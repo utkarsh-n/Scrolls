@@ -1,0 +1,43 @@
+{
+  "//": "OWNER: WP0 — canned POST /api/imports/:id/commit for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "POST",
+  "path": "/api/imports/:id/commit",
+  "owner": "WP1",
+  "request": "ImportMappingRequest",
+  "response": "JobRef",
+  "summary": "Commit with a mapping → a job (SSE progress), then the summary.",
+  "default": "ok",
+  "example_request": {
+    "mapping": {
+      "format": "csv",
+      "delimiter": ",",
+      "header": true,
+      "encoding": "utf-8",
+      "collection": { "slug": "my-zines", "name": "Zines 1977–1999", "unit": "tokens", "license": "own" },
+      "fields": {
+        "ext_id": { "from": "id" },
+        "title": { "from": "Title", "transform": ["trim"] },
+        "text": { "from": "body" },
+        "date": { "from": "issued", "transform": [{ "date": { "circa_radius": 5, "two_digit_century": null } }] },
+        "language": { "from": "lang", "transform": [{ "map": { "English": "en", "Spanish": "es" } }] },
+        "community": { "const": "east-side zine scene" },
+        "cites": { "from": "refs", "transform": [{ "split": ";" }] }
+      },
+      "options": { "dedupe": "flag", "detect_language": true, "on_bad_row": "skip_and_report", "line_mode": false }
+    }
+  },
+  "variants": {
+    "ok": { "status": 200, "body": { "job": { "id": 302 } } },
+    "conflict": {
+      "status": 409,
+      "body": {
+        "error": {
+          "code": "E_IMPORT_STATE",
+          "message": "Batch 17 was already committed (job 302).",
+          "hint": "Open the import summary instead.",
+          "detail": { "job": 302 }
+        }
+      }
+    }
+  }
+}

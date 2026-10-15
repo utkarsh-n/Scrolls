@@ -1,0 +1,121 @@
+{
+  "//": "OWNER: WP0 — canned POST /api/trace for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "POST",
+  "path": "/api/trace",
+  "owner": "WP5",
+  "request": "TraceRequest",
+  "response": "Trace",
+  "summary": "Targeted quotation trace of a span (≤ 1.5 s synchronous, else a job); creates computed relationships only.",
+  "default": "done",
+  "example_request": {
+    "passage": 77,
+    "start": 0,
+    "end": 96
+  },
+  "variants": {
+    "done": {
+      "status": 200,
+      "body": {
+        "status": "done",
+        "exact": [
+          {
+            "passage": 1630,
+            "start": 16,
+            "end": 85,
+            "tokens": 13,
+            "doc": 36,
+            "title": "Felmark Bulletin, June 1963",
+            "synthetic": true
+          }
+        ],
+        "near": [
+          {
+            "passage": 1999,
+            "score": 0.81,
+            "jaccard": 0.55,
+            "doc": 120,
+            "title": "(generated background) Lesson plan, 1938",
+            "synthetic": true
+          }
+        ],
+        "similar_wording": [],
+        "created_relationships": [
+          7790
+        ],
+        "note": "Cross-language reuse is not detected."
+      }
+    },
+    "running": {
+      "status": 200,
+      "body": {
+        "status": "running",
+        "job": {
+          "id": 305
+        },
+        "note": "The span is common; the trace continues as job 305."
+      }
+    },
+    "excluded": {
+      "note": "Contract 1.2.0 (WP5 P2): a span of production-line text lists its matches but makes no link. Canned values in the shape lineage/trace.mjs returns.",
+      "mock_note": "Illustrative numbers in the synthetic world; on Cipher the same exclusion fired for the 25 Shakespeare files sharing an \"Executive Director's Notes\" page.",
+      "status": 200,
+      "body": {
+        "status": "done",
+        "span": {
+          "passage": 1630,
+          "start": 0,
+          "end": 96,
+          "tokens": 17,
+          "quote": "Transcriber's note: obvious printing errors have been corrected (synthetic)."
+        },
+        "exact": [
+          {
+            "passage": 1702,
+            "start": 0,
+            "end": 96,
+            "tokens": 17,
+            "doc": 37,
+            "title": "Felmark Bulletin, July 1963",
+            "synthetic": true
+          },
+          {
+            "passage": 1781,
+            "start": 0,
+            "end": 96,
+            "tokens": 17,
+            "doc": 38,
+            "title": "Felmark Bulletin, August 1963",
+            "synthetic": true
+          }
+        ],
+        "near": [],
+        "similar_wording": [],
+        "cues": [],
+        "note": "Cross-language reuse is not detected. This wording opens or closes 3 documents (production-line text such as a transcriber's note): matches are listed, no links are made.",
+        "near_index": {
+          "run": 5
+        },
+        "exclusion": {
+          "kind": "production_line",
+          "documents": 3,
+          "note": "This wording opens or closes 3 documents (production-line text such as a transcriber's note): matches are listed, no links are made."
+        },
+        "created_relationships": []
+      }
+    },
+    "invalid": {
+      "status": 400,
+      "body": {
+        "error": {
+          "code": "E_VALIDATION",
+          "message": "A trace needs a span of at least 8 tokens (this one has 3).",
+          "hint": "Select a longer span.",
+          "detail": {
+            "tokens": 3,
+            "min": 8
+          }
+        }
+      }
+    }
+  }
+}

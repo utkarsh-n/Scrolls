@@ -1,0 +1,34 @@
+{
+  "//": "OWNER: WP0 — canned POST /api/analysis/runs for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "POST",
+  "path": "/api/analysis/runs",
+  "owner": "WP4",
+  "request": "AnalysisRunRequest",
+  "response": "AnalysisRunStarted",
+  "summary": "Start an analysis run (cluster, vectors, drift, tone, reuse-index) as a job; an identical finished run is reused.",
+  "default": "ok",
+  "example_request": {
+    "stage": "cluster",
+    "expr": 12,
+    "params": { "representation": "tfidf-hash-4096", "k": "auto", "seed": 1994 }
+  },
+  "variants": {
+    "ok": { "status": 200, "body": { "job": { "id": 303 }, "run": null, "reused": false } },
+    "reused": {
+      "note": "Same input fingerprint as run 14: nothing is recomputed.",
+      "status": 200,
+      "body": { "job": { "id": 288 }, "run": 14, "reused": true }
+    },
+    "invalid": {
+      "status": 400,
+      "body": {
+        "error": {
+          "code": "E_VALIDATION",
+          "message": "Unknown stage 'meaning'.",
+          "hint": "Use cluster, vectors, drift, tone or reuse-index.",
+          "detail": { "stage": "meaning" }
+        }
+      }
+    }
+  }
+}

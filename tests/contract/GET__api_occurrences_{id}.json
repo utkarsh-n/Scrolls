@@ -1,0 +1,23 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/occurrences/:id for mock mode and contract tests (contract 1.1.0, added at the M1 gate; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/occurrences/:id",
+  "owner": "WP3",
+  "request": null,
+  "response": "Occurrence",
+  "summary": "Resolve an occurrence id to its passage and document, so a reloaded view whose selection is an occurrence opens the passage.",
+  "default": "o55012",
+  "example_request": null,
+  "variants": {
+    "o55012": {
+      "note": "The 1994 Hip-hop mark of §1.11; start/end are in the same base as the passage's start/end.",
+      "status": 200,
+      "body": { "id": 55012, "passage": 901, "doc": 44, "expr": 12, "start": 106, "end": 120, "name_flag": false, "run_id": 31, "synthetic": true }
+    },
+    "not_found": {
+      "note": "An occurrence of a run that was garbage-collected, or a mistyped id.",
+      "status": 404,
+      "body": { "error": { "code": "E_NOT_FOUND", "message": "No occurrence 99999.", "hint": "Occurrences belong to a materialize run; search the expression again.", "detail": null } }
+    }
+  }
+}

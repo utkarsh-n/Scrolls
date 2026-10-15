@@ -1,0 +1,35 @@
+{
+  "//": "OWNER: WP0 — canned POST /api/relationships/:id/evidence for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "POST",
+  "path": "/api/relationships/:id/evidence",
+  "owner": "WP5",
+  "request": null,
+  "response": "Created",
+  "summary": "Attach an evidence span to a relationship (appends a revision).",
+  "default": "ok",
+  "example_request": {
+    "passage": 950,
+    "start": 0,
+    "end": 16,
+    "role": "supporting",
+    "note": "The review opens with the phrase."
+  },
+  "variants": {
+    "ok": { "status": 200, "body": { "id": 14 } },
+    "invalid": {
+      "status": 400,
+      "body": {
+        "error": {
+          "code": "E_VALIDATION",
+          "message": "Evidence role 'proof' is not one of source_span, target_span, citation_cue, supporting, contradicting, external_record.",
+          "hint": null,
+          "detail": { "field": "role" }
+        }
+      }
+    },
+    "not_found": {
+      "status": 404,
+      "body": { "error": { "code": "E_NOT_FOUND", "message": "No relationship 999999.", "hint": null, "detail": null } }
+    }
+  }
+}

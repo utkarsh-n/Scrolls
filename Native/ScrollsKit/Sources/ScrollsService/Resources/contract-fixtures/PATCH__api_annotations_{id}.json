@@ -1,0 +1,29 @@
+{
+  "//": "OWNER: WP0 — canned PATCH /api/annotations/:id for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "PATCH",
+  "path": "/api/annotations/:id",
+  "owner": "WP5",
+  "request": "AnnotationPatch",
+  "response": "AnnotationRev",
+  "summary": "Edit = append a revision (revisions are never updated or deleted).",
+  "default": "ok",
+  "example_request": { "body_md": "Ironic distance from schooling, not mockery.", "reason": "found the 1995 interview" },
+  "variants": {
+    "ok": { "status": 200, "body": { "id": 220, "rev": 2 } },
+    "machine": {
+      "status": 409,
+      "body": {
+        "error": {
+          "code": "E_MACHINE_ANNOTATION",
+          "message": "Machine annotations cannot be edited, only countered.",
+          "hint": "Add your own annotation of kind evidence_against.",
+          "detail": { "kind": "machine_tag" }
+        }
+      }
+    },
+    "not_found": {
+      "status": 404,
+      "body": { "error": { "code": "E_NOT_FOUND", "message": "No annotation 999.", "hint": null, "detail": null } }
+    }
+  }
+}

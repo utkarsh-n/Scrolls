@@ -1,0 +1,40 @@
+{
+  "//": "OWNER: WP0 — canned POST /api/annotations/:id/reinterpret for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "POST",
+  "path": "/api/annotations/:id/reinterpret",
+  "owner": "WP5",
+  "request": "AnnotationRequest",
+  "response": "AnnotationReinterpreted",
+  "summary": "Reinterpret: a new annotation that supersedes this one; the old one stays as a visible layer.",
+  "default": "ok",
+  "example_request": {
+    "target": { "type": "passage", "ref": "901" },
+    "anchor": {
+      "doc_id": 44,
+      "sha256": "7de1d5c82090cbc3a00984677222db11be5cecc025c752208d2db254991eeaf7",
+      "field": "body",
+      "start": 0,
+      "end": 104,
+      "quote": "the ones they never counted",
+      "prefix": "",
+      "suffix": " hold the place for the number\nc"
+    },
+    "kind": "interpretation",
+    "body_md": "After the 2024 interview: both readings are part of the song.",
+    "layer": "Reader A, 2026-10-04"
+  },
+  "variants": {
+    "ok": { "status": 200, "body": { "id": 231, "supersedes": 220 } },
+    "conflict": {
+      "status": 409,
+      "body": {
+        "error": {
+          "code": "E_ANNOTATION_SUPERSEDED",
+          "message": "Annotation 220 was already reinterpreted as 231.",
+          "hint": "Reinterpret 231 instead.",
+          "detail": { "by": 231 }
+        }
+      }
+    }
+  }
+}

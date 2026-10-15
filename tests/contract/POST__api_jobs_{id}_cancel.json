@@ -1,0 +1,27 @@
+{
+  "//": "OWNER: WP0 — canned POST /api/jobs/:id/cancel for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "POST",
+  "path": "/api/jobs/:id/cancel",
+  "owner": "WP0",
+  "request": null,
+  "response": "JobCancel",
+  "summary": "Request cancellation; acknowledged ≤ 500 ms, the final \"cancelled\" arrives over SSE.",
+  "default": "cancelling",
+  "example_request": null,
+  "variants": {
+    "cancelling": { "status": 200, "body": { "status": "cancelling" } },
+    "finished": { "when": { "params": { "id": "288" } }, "status": 200, "body": { "status": "finished" } },
+    "not_found": { "when": { "params": { "id": "999" } }, "status": 200, "body": { "status": "not_found" } },
+    "error": {
+      "status": 403,
+      "body": {
+        "error": {
+          "code": "E_FORBIDDEN_ORIGIN",
+          "message": "This request did not come from the Scrolls page on this computer.",
+          "hint": "Open Scrolls at http://127.0.0.1:3460/ and retry from there.",
+          "detail": null
+        }
+      }
+    }
+  }
+}

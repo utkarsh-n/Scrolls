@@ -1,0 +1,140 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/views/:slug for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/views/:slug",
+  "owner": "WP5",
+  "request": null,
+  "response": "View",
+  "summary": "A saved view as saved, with drift since it was saved; \"as saved\" (`?as=1`) restricts to the pinned imports and runs.",
+  "default": "ok",
+  "example_request": null,
+  "variants": {
+    "ok": {
+      "status": 200,
+      "body": {
+        "slug": "carry-the-zero-four-uses-3f9a",
+        "name": "carry the zero: four uses",
+        "state": {
+          "v": 1,
+          "corpus": "demo",
+          "strands": [{ "type": "expression", "id": 12, "variants": "default", "glyph": "circle" }],
+          "lanes": { "facet": "cluster", "sub": null, "run": 14, "order": "first_observed", "manual": [], "max": 10 },
+          "f": {
+            "lang": [],
+            "kind": [],
+            "coll": [],
+            "culture": [],
+            "field": [],
+            "community": [],
+            "basis": [],
+            "syn": 1
+          },
+          "toggles": { "tr": 0, "ds": 0, "ap": 0, "dup": 0, "nm": 0, "est": 1, "bp": 0 },
+          "timeBasis": "publication",
+          "axis": { "mode": "linear", "centerDay": -3653, "daysPerPx": 50, "keepLinear": false },
+          "tier": "auto",
+          "vantage": { "day": -16072, "strict": true },
+          "range": null,
+          "evidence": { "documented": 1, "computed": 1, "proposed": 1, "rejected": 0, "kindred": 0 },
+          "layers": {
+            "arcs": 1,
+            "feedback": 1,
+            "washes": 1,
+            "coverage": 1,
+            "etymology": 1,
+            "claims": 1,
+            "baseline": 0,
+            "variety": 0,
+            "tone": 0,
+            "superseded": 0
+          },
+          "selection": { "type": "passage", "id": 901 },
+          "panels": { "inspector": "tnn", "right": null },
+          "compare": { "a": { "years": [1955, 1985], "f": "" }, "b": { "years": [1994, 2026], "f": "" } },
+          "constellation": { "layoutKey": null, "size": "occurrences", "a": null, "b": null },
+          "lineage": { "root": null, "depth": 2, "types": [], "status": [] },
+          "runs": { "materialize": { "12": 31 }, "cluster": 14, "quotes": 9, "vectors": null },
+          "asSaved": false,
+          "reducedMotion": "system"
+        },
+        "savedAt": "2026-10-03T18:00:00.000Z",
+        "dataVersion": 47,
+        "currentDataVersion": 47,
+        "drift": {
+          "dataChanged": false,
+          "importsSince": [],
+          "asSavedAvailable": true,
+          "newerRuns": [],
+          "message": null
+        }
+      }
+    },
+    "drift": {
+      "note": "Request with X-Scrolls-Mock: drift.",
+      "status": 200,
+      "body": {
+        "slug": "carry-the-zero-four-uses-3f9a",
+        "name": "carry the zero: four uses",
+        "state": {
+          "v": 1,
+          "corpus": "demo",
+          "strands": [{ "type": "expression", "id": 12, "variants": "default", "glyph": "circle" }],
+          "lanes": { "facet": "cluster", "sub": null, "run": 14, "order": "first_observed", "manual": [], "max": 10 },
+          "f": {
+            "lang": [],
+            "kind": [],
+            "coll": [],
+            "culture": [],
+            "field": [],
+            "community": [],
+            "basis": [],
+            "syn": 1
+          },
+          "toggles": { "tr": 0, "ds": 0, "ap": 0, "dup": 0, "nm": 0, "est": 1, "bp": 0 },
+          "timeBasis": "publication",
+          "axis": { "mode": "linear", "centerDay": -3653, "daysPerPx": 50, "keepLinear": false },
+          "tier": "auto",
+          "vantage": { "day": -16072, "strict": true },
+          "range": null,
+          "evidence": { "documented": 1, "computed": 1, "proposed": 1, "rejected": 0, "kindred": 0 },
+          "layers": {
+            "arcs": 1,
+            "feedback": 1,
+            "washes": 1,
+            "coverage": 1,
+            "etymology": 1,
+            "claims": 1,
+            "baseline": 0,
+            "variety": 0,
+            "tone": 0,
+            "superseded": 0
+          },
+          "selection": { "type": "passage", "id": 901 },
+          "panels": { "inspector": "tnn", "right": null },
+          "compare": { "a": { "years": [1955, 1985], "f": "" }, "b": { "years": [1994, 2026], "f": "" } },
+          "constellation": { "layoutKey": null, "size": "occurrences", "a": null, "b": null },
+          "lineage": { "root": null, "depth": 2, "types": [], "status": [] },
+          "runs": { "materialize": { "12": 31 }, "cluster": 14, "quotes": 9, "vectors": null },
+          "asSaved": false,
+          "reducedMotion": "system"
+        },
+        "savedAt": "2026-10-03T18:00:00.000Z",
+        "dataVersion": 44,
+        "currentDataVersion": 47,
+        "drift": {
+          "dataChanged": true,
+          "importsSince": [{ "batch": 43, "file": "letters.csv" }],
+          "asSavedAvailable": true,
+          "newerRuns": [{ "stage": "cluster", "run": 19 }],
+          "message": "Corpus changed since this view was saved. 'As saved' restricts to imports ≤ #42 and the pinned runs."
+        }
+      }
+    },
+    "not_found": {
+      "status": 404,
+      "body": {
+        "error": { "code": "E_NOT_FOUND", "message": "No saved view no-such-view.", "hint": null, "detail": null }
+      }
+    }
+  }
+}

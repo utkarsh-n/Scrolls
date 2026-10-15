@@ -1,0 +1,136 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/timeline/bin for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/timeline/bin",
+  "owner": "WP3",
+  "request": null,
+  "response": "BinDrawer",
+  "summary": "Bin drawer: the denominator line, then KWIC rows sorted by date (50 per page); every row opens its passage.",
+  "default": "ok",
+  "example_request": null,
+  "variants": {
+    "ok": {
+      "status": 200,
+      "body": {
+        "denominator": {
+          "lane": "community:classroom",
+          "strand": 12,
+          "tier": "L2",
+          "bin": 191,
+          "label": "1910–1919",
+          "state": "observed",
+          "n": 22,
+          "docs": 6,
+          "tokens": 2700,
+          "unit": "per_million_tokens",
+          "rate": 8148.1,
+          "ci": [5106.4,12336.4],
+          "text": "n = 22 in 1910–1919 · 2.7k tokens · 6 documents · SYNTHETIC"
+        },
+        "rows": [
+          {
+            "passage": 77,
+            "doc": 12,
+            "start": 0,
+            "end": 14,
+            "left": "",
+            "match": "Carry the zero",
+            "right": ", children: it holds the place where nothing is, so that som",
+            "title": "Brennock's Ready Arithmetic",
+            "date": { "label": "1911", "precision": "year" },
+            "lane": "community:classroom",
+            "synthetic": true
+          },
+          {
+            "passage": 611,
+            "doc": 141,
+            "start": 38,
+            "end": 52,
+            "left": "Write the tens in the left column and ",
+            "match": "carry the zero",
+            "right": " so the units keep their place.",
+            "title": "(generated background) Lesson notes, Board school No. 2",
+            "date": { "label": "1913", "precision": "year" },
+            "lane": "community:classroom",
+            "synthetic": true
+          },
+          {
+            "passage": 640,
+            "doc": 143,
+            "start": 16,
+            "end": 30,
+            "left": "Say it with me: ",
+            "match": "carry the zero",
+            "right": ", then add the next column.",
+            "title": "(generated background) Slate drill, third form",
+            "date": { "label": "1916", "precision": "year" },
+            "lane": "community:classroom",
+            "synthetic": true
+          }
+        ],
+        "cursor": "p2",
+        "total": 22
+      }
+    },
+    "low": {
+      "when": { "query": {"bin": "189"} },
+      "status": 200,
+      "body": {
+        "denominator": {
+          "lane": "community:classroom",
+          "strand": 12,
+          "tier": "L2",
+          "bin": 189,
+          "label": "1890–1899",
+          "state": "low",
+          "n": 0,
+          "docs": 0,
+          "tokens": 600,
+          "unit": "per_million_tokens",
+          "rate": null,
+          "ci": null,
+          "text": "low coverage: n = 0 in 600 tokens (gate 2,000) — rate not shown"
+        },
+        "rows": [],
+        "cursor": null,
+        "total": 0
+      }
+    },
+    "error": {
+      "status": 503,
+      "body": {
+        "error": {
+          "code": "QUERY_TIMEOUT",
+          "message": "The bin query took longer than 5 s and was stopped.",
+          "hint": "Narrow the time range or add a filter, then retry.",
+          "detail": { "timeout_ms": 5000 }
+        }
+      }
+    },
+    "share_cell": {
+      "note": "Real (contract 1.3.0, the m5-stemm clone: demo + Cipher + STEMM): the drawer of one OpenAlex share cell (cell=Chemistry|1945-1949) on the Term trail of 'gene' in corpus real: the cell's k of n with its Wilson CI. Its KWIC rows quote OpenAlex abstracts, which are never exported (export_text_allowed = 0), so they are left out here.",
+      "when": { "query": {"cell": "Chemistry|1945-1949"} },
+      "status": 200,
+      "body": {
+        "denominator": {
+          "lane": "trail:stemm-abstracts:physical-sciences",
+          "strand": 8,
+          "cell": "Chemistry|1945-1949",
+          "state": "observed",
+          "k": 1,
+          "n": 196,
+          "n_cell": 200,
+          "share": 0.0051,
+          "ci": [0.0009,0.0283],
+          "unit": "share_of_sampled_works",
+          "field": "Chemistry",
+          "label": "1945–1949",
+          "text": "Chemistry · 1945–1949: 1 of 196 sampled works (title or abstract) mention it · share of the top-cited sample in each cell — not a trend"
+        },
+        "rows": [],
+        "cursor": null,
+        "total": 1
+      }
+    }
+  }
+}

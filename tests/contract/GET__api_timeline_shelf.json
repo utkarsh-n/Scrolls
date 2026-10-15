@@ -1,0 +1,105 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/timeline/shelf for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/timeline/shelf",
+  "owner": "WP3",
+  "request": null,
+  "response": "Shelf",
+  "summary": "Shelf lists: UNDATED (outside chronology), SCHEDULED (after today), washes (records that do not fit the bin).",
+  "default": "undated",
+  "example_request": null,
+  "variants": {
+    "undated": {
+      "status": 200,
+      "body": {
+        "which": "undated",
+        "total": 1,
+        "items": [
+          {
+            "document_id": 112,
+            "passage": 1188,
+            "title": "(generated background) Block party flyer",
+            "author": "Kilnmark Crew (synthetic)",
+            "kind": "flyer",
+            "lane": "community:hiphop",
+            "strand": 12,
+            "n": 1,
+            "date": { "label": "undated", "precision": "unknown", "basis": "unknown", "raw": "n.d." },
+            "synthetic": true
+          }
+        ],
+        "cursor": null
+      }
+    },
+    "scheduled": {
+      "when": { "query": { "which": "scheduled" } },
+      "status": 200,
+      "body": {
+        "which": "scheduled",
+        "total": 1,
+        "items": [
+          {
+            "document_id": 70,
+            "passage": 2405,
+            "title": "Nothing Holds the Place (30th Anniversary Reissue) — notice",
+            "author": "MC Ledgerline (synthetic)",
+            "kind": "notice",
+            "lane": "community:hiphop",
+            "strand": 12,
+            "n": 1,
+            "date": { "label": "2027", "precision": "year", "basis": "announced", "raw": "2027" },
+            "synthetic": true
+          }
+        ],
+        "cursor": null
+      }
+    },
+    "washes": {
+      "when": { "query": { "which": "washes" } },
+      "status": 200,
+      "body": {
+        "which": "washes",
+        "total": 3,
+        "items": [
+          {
+            "lane": "community:classroom",
+            "strand": 12,
+            "lo": "1900",
+            "hi": "1933",
+            "precision": "range",
+            "label": "early 20th century",
+            "n": 1,
+            "synthetic": true
+          },
+          {
+            "lane": "community:office-lab",
+            "strand": 12,
+            "lo": "1955",
+            "hi": "1965",
+            "precision": "range",
+            "label": "c. 1960",
+            "n": 2,
+            "synthetic": true
+          }
+        ],
+        "cursor": null
+      }
+    },
+    "empty": {
+      "when": { "query": { "lane": "community:software" } },
+      "status": 200,
+      "body": { "which": "undated", "total": 0, "items": [], "cursor": null }
+    },
+    "error": {
+      "status": 503,
+      "body": {
+        "error": {
+          "code": "QUERY_TIMEOUT",
+          "message": "The shelf query took longer than 5 s and was stopped.",
+          "hint": "Narrow the time range or add a filter, then retry.",
+          "detail": { "timeout_ms": 5000 }
+        }
+      }
+    }
+  }
+}

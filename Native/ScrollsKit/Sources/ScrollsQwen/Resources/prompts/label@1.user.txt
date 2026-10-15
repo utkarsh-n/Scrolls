@@ -1,0 +1,5 @@
+Word: "{{word}}"
+Words that often appear near "{{word}}" in this group (computed): {{words}}
+{{count}} passages from this group:
+{{passages}}
+Return JSON: {"label": "<at most 5 words naming the sense of '{{word}}' in this group, no digits>", "gloss": "<one sentence describing how '{{word}}' is used in these passages, no digits>", "cites": ["<2 to 4 ids of the passages that show this use best>"]}

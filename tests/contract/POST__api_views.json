@@ -1,0 +1,82 @@
+{
+  "//": "OWNER: WP0 — canned POST /api/views for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "POST",
+  "path": "/api/views",
+  "owner": "WP5",
+  "request": "ViewRequest",
+  "response": "ViewSaved",
+  "summary": "Save an immutable view (pins data version, import cutoff, run ids, revision cutoffs); re-saving makes slug~2.",
+  "default": "ok",
+  "example_request": {
+    "name": "carry the zero: four uses",
+    "state": {
+      "v": 1,
+      "corpus": "demo",
+      "strands": [{ "type": "expression", "id": 12, "variants": "default", "glyph": "circle" }],
+      "lanes": { "facet": "cluster", "sub": null, "run": 14, "order": "first_observed", "manual": [], "max": 10 },
+      "f": { "lang": [], "kind": [], "coll": [], "culture": [], "field": [], "community": [], "basis": [], "syn": 1 },
+      "toggles": { "tr": 0, "ds": 0, "ap": 0, "dup": 0, "nm": 0, "est": 1, "bp": 0 },
+      "timeBasis": "publication",
+      "axis": { "mode": "linear", "centerDay": -3653, "daysPerPx": 50, "keepLinear": false },
+      "tier": "auto",
+      "vantage": { "day": -16072, "strict": true },
+      "range": null,
+      "evidence": { "documented": 1, "computed": 1, "proposed": 1, "rejected": 0, "kindred": 0 },
+      "layers": {
+        "arcs": 1,
+        "feedback": 1,
+        "washes": 1,
+        "coverage": 1,
+        "etymology": 1,
+        "claims": 1,
+        "baseline": 0,
+        "variety": 0,
+        "tone": 0,
+        "superseded": 0
+      },
+      "selection": { "type": "passage", "id": 901 },
+      "panels": { "inspector": "tnn", "right": null },
+      "compare": { "a": { "years": [1955, 1985], "f": "" }, "b": { "years": [1994, 2026], "f": "" } },
+      "constellation": { "layoutKey": null, "size": "occurrences", "a": null, "b": null },
+      "lineage": { "root": null, "depth": 2, "types": [], "status": [] },
+      "runs": { "materialize": { "12": 31 }, "cluster": 14, "quotes": 9, "vectors": null },
+      "asSaved": false,
+      "reducedMotion": "system"
+    },
+    "comparisons_tried": 2
+  },
+  "variants": {
+    "ok": {
+      "status": 200,
+      "body": {
+        "slug": "carry-the-zero-four-uses-3f9a",
+        "url": "/#view=carry-the-zero-four-uses-3f9a",
+        "dataVersion": 47,
+        "runIds": { "materialize": { "12": 31 }, "cluster": 14, "quotes": 9 },
+        "hash": "#v=1&c=demo&s=e12&l=cluster:fo:r14&sel=psg:901&cmp=1955-1985~1994-2026&r=m12_31.c14.q9"
+      }
+    },
+    "resaved": {
+      "note": "Saving again from a saved view creates a new slug; the original never changes.",
+      "status": 200,
+      "body": {
+        "slug": "carry-the-zero-four-uses-3f9a~2",
+        "url": "/#view=carry-the-zero-four-uses-3f9a~2",
+        "dataVersion": 47,
+        "runIds": { "materialize": { "12": 31 }, "cluster": 14, "quotes": 9 },
+        "parent_slug": "carry-the-zero-four-uses-3f9a"
+      }
+    },
+    "invalid": {
+      "status": 400,
+      "body": {
+        "error": {
+          "code": "E_VALIDATION",
+          "message": "A saved view needs a name.",
+          "hint": null,
+          "detail": { "field": "name" }
+        }
+      }
+    }
+  }
+}

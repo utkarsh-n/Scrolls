@@ -1,0 +1,38 @@
+# OWNER: WP0 — keep runtime data, databases and iCloud conflict copies out of git
+# Runtime data lives in ~/Developer/scrolls-data (outside iCloud), never here.
+node_modules/
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+.DS_Store
+# iCloud conflict copies
+* 2.*
+* 2/
+# atomic-write temporaries (storeOriginal) and editor/OS noise
+*.tmp
+*.swp
+
+# Public source snapshot: keep credentials and local data out of Git.
+.DS_Store
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.pfx
+*.mobileprovision
+*.xcuserstate
+xcuserdata/
+.build/
+DerivedData/
+build/
+Build/
+node_modules/
+*.xcresult/
+*.log
+*.safetensors
+*.gguf
+*.ipsw
+*.pcap
+*.pcapng

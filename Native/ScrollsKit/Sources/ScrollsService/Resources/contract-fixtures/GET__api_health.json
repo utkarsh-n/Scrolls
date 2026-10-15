@@ -1,0 +1,179 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/health for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/health",
+  "owner": "WP0",
+  "request": null,
+  "response": "Health",
+  "summary": "Version, contract, dataVersion, jobs, read pool, adapters and the Cipher bootstrap status. Mock bodies carry `mock: true`.",
+  "default": "ok",
+  "example_request": null,
+  "variants": {
+    "ok": {
+      "note": "Cipher metadata ready; full text indexing (phase B).",
+      "status": 200,
+      "body": {
+        "ok": true,
+        "version": "0.1.0",
+        "contract": "1.2.0",
+        "dataVersion": 47,
+        "dbBytes": 1288490188,
+        "jobs": {
+          "running": 1,
+          "queued": 0
+        },
+        "readPool": {
+          "size": 3,
+          "busy": 1
+        },
+        "adapters": {
+          "nl": "missing"
+        },
+        "cipher": {
+          "status": "fulltext",
+          "phase": "B",
+          "progress": 0.21,
+          "message": "full text 312 / 1,516 books"
+        },
+        "mock": true
+      }
+    },
+    "bootstrap_metadata": {
+      "note": "First minute: metadata-first import (D10).",
+      "status": 200,
+      "body": {
+        "ok": true,
+        "version": "0.1.0",
+        "contract": "1.2.0",
+        "dataVersion": 47,
+        "dbBytes": 1288490188,
+        "jobs": {
+          "running": 1,
+          "queued": 0
+        },
+        "readPool": {
+          "size": 3,
+          "busy": 1
+        },
+        "adapters": {
+          "nl": "missing"
+        },
+        "cipher": {
+          "status": "metadata",
+          "phase": "A",
+          "progress": 0.55,
+          "message": "titles, relations and etymology · 55%"
+        },
+        "mock": true
+      }
+    },
+    "cipher_missing": {
+      "status": 200,
+      "body": {
+        "ok": true,
+        "version": "0.1.0",
+        "contract": "1.2.0",
+        "dataVersion": 47,
+        "dbBytes": 1288490188,
+        "jobs": {
+          "running": 0,
+          "queued": 0
+        },
+        "readPool": {
+          "size": 3,
+          "busy": 0
+        },
+        "adapters": {
+          "nl": "missing"
+        },
+        "cipher": {
+          "status": "absent",
+          "phase": null,
+          "progress": null,
+          "message": "Cipher files not found at the configured path; the demo still works."
+        },
+        "mock": true
+      }
+    },
+    "ready": {
+      "status": 200,
+      "body": {
+        "ok": true,
+        "version": "0.1.0",
+        "contract": "1.2.0",
+        "dataVersion": 47,
+        "dbBytes": 1288490188,
+        "jobs": {
+          "running": 0,
+          "queued": 0
+        },
+        "readPool": {
+          "size": 3,
+          "busy": 0
+        },
+        "adapters": {
+          "nl": "missing"
+        },
+        "cipher": {
+          "status": "ready",
+          "phase": null,
+          "progress": 1,
+          "message": "Cipher titles, relations, etymology and full text ready"
+        },
+        "mock": true
+      }
+    },
+    "error": {
+      "status": 403,
+      "body": {
+        "error": {
+          "code": "E_FORBIDDEN_ORIGIN",
+          "message": "This request did not come from the Scrolls page on this computer.",
+          "hint": "Open Scrolls at http://127.0.0.1:3460/ and retry from there.",
+          "detail": null
+        }
+      }
+    },
+    "integrity_ok": {
+      "note": "Real (final gate, contract 1.3.0): a server on an m5-stemm clone after the boot-time check of originals/ — 1,408 files, none missing.",
+      "status": 200,
+      "body": {
+        "ok": true,
+        "version": "0.1.0",
+        "contract": "1.3.0",
+        "dataVersion": 130,
+        "dbBytes": 3556578944,
+        "jobs": {
+          "running": 0,
+          "queued": 0
+        },
+        "readPool": {
+          "size": 3,
+          "busy": 0,
+          "queued": 0
+        },
+        "adapters": {
+          "nl": "missing",
+          "registered": 17
+        },
+        "cipher": {
+          "status": "ready",
+          "phase": "B · full text",
+          "progress": 1,
+          "message": "Cipher full text is ready"
+        },
+        "integrity": {
+          "status": "ok",
+          "checked_at": "2026-10-08T23:13:17.289Z",
+          "files": 1408,
+          "missing_files": 0,
+          "size_mismatch": 0,
+          "referenced_missing": 0,
+          "documents_affected": 0,
+          "sample": []
+        },
+        "mock": true
+      }
+    }
+  }
+}

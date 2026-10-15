@@ -1,0 +1,40 @@
+﻿letter_id,title,author,written,language,body,cites
+L01,Letter 1,Brennock Clerk (synthetic),1902-03-14,English,"Dear Ada, the ledger arrived on Tuesday and the zero column was already filled.",
+L02,Letter 2,Mireille Fixture (synthetic),1902-05,English,The clerk wrote that the sum would hold when they came to count it again.,
+L03,Letter 3,Felbridge Office (synthetic),1903,English,We kept the books open all night; nobody could find the missing farthing.,
+L04,Letter 4,Ada Fixture (synthetic),7 April 1904,English,Your letter about the carried zero made the whole office laugh at lunch.,
+L05,Letter 5,Brennock Clerk (synthetic),c. 1905,English,The auditors asked for the triplicate forms before the end of the month.,L04
+L06,Letter 6,Mireille Fixture (synthetic),1906,English,I have copied the column twice and the second copy still disagrees with the first.,
+L07,Letter 7,Felbridge Office (synthetic),1907-11-02,English,Please send the new primer; the children keep asking what the zero holds.,
+L08,Letter 8,Ada Fixture (synthetic),the 1910s,English,"The rain ruined the outer pages, but the totals at the bottom survived.",
+L09,Letter 9,Brennock Clerk (synthetic),1911,English,"Mr. Varn signed the receipt without reading it, as he always does.",
+L10,Letter 10,Mireille Fixture (synthetic),1912-08,English,Tell your sister that the shop on Crane Street now sells ruled paper.,L09
+L11,Letter 11,Felbridge Office (synthetic),June 1913,English,The tally sticks from the old office were finally burned last winter.,
+L12,Letter 12,Ada Fixture (synthetic),1914,English,Nobody in this town remembers who first painted the clock face blue.,
+L13,Letter 13,Brennock Clerk (synthetic),1915-01-30,English,"The new apprentice counts faster than any of us, though he hums while he works.",
+L14,Letter 14,Mireille Fixture (synthetic),1916,English,I found your pencil notes in the margin and could not read a single word.,
+L15,Letter 15,Felbridge Office (synthetic),1917,English,Our accounts balanced for the first time since the flood of the spring.,L14
+L16,Letter 16,Ada Fixture (synthetic),1918-12,English,The postmaster refuses to stamp anything after four o'clock on Fridays.,
+L17,Letter 17,Brennock Clerk (synthetic),1919,English,We should meet at the station café and settle the matter of the ledger.,
+L18,Letter 18,Mireille Fixture (synthetic),1920,English,The inspector arrived early and counted the chairs before the money.,
+L19,Letter 19,Felbridge Office (synthetic),1921-06-21,English,My hands are tired from writing the same figures in three different books.,
+L20,Letter 20,Ada Fixture (synthetic),1922,English,Give my regards to the printer; his new type is wonderfully clear.,L19
+L21,Letter 21,Brennock Clerk (synthetic),1923,English,The bank clerk insisted that every zero be written with a slash through it.,
+L22,Letter 22,Mireille Fixture (synthetic),1924-02,English,"A storm took the roof of the warehouse, and the inventory with it.",
+L23,Letter 23,Felbridge Office (synthetic),1925,English,"Mother says the old receipts belong in the attic, not on the kitchen table.",
+L24,Letter 24,Ada Fixture (synthetic),1926,English,The schoolmaster drew a large circle on the board and called it nothing at all.,
+L25,Letter 25,Brennock Clerk (synthetic),1927,English,We sold the last of the blue ink to the harbour office this morning.,L24
+L26,Letter 26,Mireille Fixture (synthetic),1928-09-09,English,Every evening the night watchman reads the totals aloud to the empty hall.,
+L27,Letter 27,Felbridge Office (synthetic),1929,English,"The ferry was late again, so the weekly ledger travelled by cart instead.",
+L28,Letter 28,Ada Fixture (synthetic),1930,English,Your cousin promised to mend the abacus before the market opens.,
+L29,Letter 29,Brennock Clerk (synthetic),1931,English,I wrote the figures in red so that the director would notice the error.,
+L30,Letter 30,Mireille Fixture (synthetic),1932-10,English,The cooperative now keeps its books in a cupboard that locks with two keys.,L29
+L31,Letter 31,Felbridge Office (synthetic),1933,English,On Sunday the whole family gathered to count the coins from the jar.,
+L32,Letter 32,Ada Fixture (synthetic),1934,English,The tax collector smiled for once when he saw the neat columns.,
+L33,Letter with a quoted line,Ada Fixture (synthetic),1935,English,"He wrote: ""Carry the zero.""
+Then he signed the ""final"" copy.",L01
+L34,पत्र अनुपम,Brennock Clerk (synthetic),1936,Hindi,अनुपम ने बही में शून्य को साथ ले चलने की बात लिखी और गिनती फिर से की।,
+L35,दूसरा पत्र,Mireille Fixture (synthetic),1937,हिन्दी,दुकान के खाते में हर शाम हिसाब मिलाया जाता है और शून्य सबसे पहले लिखा जाता है।,
+L36,Letter with a vague date,Felbridge Office (synthetic),Spring-ish 1850,English,"The well was dug the year the bridge fell, or so the old ledger says.",
+L37,Letter with a short date,Ada Fixture (synthetic),'90s,English,Somebody scratched the year off the corner of this page long ago.,
+L38,Letter, unquoted,Brennock Clerk (synthetic),1940,English,This row has one field too many because of the comma in its title.,

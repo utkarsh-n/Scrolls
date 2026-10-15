@@ -1,0 +1,40 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/annotations/:id/revisions for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/annotations/:id/revisions",
+  "owner": "WP5",
+  "request": null,
+  "response": "AnnotationRevisions",
+  "summary": "Every revision of an annotation (append-only).",
+  "default": "ok",
+  "example_request": null,
+  "variants": {
+    "ok": {
+      "status": 200,
+      "body": [
+        {
+          "rev": 1,
+          "body_md": "Mockery of schooling: the verse sneers at the classroom phrase.",
+          "dimensions": { "pragmatic_function": "parodic" },
+          "tags": ["mockery"],
+          "author": "Reader A (synthetic)",
+          "at": "2026-10-03T14:00:00.000Z",
+          "reason": null
+        },
+        {
+          "rev": 2,
+          "body_md": "Ironic distance from schooling: the verse keeps the classroom phrase but turns it toward the people nobody counted.",
+          "dimensions": { "pragmatic_function": "ironic", "perspective": "2026 reader" },
+          "tags": ["irony"],
+          "author": "Reader A (synthetic)",
+          "at": "2026-10-03T16:20:00.000Z",
+          "reason": "found the 1995 interview"
+        }
+      ]
+    },
+    "not_found": {
+      "status": 404,
+      "body": { "error": { "code": "E_NOT_FOUND", "message": "No annotation 999.", "hint": null, "detail": null } }
+    }
+  }
+}

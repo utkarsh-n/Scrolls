@@ -1,0 +1,6263 @@
+{
+  "//": "OWNER: WP0 — canned POST /api/compare for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "POST",
+  "path": "/api/compare",
+  "owner": "WP4",
+  "request": "CompareRequest",
+  "response": "Compare",
+  "summary": "Compare two slices: multiplicity, coverage and composition first, frequency with CIs, passages, collocates, context groups, gated measures, tone, human counts.",
+  "default": "ok",
+  "example_request": {
+    "expr": [
+      12
+    ],
+    "a": {
+      "years": [
+        1955,
+        1985
+      ],
+      "f": "syn:1"
+    },
+    "b": {
+      "years": [
+        1994,
+        2026
+      ],
+      "f": "syn:1"
+    },
+    "measures": [
+      "freq",
+      "collocates",
+      "clusters",
+      "sense_share_jsd",
+      "neighbor_overlap",
+      "aligned_displacement",
+      "tone"
+    ]
+  },
+  "variants": {
+    "ok": {
+      "note": "§9.6: sense_share_jsd ok; aligned displacement refused (slice_too_small, value null).",
+      "status": 200,
+      "body": {
+        "multiplicity": {
+          "k": 1,
+          "notable_so_far": 0,
+          "threshold_percentile": 95,
+          "text": "Comparison #1 for 'carry the zero' in this session; the notable threshold is the 95th percentile."
+        },
+        "coverage": {
+          "a": {
+            "tokens": 21400,
+            "docs": 41,
+            "authors": 19,
+            "translations": 0,
+            "undated_share": 0,
+            "mix": {
+              "memo": 0.6,
+              "bulletin": 0.4
+            },
+            "modality": {
+              "text": 1
+            },
+            "basis": {
+              "stated": 0.95,
+              "estimated": 0.05
+            }
+          },
+          "b": {
+            "tokens": 30100,
+            "docs": 63,
+            "authors": 27,
+            "translations": 0,
+            "undated_share": 0.02,
+            "mix": {
+              "song": 0.62,
+              "blog": 0.21,
+              "essay": 0.17
+            },
+            "modality": {
+              "text": 1
+            },
+            "basis": {
+              "stated": 1
+            }
+          },
+          "composition_jsd": 0.48,
+          "caveats": [
+            "composition"
+          ],
+          "modality_gate": "ok",
+          "prominence": {
+            "consistent": true
+          }
+        },
+        "freq": {
+          "a": {
+            "n": 61,
+            "rate": 2850.5,
+            "ci": [
+              2180.4,
+              3661.5
+            ],
+            "unit": "per_million_tokens",
+            "docs": 18,
+            "dp": 0.41
+          },
+          "b": {
+            "n": 122,
+            "rate": 4053.2,
+            "ci": [
+              3365.9,
+              4839.5
+            ],
+            "unit": "per_million_tokens",
+            "docs": 33,
+            "dp": 0.29
+          },
+          "rate_ratio": {
+            "value": 1.42,
+            "ci": [
+              1.04,
+              1.96
+            ]
+          },
+          "standardized": {
+            "a": 2790,
+            "b": 4011.6
+          },
+          "ci_method": "Garwood exact Poisson 95%"
+        },
+        "passages": {
+          "a": [
+            {
+              "passage": 455,
+              "doc": 33,
+              "start": 24,
+              "end": 38,
+              "left": "Half this department is ",
+              "match": "carrying zeros",
+              "right": " for the auditors.",
+              "title": "Memo to the computing section",
+              "date": {
+                "label": "14 Mar 1958",
+                "precision": "day"
+              },
+              "lane": "community:office-lab",
+              "synthetic": true,
+              "context_group": null
+            },
+            {
+              "passage": 1630,
+              "doc": 36,
+              "start": 0,
+              "end": 14,
+              "left": "",
+              "match": "Carry the zero",
+              "right": ": it holds the place where nothing is, so that something can",
+              "title": "Felmark Bulletin, June 1963",
+              "date": {
+                "label": "Jun 1963",
+                "precision": "month"
+              },
+              "lane": "community:office-lab",
+              "synthetic": true,
+              "context_group": null
+            }
+          ],
+          "b": [
+            {
+              "passage": 901,
+              "doc": 44,
+              "start": 58,
+              "end": 72,
+              "left": "the ones they never counted hold the place for the number\n",
+              "match": "carry the zero",
+              "right": ", carry the block, carry my name",
+              "title": "Zero Holds the Place",
+              "date": {
+                "label": "17 May 1994",
+                "precision": "day"
+              },
+              "lane": "community:hiphop",
+              "synthetic": true,
+              "context_group": null
+            },
+            {
+              "passage": 1199,
+              "doc": 52,
+              "start": 0,
+              "end": 14,
+              "left": "",
+              "match": "carry the zero",
+              "right": " — call it a sneer, call it a prayer",
+              "title": "Sneer or Prayer",
+              "date": {
+                "label": "2003",
+                "precision": "year"
+              },
+              "lane": "community:hiphop",
+              "synthetic": true,
+              "context_group": null
+            },
+            {
+              "passage": 2302,
+              "doc": 65,
+              "start": 0,
+              "end": 14,
+              "left": "",
+              "match": "Carry the zero",
+              "right": ": never drop a null that holds a place in the schema.",
+              "title": "Nulls that hold the place",
+              "date": {
+                "label": "30 Sep 2019",
+                "precision": "day"
+              },
+              "lane": "community:software",
+              "synthetic": true,
+              "context_group": null
+            }
+          ],
+          "seed": 771
+        },
+        "collocates": {
+          "a": [
+            {
+              "term": "auditors",
+              "f_xy": 14,
+              "logDice": 11.2,
+              "g2": 41.3,
+              "q": 0.001
+            },
+            {
+              "term": "forms",
+              "f_xy": 11,
+              "logDice": 10.8,
+              "g2": 33,
+              "q": 0.002
+            },
+            {
+              "term": "memo",
+              "f_xy": 9,
+              "logDice": 10.5,
+              "g2": 27.6,
+              "q": 0.004
+            }
+          ],
+          "b": [
+            {
+              "term": "counted",
+              "f_xy": 31,
+              "logDice": 12.1,
+              "g2": 88.4,
+              "q": 0.0001
+            },
+            {
+              "term": "hold",
+              "f_xy": 24,
+              "logDice": 11.7,
+              "g2": 61.2,
+              "q": 0.0003
+            },
+            {
+              "term": "uncredited",
+              "f_xy": 12,
+              "logDice": 10.9,
+              "g2": 35.5,
+              "q": 0.002
+            }
+          ],
+          "shared": [
+            {
+              "term": "place",
+              "a": {
+                "f_xy": 7,
+                "logDice": 10.1
+              },
+              "b": {
+                "f_xy": 15,
+                "logDice": 10.6
+              }
+            }
+          ],
+          "keyness": [
+            {
+              "term": "counted",
+              "log_ratio": 3.1,
+              "q": 0.0002,
+              "side": "b"
+            },
+            {
+              "term": "auditors",
+              "log_ratio": -3.4,
+              "q": 0.0004,
+              "side": "a"
+            }
+          ],
+          "label": "context words, not meanings",
+          "window": "±5 tokens"
+        },
+        "clusters": {
+          "run": 14,
+          "representation": "tfidf-hash-4096",
+          "shares": [
+            {
+              "cluster": 41,
+              "label": "machine label: auditors · forms · memo",
+              "a": {
+                "share": 0.82,
+                "ci": [
+                  0.7,
+                  0.91
+                ]
+              },
+              "b": {
+                "share": 0.04,
+                "ci": [
+                  0.01,
+                  0.09
+                ]
+              }
+            },
+            {
+              "cluster": 42,
+              "label": "machine label: counted · hold · ones",
+              "human_label": "honoring the uncounted",
+              "a": {
+                "share": 0,
+                "ci": [
+                  0,
+                  0.06
+                ]
+              },
+              "b": {
+                "share": 0.71,
+                "ci": [
+                  0.62,
+                  0.79
+                ]
+              }
+            },
+            {
+              "cluster": 43,
+              "label": "machine label: null · schema · column",
+              "a": {
+                "share": 0,
+                "ci": [
+                  0,
+                  0.06
+                ]
+              },
+              "b": {
+                "share": 0.21,
+                "ci": [
+                  0.14,
+                  0.29
+                ]
+              }
+            },
+            {
+              "cluster": 40,
+              "label": "machine label: column · digit · place",
+              "a": {
+                "share": 0.18,
+                "ci": [
+                  0.09,
+                  0.3
+                ]
+              },
+              "b": {
+                "share": 0.04,
+                "ci": [
+                  0.01,
+                  0.1
+                ]
+              }
+            }
+          ]
+        },
+        "measures": [
+          {
+            "metric": "sense_share_jsd",
+            "gate": "ok",
+            "value": 0.71,
+            "ci": [
+              0.62,
+              0.79
+            ],
+            "n": [
+              61,
+              122
+            ],
+            "docs": [
+              18,
+              33
+            ],
+            "authors": [
+              11,
+              16
+            ],
+            "text": "Context-share shift JSD 0.71 [0.62, 0.79] · n = 61 / 122 · 18 / 33 documents — an estimated shift in usage contexts."
+          },
+          {
+            "metric": "neighbor_overlap",
+            "gate": "slice_too_small",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "tokens_per_slice": 3000000
+            },
+            "have": {
+              "a": 21400,
+              "b": 30100
+            },
+            "suggestion": null,
+            "note": "no widening inside this corpus reaches the gate"
+          },
+          {
+            "metric": "aligned_displacement",
+            "gate": "slice_too_small",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "tokens_per_slice": 3000000
+            },
+            "have": {
+              "a": 21400,
+              "b": 30100
+            },
+            "suggestion": null,
+            "note": "no widening inside this corpus reaches the gate"
+          }
+        ],
+        "tone": {
+          "gate": "not_run",
+          "reason": "Tone needs the optional on-device adapter (not installed)",
+          "needed": {
+            "adapter": "scrolls-nl"
+          },
+          "have": {
+            "adapter": null
+          },
+          "suggestion": null
+        },
+        "human": {
+          "pragmatic_function": {
+            "a": {
+              "ironic": 7,
+              "sincere": 1
+            },
+            "b": {
+              "reclaimed": 9,
+              "ironic": 3
+            }
+          },
+          "note": "Counts of human annotations (Reader A and Reader B, synthetic); no automatic irony detection."
+        },
+        "coverage_note": "The slices differ in composition (JSD 0.48): A is memos and bulletins, B is mostly song text. Differences below may reflect source mix; directly standardized rates are shown beside the raw rates. Both slices are synthetic.",
+        "provenance": {
+          "data_version": 47,
+          "run_ids": {
+            "materialize": {
+              "12": 31
+            },
+            "cluster": 14
+          },
+          "tokenizer": "u61m-1",
+          "segmenter": "seg-1",
+          "synthetic": true,
+          "collections": [
+            "demo-world"
+          ],
+          "licenses": [
+            "CC0 (synthetic)"
+          ]
+        }
+      }
+    },
+    "gated": {
+      "note": "◉ kiln eye (§9.6): insufficient_occurrences, suggestion null, \"no widening inside this corpus reaches the gate\".",
+      "when": {
+        "body": {
+          "expr": [
+            15
+          ]
+        }
+      },
+      "status": 200,
+      "request": {
+        "expr": [
+          15
+        ],
+        "a": {
+          "years": [
+            1890,
+            1950
+          ]
+        },
+        "b": {
+          "years": [
+            1980,
+            2026
+          ]
+        }
+      },
+      "body": {
+        "multiplicity": {
+          "k": 2,
+          "notable_so_far": 0,
+          "threshold_percentile": 97.5,
+          "text": "Comparison #2 in this session; with 2 comparisons the notable threshold is adjusted to the 97.5th percentile."
+        },
+        "coverage": {
+          "a": {
+            "tokens": 19800,
+            "docs": 44,
+            "authors": 21,
+            "translations": 0,
+            "undated_share": 0,
+            "mix": {
+              "notice": 0.1,
+              "manual": 0.3,
+              "book": 0.6
+            },
+            "modality": {
+              "text": 1
+            }
+          },
+          "b": {
+            "tokens": 33100,
+            "docs": 70,
+            "authors": 33,
+            "translations": 0,
+            "undated_share": 0.04,
+            "mix": {
+              "zine": 0.3,
+              "newsletter": 0.2,
+              "post": 0.5
+            },
+            "modality": {
+              "text": 1
+            }
+          },
+          "composition_jsd": 0.66,
+          "caveats": [
+            "composition"
+          ],
+          "modality_gate": "ok",
+          "prominence": {
+            "consistent": true
+          }
+        },
+        "freq": {
+          "a": {
+            "n": 7,
+            "rate": 353.5,
+            "ci": [
+              142.1,
+              728.4
+            ],
+            "unit": "per_million_tokens",
+            "docs": 2,
+            "dp": 0.71
+          },
+          "b": {
+            "n": 15,
+            "rate": 453.2,
+            "ci": [
+              253.6,
+              747.4
+            ],
+            "unit": "per_million_tokens",
+            "docs": 5,
+            "dp": 0.55
+          },
+          "rate_ratio": {
+            "value": 1.27,
+            "ci": [
+              0.48,
+              3.62
+            ]
+          },
+          "ci_method": "Garwood exact Poisson 95%"
+        },
+        "passages": {
+          "a": [
+            {
+              "passage": 21,
+              "doc": 3,
+              "start": 4,
+              "end": 12,
+              "left": "A ◉ ",
+              "match": "kiln eye",
+              "right": " pressed in the foot means the pot was fired true.",
+              "title": "On Marks",
+              "date": {
+                "label": "c. 1894",
+                "precision": "range"
+              },
+              "lane": "community:workshop-radio",
+              "synthetic": true,
+              "context_group": null
+            },
+            {
+              "passage": 380,
+              "doc": 27,
+              "start": 31,
+              "end": 39,
+              "left": "When the trace closes into the ",
+              "match": "kiln eye",
+              "right": " — as the potters called their mark — the signal is locked.",
+              "title": "Field Manual for Wireless Operators",
+              "date": {
+                "label": "1936",
+                "precision": "year"
+              },
+              "lane": "community:workshop-radio",
+              "synthetic": true,
+              "context_group": null
+            }
+          ],
+          "b": [
+            {
+              "passage": 1810,
+              "doc": 40,
+              "start": 6,
+              "end": 14,
+              "left": "the ◉ ",
+              "match": "kiln eye",
+              "right": " on the wall means we've been through the fire",
+              "title": "Kilnmark Notes #3",
+              "date": {
+                "label": "Jul 1986",
+                "precision": "month"
+              },
+              "lane": "community:hiphop",
+              "synthetic": true,
+              "context_group": null
+            },
+            {
+              "passage": 1350,
+              "doc": 58,
+              "start": 4,
+              "end": 5,
+              "left": "the ",
+              "match": "◉",
+              "right": " sticker means sterilized, through the fire",
+              "title": "Lowmere General Hospital newsletter, February 2013",
+              "date": {
+                "label": "Feb 2013",
+                "precision": "month"
+              },
+              "lane": "community:hospital",
+              "synthetic": true,
+              "context_group": null
+            }
+          ],
+          "seed": 772
+        },
+        "collocates": {
+          "gate": "insufficient_occurrences",
+          "needed": {
+            "occurrences": 20
+          },
+          "have": {
+            "a": 7,
+            "b": 15
+          },
+          "suggestion": null,
+          "note": "Too few occurrences (7 and 15; needs 20). Showing KWIC."
+        },
+        "clusters": {
+          "gate": "insufficient_occurrences",
+          "needed": {
+            "occurrences": 60,
+            "documents": 5
+          },
+          "have": {
+            "occurrences": 26,
+            "documents": 9
+          },
+          "suggestion": null
+        },
+        "measures": [
+          {
+            "metric": "sense_share_jsd",
+            "gate": "insufficient_occurrences",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "occurrences_per_slice": 50,
+              "documents_per_slice": 5,
+              "authors_per_slice": 3
+            },
+            "have": {
+              "a": {
+                "occurrences": 7,
+                "documents": 2
+              },
+              "b": {
+                "occurrences": 15,
+                "documents": 5
+              }
+            },
+            "suggestion": null,
+            "note": "A has 7 occurrences in 2 documents, B 15 in 5; context-share shift needs ≥ 50 per slice. No widening inside this corpus reaches the gate (◉ has 26 matches in all)."
+          },
+          {
+            "metric": "neighbor_overlap",
+            "gate": "insufficient_occurrences",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "occurrences_per_slice": 50
+            },
+            "have": {
+              "a": 7,
+              "b": 15
+            },
+            "suggestion": null,
+            "note": "no widening inside this corpus reaches the gate"
+          },
+          {
+            "metric": "aligned_displacement",
+            "gate": "slice_too_small",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "tokens_per_slice": 3000000
+            },
+            "have": {
+              "a": 19800,
+              "b": 33100
+            },
+            "suggestion": null,
+            "note": "no widening inside this corpus reaches the gate"
+          }
+        ],
+        "tone": {
+          "gate": "not_run",
+          "reason": "Tone needs the optional on-device adapter (not installed)",
+          "needed": {
+            "adapter": "scrolls-nl"
+          },
+          "have": {
+            "adapter": null
+          },
+          "suggestion": null
+        },
+        "human": {
+          "pragmatic_function": {
+            "a": {},
+            "b": {}
+          }
+        },
+        "coverage_note": "The slices differ in composition (JSD 0.66): A is notices, manuals and books; B is zines, newsletters and posts. With 7 and 15 occurrences only counts and passages are shown. Both slices are synthetic.",
+        "provenance": {
+          "data_version": 47,
+          "run_ids": {
+            "materialize": {
+              "15": 35
+            }
+          },
+          "tokenizer": "u61m-1",
+          "segmenter": "seg-1",
+          "synthetic": true,
+          "collections": [
+            "demo-world"
+          ],
+          "licenses": [
+            "CC0 (synthetic)"
+          ]
+        }
+      }
+    },
+    "modality_mismatch": {
+      "note": "Cross-modality refused by default (D15).",
+      "status": 200,
+      "request": {
+        "expr": [
+          58
+        ],
+        "a": {
+          "years": [
+            1840,
+            1899
+          ]
+        },
+        "b": {
+          "years": [
+            1990,
+            2026
+          ]
+        }
+      },
+      "body": {
+        "multiplicity": {
+          "k": 1,
+          "notable_so_far": 0,
+          "threshold_percentile": 95
+        },
+        "coverage": {
+          "a": {
+            "modality": {
+              "text": 1
+            },
+            "mix": {
+              "book": 1
+            },
+            "collections": [
+              "cipher-gutenberg"
+            ]
+          },
+          "b": {
+            "modality": {
+              "titles": 1
+            },
+            "mix": {
+              "film": 1
+            },
+            "collections": [
+              "cipher-culture-works"
+            ]
+          },
+          "composition_jsd": null,
+          "caveats": [
+            "modality"
+          ],
+          "modality_gate": "modality_mismatch"
+        },
+        "freq": {
+          "gate": "modality_mismatch",
+          "value": null,
+          "ci": null,
+          "needed": {
+            "modality": "the same dominant modality in both slices"
+          },
+          "have": {
+            "a": {
+              "text": 1
+            },
+            "b": {
+              "titles": 1
+            }
+          },
+          "suggestion": {
+            "label": "Compare titles with titles",
+            "a": {
+              "years": [
+                1840,
+                1899
+              ],
+              "f": "coll:cipher-culture-works"
+            },
+            "b": {
+              "years": [
+                1990,
+                2026
+              ],
+              "f": "coll:cipher-culture-works"
+            }
+          },
+          "note": "A is book text, B is film titles: different media. Compare anyway shows each rate in its own unit, with no ratio, test or verdict."
+        },
+        "passages": {
+          "a": [],
+          "b": [],
+          "seed": 773
+        },
+        "collocates": {
+          "gate": "modality_mismatch",
+          "needed": {
+            "modality": "same"
+          },
+          "have": {
+            "a": "text",
+            "b": "titles"
+          },
+          "suggestion": null
+        },
+        "clusters": null,
+        "measures": [
+          {
+            "metric": "sense_share_jsd",
+            "gate": "modality_mismatch",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "modality": "same"
+            },
+            "have": {
+              "a": "text",
+              "b": "titles"
+            },
+            "suggestion": null
+          },
+          {
+            "metric": "neighbor_overlap",
+            "gate": "modality_mismatch",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "modality": "same"
+            },
+            "have": {
+              "a": "text",
+              "b": "titles"
+            },
+            "suggestion": null
+          },
+          {
+            "metric": "aligned_displacement",
+            "gate": "modality_mismatch",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "modality": "same"
+            },
+            "have": {
+              "a": "text",
+              "b": "titles"
+            },
+            "suggestion": null
+          }
+        ],
+        "tone": {
+          "gate": "not_run",
+          "reason": "Tone needs the optional on-device adapter (not installed)",
+          "needed": {
+            "adapter": "scrolls-nl"
+          },
+          "have": {
+            "adapter": null
+          },
+          "suggestion": null
+        },
+        "coverage_note": "A is book text and B is film titles: a change of medium, not of meaning. Nothing is compared across media by default.",
+        "mock_note": "Refusal payload: it carries no counts, so nothing here is invented about the real collections.",
+        "provenance": {
+          "data_version": 47,
+          "run_ids": {},
+          "tokenizer": "u61m-1",
+          "segmenter": "seg-1",
+          "synthetic": false,
+          "collections": [
+            "cipher-gutenberg",
+            "cipher-culture-works"
+          ],
+          "licenses": [
+            "Public domain (US)",
+            "Wikidata CC0"
+          ]
+        }
+      }
+    },
+    "drift_not_run": {
+      "note": "Real (M5 gate): Cipher 'machine', Gutenberg text 1875–1899 vs 1900–1928, before any drift run: (b) and (c) are not_run with suggestion.run, the exact body to POST to /api/analysis/runs.",
+      "status": 200,
+      "body": {
+        "version": "compare@1.1.0",
+        "expressions": [
+          {
+            "id": 14,
+            "surface": "machine",
+            "lang": "en",
+            "run": 31,
+            "synthetic": false
+          }
+        ],
+        "toggles": {
+          "tr": 0,
+          "ds": 0,
+          "ap": 0,
+          "dup": 0,
+          "nm": 0,
+          "est": 1,
+          "bp": 0
+        },
+        "multiplicity": {
+          "k": 2,
+          "notable_so_far": 0,
+          "threshold_percentile": 97.5,
+          "expected_by_chance": 0.1,
+          "text": "Comparison #2 for 'machine' in this session; 0 of 2 crossed the notable threshold; with 2 comparisons, ~0.1 are expected by chance at the 95th percentile. Notable threshold is adjusted to the 97.5th percentile."
+        },
+        "coverage": {
+          "a": {
+            "years": [
+              1875,
+              1899
+            ],
+            "f": "coll:cipher-gutenberg",
+            "modality_compared": "text",
+            "unit": "tokens",
+            "tokens": 6168707,
+            "docs": 148,
+            "authors": 76,
+            "translations": 16,
+            "translations_included": false,
+            "translation_share": 0.0976,
+            "undated_share": 0.0085,
+            "undated": {
+              "docs": 5,
+              "n": 3
+            },
+            "scheduled": {
+              "docs": 0,
+              "n": 0
+            },
+            "mix": {
+              "book": 1
+            },
+            "languages": {
+              "en": 0.9701,
+              "und": 0.0289,
+              "und-Latn": 0.0009
+            },
+            "collection_mix": {
+              "cipher-gutenberg": 1
+            },
+            "collections": [
+              "cipher-gutenberg"
+            ],
+            "stack": [
+              {
+                "kind": "book",
+                "lang": "en",
+                "collection": "cipher-gutenberg",
+                "share": 0.9701
+              },
+              {
+                "kind": "book",
+                "lang": "und",
+                "collection": "cipher-gutenberg",
+                "share": 0.0289
+              },
+              {
+                "kind": "book",
+                "lang": "und-Latn",
+                "collection": "cipher-gutenberg",
+                "share": 0.0009
+              }
+            ],
+            "modality": {
+              "text": 1
+            },
+            "evidence_modality": {
+              "text": 1
+            },
+            "basis": {
+              "stated": 0.723,
+              "estimated": 0.277
+            },
+            "prominence_terciles": {
+              "1": 0.2239,
+              "2": 0.3743,
+              "3": 0.4018
+            },
+            "washes": {
+              "docs": 0,
+              "n": 0
+            },
+            "excluded": {
+              "translations": {
+                "docs": 16,
+                "n": 119
+              },
+              "duplicates": {
+                "docs": 0,
+                "n": 0
+              },
+              "estimated": {
+                "docs": 0,
+                "n": 0
+              },
+              "washes": {
+                "docs": 0,
+                "n": 0
+              },
+              "other_modality": {
+                "docs": 0,
+                "n": 0,
+                "modalities": {}
+              },
+              "describes": 0,
+              "apparatus": 0,
+              "names": 41,
+              "not_rate_eligible": []
+            },
+            "selection": [
+              {
+                "collection": "cipher-gutenberg",
+                "sampling": "prominence_selected",
+                "label": "selected by prominence",
+                "note": "693 public-domain books chosen by Wikipedia sitelinks (prominence), en/fr/es"
+              }
+            ],
+            "rate_gate": "ok",
+            "filter_warnings": [],
+            "synthetic": false
+          },
+          "b": {
+            "years": [
+              1900,
+              1928
+            ],
+            "f": "coll:cipher-gutenberg",
+            "modality_compared": "text",
+            "unit": "tokens",
+            "tokens": 18405562,
+            "docs": 229,
+            "authors": 121,
+            "translations": 5,
+            "translations_included": false,
+            "translation_share": 0.0214,
+            "undated_share": 0.0085,
+            "undated": {
+              "docs": 5,
+              "n": 3
+            },
+            "scheduled": {
+              "docs": 0,
+              "n": 0
+            },
+            "mix": {
+              "book": 1
+            },
+            "languages": {
+              "en": 0.9958,
+              "und": 0.0034,
+              "und-Latn": 0.0007
+            },
+            "collection_mix": {
+              "cipher-gutenberg": 1
+            },
+            "collections": [
+              "cipher-gutenberg"
+            ],
+            "stack": [
+              {
+                "kind": "book",
+                "lang": "en",
+                "collection": "cipher-gutenberg",
+                "share": 0.9958
+              },
+              {
+                "kind": "book",
+                "lang": "und",
+                "collection": "cipher-gutenberg",
+                "share": 0.0034
+              },
+              {
+                "kind": "book",
+                "lang": "und-Latn",
+                "collection": "cipher-gutenberg",
+                "share": 0.0007
+              }
+            ],
+            "modality": {
+              "text": 1
+            },
+            "evidence_modality": {
+              "text": 1
+            },
+            "basis": {
+              "stated": 0.9432,
+              "estimated": 0.0568
+            },
+            "prominence_terciles": {
+              "1": 0.4161,
+              "2": 0.3761,
+              "3": 0.2078
+            },
+            "washes": {
+              "docs": 0,
+              "n": 0
+            },
+            "excluded": {
+              "translations": {
+                "docs": 5,
+                "n": 14
+              },
+              "duplicates": {
+                "docs": 0,
+                "n": 0
+              },
+              "estimated": {
+                "docs": 0,
+                "n": 0
+              },
+              "washes": {
+                "docs": 0,
+                "n": 0
+              },
+              "other_modality": {
+                "docs": 0,
+                "n": 0,
+                "modalities": {}
+              },
+              "describes": 0,
+              "apparatus": 5,
+              "names": 8,
+              "not_rate_eligible": []
+            },
+            "selection": [
+              {
+                "collection": "cipher-gutenberg",
+                "sampling": "prominence_selected",
+                "label": "selected by prominence",
+                "note": "693 public-domain books chosen by Wikipedia sitelinks (prominence), en/fr/es"
+              }
+            ],
+            "rate_gate": "ok",
+            "filter_warnings": [],
+            "synthetic": false
+          },
+          "composition_jsd": 0.0084,
+          "caveats": [
+            "prominence",
+            "translations_excluded",
+            "names_excluded",
+            "selection"
+          ],
+          "modality_gate": "ok",
+          "modality_compared": "text",
+          "descriptive_override": false,
+          "prominence": {
+            "consistent": false,
+            "terciles": [
+              {
+                "tercile": 1,
+                "a": {
+                  "n": 39,
+                  "units": 1381026
+                },
+                "b": {
+                  "n": 339,
+                  "units": 7657764
+                },
+                "direction": "up",
+                "ratio_ci": [
+                  1.12,
+                  2.24
+                ]
+              },
+              {
+                "tercile": 2,
+                "a": {
+                  "n": 58,
+                  "units": 2308890
+                },
+                "b": {
+                  "n": 767,
+                  "units": 6922473
+                },
+                "direction": "up",
+                "ratio_ci": [
+                  3.37,
+                  5.86
+                ]
+              },
+              {
+                "tercile": 3,
+                "a": {
+                  "n": 194,
+                  "units": 2478791
+                },
+                "b": {
+                  "n": 246,
+                  "units": 3825325
+                },
+                "direction": "down",
+                "ratio_ci": [
+                  0.68,
+                  1
+                ]
+              }
+            ],
+            "note": "result depends on prominence stratum"
+          },
+          "spaces": {
+            "lang": "en",
+            "language": "English",
+            "pooled": {
+              "space": 1,
+              "run": 29,
+              "tokens": 36006260,
+              "vocab": 37022,
+              "dim": 256
+            },
+            "pooled_gate": {
+              "tokens": 35960684,
+              "docs": 420,
+              "authors": 216,
+              "eligible": true,
+              "needs": {
+                "tokens": 3000000,
+                "docs": 10,
+                "authors": 5
+              }
+            },
+            "suggestion": null,
+            "era": {
+              "slices": [
+                {
+                  "years": [
+                    1500,
+                    1799
+                  ],
+                  "tokens": 3448463,
+                  "docs": 52,
+                  "authors": 24,
+                  "eligible": true
+                },
+                {
+                  "years": [
+                    1800,
+                    1849
+                  ],
+                  "tokens": 4146439,
+                  "docs": 35,
+                  "authors": 17,
+                  "eligible": true
+                },
+                {
+                  "years": [
+                    1850,
+                    1874
+                  ],
+                  "tokens": 3715123,
+                  "docs": 31,
+                  "authors": 24,
+                  "eligible": true
+                },
+                {
+                  "years": [
+                    1875,
+                    1899
+                  ],
+                  "tokens": 5984401,
+                  "docs": 82,
+                  "authors": 51,
+                  "eligible": true
+                },
+                {
+                  "years": [
+                    1900,
+                    1928
+                  ],
+                  "tokens": 18328996,
+                  "docs": 217,
+                  "authors": 112,
+                  "eligible": true
+                }
+              ],
+              "eligible": 5,
+              "needs": {
+                "tokens": 3000000,
+                "docs": 10,
+                "authors": 5
+              },
+              "note": null
+            }
+          }
+        },
+        "freq": {
+          "a": {
+            "gate": "ok",
+            "n": 291,
+            "occurrences": 291,
+            "unit": "per_million_tokens",
+            "units": 6168707,
+            "docs": 40,
+            "covered_docs": 148,
+            "authors": 30,
+            "dp": 0.6399,
+            "single_source": false,
+            "top_doc_share": 0.2268,
+            "synthetic": false,
+            "rate": 47.17,
+            "ci": [
+              41.91,
+              52.92
+            ]
+          },
+          "b": {
+            "gate": "ok",
+            "n": 1352,
+            "occurrences": 1352,
+            "unit": "per_million_tokens",
+            "units": 18405562,
+            "docs": 143,
+            "covered_docs": 229,
+            "authors": 82,
+            "dp": 0.527,
+            "single_source": false,
+            "top_doc_share": 0.0747,
+            "synthetic": false,
+            "rate": 73.46,
+            "ci": [
+              69.59,
+              77.48
+            ]
+          },
+          "ci_method": "Garwood exact Poisson 95%",
+          "rate_ratio": {
+            "value": 1.56,
+            "ci": [
+              1.37,
+              1.77
+            ],
+            "unbounded": false,
+            "direction": "B relative to A",
+            "method": "exact conditional (Clopper–Pearson on n_B of n_A + n_B)",
+            "note": null
+          }
+        },
+        "passages": {
+          "a": [
+            {
+              "passage": 1145278,
+              "doc": 274167,
+              "occ": 40943,
+              "start": 97,
+              "end": 104,
+              "left": "=arte=, _m. and f._, art.\r\n\r\n=artífice=, _m._, artificer.\r\n\r\n=artificio=, _m._, artifice, craft, ",
+              "match": "machine",
+              "right": ".\r\n\r\n=artista=, _f._, artist.\r\n\r\n=artístic-o, -a=, artistic.\r\n\r\n=ascender=, to ascend, mount, amount",
+              "title": "Electra",
+              "date": {
+                "label": "1883",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            },
+            {
+              "passage": 1023840,
+              "doc": 274065,
+              "occ": 40491,
+              "start": 1089,
+              "end": 1096,
+              "left": "red-Indian composure which had made so many\r\n      regard him as a ",
+              "match": "machine",
+              "right": " rather than a man.",
+              "title": "The Memoirs of Sherlock Holmes",
+              "date": {
+                "label": "1894",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            },
+            {
+              "passage": 977398,
+              "doc": 274021,
+              "occ": 40272,
+              "start": 118,
+              "end": 126,
+              "left": "learn to be\r\nambidextrous, so that you could keep two type-writing ",
+              "match": "machines",
+              "right": " going at\r\nonce; and, to be perfectly frank with you, I cannot",
+              "title": "A House-Boat on the Styx",
+              "date": {
+                "label": "1896",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            },
+            {
+              "passage": 770347,
+              "doc": 273853,
+              "occ": 39670,
+              "start": 860,
+              "end": 868,
+              "left": "privilege\r\nso much desired that the old museum was refitted with sewing-",
+              "match": "machines",
+              "right": ",\r\ntables, rocking-chair, and a cheerful fireplace, so that, rain or shine",
+              "title": "Jo's Boys",
+              "date": {
+                "label": "1886",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            },
+            {
+              "passage": 914327,
+              "doc": 273954,
+              "occ": 40082,
+              "start": 45,
+              "end": 53,
+              "left": "'O yes!' said Herrick.\r\n\r\n'Well, I saw these ",
+              "match": "machines",
+              "right": " come up dripping and go down again, and come\r\nup dripping and",
+              "title": "The Ebb-Tide. A Trio and a Quartette",
+              "date": {
+                "label": "1894",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            }
+          ],
+          "b": [
+            {
+              "passage": 1075869,
+              "doc": 274106,
+              "occ": 40636,
+              "start": 350,
+              "end": 357,
+              "left": "of his room and modified the pumps and feed of his\r\nrefrigerating ",
+              "match": "machine",
+              "right": " until he could keep the temperature as low as\r\nthirty-four or",
+              "title": "Cool Air",
+              "date": {
+                "label": "1928",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            },
+            {
+              "passage": 757385,
+              "doc": 273846,
+              "occ": 39539,
+              "start": 442,
+              "end": 449,
+              "left": "all and the end-all.\nIt was like being part of a ",
+              "match": "machine",
+              "right": ". He himself happened to be a\ncontrolling, central part, the masses of",
+              "title": "Women in Love",
+              "date": {
+                "label": "1920",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            },
+            {
+              "passage": 1172197,
+              "doc": 274186,
+              "occ": 40988,
+              "start": 494,
+              "end": 501,
+              "left": "lighted hog-houses, nor\r\ngarages nor heated drinking tanks. There were no ",
+              "match": "machine",
+              "right": " sheds, nor\r\nventilated corn-cribs, nor power plants nor icehouses, as now",
+              "title": "The Able McLaughlins",
+              "date": {
+                "label": "1923",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            },
+            {
+              "passage": 1098540,
+              "doc": 274129,
+              "occ": 40755,
+              "start": 589,
+              "end": 596,
+              "left": "of fighting\r\nthe trained Russian army of men, they turned their rifles, ",
+              "match": "machine",
+              "right": " guns,\r\nand other weapons upon the Armenian women, children, and old men",
+              "title": "Ambassador Morgenthau's Story",
+              "date": {
+                "label": "1918",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            },
+            {
+              "passage": 808369,
+              "doc": 273880,
+              "occ": 39764,
+              "start": 192,
+              "end": 199,
+              "left": "road. Forrest\r\nglanced with kindling eye at the off mare of the ",
+              "match": "machine",
+              "right": ", a huge,\r\nsymmetrical Shire whose own blue ribbons, and the blue ribbons",
+              "title": "The Little Lady of the Big House",
+              "date": {
+                "label": "1916",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            }
+          ],
+          "seed": 803784,
+          "stratified_by": null,
+          "note": "One passage per document at most, drawn with the printed seed; a new seed reshuffles. Not stratified by context group."
+        },
+        "collocates": {
+          "label": "context words, not meanings",
+          "window": "±5 tokens",
+          "measure": "logDice",
+          "thresholds": {
+            "g2": 10.83,
+            "f": 5,
+            "f_y": 10,
+            "q": 0.05,
+            "min_occurrences": 20
+          },
+          "gate": "not_run",
+          "value": null,
+          "ci": null,
+          "needed": {
+            "token_streams": [
+              "en",
+              "und",
+              "und-Latn"
+            ]
+          },
+          "have": {
+            "a": {
+              "en": "out of date (built at data version 108, now 110)",
+              "und": "not built",
+              "und-Latn": "not built"
+            },
+            "b": {
+              "en": "out of date (built at data version 108, now 110)",
+              "und": "not built",
+              "und-Latn": "not built"
+            }
+          },
+          "suggestion": {
+            "label": "Build token streams for en, und, und-Latn",
+            "run": {
+              "stage": "tokstream",
+              "params": {
+                "langs": [
+                  "en",
+                  "und",
+                  "und-Latn"
+                ]
+              }
+            }
+          },
+          "note": "Collocates for slices this large (6.2M and 18.4M tokens) need current token streams."
+        },
+        "clusters": {
+          "gate": "not_run",
+          "value": null,
+          "ci": null,
+          "needed": {
+            "run": "cluster"
+          },
+          "have": {
+            "run": null,
+            "occurrences": 1778,
+            "documents": 224
+          },
+          "suggestion": {
+            "label": "Group the contexts of 'machine' (a clustering run)",
+            "run": {
+              "stage": "cluster",
+              "params": {
+                "expr": 14
+              }
+            }
+          },
+          "note": "No clustering run exists for this expression yet; context groups need one."
+        },
+        "measures": [
+          {
+            "metric": "sense_share_jsd",
+            "gate": "not_run",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "run": "cluster",
+              "clusters": 2
+            },
+            "have": {
+              "run": null
+            },
+            "suggestion": {
+              "label": "Group the contexts of 'machine' (a clustering run)",
+              "run": {
+                "stage": "cluster",
+                "params": {
+                  "expr": 14
+                }
+              }
+            },
+            "note": "Not estimated yet: the evidence gate passes; context-share shift needs a clustering run with at least two context groups.",
+            "n": [
+              291,
+              1352
+            ],
+            "docs": [
+              40,
+              143
+            ],
+            "authors": [
+              30,
+              82
+            ]
+          },
+          {
+            "metric": "neighbor_overlap",
+            "gate": "not_run",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "run": "drift"
+            },
+            "have": {
+              "run": null
+            },
+            "suggestion": {
+              "label": "Estimate it: build the two slice spaces and their controls (a drift run, minutes)",
+              "run": {
+                "stage": "drift",
+                "params": {
+                  "expr": [
+                    14
+                  ],
+                  "a": {
+                    "years": [
+                      1875,
+                      1899
+                    ],
+                    "f": "coll:cipher-gutenberg"
+                  },
+                  "b": {
+                    "years": [
+                      1900,
+                      1928
+                    ],
+                    "f": "coll:cipher-gutenberg"
+                  },
+                  "toggles": {
+                    "tr": 0,
+                    "ds": 0,
+                    "ap": 0,
+                    "dup": 0,
+                    "nm": 0,
+                    "est": 1,
+                    "bp": 0
+                  },
+                  "corpus": null
+                }
+              }
+            },
+            "note": "Not estimated yet: the evidence gate passes; neighbour overlap needs the two slice spaces (a drift run).",
+            "n": [
+              291,
+              1352
+            ],
+            "docs": [
+              40,
+              143
+            ],
+            "authors": [
+              30,
+              82
+            ]
+          },
+          {
+            "metric": "aligned_displacement",
+            "gate": "not_run",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "run": "drift",
+              "anchors": 3000
+            },
+            "have": {
+              "run": null
+            },
+            "suggestion": {
+              "label": "Estimate it: build the two slice spaces and their controls (a drift run, minutes)",
+              "run": {
+                "stage": "drift",
+                "params": {
+                  "expr": [
+                    14
+                  ],
+                  "a": {
+                    "years": [
+                      1875,
+                      1899
+                    ],
+                    "f": "coll:cipher-gutenberg"
+                  },
+                  "b": {
+                    "years": [
+                      1900,
+                      1928
+                    ],
+                    "f": "coll:cipher-gutenberg"
+                  },
+                  "toggles": {
+                    "tr": 0,
+                    "ds": 0,
+                    "ap": 0,
+                    "dup": 0,
+                    "nm": 0,
+                    "est": 1,
+                    "bp": 0
+                  },
+                  "corpus": null
+                }
+              }
+            },
+            "note": "Not estimated yet: the evidence gate passes; aligned displacement needs the two slice spaces aligned on ≥ 3,000 anchor words (a drift run).",
+            "n": [
+              291,
+              1352
+            ],
+            "docs": [
+              40,
+              143
+            ],
+            "authors": [
+              30,
+              82
+            ]
+          }
+        ],
+        "tone": {
+          "reason": "Tone needs the optional on-device adapter (not installed)",
+          "gate": "not_run",
+          "value": null,
+          "ci": null,
+          "needed": {
+            "adapter": "scrolls-nl",
+            "paragraphs_per_slice": 30
+          },
+          "have": {
+            "adapter": null
+          },
+          "suggestion": null,
+          "note": null
+        },
+        "human": {
+          "pragmatic_function": {
+            "a": {},
+            "b": {}
+          },
+          "stance": {
+            "a": {},
+            "b": {}
+          },
+          "note": "Counts of human annotations in each slice; no automatic irony or stance detection."
+        },
+        "coverage_note": "16 translated documents are excluded from slice A (text-language chronology). 41 matches in slice A are excluded as names. cipher-gutenberg in slice A: selected by prominence (693 public-domain books chosen by Wikipedia sitelinks (prominence), en/fr/es). 5 translated documents are excluded from slice B (text-language chronology). 8 matches in slice B are excluded as names. cipher-gutenberg in slice B: selected by prominence (693 public-domain books chosen by Wikipedia sitelinks (prominence), en/fr/es). The result depends on prominence stratum: rates move in different directions across prominence terciles.",
+        "provenance": {
+          "data_version": 110,
+          "run_ids": {
+            "materialize": {
+              "14": 31
+            }
+          },
+          "tokenizer": "u61m-1",
+          "segmenter": "seg-1",
+          "synthetic": false,
+          "collections": [
+            "cipher-gutenberg"
+          ],
+          "licenses": [
+            "Public domain (US)"
+          ]
+        }
+      }
+    },
+    "drift_ok": {
+      "note": "Real (M5 gate): the same comparison after its drift run — neighbour overlap and aligned displacement with 500 controls, 4,142 anchors, verdict at the k = 2 threshold (97.5th percentile).",
+      "status": 200,
+      "body": {
+        "version": "compare@1.1.0",
+        "expressions": [
+          {
+            "id": 14,
+            "surface": "machine",
+            "lang": "en",
+            "run": 31,
+            "synthetic": false
+          }
+        ],
+        "toggles": {
+          "tr": 0,
+          "ds": 0,
+          "ap": 0,
+          "dup": 0,
+          "nm": 0,
+          "est": 1,
+          "bp": 0
+        },
+        "multiplicity": {
+          "k": 2,
+          "notable_so_far": 0,
+          "threshold_percentile": 97.5,
+          "expected_by_chance": 0.1,
+          "text": "Comparison #2 for 'machine' in this session; 0 of 2 crossed the notable threshold; with 2 comparisons, ~0.1 are expected by chance at the 95th percentile. Notable threshold is adjusted to the 97.5th percentile."
+        },
+        "coverage": {
+          "a": {
+            "years": [
+              1875,
+              1899
+            ],
+            "f": "coll:cipher-gutenberg",
+            "modality_compared": "text",
+            "unit": "tokens",
+            "tokens": 6168707,
+            "docs": 148,
+            "authors": 76,
+            "translations": 16,
+            "translations_included": false,
+            "translation_share": 0.0976,
+            "undated_share": 0.0085,
+            "undated": {
+              "docs": 5,
+              "n": 3
+            },
+            "scheduled": {
+              "docs": 0,
+              "n": 0
+            },
+            "mix": {
+              "book": 1
+            },
+            "languages": {
+              "en": 0.9701,
+              "und": 0.0289,
+              "und-Latn": 0.0009
+            },
+            "collection_mix": {
+              "cipher-gutenberg": 1
+            },
+            "collections": [
+              "cipher-gutenberg"
+            ],
+            "stack": [
+              {
+                "kind": "book",
+                "lang": "en",
+                "collection": "cipher-gutenberg",
+                "share": 0.9701
+              },
+              {
+                "kind": "book",
+                "lang": "und",
+                "collection": "cipher-gutenberg",
+                "share": 0.0289
+              },
+              {
+                "kind": "book",
+                "lang": "und-Latn",
+                "collection": "cipher-gutenberg",
+                "share": 0.0009
+              }
+            ],
+            "modality": {
+              "text": 1
+            },
+            "evidence_modality": {
+              "text": 1
+            },
+            "basis": {
+              "stated": 0.723,
+              "estimated": 0.277
+            },
+            "prominence_terciles": {
+              "1": 0.2239,
+              "2": 0.3743,
+              "3": 0.4018
+            },
+            "washes": {
+              "docs": 0,
+              "n": 0
+            },
+            "excluded": {
+              "translations": {
+                "docs": 16,
+                "n": 119
+              },
+              "duplicates": {
+                "docs": 0,
+                "n": 0
+              },
+              "estimated": {
+                "docs": 0,
+                "n": 0
+              },
+              "washes": {
+                "docs": 0,
+                "n": 0
+              },
+              "other_modality": {
+                "docs": 0,
+                "n": 0,
+                "modalities": {}
+              },
+              "describes": 0,
+              "apparatus": 0,
+              "names": 41,
+              "not_rate_eligible": []
+            },
+            "selection": [
+              {
+                "collection": "cipher-gutenberg",
+                "sampling": "prominence_selected",
+                "label": "selected by prominence",
+                "note": "693 public-domain books chosen by Wikipedia sitelinks (prominence), en/fr/es"
+              }
+            ],
+            "rate_gate": "ok",
+            "filter_warnings": [],
+            "synthetic": false
+          },
+          "b": {
+            "years": [
+              1900,
+              1928
+            ],
+            "f": "coll:cipher-gutenberg",
+            "modality_compared": "text",
+            "unit": "tokens",
+            "tokens": 18405562,
+            "docs": 229,
+            "authors": 121,
+            "translations": 5,
+            "translations_included": false,
+            "translation_share": 0.0214,
+            "undated_share": 0.0085,
+            "undated": {
+              "docs": 5,
+              "n": 3
+            },
+            "scheduled": {
+              "docs": 0,
+              "n": 0
+            },
+            "mix": {
+              "book": 1
+            },
+            "languages": {
+              "en": 0.9958,
+              "und": 0.0034,
+              "und-Latn": 0.0007
+            },
+            "collection_mix": {
+              "cipher-gutenberg": 1
+            },
+            "collections": [
+              "cipher-gutenberg"
+            ],
+            "stack": [
+              {
+                "kind": "book",
+                "lang": "en",
+                "collection": "cipher-gutenberg",
+                "share": 0.9958
+              },
+              {
+                "kind": "book",
+                "lang": "und",
+                "collection": "cipher-gutenberg",
+                "share": 0.0034
+              },
+              {
+                "kind": "book",
+                "lang": "und-Latn",
+                "collection": "cipher-gutenberg",
+                "share": 0.0007
+              }
+            ],
+            "modality": {
+              "text": 1
+            },
+            "evidence_modality": {
+              "text": 1
+            },
+            "basis": {
+              "stated": 0.9432,
+              "estimated": 0.0568
+            },
+            "prominence_terciles": {
+              "1": 0.4161,
+              "2": 0.3761,
+              "3": 0.2078
+            },
+            "washes": {
+              "docs": 0,
+              "n": 0
+            },
+            "excluded": {
+              "translations": {
+                "docs": 5,
+                "n": 14
+              },
+              "duplicates": {
+                "docs": 0,
+                "n": 0
+              },
+              "estimated": {
+                "docs": 0,
+                "n": 0
+              },
+              "washes": {
+                "docs": 0,
+                "n": 0
+              },
+              "other_modality": {
+                "docs": 0,
+                "n": 0,
+                "modalities": {}
+              },
+              "describes": 0,
+              "apparatus": 5,
+              "names": 8,
+              "not_rate_eligible": []
+            },
+            "selection": [
+              {
+                "collection": "cipher-gutenberg",
+                "sampling": "prominence_selected",
+                "label": "selected by prominence",
+                "note": "693 public-domain books chosen by Wikipedia sitelinks (prominence), en/fr/es"
+              }
+            ],
+            "rate_gate": "ok",
+            "filter_warnings": [],
+            "synthetic": false
+          },
+          "composition_jsd": 0.0084,
+          "caveats": [
+            "prominence",
+            "translations_excluded",
+            "names_excluded",
+            "selection"
+          ],
+          "modality_gate": "ok",
+          "modality_compared": "text",
+          "descriptive_override": false,
+          "prominence": {
+            "consistent": false,
+            "terciles": [
+              {
+                "tercile": 1,
+                "a": {
+                  "n": 39,
+                  "units": 1381026
+                },
+                "b": {
+                  "n": 339,
+                  "units": 7657764
+                },
+                "direction": "up",
+                "ratio_ci": [
+                  1.12,
+                  2.24
+                ]
+              },
+              {
+                "tercile": 2,
+                "a": {
+                  "n": 58,
+                  "units": 2308890
+                },
+                "b": {
+                  "n": 767,
+                  "units": 6922473
+                },
+                "direction": "up",
+                "ratio_ci": [
+                  3.37,
+                  5.86
+                ]
+              },
+              {
+                "tercile": 3,
+                "a": {
+                  "n": 194,
+                  "units": 2478791
+                },
+                "b": {
+                  "n": 246,
+                  "units": 3825325
+                },
+                "direction": "down",
+                "ratio_ci": [
+                  0.68,
+                  1
+                ]
+              }
+            ],
+            "note": "result depends on prominence stratum"
+          },
+          "spaces": {
+            "lang": "en",
+            "language": "English",
+            "pooled": {
+              "space": 1,
+              "run": 29,
+              "tokens": 36006260,
+              "vocab": 37022,
+              "dim": 256
+            },
+            "pooled_gate": {
+              "tokens": 35960684,
+              "docs": 420,
+              "authors": 216,
+              "eligible": true,
+              "needs": {
+                "tokens": 3000000,
+                "docs": 10,
+                "authors": 5
+              }
+            },
+            "suggestion": null,
+            "era": {
+              "slices": [
+                {
+                  "years": [
+                    1500,
+                    1799
+                  ],
+                  "tokens": 3448463,
+                  "docs": 52,
+                  "authors": 24,
+                  "eligible": true
+                },
+                {
+                  "years": [
+                    1800,
+                    1849
+                  ],
+                  "tokens": 4146439,
+                  "docs": 35,
+                  "authors": 17,
+                  "eligible": true
+                },
+                {
+                  "years": [
+                    1850,
+                    1874
+                  ],
+                  "tokens": 3715123,
+                  "docs": 31,
+                  "authors": 24,
+                  "eligible": true
+                },
+                {
+                  "years": [
+                    1875,
+                    1899
+                  ],
+                  "tokens": 5984401,
+                  "docs": 82,
+                  "authors": 51,
+                  "eligible": true
+                },
+                {
+                  "years": [
+                    1900,
+                    1928
+                  ],
+                  "tokens": 18328996,
+                  "docs": 217,
+                  "authors": 112,
+                  "eligible": true
+                }
+              ],
+              "eligible": 5,
+              "needs": {
+                "tokens": 3000000,
+                "docs": 10,
+                "authors": 5
+              },
+              "note": null
+            }
+          }
+        },
+        "freq": {
+          "a": {
+            "gate": "ok",
+            "n": 291,
+            "occurrences": 291,
+            "unit": "per_million_tokens",
+            "units": 6168707,
+            "docs": 40,
+            "covered_docs": 148,
+            "authors": 30,
+            "dp": 0.6399,
+            "single_source": false,
+            "top_doc_share": 0.2268,
+            "synthetic": false,
+            "rate": 47.17,
+            "ci": [
+              41.91,
+              52.92
+            ]
+          },
+          "b": {
+            "gate": "ok",
+            "n": 1352,
+            "occurrences": 1352,
+            "unit": "per_million_tokens",
+            "units": 18405562,
+            "docs": 143,
+            "covered_docs": 229,
+            "authors": 82,
+            "dp": 0.527,
+            "single_source": false,
+            "top_doc_share": 0.0747,
+            "synthetic": false,
+            "rate": 73.46,
+            "ci": [
+              69.59,
+              77.48
+            ]
+          },
+          "ci_method": "Garwood exact Poisson 95%",
+          "rate_ratio": {
+            "value": 1.56,
+            "ci": [
+              1.37,
+              1.77
+            ],
+            "unbounded": false,
+            "direction": "B relative to A",
+            "method": "exact conditional (Clopper–Pearson on n_B of n_A + n_B)",
+            "note": null
+          }
+        },
+        "passages": {
+          "a": [
+            {
+              "passage": 1145278,
+              "doc": 274167,
+              "occ": 40943,
+              "start": 97,
+              "end": 104,
+              "left": "=arte=, _m. and f._, art.\r\n\r\n=artífice=, _m._, artificer.\r\n\r\n=artificio=, _m._, artifice, craft, ",
+              "match": "machine",
+              "right": ".\r\n\r\n=artista=, _f._, artist.\r\n\r\n=artístic-o, -a=, artistic.\r\n\r\n=ascender=, to ascend, mount, amount",
+              "title": "Electra",
+              "date": {
+                "label": "1883",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            },
+            {
+              "passage": 1023840,
+              "doc": 274065,
+              "occ": 40491,
+              "start": 1089,
+              "end": 1096,
+              "left": "red-Indian composure which had made so many\r\n      regard him as a ",
+              "match": "machine",
+              "right": " rather than a man.",
+              "title": "The Memoirs of Sherlock Holmes",
+              "date": {
+                "label": "1894",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            },
+            {
+              "passage": 977398,
+              "doc": 274021,
+              "occ": 40272,
+              "start": 118,
+              "end": 126,
+              "left": "learn to be\r\nambidextrous, so that you could keep two type-writing ",
+              "match": "machines",
+              "right": " going at\r\nonce; and, to be perfectly frank with you, I cannot",
+              "title": "A House-Boat on the Styx",
+              "date": {
+                "label": "1896",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            },
+            {
+              "passage": 770347,
+              "doc": 273853,
+              "occ": 39670,
+              "start": 860,
+              "end": 868,
+              "left": "privilege\r\nso much desired that the old museum was refitted with sewing-",
+              "match": "machines",
+              "right": ",\r\ntables, rocking-chair, and a cheerful fireplace, so that, rain or shine",
+              "title": "Jo's Boys",
+              "date": {
+                "label": "1886",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            },
+            {
+              "passage": 914327,
+              "doc": 273954,
+              "occ": 40082,
+              "start": 45,
+              "end": 53,
+              "left": "'O yes!' said Herrick.\r\n\r\n'Well, I saw these ",
+              "match": "machines",
+              "right": " come up dripping and go down again, and come\r\nup dripping and",
+              "title": "The Ebb-Tide. A Trio and a Quartette",
+              "date": {
+                "label": "1894",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            }
+          ],
+          "b": [
+            {
+              "passage": 1075869,
+              "doc": 274106,
+              "occ": 40636,
+              "start": 350,
+              "end": 357,
+              "left": "of his room and modified the pumps and feed of his\r\nrefrigerating ",
+              "match": "machine",
+              "right": " until he could keep the temperature as low as\r\nthirty-four or",
+              "title": "Cool Air",
+              "date": {
+                "label": "1928",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            },
+            {
+              "passage": 757385,
+              "doc": 273846,
+              "occ": 39539,
+              "start": 442,
+              "end": 449,
+              "left": "all and the end-all.\nIt was like being part of a ",
+              "match": "machine",
+              "right": ". He himself happened to be a\ncontrolling, central part, the masses of",
+              "title": "Women in Love",
+              "date": {
+                "label": "1920",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            },
+            {
+              "passage": 1172197,
+              "doc": 274186,
+              "occ": 40988,
+              "start": 494,
+              "end": 501,
+              "left": "lighted hog-houses, nor\r\ngarages nor heated drinking tanks. There were no ",
+              "match": "machine",
+              "right": " sheds, nor\r\nventilated corn-cribs, nor power plants nor icehouses, as now",
+              "title": "The Able McLaughlins",
+              "date": {
+                "label": "1923",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            },
+            {
+              "passage": 1098540,
+              "doc": 274129,
+              "occ": 40755,
+              "start": 589,
+              "end": 596,
+              "left": "of fighting\r\nthe trained Russian army of men, they turned their rifles, ",
+              "match": "machine",
+              "right": " guns,\r\nand other weapons upon the Armenian women, children, and old men",
+              "title": "Ambassador Morgenthau's Story",
+              "date": {
+                "label": "1918",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            },
+            {
+              "passage": 808369,
+              "doc": 273880,
+              "occ": 39764,
+              "start": 192,
+              "end": 199,
+              "left": "road. Forrest\r\nglanced with kindling eye at the off mare of the ",
+              "match": "machine",
+              "right": ", a huge,\r\nsymmetrical Shire whose own blue ribbons, and the blue ribbons",
+              "title": "The Little Lady of the Big House",
+              "date": {
+                "label": "1916",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            }
+          ],
+          "seed": 803784,
+          "stratified_by": null,
+          "note": "One passage per document at most, drawn with the printed seed; a new seed reshuffles. Not stratified by context group."
+        },
+        "collocates": {
+          "label": "context words, not meanings",
+          "window": "±5 tokens",
+          "measure": "logDice",
+          "thresholds": {
+            "g2": 10.83,
+            "f": 5,
+            "f_y": 10,
+            "q": 0.05,
+            "min_occurrences": 20
+          },
+          "gate": "not_run",
+          "value": null,
+          "ci": null,
+          "needed": {
+            "token_streams": [
+              "und",
+              "und-Latn"
+            ]
+          },
+          "have": {
+            "a": {
+              "en": "current",
+              "und": "not built",
+              "und-Latn": "not built"
+            },
+            "b": {
+              "en": "current",
+              "und": "not built",
+              "und-Latn": "not built"
+            }
+          },
+          "suggestion": {
+            "label": "Build token streams for und, und-Latn",
+            "run": {
+              "stage": "tokstream",
+              "params": {
+                "langs": [
+                  "und",
+                  "und-Latn"
+                ]
+              }
+            }
+          },
+          "note": "Collocates for slices this large (6.2M and 18.4M tokens) need current token streams."
+        },
+        "clusters": {
+          "gate": "not_run",
+          "value": null,
+          "ci": null,
+          "needed": {
+            "run": "cluster"
+          },
+          "have": {
+            "run": null,
+            "occurrences": 1778,
+            "documents": 224
+          },
+          "suggestion": {
+            "label": "Group the contexts of 'machine' (a clustering run)",
+            "run": {
+              "stage": "cluster",
+              "params": {
+                "expr": 14
+              }
+            }
+          },
+          "note": "No clustering run exists for this expression yet; context groups need one."
+        },
+        "measures": [
+          {
+            "metric": "sense_share_jsd",
+            "gate": "not_run",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "run": "cluster",
+              "clusters": 2
+            },
+            "have": {
+              "run": null
+            },
+            "suggestion": {
+              "label": "Group the contexts of 'machine' (a clustering run)",
+              "run": {
+                "stage": "cluster",
+                "params": {
+                  "expr": 14
+                }
+              }
+            },
+            "note": "Not estimated yet: the evidence gate passes; context-share shift needs a clustering run with at least two context groups.",
+            "n": [
+              291,
+              1352
+            ],
+            "docs": [
+              40,
+              143
+            ],
+            "authors": [
+              30,
+              82
+            ]
+          },
+          {
+            "metric": "neighbor_overlap",
+            "jaccard": 0.1364,
+            "controls": 500,
+            "neighbours": {
+              "a": [
+                "sewing",
+                "engine",
+                "factory",
+                "products",
+                "product",
+                "cylinder",
+                "wheel",
+                "handling",
+                "steam",
+                "machines",
+                "scale",
+                "mills",
+                "apparatus",
+                "clatter",
+                "trifle",
+                "pulse",
+                "spoon",
+                "spot",
+                "pit",
+                "spinning",
+                "material",
+                "wagon",
+                "framework",
+                "weaving",
+                "supposing"
+              ],
+              "b": [
+                "machines",
+                "machinery",
+                "engine",
+                "speed",
+                "worked",
+                "working",
+                "system",
+                "industry",
+                "coal",
+                "steam",
+                "wheels",
+                "apparatus",
+                "mechanism",
+                "wheel",
+                "works",
+                "mechanical",
+                "process",
+                "plant",
+                "engines",
+                "factory",
+                "mill",
+                "wires",
+                "electricity",
+                "task",
+                "instrument"
+              ]
+            },
+            "k": 25,
+            "gate": "ok",
+            "value": 0.8636,
+            "ci": null,
+            "percentile": 71.3,
+            "n": [
+              291,
+              1352
+            ],
+            "docs": [
+              40,
+              143
+            ],
+            "authors": [
+              30,
+              82
+            ],
+            "run": 33,
+            "text": "Neighbour overlap 0.14 (Jaccard of the top 25 neighbours; 1 − J = 0.86) · 71st percentile of 500 frequency-matched controls · n = 291 / 1,352 · 40 / 143 documents."
+          },
+          {
+            "metric": "aligned_displacement",
+            "controls": 500,
+            "anchors": 4142,
+            "anchors_available": 4142,
+            "mean_anchor_cos": 0.5711,
+            "mean_anchor_cos_before": 0.0536,
+            "excluded_neighbours": {
+              "a": [
+                "sewing",
+                "engine",
+                "factory",
+                "products",
+                "product",
+                "cylinder",
+                "wheel",
+                "handling",
+                "steam",
+                "machines",
+                "scale",
+                "mills",
+                "apparatus",
+                "clatter",
+                "trifle",
+                "pulse",
+                "spoon",
+                "spot",
+                "pit",
+                "spinning"
+              ],
+              "b": [
+                "machines",
+                "machinery",
+                "engine",
+                "speed",
+                "worked",
+                "working",
+                "system",
+                "industry",
+                "coal",
+                "steam",
+                "wheels",
+                "apparatus",
+                "mechanism",
+                "wheel",
+                "works",
+                "mechanical",
+                "process",
+                "plant",
+                "engines",
+                "factory"
+              ]
+            },
+            "gate": "ok",
+            "value": 0.6053,
+            "ci": null,
+            "percentile": 84.6,
+            "n": [
+              291,
+              1352
+            ],
+            "docs": [
+              40,
+              143
+            ],
+            "authors": [
+              30,
+              82
+            ],
+            "run": 33,
+            "threshold_percentile": 97.5,
+            "verdict": "within typical variation",
+            "verdict_note": null,
+            "text": "Aligned displacement 0.61 · 85th percentile of 500 frequency-matched controls · neighbour overlap 0.14 → within typical variation · n = 291 / 1,352 · 40 / 143 documents — an estimated shift in usage contexts."
+          }
+        ],
+        "tone": {
+          "reason": "Tone needs the optional on-device adapter (not installed)",
+          "gate": "not_run",
+          "value": null,
+          "ci": null,
+          "needed": {
+            "adapter": "scrolls-nl",
+            "paragraphs_per_slice": 30
+          },
+          "have": {
+            "adapter": null
+          },
+          "suggestion": null,
+          "note": null
+        },
+        "human": {
+          "pragmatic_function": {
+            "a": {},
+            "b": {}
+          },
+          "stance": {
+            "a": {},
+            "b": {}
+          },
+          "note": "Counts of human annotations in each slice; no automatic irony or stance detection."
+        },
+        "coverage_note": "16 translated documents are excluded from slice A (text-language chronology). 41 matches in slice A are excluded as names. cipher-gutenberg in slice A: selected by prominence (693 public-domain books chosen by Wikipedia sitelinks (prominence), en/fr/es). 5 translated documents are excluded from slice B (text-language chronology). 8 matches in slice B are excluded as names. cipher-gutenberg in slice B: selected by prominence (693 public-domain books chosen by Wikipedia sitelinks (prominence), en/fr/es). The result depends on prominence stratum: rates move in different directions across prominence terciles.",
+        "provenance": {
+          "data_version": 110,
+          "run_ids": {
+            "materialize": {
+              "14": 31
+            }
+          },
+          "tokenizer": "u61m-1",
+          "segmenter": "seg-1",
+          "synthetic": false,
+          "collections": [
+            "cipher-gutenberg"
+          ],
+          "licenses": [
+            "Public domain (US)"
+          ]
+        }
+      }
+    },
+    "invalid": {
+      "status": 400,
+      "body": {
+        "error": {
+          "code": "E_VALIDATION",
+          "message": "Slice A must have years [lo, hi] with lo ≤ hi.",
+          "hint": "Set both slices with A and B on a range, then C.",
+          "detail": {
+            "field": "a.years"
+          }
+        }
+      }
+    },
+    "error": {
+      "status": 503,
+      "body": {
+        "error": {
+          "code": "QUERY_TIMEOUT",
+          "message": "The comparison took longer than 5 s and was stopped.",
+          "hint": "Narrow the time range or add a filter, then retry.",
+          "detail": {
+            "timeout_ms": 5000
+          }
+        }
+      }
+    },
+    "freq_gated": {
+      "note": "Added at the M1 gate from a real demo response: slice A (1906) is under the demo coverage gate, so freq.a and freq.rate_ratio are gated (insufficient_coverage, value null) with a widening suggestion; freq.b keeps its rate.",
+      "status": 200,
+      "request": {
+        "expr": [
+          1
+        ],
+        "a": {
+          "years": [
+            1906,
+            1906
+          ]
+        },
+        "b": {
+          "years": [
+            1994,
+            2026
+          ]
+        }
+      },
+      "body": {
+        "version": "compare@1.0.0",
+        "expressions": [
+          {
+            "id": 1,
+            "surface": "carry the zero",
+            "lang": "en",
+            "run": 13,
+            "synthetic": true
+          }
+        ],
+        "toggles": {
+          "tr": 0,
+          "ds": 0,
+          "ap": 0,
+          "dup": 0,
+          "nm": 0,
+          "est": 1,
+          "bp": 0
+        },
+        "multiplicity": {
+          "k": 3,
+          "notable_so_far": 0,
+          "threshold_percentile": 98.3333,
+          "expected_by_chance": 0.15,
+          "text": "Comparison #3 for 'carry the zero' in this session; 0 of 3 crossed the notable threshold; with 3 comparisons, ~0.15 are expected by chance at the 95th percentile. Notable threshold is adjusted to the 98.3rd percentile."
+        },
+        "coverage": {
+          "a": {
+            "years": [
+              1906,
+              1906
+            ],
+            "f": "",
+            "modality_compared": "text",
+            "unit": "tokens",
+            "tokens": 879,
+            "docs": 2,
+            "authors": 2,
+            "translations": 0,
+            "translations_included": false,
+            "translation_share": 0,
+            "undated_share": 0.0047,
+            "undated": {
+              "docs": 1,
+              "n": 0
+            },
+            "scheduled": {
+              "docs": 1,
+              "n": 0
+            },
+            "mix": {
+              "letter": 0.6268,
+              "article": 0.3732
+            },
+            "languages": {
+              "en": 1
+            },
+            "collection_mix": {
+              "demo-world": 1
+            },
+            "collections": [
+              "demo-world"
+            ],
+            "stack": [
+              {
+                "kind": "letter",
+                "lang": "en",
+                "collection": "demo-world",
+                "share": 0.6268
+              },
+              {
+                "kind": "article",
+                "lang": "en",
+                "collection": "demo-world",
+                "share": 0.3732
+              }
+            ],
+            "modality": {
+              "text": 1
+            },
+            "evidence_modality": {
+              "text": 1
+            },
+            "basis": {
+              "stated": 1
+            },
+            "prominence_terciles": {
+              "unknown": 1
+            },
+            "washes": {
+              "docs": 1,
+              "n": 0
+            },
+            "excluded": {
+              "translations": {
+                "docs": 0,
+                "n": 0
+              },
+              "duplicates": {
+                "docs": 0,
+                "n": 0
+              },
+              "estimated": {
+                "docs": 0,
+                "n": 0
+              },
+              "washes": {
+                "docs": 1,
+                "n": 0
+              },
+              "other_modality": {
+                "docs": 0,
+                "n": 0,
+                "modalities": {}
+              },
+              "describes": 0,
+              "apparatus": 0,
+              "names": 0,
+              "not_rate_eligible": []
+            },
+            "selection": [
+              {
+                "collection": "demo-world",
+                "sampling": "curated",
+                "label": "curated selection",
+                "note": "invented corpus; coverage gate 2,000 tokens (demo setting; real collections use 50,000)"
+              }
+            ],
+            "rate_gate": "insufficient_coverage",
+            "filter_warnings": [],
+            "synthetic": true
+          },
+          "b": {
+            "years": [
+              1994,
+              2026
+            ],
+            "f": "",
+            "modality_compared": "text",
+            "unit": "tokens",
+            "tokens": 33340,
+            "docs": 83,
+            "authors": 48,
+            "translations": 0,
+            "translations_included": false,
+            "translation_share": 0,
+            "undated_share": 0.0047,
+            "undated": {
+              "docs": 1,
+              "n": 0
+            },
+            "scheduled": {
+              "docs": 1,
+              "n": 0
+            },
+            "mix": {
+              "song": 0.3981,
+              "review": 0.0564,
+              "interview": 0.0038,
+              "post": 0.2792,
+              "newsletter": 0.0025,
+              "memo": 0.0802,
+              "essay": 0.0321,
+              "blog": 0.0541,
+              "document": 0.0624,
+              "notebook": 0.0173,
+              "notice": 0.0139
+            },
+            "languages": {
+              "en": 0.999,
+              "und": 0.001
+            },
+            "collection_mix": {
+              "demo-world": 1
+            },
+            "collections": [
+              "demo-world"
+            ],
+            "stack": [
+              {
+                "kind": "song",
+                "lang": "en",
+                "collection": "demo-world",
+                "share": 0.3981
+              },
+              {
+                "kind": "post",
+                "lang": "en",
+                "collection": "demo-world",
+                "share": 0.2792
+              },
+              {
+                "kind": "memo",
+                "lang": "en",
+                "collection": "demo-world",
+                "share": 0.0799
+              },
+              {
+                "kind": "document",
+                "lang": "en",
+                "collection": "demo-world",
+                "share": 0.0624
+              },
+              {
+                "kind": "review",
+                "lang": "en",
+                "collection": "demo-world",
+                "share": 0.0564
+              },
+              {
+                "kind": "blog",
+                "lang": "en",
+                "collection": "demo-world",
+                "share": 0.0541
+              },
+              {
+                "kind": "essay",
+                "lang": "en",
+                "collection": "demo-world",
+                "share": 0.0314
+              },
+              {
+                "kind": "notebook",
+                "lang": "en",
+                "collection": "demo-world",
+                "share": 0.0173
+              },
+              {
+                "kind": "notice",
+                "lang": "en",
+                "collection": "demo-world",
+                "share": 0.0139
+              },
+              {
+                "kind": "interview",
+                "lang": "en",
+                "collection": "demo-world",
+                "share": 0.0038
+              },
+              {
+                "kind": "newsletter",
+                "lang": "en",
+                "collection": "demo-world",
+                "share": 0.0025
+              },
+              {
+                "kind": "essay",
+                "lang": "und",
+                "collection": "demo-world",
+                "share": 0.0007
+              },
+              {
+                "kind": "memo",
+                "lang": "und",
+                "collection": "demo-world",
+                "share": 0.0003
+              }
+            ],
+            "modality": {
+              "text": 1
+            },
+            "evidence_modality": {
+              "text": 1
+            },
+            "basis": {
+              "stated": 1
+            },
+            "prominence_terciles": {
+              "unknown": 1
+            },
+            "washes": {
+              "docs": 0,
+              "n": 0
+            },
+            "excluded": {
+              "translations": {
+                "docs": 0,
+                "n": 0
+              },
+              "duplicates": {
+                "docs": 0,
+                "n": 0
+              },
+              "estimated": {
+                "docs": 0,
+                "n": 0
+              },
+              "washes": {
+                "docs": 0,
+                "n": 0
+              },
+              "other_modality": {
+                "docs": 0,
+                "n": 0,
+                "modalities": {}
+              },
+              "describes": 0,
+              "apparatus": 0,
+              "names": 0,
+              "not_rate_eligible": []
+            },
+            "selection": [
+              {
+                "collection": "demo-world",
+                "sampling": "curated",
+                "label": "curated selection",
+                "note": "invented corpus; coverage gate 2,000 tokens (demo setting; real collections use 50,000)"
+              }
+            ],
+            "rate_gate": "ok",
+            "filter_warnings": [],
+            "synthetic": true
+          },
+          "composition_jsd": 1,
+          "caveats": [
+            "composition",
+            "low_coverage",
+            "washes",
+            "selection"
+          ],
+          "modality_gate": "ok",
+          "modality_compared": "text",
+          "descriptive_override": false,
+          "prominence": {
+            "consistent": null,
+            "terciles": [],
+            "note": "no prominence data in these slices"
+          }
+        },
+        "freq": {
+          "a": {
+            "n": 4,
+            "occurrences": 4,
+            "unit": "per_million_tokens",
+            "units": 879,
+            "docs": 1,
+            "covered_docs": 2,
+            "authors": 1,
+            "dp": 0.3732,
+            "single_source": true,
+            "top_doc_share": 1,
+            "synthetic": true,
+            "gate": "insufficient_coverage",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "tokens": 2000
+            },
+            "have": {
+              "tokens": 879
+            },
+            "suggestion": {
+              "label": "Widen A to 1896–1906 (4.6k tokens)",
+              "would_have": {
+                "a": {
+                  "tokens": 4578,
+                  "occurrences": 4
+                }
+              },
+              "a": {
+                "years": [
+                  1896,
+                  1906
+                ],
+                "f": ""
+              }
+            },
+            "note": "low coverage: n = 4 in 879 tokens"
+          },
+          "b": {
+            "gate": "ok",
+            "n": 180,
+            "occurrences": 180,
+            "unit": "per_million_tokens",
+            "units": 33340,
+            "docs": 50,
+            "covered_docs": 83,
+            "authors": 27,
+            "dp": 0.3518,
+            "single_source": false,
+            "top_doc_share": 0.0278,
+            "synthetic": true,
+            "rate": 5398.92,
+            "ci": [
+              4638.99,
+              6247.83
+            ]
+          },
+          "ci_method": "Garwood exact Poisson 95%",
+          "rate_ratio": {
+            "gate": "insufficient_coverage",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "tokens": 2000
+            },
+            "have": {
+              "a": 879,
+              "b": 33340
+            },
+            "suggestion": {
+              "label": "Widen A to 1896–1906 (4.6k tokens)",
+              "would_have": {
+                "a": {
+                  "tokens": 4578,
+                  "occurrences": 4
+                }
+              },
+              "a": {
+                "years": [
+                  1896,
+                  1906
+                ],
+                "f": ""
+              }
+            },
+            "note": "Not estimated: slice A has 879 tokens (needs 2k tokens)."
+          }
+        },
+        "passages": {
+          "a": [
+            {
+              "passage": 94,
+              "doc": 32,
+              "occ": 1219,
+              "start": 127,
+              "end": 141,
+              "left": "teacher read aloud the times table with the door open. If you ",
+              "match": "carry the zero",
+              "right": ", the tens keeps its column in the slate, the Board examiner told",
+              "title": "(generated background) School log 001",
+              "date": {
+                "label": "1906",
+                "precision": "year"
+              },
+              "lane": "collection:demo-world",
+              "collection": "demo-world",
+              "kind": "letter",
+              "synthetic": true,
+              "context_group": null
+            }
+          ],
+          "b": [
+            {
+              "passage": 526,
+              "doc": 89,
+              "occ": 1451,
+              "start": 168,
+              "end": 182,
+              "left": "the girls on the stoop painted the cheap headphones in the stairwell\n",
+              "match": "carry the zero",
+              "right": " for the uncredited who were never credit on the block",
+              "title": "(generated background) Saltwharf Road track 058",
+              "date": {
+                "label": "2017",
+                "precision": "year"
+              },
+              "lane": "collection:demo-world",
+              "collection": "demo-world",
+              "kind": "song",
+              "synthetic": true,
+              "context_group": null
+            },
+            {
+              "passage": 646,
+              "doc": 103,
+              "occ": 1505,
+              "start": 256,
+              "end": 270,
+              "left": "the billing service in the retro before lunch. A pipeline that can ",
+              "match": "carry the zero",
+              "right": " keeps the drop honest when we null. Last sprint, the infra team",
+              "title": "(generated background) Team wiki page 072",
+              "date": {
+                "label": "2017",
+                "precision": "year"
+              },
+              "lane": "collection:demo-world",
+              "collection": "demo-world",
+              "kind": "document",
+              "synthetic": true,
+              "context_group": null
+            }
+          ],
+          "seed": 570355,
+          "stratified_by": null,
+          "note": "One passage per document at most, drawn with the printed seed; a new seed reshuffles. Not stratified by context group (no clustering run)."
+        },
+        "collocates": {
+          "label": "context words, not meanings",
+          "window": "±5 tokens",
+          "measure": "logDice",
+          "thresholds": {
+            "g2": 10.83,
+            "f": 5,
+            "f_y": 10,
+            "q": 0.05,
+            "min_occurrences": 20
+          },
+          "gate": "insufficient_occurrences",
+          "value": null,
+          "ci": null,
+          "needed": {
+            "occurrences": 20
+          },
+          "have": {
+            "a": 4,
+            "b": 180
+          },
+          "suggestion": {
+            "label": "Widen A to 1906–1916 (21 occurrences)",
+            "would_have": {
+              "a": {
+                "occurrences": 21
+              }
+            },
+            "a": {
+              "years": [
+                1906,
+                1916
+              ],
+              "f": ""
+            }
+          },
+          "note": "Too few occurrences in A (4; needs 20). Showing KWIC."
+        },
+        "clusters": {
+          "gate": "not_run",
+          "value": null,
+          "ci": null,
+          "needed": {
+            "run": "cluster"
+          },
+          "have": {
+            "run": null,
+            "occurrences": 340,
+            "documents": 92
+          },
+          "suggestion": null,
+          "note": "No clustering run exists for this expression yet; context groups need one (not available in this version)."
+        },
+        "measures": [
+          {
+            "metric": "sense_share_jsd",
+            "gate": "insufficient_occurrences",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "occurrences_per_slice": 50,
+              "documents_per_slice": 5,
+              "authors_per_slice": 3,
+              "max_top_document_share": 0.5
+            },
+            "have": {
+              "a": {
+                "occurrences": 4,
+                "documents": 1,
+                "authors": 1,
+                "top_document_share": 1
+              },
+              "b": {
+                "occurrences": 180,
+                "documents": 50,
+                "authors": 27,
+                "top_document_share": 0.0278
+              }
+            },
+            "suggestion": {
+              "label": "Widen A to 1906–1936 (65 occurrences in 17 documents)",
+              "would_have": {
+                "a": {
+                  "occurrences": 65,
+                  "documents": 17,
+                  "authors": 3
+                }
+              },
+              "a": {
+                "years": [
+                  1906,
+                  1936
+                ],
+                "f": ""
+              }
+            },
+            "note": "Not estimated. A has 4 occurrences in 1 documents, B 180 in 50; context-share shift needs ≥ 50 per slice in ≥ 5 documents by ≥ 3 authors, no document holding more than half. Widen A to 1906–1936 (65 occurrences in 17 documents) would reach it.",
+            "n": [
+              4,
+              180
+            ],
+            "docs": [
+              1,
+              50
+            ],
+            "authors": [
+              1,
+              27
+            ]
+          },
+          {
+            "metric": "neighbor_overlap",
+            "gate": "insufficient_occurrences",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "occurrences_per_slice": 50
+            },
+            "have": {
+              "a": 4,
+              "b": 180
+            },
+            "suggestion": {
+              "label": "Widen A to 1906–1936 (65 occurrences)",
+              "would_have": {
+                "a": {
+                  "occurrences": 65
+                }
+              },
+              "a": {
+                "years": [
+                  1906,
+                  1936
+                ],
+                "f": ""
+              }
+            },
+            "note": "Word too rare in 1906 (4; needs 50). Widen A to 1906–1936 (65 occurrences) would reach it.",
+            "n": [
+              4,
+              180
+            ],
+            "docs": [
+              1,
+              50
+            ],
+            "authors": [
+              1,
+              27
+            ]
+          },
+          {
+            "metric": "aligned_displacement",
+            "gate": "slice_too_small",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "tokens_per_slice": 3000000
+            },
+            "have": {
+              "a": 879,
+              "b": 33340
+            },
+            "suggestion": null,
+            "note": "Not estimated: slice A has 879 tokens and slice B has 33.3k tokens (needs 3M); no widening inside this corpus reaches the gate",
+            "n": [
+              4,
+              180
+            ],
+            "docs": [
+              1,
+              50
+            ],
+            "authors": [
+              1,
+              27
+            ]
+          }
+        ],
+        "tone": {
+          "reason": "Tone needs the optional on-device adapter (not installed)",
+          "gate": "not_run",
+          "value": null,
+          "ci": null,
+          "needed": {
+            "adapter": "scrolls-nl",
+            "paragraphs_per_slice": 30
+          },
+          "have": {
+            "adapter": null
+          },
+          "suggestion": null,
+          "note": null
+        },
+        "human": {
+          "pragmatic_function": {
+            "a": {},
+            "b": {
+              "reclaimed": 9,
+              "ironic": 3
+            }
+          },
+          "stance": {
+            "a": {},
+            "b": {}
+          },
+          "note": "Counts of human annotations in each slice; no automatic irony or stance detection."
+        },
+        "coverage_note": "The slices differ in composition (JSD 1.00): A is 63% letter text, B is 40% song text. Differences below may reflect source mix. Slice A has 879 tokens (needs 2k tokens): its rate is not estimated. 1 document (0 matches) has a date too coarse to fit slice A and is left out. demo-world in slice A: curated selection (invented corpus; coverage gate 2,000 tokens (demo setting; real collections use 50,000)). demo-world in slice B: curated selection (invented corpus; coverage gate 2,000 tokens (demo setting; real collections use 50,000)). Both slices are synthetic.",
+        "provenance": {
+          "data_version": 45,
+          "run_ids": {
+            "materialize": {
+              "1": 13
+            }
+          },
+          "tokenizer": "u61m-1",
+          "segmenter": "seg-1",
+          "synthetic": true,
+          "collections": [
+            "demo-world"
+          ],
+          "licenses": [
+            "CC0 (synthetic)"
+          ]
+        }
+      }
+    },
+    "collocates_not_run": {
+      "note": "Added at the M1 gate from a real Cipher response (public-domain Gutenberg text): slices of 5M and 10M tokens without current token streams → collocates gated not_run with suggestion.run {stage: tokstream}. Passages trimmed to two per slice.",
+      "status": 200,
+      "request": {
+        "expr": [
+          7
+        ],
+        "a": {
+          "years": [
+            1750,
+            1849
+          ]
+        },
+        "b": {
+          "years": [
+            1850,
+            1899
+          ]
+        }
+      },
+      "body": {
+        "version": "compare@1.0.0",
+        "expressions": [
+          {
+            "id": 7,
+            "surface": "sample",
+            "lang": "en",
+            "run": 12,
+            "synthetic": false
+          }
+        ],
+        "toggles": {
+          "tr": 0,
+          "ds": 0,
+          "ap": 0,
+          "dup": 0,
+          "nm": 0,
+          "est": 1,
+          "bp": 0
+        },
+        "multiplicity": {
+          "k": 2,
+          "notable_so_far": 0,
+          "threshold_percentile": 97.5,
+          "expected_by_chance": 0.1,
+          "text": "Comparison #2 for 'sample' in this session; 0 of 2 crossed the notable threshold; with 2 comparisons, ~0.1 are expected by chance at the 95th percentile. Notable threshold is adjusted to the 97.5th percentile."
+        },
+        "coverage": {
+          "a": {
+            "years": [
+              1750,
+              1849
+            ],
+            "f": "",
+            "modality_compared": "text",
+            "unit": "tokens",
+            "tokens": 4964863,
+            "docs": 70,
+            "authors": 46,
+            "translations": 59,
+            "translations_included": false,
+            "translation_share": 0.4574,
+            "undated_share": 0.0342,
+            "undated": {
+              "docs": 23,
+              "n": 0
+            },
+            "scheduled": {
+              "docs": 0,
+              "n": 0
+            },
+            "mix": {
+              "book": 1
+            },
+            "languages": {
+              "en": 0.9849,
+              "und": 0.0127,
+              "und-Latn": 0.0024
+            },
+            "collection_mix": {
+              "cipher-gutenberg": 0.9964,
+              "cipher-wikisource-hi": 0.0036
+            },
+            "collections": [
+              "cipher-gutenberg",
+              "cipher-wikisource-hi"
+            ],
+            "stack": [
+              {
+                "kind": "book",
+                "lang": "en",
+                "collection": "cipher-gutenberg",
+                "share": 0.9814
+              },
+              {
+                "kind": "book",
+                "lang": "und",
+                "collection": "cipher-gutenberg",
+                "share": 0.0126
+              },
+              {
+                "kind": "book",
+                "lang": "en",
+                "collection": "cipher-wikisource-hi",
+                "share": 0.0035
+              },
+              {
+                "kind": "book",
+                "lang": "und-Latn",
+                "collection": "cipher-gutenberg",
+                "share": 0.0024
+              },
+              {
+                "kind": "book",
+                "lang": "und",
+                "collection": "cipher-wikisource-hi",
+                "share": 0.0002
+              },
+              {
+                "kind": "book",
+                "lang": "und-Latn",
+                "collection": "cipher-wikisource-hi",
+                "share": 0
+              }
+            ],
+            "modality": {
+              "text": 0.1338,
+              "titles": 0.8662
+            },
+            "evidence_modality": {
+              "text": 1
+            },
+            "basis": {
+              "stated": 0.8286,
+              "estimated": 0.1714
+            },
+            "prominence_terciles": {
+              "1": 0.0086,
+              "2": 0.2375,
+              "3": 0.7502,
+              "unknown": 0.0036
+            },
+            "washes": {
+              "docs": 0,
+              "n": 0
+            },
+            "excluded": {
+              "translations": {
+                "docs": 59,
+                "n": 23
+              },
+              "duplicates": {
+                "docs": 0,
+                "n": 0
+              },
+              "estimated": {
+                "docs": 0,
+                "n": 0
+              },
+              "washes": {
+                "docs": 0,
+                "n": 0
+              },
+              "other_modality": {
+                "docs": 453,
+                "n": 0,
+                "modalities": {
+                  "titles": 453
+                }
+              },
+              "describes": 0,
+              "apparatus": 0,
+              "names": 0,
+              "not_rate_eligible": [
+                "cipher-music-relations"
+              ]
+            },
+            "selection": [
+              {
+                "collection": "cipher-gutenberg",
+                "sampling": "prominence_selected",
+                "label": "selected by prominence",
+                "note": "693 public-domain books chosen by Wikipedia sitelinks (prominence), en/fr/es"
+              },
+              {
+                "collection": "cipher-wikisource-hi",
+                "sampling": "curated",
+                "label": "curated selection",
+                "note": "Wikisource index books with transcribed pages"
+              }
+            ],
+            "rate_gate": "ok",
+            "filter_warnings": [],
+            "synthetic": false
+          },
+          "b": {
+            "years": [
+              1850,
+              1899
+            ],
+            "f": "",
+            "modality_compared": "text",
+            "unit": "tokens",
+            "tokens": 10032501,
+            "docs": 226,
+            "authors": 115,
+            "translations": 29,
+            "translations_included": false,
+            "translation_share": 0.1137,
+            "undated_share": 0.0342,
+            "undated": {
+              "docs": 23,
+              "n": 0
+            },
+            "scheduled": {
+              "docs": 0,
+              "n": 0
+            },
+            "mix": {
+              "book": 1
+            },
+            "languages": {
+              "en": 0.9671,
+              "und-Latn": 0.0027,
+              "und": 0.0302
+            },
+            "collection_mix": {
+              "cipher-gutenberg": 0.9997,
+              "cipher-wikisource-gu": 0.0003
+            },
+            "collections": [
+              "cipher-gutenberg",
+              "cipher-wikisource-gu"
+            ],
+            "stack": [
+              {
+                "kind": "book",
+                "lang": "en",
+                "collection": "cipher-gutenberg",
+                "share": 0.9668
+              },
+              {
+                "kind": "book",
+                "lang": "und",
+                "collection": "cipher-gutenberg",
+                "share": 0.0302
+              },
+              {
+                "kind": "book",
+                "lang": "und-Latn",
+                "collection": "cipher-gutenberg",
+                "share": 0.0027
+              },
+              {
+                "kind": "book",
+                "lang": "en",
+                "collection": "cipher-wikisource-gu",
+                "share": 0.0003
+              },
+              {
+                "kind": "book",
+                "lang": "und",
+                "collection": "cipher-wikisource-gu",
+                "share": 0
+              }
+            ],
+            "modality": {
+              "text": 0.224,
+              "titles": 0.776
+            },
+            "evidence_modality": {
+              "text": 1
+            },
+            "basis": {
+              "stated": 0.6726,
+              "estimated": 0.3274
+            },
+            "prominence_terciles": {
+              "1": 0.1566,
+              "2": 0.3423,
+              "3": 0.5008,
+              "unknown": 0.0003
+            },
+            "washes": {
+              "docs": 0,
+              "n": 0
+            },
+            "excluded": {
+              "translations": {
+                "docs": 29,
+                "n": 4
+              },
+              "duplicates": {
+                "docs": 0,
+                "n": 0
+              },
+              "estimated": {
+                "docs": 0,
+                "n": 0
+              },
+              "washes": {
+                "docs": 0,
+                "n": 0
+              },
+              "other_modality": {
+                "docs": 783,
+                "n": 0,
+                "modalities": {
+                  "titles": 783
+                }
+              },
+              "describes": 0,
+              "apparatus": 0,
+              "names": 0,
+              "not_rate_eligible": [
+                "cipher-music-relations"
+              ]
+            },
+            "selection": [
+              {
+                "collection": "cipher-gutenberg",
+                "sampling": "prominence_selected",
+                "label": "selected by prominence",
+                "note": "693 public-domain books chosen by Wikipedia sitelinks (prominence), en/fr/es"
+              },
+              {
+                "collection": "cipher-wikisource-gu",
+                "sampling": "curated",
+                "label": "curated selection",
+                "note": "Wikisource index books with transcribed pages"
+              }
+            ],
+            "rate_gate": "ok",
+            "filter_warnings": [],
+            "synthetic": false
+          },
+          "composition_jsd": 0.0047,
+          "caveats": [
+            "mixed_modality",
+            "translations_excluded",
+            "selection"
+          ],
+          "modality_gate": "ok",
+          "modality_compared": "text",
+          "descriptive_override": false,
+          "prominence": {
+            "consistent": true,
+            "terciles": [
+              {
+                "tercile": 1,
+                "a": {
+                  "n": 0,
+                  "units": 42860
+                },
+                "b": {
+                  "n": 8,
+                  "units": 1571094
+                },
+                "direction": "flat",
+                "ratio_ci": [
+                  0.05,
+                  null
+                ]
+              },
+              {
+                "tercile": 2,
+                "a": {
+                  "n": 1,
+                  "units": 1179324
+                },
+                "b": {
+                  "n": 51,
+                  "units": 3433877
+                },
+                "direction": "up",
+                "ratio_ci": [
+                  3.01,
+                  705.21
+                ]
+              },
+              {
+                "tercile": 3,
+                "a": {
+                  "n": 21,
+                  "units": 3724697
+                },
+                "b": {
+                  "n": 41,
+                  "units": 5024446
+                },
+                "direction": "flat",
+                "ratio_ci": [
+                  0.84,
+                  2.58
+                ]
+              }
+            ],
+            "note": null
+          }
+        },
+        "freq": {
+          "a": {
+            "gate": "ok",
+            "n": 22,
+            "occurrences": 22,
+            "unit": "per_million_tokens",
+            "units": 4964863,
+            "docs": 11,
+            "covered_docs": 70,
+            "authors": 7,
+            "dp": 0.5479,
+            "single_source": false,
+            "top_doc_share": 0.2273,
+            "synthetic": false,
+            "rate": 4.43,
+            "ci": [
+              2.78,
+              6.71
+            ]
+          },
+          "b": {
+            "gate": "ok",
+            "n": 100,
+            "occurrences": 100,
+            "unit": "per_million_tokens",
+            "units": 10032501,
+            "docs": 38,
+            "covered_docs": 226,
+            "authors": 27,
+            "dp": 0.5922,
+            "single_source": false,
+            "top_doc_share": 0.11,
+            "synthetic": false,
+            "rate": 9.97,
+            "ci": [
+              8.11,
+              12.12
+            ]
+          },
+          "ci_method": "Garwood exact Poisson 95%",
+          "rate_ratio": {
+            "value": 2.25,
+            "ci": [
+              1.41,
+              3.75
+            ],
+            "unbounded": false,
+            "direction": "B relative to A",
+            "method": "exact conditional (Clopper–Pearson on n_B of n_A + n_B)",
+            "note": null
+          }
+        },
+        "passages": {
+          "a": [
+            {
+              "passage": 515903,
+              "doc": 273692,
+              "occ": 927,
+              "start": 420,
+              "end": 426,
+              "left": "drew\nforth a couple of whiplashes, three or four buckles, a little ",
+              "match": "sample",
+              "right": "-bag\nof corn, and, finally, a small roll of very dirty bank",
+              "title": "The Pickwick Papers",
+              "date": {
+                "label": "1836",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            },
+            {
+              "passage": 1020889,
+              "doc": 274062,
+              "occ": 1137,
+              "start": 270,
+              "end": 276,
+              "left": "people.  Indeed, the necessity of a master's giving\r\nthe parents some ",
+              "match": "sample",
+              "right": " of the boy's abilities, which during the\r\nvacation, is shown to",
+              "title": "A Vindication of the Rights of Woman",
+              "date": {
+                "label": "1792",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            }
+          ],
+          "b": [
+            {
+              "passage": 452855,
+              "doc": 273656,
+              "occ": 897,
+              "start": 286,
+              "end": 292,
+              "left": "presents his compliments to Messrs. Maw. He\nassures them that their last ",
+              "match": "sample",
+              "right": " is impure and quite useless for his\npresent purpose. In the year",
+              "title": "Strange Case of Dr Jekyll and Mr Hyde",
+              "date": {
+                "label": "1885",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            },
+            {
+              "passage": 443960,
+              "doc": 273649,
+              "occ": 891,
+              "start": 303,
+              "end": 310,
+              "left": "nobles of great power all of them;\nbut, most especially the last. ",
+              "match": "Samples",
+              "right": " of a people that had undergone a\nterrible grinding and regrinding in",
+              "title": "A Tale of Two Cities",
+              "date": {
+                "label": "1859",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            }
+          ],
+          "seed": 441300,
+          "stratified_by": null,
+          "note": "One passage per document at most, drawn with the printed seed; a new seed reshuffles. Not stratified by context group (no clustering run)."
+        },
+        "collocates": {
+          "label": "context words, not meanings",
+          "window": "±5 tokens",
+          "measure": "logDice",
+          "thresholds": {
+            "g2": 10.83,
+            "f": 5,
+            "f_y": 10,
+            "q": 0.05,
+            "min_occurrences": 20
+          },
+          "gate": "not_run",
+          "value": null,
+          "ci": null,
+          "needed": {
+            "token_streams": [
+              "en",
+              "und",
+              "und-Latn"
+            ]
+          },
+          "have": {
+            "a": {
+              "en": "not built",
+              "und": "not built",
+              "und-Latn": "not built"
+            },
+            "b": {
+              "en": "not built",
+              "und": "not built",
+              "und-Latn": "not built"
+            }
+          },
+          "suggestion": {
+            "label": "Build token streams for en, und, und-Latn",
+            "run": {
+              "stage": "tokstream",
+              "params": {
+                "langs": [
+                  "en",
+                  "und",
+                  "und-Latn"
+                ]
+              }
+            }
+          },
+          "note": "Collocates for slices this large (5M and 10M tokens) need current token streams."
+        },
+        "clusters": {
+          "gate": "not_run",
+          "value": null,
+          "ci": null,
+          "needed": {
+            "run": "cluster"
+          },
+          "have": {
+            "run": null,
+            "occurrences": 289,
+            "documents": 125
+          },
+          "suggestion": null,
+          "note": "No clustering run exists for this expression yet; context groups need one (not available in this version)."
+        },
+        "measures": [
+          {
+            "metric": "sense_share_jsd",
+            "gate": "insufficient_occurrences",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "occurrences_per_slice": 50,
+              "documents_per_slice": 5,
+              "authors_per_slice": 3,
+              "max_top_document_share": 0.5
+            },
+            "have": {
+              "a": {
+                "occurrences": 22,
+                "documents": 11,
+                "authors": 7,
+                "top_document_share": 0.2273
+              },
+              "b": {
+                "occurrences": 100,
+                "documents": 38,
+                "authors": 27,
+                "top_document_share": 0.11
+              }
+            },
+            "suggestion": null,
+            "note": "Not estimated. A has 22 occurrences in 11 documents, B 100 in 38; context-share shift needs ≥ 50 per slice in ≥ 5 documents by ≥ 3 authors, no document holding more than half. No widening inside this corpus reaches the gate ('sample' has 289 matches in all).",
+            "n": [
+              22,
+              100
+            ],
+            "docs": [
+              11,
+              38
+            ],
+            "authors": [
+              7,
+              27
+            ]
+          },
+          {
+            "metric": "neighbor_overlap",
+            "gate": "insufficient_occurrences",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "occurrences_per_slice": 50
+            },
+            "have": {
+              "a": 22,
+              "b": 100
+            },
+            "suggestion": null,
+            "note": "Word too rare in 1750–1849 (22; needs 50); no widening inside this corpus reaches the gate",
+            "n": [
+              22,
+              100
+            ],
+            "docs": [
+              11,
+              38
+            ],
+            "authors": [
+              7,
+              27
+            ]
+          },
+          {
+            "metric": "aligned_displacement",
+            "gate": "insufficient_occurrences",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "occurrences_per_slice": 100
+            },
+            "have": {
+              "a": 22,
+              "b": 100
+            },
+            "suggestion": null,
+            "note": "no widening inside this corpus reaches the gate",
+            "n": [
+              22,
+              100
+            ],
+            "docs": [
+              11,
+              38
+            ],
+            "authors": [
+              7,
+              27
+            ]
+          }
+        ],
+        "tone": {
+          "reason": "Tone needs the optional on-device adapter (not installed)",
+          "gate": "not_run",
+          "value": null,
+          "ci": null,
+          "needed": {
+            "adapter": "scrolls-nl",
+            "paragraphs_per_slice": 30
+          },
+          "have": {
+            "adapter": null
+          },
+          "suggestion": null,
+          "note": null
+        },
+        "human": {
+          "pragmatic_function": {
+            "a": {},
+            "b": {}
+          },
+          "stance": {
+            "a": {},
+            "b": {}
+          },
+          "note": "Counts of human annotations in each slice; no automatic irony or stance detection."
+        },
+        "coverage_note": "Slice A also holds titles (453 documents, 0 matches); only text is compared. 59 translated documents are excluded from slice A (text-language chronology). cipher-gutenberg in slice A: selected by prominence (693 public-domain books chosen by Wikipedia sitelinks (prominence), en/fr/es). cipher-wikisource-hi in slice A: curated selection (Wikisource index books with transcribed pages). Slice B also holds titles (783 documents, 0 matches); only text is compared. 29 translated documents are excluded from slice B (text-language chronology). cipher-gutenberg in slice B: selected by prominence (693 public-domain books chosen by Wikipedia sitelinks (prominence), en/fr/es). cipher-wikisource-gu in slice B: curated selection (Wikisource index books with transcribed pages).",
+        "provenance": {
+          "data_version": 45,
+          "run_ids": {
+            "materialize": {
+              "7": 12
+            }
+          },
+          "tokenizer": "u61m-1",
+          "segmenter": "seg-1",
+          "synthetic": false,
+          "collections": [
+            "cipher-gutenberg",
+            "cipher-wikisource-gu",
+            "cipher-wikisource-hi"
+          ],
+          "licenses": [
+            "CC BY-SA (Wikisource)",
+            "Public domain (US)"
+          ]
+        }
+      }
+    },
+    "baseline_rho_ok": {
+      "note": "Real (final gate, contract 1.3.0): Cipher machine, Gutenberg text 1800–1874 vs 1875–1928 on the m5-stemm snapshot — baseline_rho gate ok: Spearman ρ 0.9 [0.29, 0.92] over 12 shared decades against the Ngram baseline. Passages trimmed to one per slice.",
+      "status": 200,
+      "request": {
+        "expr": [
+          14
+        ],
+        "a": {
+          "years": [
+            1800,
+            1874
+          ],
+          "f": "coll:cipher-gutenberg"
+        },
+        "b": {
+          "years": [
+            1875,
+            1928
+          ],
+          "f": "coll:cipher-gutenberg"
+        }
+      },
+      "body": {
+        "version": "compare@1.2.0",
+        "expressions": [
+          {
+            "id": 14,
+            "surface": "machine",
+            "lang": "en",
+            "run": 31,
+            "synthetic": false
+          }
+        ],
+        "toggles": {
+          "tr": 0,
+          "ds": 0,
+          "ap": 0,
+          "dup": 0,
+          "nm": 0,
+          "est": 1,
+          "bp": 0
+        },
+        "multiplicity": {
+          "k": 2,
+          "notable_so_far": 0,
+          "threshold_percentile": 97.5,
+          "expected_by_chance": 0.1,
+          "text": "Comparison #2 for 'machine' in this session; 0 of 2 crossed the notable threshold; with 2 comparisons, ~0.1 are expected by chance at the 95th percentile. Notable threshold is adjusted to the 97.5th percentile."
+        },
+        "coverage": {
+          "a": {
+            "years": [
+              1800,
+              1874
+            ],
+            "f": "coll:cipher-gutenberg",
+            "modality_compared": "text",
+            "unit": "tokens",
+            "tokens": 8071784,
+            "docs": 129,
+            "authors": 72,
+            "translations": 67,
+            "translations_included": false,
+            "translation_share": 0.3418,
+            "undated_share": 0.0085,
+            "undated": {
+              "docs": 5,
+              "n": 3
+            },
+            "scheduled": {
+              "docs": 0,
+              "n": 0
+            },
+            "mix": {
+              "book": 1
+            },
+            "languages": {
+              "en": 0.974,
+              "und-Latn": 0.0036,
+              "und": 0.0224
+            },
+            "collection_mix": {
+              "cipher-gutenberg": 1
+            },
+            "collections": [
+              "cipher-gutenberg"
+            ],
+            "stack": [
+              {
+                "kind": "book",
+                "lang": "en",
+                "collection": "cipher-gutenberg",
+                "share": 0.974
+              },
+              {
+                "kind": "book",
+                "lang": "und",
+                "collection": "cipher-gutenberg",
+                "share": 0.0224
+              },
+              {
+                "kind": "book",
+                "lang": "und-Latn",
+                "collection": "cipher-gutenberg",
+                "share": 0.0036
+              }
+            ],
+            "modality": {
+              "text": 1
+            },
+            "evidence_modality": {
+              "text": 1
+            },
+            "basis": {
+              "stated": 0.6589,
+              "estimated": 0.3411
+            },
+            "prominence_terciles": {
+              "1": 0.0288,
+              "2": 0.2852,
+              "3": 0.686
+            },
+            "washes": {
+              "docs": 0,
+              "n": 0
+            },
+            "excluded": {
+              "translations": {
+                "docs": 67,
+                "n": 136
+              },
+              "duplicates": {
+                "docs": 0,
+                "n": 0
+              },
+              "estimated": {
+                "docs": 0,
+                "n": 0
+              },
+              "washes": {
+                "docs": 0,
+                "n": 0
+              },
+              "other_modality": {
+                "docs": 0,
+                "n": 0,
+                "modalities": {}
+              },
+              "describes": 0,
+              "apparatus": 4,
+              "names": 2,
+              "not_rate_eligible": []
+            },
+            "selection": [
+              {
+                "collection": "cipher-gutenberg",
+                "sampling": "prominence_selected",
+                "label": "selected by prominence",
+                "note": "693 public-domain books chosen by Wikipedia sitelinks (prominence), en/fr/es"
+              }
+            ],
+            "rate_gate": "ok",
+            "filter_warnings": [],
+            "synthetic": false
+          },
+          "b": {
+            "years": [
+              1875,
+              1928
+            ],
+            "f": "coll:cipher-gutenberg",
+            "modality_compared": "text",
+            "unit": "tokens",
+            "tokens": 24574269,
+            "docs": 377,
+            "authors": 188,
+            "translations": 21,
+            "translations_included": false,
+            "translation_share": 0.0528,
+            "undated_share": 0.0085,
+            "undated": {
+              "docs": 5,
+              "n": 3
+            },
+            "scheduled": {
+              "docs": 0,
+              "n": 0
+            },
+            "mix": {
+              "book": 1
+            },
+            "languages": {
+              "en": 0.9894,
+              "und": 0.0098,
+              "und-Latn": 0.0008
+            },
+            "collection_mix": {
+              "cipher-gutenberg": 1
+            },
+            "collections": [
+              "cipher-gutenberg"
+            ],
+            "stack": [
+              {
+                "kind": "book",
+                "lang": "en",
+                "collection": "cipher-gutenberg",
+                "share": 0.9894
+              },
+              {
+                "kind": "book",
+                "lang": "und",
+                "collection": "cipher-gutenberg",
+                "share": 0.0098
+              },
+              {
+                "kind": "book",
+                "lang": "und-Latn",
+                "collection": "cipher-gutenberg",
+                "share": 0.0008
+              }
+            ],
+            "modality": {
+              "text": 1
+            },
+            "evidence_modality": {
+              "text": 1
+            },
+            "basis": {
+              "stated": 0.8568,
+              "estimated": 0.1432
+            },
+            "prominence_terciles": {
+              "1": 0.3678,
+              "2": 0.3757,
+              "3": 0.2565
+            },
+            "washes": {
+              "docs": 0,
+              "n": 0
+            },
+            "excluded": {
+              "translations": {
+                "docs": 21,
+                "n": 133
+              },
+              "duplicates": {
+                "docs": 0,
+                "n": 0
+              },
+              "estimated": {
+                "docs": 0,
+                "n": 0
+              },
+              "washes": {
+                "docs": 0,
+                "n": 0
+              },
+              "other_modality": {
+                "docs": 0,
+                "n": 0,
+                "modalities": {}
+              },
+              "describes": 0,
+              "apparatus": 5,
+              "names": 49,
+              "not_rate_eligible": []
+            },
+            "selection": [
+              {
+                "collection": "cipher-gutenberg",
+                "sampling": "prominence_selected",
+                "label": "selected by prominence",
+                "note": "693 public-domain books chosen by Wikipedia sitelinks (prominence), en/fr/es"
+              }
+            ],
+            "rate_gate": "ok",
+            "filter_warnings": [],
+            "synthetic": false
+          },
+          "composition_jsd": 0.0026,
+          "caveats": [
+            "translations_excluded",
+            "names_excluded",
+            "selection"
+          ],
+          "modality_gate": "ok",
+          "modality_compared": "text",
+          "descriptive_override": false,
+          "prominence": {
+            "consistent": true,
+            "terciles": [
+              {
+                "tercile": 1,
+                "a": {
+                  "n": 1,
+                  "units": 232465
+                },
+                "b": {
+                  "n": 378,
+                  "units": 9038790
+                },
+                "direction": "up",
+                "ratio_ci": [
+                  1.73,
+                  384.99
+                ]
+              },
+              {
+                "tercile": 2,
+                "a": {
+                  "n": 24,
+                  "units": 2302211
+                },
+                "b": {
+                  "n": 825,
+                  "units": 9231363
+                },
+                "direction": "up",
+                "ratio_ci": [
+                  5.72,
+                  13.46
+                ]
+              },
+              {
+                "tercile": 3,
+                "a": {
+                  "n": 80,
+                  "units": 5537108
+                },
+                "b": {
+                  "n": 440,
+                  "units": 6304116
+                },
+                "direction": "up",
+                "ratio_ci": [
+                  3.8,
+                  6.21
+                ]
+              }
+            ],
+            "note": null
+          },
+          "spaces": {
+            "lang": "en",
+            "language": "English",
+            "pooled": {
+              "space": 1,
+              "run": 29,
+              "tokens": 36006260,
+              "vocab": 37022,
+              "dim": 256
+            },
+            "pooled_gate": {
+              "tokens": 35960684,
+              "docs": 420,
+              "authors": 216,
+              "eligible": true,
+              "needs": {
+                "tokens": 3000000,
+                "docs": 10,
+                "authors": 5
+              }
+            },
+            "suggestion": null,
+            "era": {
+              "slices": [
+                {
+                  "years": [
+                    1500,
+                    1799
+                  ],
+                  "tokens": 3448463,
+                  "docs": 52,
+                  "authors": 24,
+                  "eligible": true
+                },
+                {
+                  "years": [
+                    1800,
+                    1849
+                  ],
+                  "tokens": 4146439,
+                  "docs": 35,
+                  "authors": 17,
+                  "eligible": true
+                },
+                {
+                  "years": [
+                    1850,
+                    1874
+                  ],
+                  "tokens": 3715123,
+                  "docs": 31,
+                  "authors": 24,
+                  "eligible": true
+                },
+                {
+                  "years": [
+                    1875,
+                    1899
+                  ],
+                  "tokens": 5984401,
+                  "docs": 82,
+                  "authors": 51,
+                  "eligible": true
+                },
+                {
+                  "years": [
+                    1900,
+                    1928
+                  ],
+                  "tokens": 18328996,
+                  "docs": 217,
+                  "authors": 112,
+                  "eligible": true
+                }
+              ],
+              "eligible": 5,
+              "needs": {
+                "tokens": 3000000,
+                "docs": 10,
+                "authors": 5
+              },
+              "note": null
+            }
+          }
+        },
+        "freq": {
+          "a": {
+            "gate": "ok",
+            "n": 105,
+            "occurrences": 105,
+            "unit": "per_million_tokens",
+            "units": 8071784,
+            "docs": 30,
+            "covered_docs": 129,
+            "authors": 21,
+            "dp": 0.5079,
+            "single_source": false,
+            "top_doc_share": 0.181,
+            "synthetic": false,
+            "rate": 13.01,
+            "ci": [
+              10.64,
+              15.75
+            ]
+          },
+          "b": {
+            "gate": "ok",
+            "n": 1643,
+            "occurrences": 1643,
+            "unit": "per_million_tokens",
+            "units": 24574269,
+            "docs": 183,
+            "covered_docs": 377,
+            "authors": 109,
+            "dp": 0.5571,
+            "single_source": false,
+            "top_doc_share": 0.0615,
+            "synthetic": false,
+            "rate": 66.86,
+            "ci": [
+              63.66,
+              70.17
+            ]
+          },
+          "ci_method": "Garwood exact Poisson 95%",
+          "rate_ratio": {
+            "value": 5.14,
+            "ci": [
+              4.22,
+              6.32
+            ],
+            "unbounded": false,
+            "direction": "B relative to A",
+            "method": "exact conditional (Clopper–Pearson on n_B of n_A + n_B)",
+            "note": null
+          }
+        },
+        "baseline_rho": {
+          "available": true,
+          "unit": "per million tokens",
+          "years": [
+            1800,
+            1928
+          ],
+          "forms": [
+            "machine",
+            "machines",
+            "machined",
+            "machining"
+          ],
+          "forms_missing": [
+            "machiner",
+            "machiners"
+          ],
+          "label": "Google Books Ngram, English, 2020 edition — a different corpus",
+          "attribution": "Google Books Ngram Viewer (http://books.google.com/ngrams), dataset version 20200217. Michel et al. 2011, Science 331:176–182; Lin et al. 2012, ACL System Demonstrations.",
+          "license": "CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/)",
+          "caveats": [
+            "case folding merges senses",
+            "first_year 1500 is the first year with a match in this store, not a coinage or attestation date"
+          ],
+          "rule": "≥ 8 decades up to 2019, each with our rate gate met and ≥ 500 books in Google's decade",
+          "series": [
+            {
+              "decade": 1800,
+              "slice": "a",
+              "n": 0,
+              "tokens": 128331,
+              "rate": 0,
+              "low_coverage": false,
+              "baseline_per_million": 35.93,
+              "volumes": 39217,
+              "thin": false,
+              "shared": true
+            },
+            {
+              "decade": 1810,
+              "slice": "a",
+              "n": 5,
+              "tokens": 890210,
+              "rate": 5.617,
+              "low_coverage": false,
+              "baseline_per_million": 31.1,
+              "volumes": 52677,
+              "thin": false,
+              "shared": true
+            },
+            {
+              "decade": 1820,
+              "slice": "a",
+              "n": 1,
+              "tokens": 493994,
+              "rate": 2.024,
+              "low_coverage": false,
+              "baseline_per_million": 34,
+              "volumes": 78683,
+              "thin": false,
+              "shared": true
+            },
+            {
+              "decade": 1830,
+              "slice": "a",
+              "n": 8,
+              "tokens": 1200032,
+              "rate": 6.666,
+              "low_coverage": false,
+              "baseline_per_million": 39.72,
+              "volumes": 107587,
+              "thin": false,
+              "shared": true
+            },
+            {
+              "decade": 1840,
+              "slice": "a",
+              "n": 30,
+              "tokens": 1498507,
+              "rate": 20.02,
+              "low_coverage": false,
+              "baseline_per_million": 38.89,
+              "volumes": 128357,
+              "thin": false,
+              "shared": true
+            },
+            {
+              "decade": 1850,
+              "slice": "a",
+              "n": 27,
+              "tokens": 1148686,
+              "rate": 23.51,
+              "low_coverage": false,
+              "baseline_per_million": 60.31,
+              "volumes": 174393,
+              "thin": false,
+              "shared": true
+            },
+            {
+              "decade": 1860,
+              "slice": "a",
+              "n": 14,
+              "tokens": 1454812,
+              "rate": 9.623,
+              "low_coverage": false,
+              "baseline_per_million": 71.04,
+              "volumes": 175721,
+              "thin": false,
+              "shared": true
+            },
+            {
+              "decade": 1870,
+              "slice": "a",
+              "n": 53,
+              "tokens": 1874777,
+              "rate": 28.27,
+              "low_coverage": false,
+              "baseline_per_million": 76.43,
+              "volumes": 197765,
+              "thin": false,
+              "shared": true
+            },
+            {
+              "decade": 1880,
+              "slice": "a",
+              "n": 54,
+              "tokens": 2452323,
+              "rate": 22.02,
+              "low_coverage": false,
+              "baseline_per_million": 90.2,
+              "volumes": 245392,
+              "thin": false,
+              "shared": true
+            },
+            {
+              "decade": 1890,
+              "slice": "a",
+              "n": 204,
+              "tokens": 3098819,
+              "rate": 65.83,
+              "low_coverage": false,
+              "baseline_per_million": 115.7,
+              "volumes": 360423,
+              "thin": false,
+              "shared": true
+            },
+            {
+              "decade": 1900,
+              "slice": "a",
+              "n": 287,
+              "tokens": 5839188,
+              "rate": 49.15,
+              "low_coverage": false,
+              "baseline_per_million": 152.4,
+              "volumes": 509569,
+              "thin": false,
+              "shared": true
+            },
+            {
+              "decade": 1910,
+              "slice": "a",
+              "n": 705,
+              "tokens": 6720448,
+              "rate": 104.9,
+              "low_coverage": false,
+              "baseline_per_million": 204,
+              "volumes": 599884,
+              "thin": false,
+              "shared": true
+            }
+          ],
+          "gate": "ok",
+          "value": 0.9,
+          "ci": [
+            0.29,
+            0.92
+          ],
+          "n_bins": 12,
+          "span": [
+            1800,
+            1919
+          ],
+          "method": "Spearman ρ over decades; moving-block bootstrap 95% CI (blocks of 3 decades, 1000 resamples, seed 42)",
+          "note": "Different corpus, different composition: Google Books is a much larger library with its own selection; ρ only says whether the two decade series rise and fall together.",
+          "text": "Does our sample track a larger corpus? ρ = 0.9 [0.29, 0.92] (12 decades, 1800–1919). Different corpus, different composition: Google Books is a much larger library with its own selection; ρ only says whether the two decade series rise and fall together."
+        },
+        "passages": {
+          "a": [
+            {
+              "passage": 615878,
+              "doc": 273743,
+              "occ": 38807,
+              "start": 657,
+              "end": 664,
+              "left": "that the operation of these fans\n      not only did not propel the ",
+              "match": "machine",
+              "right": ", but actually impeded its\n      flight. The only propelling force it ever exhibited",
+              "title": "The Mystery of Marie Rogêt",
+              "date": {
+                "label": "1842",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            }
+          ],
+          "b": [
+            {
+              "passage": 911148,
+              "doc": 273951,
+              "occ": 40079,
+              "start": 318,
+              "end": 325,
+              "left": "phonograph; but before the disc\r\nstarted, and while he was winding the ",
+              "match": "machine",
+              "right": ", he heard her saying:",
+              "title": "Adventure",
+              "date": {
+                "label": "1911",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            }
+          ],
+          "seed": 848380,
+          "stratified_by": null,
+          "note": "One passage per document at most, drawn with the printed seed; a new seed reshuffles. Not stratified by context group."
+        },
+        "collocates": {
+          "label": "context words, not meanings",
+          "window": "±5 tokens",
+          "measure": "logDice",
+          "thresholds": {
+            "g2": 10.83,
+            "f": 5,
+            "f_y": 10,
+            "q": 0.05,
+            "min_occurrences": 20
+          },
+          "gate": "not_run",
+          "value": null,
+          "ci": null,
+          "needed": {
+            "token_streams": [
+              "en",
+              "und",
+              "und-Latn"
+            ]
+          },
+          "have": {
+            "a": {
+              "en": "out of date (built at data version 110, now 129)",
+              "und": "not built",
+              "und-Latn": "not built"
+            },
+            "b": {
+              "en": "out of date (built at data version 110, now 129)",
+              "und": "not built",
+              "und-Latn": "not built"
+            }
+          },
+          "suggestion": {
+            "label": "Build token streams for en, und, und-Latn",
+            "run": {
+              "stage": "tokstream",
+              "params": {
+                "langs": [
+                  "en",
+                  "und",
+                  "und-Latn"
+                ]
+              }
+            }
+          },
+          "note": "Collocates for slices this large (8.1M and 24.6M tokens) need current token streams."
+        },
+        "clusters": {
+          "gate": "not_run",
+          "value": null,
+          "ci": null,
+          "needed": {
+            "run": "cluster"
+          },
+          "have": {
+            "run": null,
+            "occurrences": 1778,
+            "documents": 224
+          },
+          "suggestion": {
+            "label": "Group the contexts of 'machine' (a clustering run)",
+            "run": {
+              "stage": "cluster",
+              "params": {
+                "expr": 14,
+                "collections": [
+                  "cipher-gutenberg"
+                ]
+              }
+            }
+          },
+          "note": "No clustering run exists for this expression yet; context groups need one."
+        },
+        "measures": [
+          {
+            "metric": "sense_share_jsd",
+            "gate": "not_run",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "run": "cluster",
+              "clusters": 2
+            },
+            "have": {
+              "run": null
+            },
+            "suggestion": {
+              "label": "Group the contexts of 'machine' (a clustering run)",
+              "run": {
+                "stage": "cluster",
+                "params": {
+                  "expr": 14,
+                  "collections": [
+                    "cipher-gutenberg"
+                  ]
+                }
+              }
+            },
+            "note": "Not estimated yet: the evidence gate passes; context-share shift needs a clustering run with at least two context groups.",
+            "n": [
+              105,
+              1643
+            ],
+            "docs": [
+              30,
+              183
+            ],
+            "authors": [
+              21,
+              109
+            ]
+          },
+          {
+            "metric": "neighbor_overlap",
+            "gate": "not_run",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "run": "drift"
+            },
+            "have": {
+              "run": null
+            },
+            "suggestion": {
+              "label": "Estimate it: build the two slice spaces and their controls (a drift run, minutes)",
+              "run": {
+                "stage": "drift",
+                "params": {
+                  "expr": [
+                    14
+                  ],
+                  "a": {
+                    "years": [
+                      1800,
+                      1874
+                    ],
+                    "f": "coll:cipher-gutenberg"
+                  },
+                  "b": {
+                    "years": [
+                      1875,
+                      1928
+                    ],
+                    "f": "coll:cipher-gutenberg"
+                  },
+                  "toggles": {
+                    "tr": 0,
+                    "ds": 0,
+                    "ap": 0,
+                    "dup": 0,
+                    "nm": 0,
+                    "est": 1,
+                    "bp": 0
+                  },
+                  "corpus": null
+                }
+              }
+            },
+            "note": "Not estimated yet: the evidence gate passes; neighbour overlap needs the two slice spaces (a drift run).",
+            "n": [
+              105,
+              1643
+            ],
+            "docs": [
+              30,
+              183
+            ],
+            "authors": [
+              21,
+              109
+            ]
+          },
+          {
+            "metric": "aligned_displacement",
+            "gate": "not_run",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "run": "drift",
+              "anchors": 3000
+            },
+            "have": {
+              "run": null
+            },
+            "suggestion": {
+              "label": "Estimate it: build the two slice spaces and their controls (a drift run, minutes)",
+              "run": {
+                "stage": "drift",
+                "params": {
+                  "expr": [
+                    14
+                  ],
+                  "a": {
+                    "years": [
+                      1800,
+                      1874
+                    ],
+                    "f": "coll:cipher-gutenberg"
+                  },
+                  "b": {
+                    "years": [
+                      1875,
+                      1928
+                    ],
+                    "f": "coll:cipher-gutenberg"
+                  },
+                  "toggles": {
+                    "tr": 0,
+                    "ds": 0,
+                    "ap": 0,
+                    "dup": 0,
+                    "nm": 0,
+                    "est": 1,
+                    "bp": 0
+                  },
+                  "corpus": null
+                }
+              }
+            },
+            "note": "Not estimated yet: the evidence gate passes; aligned displacement needs the two slice spaces aligned on ≥ 3,000 anchor words (a drift run).",
+            "n": [
+              105,
+              1643
+            ],
+            "docs": [
+              30,
+              183
+            ],
+            "authors": [
+              21,
+              109
+            ]
+          }
+        ],
+        "tone": {
+          "reason": "Tone needs the optional on-device adapter (not installed)",
+          "gate": "not_run",
+          "value": null,
+          "ci": null,
+          "needed": {
+            "adapter": "scrolls-nl",
+            "paragraphs_per_slice": 30
+          },
+          "have": {
+            "adapter": null
+          },
+          "suggestion": null,
+          "note": null
+        },
+        "human": {
+          "pragmatic_function": {
+            "a": {},
+            "b": {}
+          },
+          "stance": {
+            "a": {},
+            "b": {}
+          },
+          "note": "Counts of human annotations in each slice; no automatic irony or stance detection."
+        },
+        "coverage_note": "67 translated documents are excluded from slice A (text-language chronology). 2 matches in slice A are excluded as names. cipher-gutenberg in slice A: selected by prominence (693 public-domain books chosen by Wikipedia sitelinks (prominence), en/fr/es). 21 translated documents are excluded from slice B (text-language chronology). 49 matches in slice B are excluded as names. cipher-gutenberg in slice B: selected by prominence (693 public-domain books chosen by Wikipedia sitelinks (prominence), en/fr/es).",
+        "provenance": {
+          "data_version": 129,
+          "run_ids": {
+            "materialize": {
+              "14": 31
+            }
+          },
+          "tokenizer": "u61m-1",
+          "segmenter": "seg-1",
+          "synthetic": false,
+          "collections": [
+            "cipher-gutenberg"
+          ],
+          "licenses": [
+            "Public domain (US)"
+          ]
+        }
+      }
+    },
+    "baseline_rho_gated": {
+      "note": "Real (final gate): the same word, 1900–1914 vs 1915–1928 — only 2 shared decades of the 8 needed, so baseline_rho is gated (insufficient_coverage) with no value. Passages trimmed to one per slice.",
+      "status": 200,
+      "request": {
+        "expr": [
+          14
+        ],
+        "a": {
+          "years": [
+            1900,
+            1914
+          ],
+          "f": "coll:cipher-gutenberg"
+        },
+        "b": {
+          "years": [
+            1915,
+            1928
+          ],
+          "f": "coll:cipher-gutenberg"
+        }
+      },
+      "body": {
+        "version": "compare@1.2.0",
+        "expressions": [
+          {
+            "id": 14,
+            "surface": "machine",
+            "lang": "en",
+            "run": 31,
+            "synthetic": false
+          }
+        ],
+        "toggles": {
+          "tr": 0,
+          "ds": 0,
+          "ap": 0,
+          "dup": 0,
+          "nm": 0,
+          "est": 1,
+          "bp": 0
+        },
+        "multiplicity": {
+          "k": 2,
+          "notable_so_far": 0,
+          "threshold_percentile": 97.5,
+          "expected_by_chance": 0.1,
+          "text": "Comparison #2 for 'machine' in this session; 0 of 2 crossed the notable threshold; with 2 comparisons, ~0.1 are expected by chance at the 95th percentile. Notable threshold is adjusted to the 97.5th percentile."
+        },
+        "coverage": {
+          "a": {
+            "years": [
+              1900,
+              1914
+            ],
+            "f": "coll:cipher-gutenberg",
+            "modality_compared": "text",
+            "unit": "tokens",
+            "tokens": 9221980,
+            "docs": 108,
+            "authors": 65,
+            "translations": 3,
+            "translations_included": false,
+            "translation_share": 0.027,
+            "undated_share": 0.0085,
+            "undated": {
+              "docs": 5,
+              "n": 3
+            },
+            "scheduled": {
+              "docs": 0,
+              "n": 0
+            },
+            "mix": {
+              "book": 1
+            },
+            "languages": {
+              "en": 0.9949,
+              "und": 0.0046,
+              "und-Latn": 0.0006
+            },
+            "collection_mix": {
+              "cipher-gutenberg": 1
+            },
+            "collections": [
+              "cipher-gutenberg"
+            ],
+            "stack": [
+              {
+                "kind": "book",
+                "lang": "en",
+                "collection": "cipher-gutenberg",
+                "share": 0.9949
+              },
+              {
+                "kind": "book",
+                "lang": "und",
+                "collection": "cipher-gutenberg",
+                "share": 0.0046
+              },
+              {
+                "kind": "book",
+                "lang": "und-Latn",
+                "collection": "cipher-gutenberg",
+                "share": 0.0006
+              }
+            ],
+            "modality": {
+              "text": 1
+            },
+            "evidence_modality": {
+              "text": 1
+            },
+            "basis": {
+              "stated": 0.963,
+              "estimated": 0.037
+            },
+            "prominence_terciles": {
+              "1": 0.4246,
+              "2": 0.3037,
+              "3": 0.2717
+            },
+            "washes": {
+              "docs": 0,
+              "n": 0
+            },
+            "excluded": {
+              "translations": {
+                "docs": 3,
+                "n": 10
+              },
+              "duplicates": {
+                "docs": 0,
+                "n": 0
+              },
+              "estimated": {
+                "docs": 0,
+                "n": 0
+              },
+              "washes": {
+                "docs": 0,
+                "n": 0
+              },
+              "other_modality": {
+                "docs": 0,
+                "n": 0,
+                "modalities": {}
+              },
+              "describes": 0,
+              "apparatus": 5,
+              "names": 6,
+              "not_rate_eligible": []
+            },
+            "selection": [
+              {
+                "collection": "cipher-gutenberg",
+                "sampling": "prominence_selected",
+                "label": "selected by prominence",
+                "note": "693 public-domain books chosen by Wikipedia sitelinks (prominence), en/fr/es"
+              }
+            ],
+            "rate_gate": "ok",
+            "filter_warnings": [],
+            "synthetic": false
+          },
+          "b": {
+            "years": [
+              1915,
+              1928
+            ],
+            "f": "coll:cipher-gutenberg",
+            "modality_compared": "text",
+            "unit": "tokens",
+            "tokens": 9183582,
+            "docs": 121,
+            "authors": 68,
+            "translations": 2,
+            "translations_included": false,
+            "translation_share": 0.0163,
+            "undated_share": 0.0085,
+            "undated": {
+              "docs": 5,
+              "n": 3
+            },
+            "scheduled": {
+              "docs": 0,
+              "n": 0
+            },
+            "mix": {
+              "book": 1
+            },
+            "languages": {
+              "en": 0.9968,
+              "und": 0.0023,
+              "und-Latn": 0.0009
+            },
+            "collection_mix": {
+              "cipher-gutenberg": 1
+            },
+            "collections": [
+              "cipher-gutenberg"
+            ],
+            "stack": [
+              {
+                "kind": "book",
+                "lang": "en",
+                "collection": "cipher-gutenberg",
+                "share": 0.9968
+              },
+              {
+                "kind": "book",
+                "lang": "und",
+                "collection": "cipher-gutenberg",
+                "share": 0.0023
+              },
+              {
+                "kind": "book",
+                "lang": "und-Latn",
+                "collection": "cipher-gutenberg",
+                "share": 0.0009
+              }
+            ],
+            "modality": {
+              "text": 1
+            },
+            "evidence_modality": {
+              "text": 1
+            },
+            "basis": {
+              "stated": 0.9256,
+              "estimated": 0.0744
+            },
+            "prominence_terciles": {
+              "1": 0.4075,
+              "2": 0.4488,
+              "3": 0.1437
+            },
+            "washes": {
+              "docs": 0,
+              "n": 0
+            },
+            "excluded": {
+              "translations": {
+                "docs": 2,
+                "n": 4
+              },
+              "duplicates": {
+                "docs": 0,
+                "n": 0
+              },
+              "estimated": {
+                "docs": 0,
+                "n": 0
+              },
+              "washes": {
+                "docs": 0,
+                "n": 0
+              },
+              "other_modality": {
+                "docs": 0,
+                "n": 0,
+                "modalities": {}
+              },
+              "describes": 0,
+              "apparatus": 0,
+              "names": 2,
+              "not_rate_eligible": []
+            },
+            "selection": [
+              {
+                "collection": "cipher-gutenberg",
+                "sampling": "prominence_selected",
+                "label": "selected by prominence",
+                "note": "693 public-domain books chosen by Wikipedia sitelinks (prominence), en/fr/es"
+              }
+            ],
+            "rate_gate": "ok",
+            "filter_warnings": [],
+            "synthetic": false
+          },
+          "composition_jsd": 0.0003,
+          "caveats": [
+            "prominence",
+            "translations_excluded",
+            "names_excluded",
+            "selection"
+          ],
+          "modality_gate": "ok",
+          "modality_compared": "text",
+          "descriptive_override": false,
+          "prominence": {
+            "consistent": false,
+            "terciles": [
+              {
+                "tercile": 1,
+                "a": {
+                  "n": 141,
+                  "units": 3915700
+                },
+                "b": {
+                  "n": 198,
+                  "units": 3742064
+                },
+                "direction": "up",
+                "ratio_ci": [
+                  1.18,
+                  1.84
+                ]
+              },
+              {
+                "tercile": 2,
+                "a": {
+                  "n": 372,
+                  "units": 2800626
+                },
+                "b": {
+                  "n": 395,
+                  "units": 4121847
+                },
+                "direction": "down",
+                "ratio_ci": [
+                  0.62,
+                  0.83
+                ]
+              },
+              {
+                "tercile": 3,
+                "a": {
+                  "n": 183,
+                  "units": 2505654
+                },
+                "b": {
+                  "n": 63,
+                  "units": 1319671
+                },
+                "direction": "down",
+                "ratio_ci": [
+                  0.48,
+                  0.87
+                ]
+              }
+            ],
+            "note": "result depends on prominence stratum"
+          },
+          "spaces": {
+            "lang": "en",
+            "language": "English",
+            "pooled": {
+              "space": 1,
+              "run": 29,
+              "tokens": 36006260,
+              "vocab": 37022,
+              "dim": 256
+            },
+            "pooled_gate": {
+              "tokens": 35960684,
+              "docs": 420,
+              "authors": 216,
+              "eligible": true,
+              "needs": {
+                "tokens": 3000000,
+                "docs": 10,
+                "authors": 5
+              }
+            },
+            "suggestion": null,
+            "era": {
+              "slices": [
+                {
+                  "years": [
+                    1500,
+                    1799
+                  ],
+                  "tokens": 3448463,
+                  "docs": 52,
+                  "authors": 24,
+                  "eligible": true
+                },
+                {
+                  "years": [
+                    1800,
+                    1849
+                  ],
+                  "tokens": 4146439,
+                  "docs": 35,
+                  "authors": 17,
+                  "eligible": true
+                },
+                {
+                  "years": [
+                    1850,
+                    1874
+                  ],
+                  "tokens": 3715123,
+                  "docs": 31,
+                  "authors": 24,
+                  "eligible": true
+                },
+                {
+                  "years": [
+                    1875,
+                    1899
+                  ],
+                  "tokens": 5984401,
+                  "docs": 82,
+                  "authors": 51,
+                  "eligible": true
+                },
+                {
+                  "years": [
+                    1900,
+                    1928
+                  ],
+                  "tokens": 18328996,
+                  "docs": 217,
+                  "authors": 112,
+                  "eligible": true
+                }
+              ],
+              "eligible": 5,
+              "needs": {
+                "tokens": 3000000,
+                "docs": 10,
+                "authors": 5
+              },
+              "note": null
+            }
+          }
+        },
+        "freq": {
+          "a": {
+            "gate": "ok",
+            "n": 696,
+            "occurrences": 696,
+            "unit": "per_million_tokens",
+            "units": 9221980,
+            "docs": 67,
+            "covered_docs": 108,
+            "authors": 41,
+            "dp": 0.5742,
+            "single_source": false,
+            "top_doc_share": 0.1451,
+            "synthetic": false,
+            "rate": 75.47,
+            "ci": [
+              69.97,
+              81.29
+            ]
+          },
+          "b": {
+            "gate": "ok",
+            "n": 656,
+            "occurrences": 656,
+            "unit": "per_million_tokens",
+            "units": 9183582,
+            "docs": 76,
+            "covered_docs": 121,
+            "authors": 50,
+            "dp": 0.479,
+            "single_source": false,
+            "top_doc_share": 0.0625,
+            "synthetic": false,
+            "rate": 71.43,
+            "ci": [
+              66.07,
+              77.11
+            ]
+          },
+          "ci_method": "Garwood exact Poisson 95%",
+          "rate_ratio": {
+            "value": 0.95,
+            "ci": [
+              0.85,
+              1.05
+            ],
+            "unbounded": false,
+            "direction": "B relative to A",
+            "method": "exact conditional (Clopper–Pearson on n_B of n_A + n_B)",
+            "note": null
+          }
+        },
+        "baseline_rho": {
+          "available": true,
+          "unit": "per million tokens",
+          "years": [
+            1900,
+            1928
+          ],
+          "forms": [
+            "machine",
+            "machines",
+            "machined",
+            "machining"
+          ],
+          "forms_missing": [
+            "machiner",
+            "machiners"
+          ],
+          "label": "Google Books Ngram, English, 2020 edition — a different corpus",
+          "attribution": "Google Books Ngram Viewer (http://books.google.com/ngrams), dataset version 20200217. Michel et al. 2011, Science 331:176–182; Lin et al. 2012, ACL System Demonstrations.",
+          "license": "CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/)",
+          "caveats": [
+            "case folding merges senses",
+            "first_year 1500 is the first year with a match in this store, not a coinage or attestation date"
+          ],
+          "rule": "≥ 8 decades up to 2019, each with our rate gate met and ≥ 500 books in Google's decade",
+          "series": [
+            {
+              "decade": 1900,
+              "slice": "a",
+              "n": 287,
+              "tokens": 5839188,
+              "rate": 49.15,
+              "low_coverage": false,
+              "baseline_per_million": 152.4,
+              "volumes": 509569,
+              "thin": false,
+              "shared": true
+            },
+            {
+              "decade": 1910,
+              "slice": "a",
+              "n": 705,
+              "tokens": 6720448,
+              "rate": 104.9,
+              "low_coverage": false,
+              "baseline_per_million": 204,
+              "volumes": 599884,
+              "thin": false,
+              "shared": true
+            }
+          ],
+          "n_bins": 2,
+          "gate": "insufficient_coverage",
+          "value": null,
+          "ci": null,
+          "needed": {
+            "decades": 8
+          },
+          "have": {
+            "decades": 2
+          },
+          "suggestion": null,
+          "note": "Not compared: 2 decades between 1900 and 1928 have enough text here and in Google Books (needs 8). Widen the slices to span more decades."
+        },
+        "passages": {
+          "a": [
+            {
+              "passage": 861588,
+              "doc": 273914,
+              "occ": 39957,
+              "start": 136,
+              "end": 143,
+              "left": "clothes\r\nswiftly and nervously. Her mind was working like a rapidly moving\r\n",
+              "match": "machine",
+              "right": ". She was wondering whether this really could be her father.\r\nPerhaps it",
+              "title": "The Financier",
+              "date": {
+                "label": "1912",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            }
+          ],
+          "b": [
+            {
+              "passage": 809104,
+              "doc": 273880,
+              "occ": 39773,
+              "start": 125,
+              "end": 132,
+              "left": "noted down and classified. And\r\nI've as many more for the ",
+              "match": "machine",
+              "right": " itself. If the thing is a success, it\r\nwill take a long",
+              "title": "The Little Lady of the Big House",
+              "date": {
+                "label": "1916",
+                "precision": "year"
+              },
+              "lane": "collection:cipher-gutenberg",
+              "collection": "cipher-gutenberg",
+              "kind": "book",
+              "synthetic": false,
+              "context_group": null
+            }
+          ],
+          "seed": 110359,
+          "stratified_by": null,
+          "note": "One passage per document at most, drawn with the printed seed; a new seed reshuffles. Not stratified by context group."
+        },
+        "collocates": {
+          "label": "context words, not meanings",
+          "window": "±5 tokens",
+          "measure": "logDice",
+          "thresholds": {
+            "g2": 10.83,
+            "f": 5,
+            "f_y": 10,
+            "q": 0.05,
+            "min_occurrences": 20
+          },
+          "gate": "not_run",
+          "value": null,
+          "ci": null,
+          "needed": {
+            "token_streams": [
+              "en",
+              "und",
+              "und-Latn"
+            ]
+          },
+          "have": {
+            "a": {
+              "en": "out of date (built at data version 110, now 129)",
+              "und": "not built",
+              "und-Latn": "not built"
+            },
+            "b": {
+              "en": "out of date (built at data version 110, now 129)",
+              "und": "not built",
+              "und-Latn": "not built"
+            }
+          },
+          "suggestion": {
+            "label": "Build token streams for en, und, und-Latn",
+            "run": {
+              "stage": "tokstream",
+              "params": {
+                "langs": [
+                  "en",
+                  "und",
+                  "und-Latn"
+                ]
+              }
+            }
+          },
+          "note": "Collocates for slices this large (9.2M and 9.2M tokens) need current token streams."
+        },
+        "clusters": {
+          "gate": "not_run",
+          "value": null,
+          "ci": null,
+          "needed": {
+            "run": "cluster"
+          },
+          "have": {
+            "run": null,
+            "occurrences": 1778,
+            "documents": 224
+          },
+          "suggestion": {
+            "label": "Group the contexts of 'machine' (a clustering run)",
+            "run": {
+              "stage": "cluster",
+              "params": {
+                "expr": 14,
+                "collections": [
+                  "cipher-gutenberg"
+                ]
+              }
+            }
+          },
+          "note": "No clustering run exists for this expression yet; context groups need one."
+        },
+        "measures": [
+          {
+            "metric": "sense_share_jsd",
+            "gate": "not_run",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "run": "cluster",
+              "clusters": 2
+            },
+            "have": {
+              "run": null
+            },
+            "suggestion": {
+              "label": "Group the contexts of 'machine' (a clustering run)",
+              "run": {
+                "stage": "cluster",
+                "params": {
+                  "expr": 14,
+                  "collections": [
+                    "cipher-gutenberg"
+                  ]
+                }
+              }
+            },
+            "note": "Not estimated yet: the evidence gate passes; context-share shift needs a clustering run with at least two context groups.",
+            "n": [
+              696,
+              656
+            ],
+            "docs": [
+              67,
+              76
+            ],
+            "authors": [
+              41,
+              50
+            ]
+          },
+          {
+            "metric": "neighbor_overlap",
+            "gate": "not_run",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "run": "drift"
+            },
+            "have": {
+              "run": null
+            },
+            "suggestion": {
+              "label": "Estimate it: build the two slice spaces and their controls (a drift run, minutes)",
+              "run": {
+                "stage": "drift",
+                "params": {
+                  "expr": [
+                    14
+                  ],
+                  "a": {
+                    "years": [
+                      1900,
+                      1914
+                    ],
+                    "f": "coll:cipher-gutenberg"
+                  },
+                  "b": {
+                    "years": [
+                      1915,
+                      1928
+                    ],
+                    "f": "coll:cipher-gutenberg"
+                  },
+                  "toggles": {
+                    "tr": 0,
+                    "ds": 0,
+                    "ap": 0,
+                    "dup": 0,
+                    "nm": 0,
+                    "est": 1,
+                    "bp": 0
+                  },
+                  "corpus": null
+                }
+              }
+            },
+            "note": "Not estimated yet: the evidence gate passes; neighbour overlap needs the two slice spaces (a drift run).",
+            "n": [
+              696,
+              656
+            ],
+            "docs": [
+              67,
+              76
+            ],
+            "authors": [
+              41,
+              50
+            ]
+          },
+          {
+            "metric": "aligned_displacement",
+            "gate": "not_run",
+            "value": null,
+            "ci": null,
+            "needed": {
+              "run": "drift",
+              "anchors": 3000
+            },
+            "have": {
+              "run": null
+            },
+            "suggestion": {
+              "label": "Estimate it: build the two slice spaces and their controls (a drift run, minutes)",
+              "run": {
+                "stage": "drift",
+                "params": {
+                  "expr": [
+                    14
+                  ],
+                  "a": {
+                    "years": [
+                      1900,
+                      1914
+                    ],
+                    "f": "coll:cipher-gutenberg"
+                  },
+                  "b": {
+                    "years": [
+                      1915,
+                      1928
+                    ],
+                    "f": "coll:cipher-gutenberg"
+                  },
+                  "toggles": {
+                    "tr": 0,
+                    "ds": 0,
+                    "ap": 0,
+                    "dup": 0,
+                    "nm": 0,
+                    "est": 1,
+                    "bp": 0
+                  },
+                  "corpus": null
+                }
+              }
+            },
+            "note": "Not estimated yet: the evidence gate passes; aligned displacement needs the two slice spaces aligned on ≥ 3,000 anchor words (a drift run).",
+            "n": [
+              696,
+              656
+            ],
+            "docs": [
+              67,
+              76
+            ],
+            "authors": [
+              41,
+              50
+            ]
+          }
+        ],
+        "tone": {
+          "reason": "Tone needs the optional on-device adapter (not installed)",
+          "gate": "not_run",
+          "value": null,
+          "ci": null,
+          "needed": {
+            "adapter": "scrolls-nl",
+            "paragraphs_per_slice": 30
+          },
+          "have": {
+            "adapter": null
+          },
+          "suggestion": null,
+          "note": null
+        },
+        "human": {
+          "pragmatic_function": {
+            "a": {},
+            "b": {}
+          },
+          "stance": {
+            "a": {},
+            "b": {}
+          },
+          "note": "Counts of human annotations in each slice; no automatic irony or stance detection."
+        },
+        "coverage_note": "3 translated documents are excluded from slice A (text-language chronology). 6 matches in slice A are excluded as names. cipher-gutenberg in slice A: selected by prominence (693 public-domain books chosen by Wikipedia sitelinks (prominence), en/fr/es). 2 translated documents are excluded from slice B (text-language chronology). 2 matches in slice B are excluded as names. cipher-gutenberg in slice B: selected by prominence (693 public-domain books chosen by Wikipedia sitelinks (prominence), en/fr/es). The result depends on prominence stratum: rates move in different directions across prominence terciles.",
+        "provenance": {
+          "data_version": 129,
+          "run_ids": {
+            "materialize": {
+              "14": 31
+            }
+          },
+          "tokenizer": "u61m-1",
+          "segmenter": "seg-1",
+          "synthetic": false,
+          "collections": [
+            "cipher-gutenberg"
+          ],
+          "licenses": [
+            "Public domain (US)"
+          ]
+        }
+      }
+    }
+  }
+}

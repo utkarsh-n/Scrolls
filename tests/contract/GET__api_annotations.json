@@ -1,0 +1,234 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/annotations for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/annotations",
+  "owner": "WP5",
+  "request": null,
+  "response": "Annotations",
+  "summary": "Annotations on a target (`?target=&include=superseded&as_of=`); machine annotations are labelled and cannot be edited.",
+  "default": "ok",
+  "example_request": null,
+  "variants": {
+    "ok": {
+      "status": 200,
+      "body": {
+        "items": [
+          {
+            "is_machine": false,
+            "method": null,
+            "status": "active",
+            "layer": "Reader A, 2026-10-03",
+            "supersedes": null,
+            "anchor": {
+              "doc_id": 44,
+              "sha256": "7de1d5c82090cbc3a00984677222db11be5cecc025c752208d2db254991eeaf7",
+              "field": "body",
+              "start": 0,
+              "end": 104,
+              "quote": "the ones they never counted",
+              "prefix": "",
+              "suffix": " hold the place for the number\nc"
+            },
+            "dimensions": { "pragmatic_function": "ironic", "perspective": "2026 reader" },
+            "tags": ["irony"],
+            "synthetic": true,
+            "id": 220,
+            "target": { "type": "passage", "ref": "901" },
+            "kind": "interpretation",
+            "author": "Reader A (synthetic)",
+            "rev": 2,
+            "body_md": "Ironic distance from schooling: the verse keeps the classroom phrase but turns it toward the people nobody counted.",
+            "created_at": "2026-10-03T14:00:00.000Z"
+          },
+          {
+            "is_machine": false,
+            "method": null,
+            "status": "active",
+            "layer": "Reader B, 2026-10-03",
+            "supersedes": null,
+            "anchor": {
+              "doc_id": 44,
+              "sha256": "7de1d5c82090cbc3a00984677222db11be5cecc025c752208d2db254991eeaf7",
+              "field": "body",
+              "start": 0,
+              "end": 104,
+              "quote": "the ones they never counted",
+              "prefix": "",
+              "suffix": " hold the place for the number\nc"
+            },
+            "dimensions": { "pragmatic_function": "reclaimed" },
+            "tags": ["tribute"],
+            "synthetic": true,
+            "id": 223,
+            "target": { "type": "passage", "ref": "901" },
+            "kind": "interpretation",
+            "author": "Reader B (synthetic)",
+            "rev": 1,
+            "body_md": "Tribute — the zero is the uncounted. The April 1995 interview calls the song a thank-you note.",
+            "created_at": "2026-10-03T15:10:00.000Z"
+          },
+          {
+            "is_machine": false,
+            "method": null,
+            "status": "active",
+            "layer": null,
+            "supersedes": null,
+            "anchor": {
+              "doc_id": 44,
+              "sha256": "7de1d5c82090cbc3a00984677222db11be5cecc025c752208d2db254991eeaf7",
+              "field": "body",
+              "start": 0,
+              "end": 104,
+              "quote": "the ones they never counted",
+              "prefix": "",
+              "suffix": " hold the place for the number\nc"
+            },
+            "dimensions": {},
+            "tags": ["forecast"],
+            "synthetic": true,
+            "id": 230,
+            "target": { "type": "passage", "ref": "901" },
+            "kind": "hypothesis",
+            "author": "Reader A (synthetic)",
+            "rev": 1,
+            "body_md": "By 2035 'carry the zero' may be mainly a data-engineering term outside hip-hop.",
+            "created_at": "2026-10-03T17:05:00.000Z",
+            "label": "Hypothesis — by Reader A (synthetic), 2026-10-03 — not evidence"
+          }
+        ],
+        "cursor": null
+      }
+    },
+    "with_superseded": {
+      "when": { "query": { "include": "superseded" } },
+      "status": 200,
+      "body": {
+        "items": [
+          {
+            "is_machine": false,
+            "method": null,
+            "status": "superseded",
+            "layer": "Reader A, 2026-10-02",
+            "supersedes": null,
+            "anchor": {
+              "doc_id": 44,
+              "sha256": "7de1d5c82090cbc3a00984677222db11be5cecc025c752208d2db254991eeaf7",
+              "field": "body",
+              "start": 0,
+              "end": 104,
+              "quote": "the ones they never counted",
+              "prefix": "",
+              "suffix": " hold the place for the number\nc"
+            },
+            "dimensions": { "pragmatic_function": "parodic" },
+            "tags": ["mockery"],
+            "synthetic": true,
+            "id": 219,
+            "target": { "type": "passage", "ref": "901" },
+            "kind": "interpretation",
+            "author": "Reader A (synthetic)",
+            "rev": 1,
+            "body_md": "A sneer at the schoolroom.",
+            "created_at": "2026-10-02T11:00:00.000Z",
+            "superseded_by": 220
+          },
+          {
+            "is_machine": false,
+            "method": null,
+            "status": "active",
+            "layer": "Reader A, 2026-10-03",
+            "supersedes": null,
+            "anchor": {
+              "doc_id": 44,
+              "sha256": "7de1d5c82090cbc3a00984677222db11be5cecc025c752208d2db254991eeaf7",
+              "field": "body",
+              "start": 0,
+              "end": 104,
+              "quote": "the ones they never counted",
+              "prefix": "",
+              "suffix": " hold the place for the number\nc"
+            },
+            "dimensions": { "pragmatic_function": "ironic", "perspective": "2026 reader" },
+            "tags": ["irony"],
+            "synthetic": true,
+            "id": 220,
+            "target": { "type": "passage", "ref": "901" },
+            "kind": "interpretation",
+            "author": "Reader A (synthetic)",
+            "rev": 2,
+            "body_md": "Ironic distance from schooling: the verse keeps the classroom phrase but turns it toward the people nobody counted.",
+            "created_at": "2026-10-03T14:00:00.000Z"
+          },
+          {
+            "is_machine": false,
+            "method": null,
+            "status": "active",
+            "layer": "Reader B, 2026-10-03",
+            "supersedes": null,
+            "anchor": {
+              "doc_id": 44,
+              "sha256": "7de1d5c82090cbc3a00984677222db11be5cecc025c752208d2db254991eeaf7",
+              "field": "body",
+              "start": 0,
+              "end": 104,
+              "quote": "the ones they never counted",
+              "prefix": "",
+              "suffix": " hold the place for the number\nc"
+            },
+            "dimensions": { "pragmatic_function": "reclaimed" },
+            "tags": ["tribute"],
+            "synthetic": true,
+            "id": 223,
+            "target": { "type": "passage", "ref": "901" },
+            "kind": "interpretation",
+            "author": "Reader B (synthetic)",
+            "rev": 1,
+            "body_md": "Tribute — the zero is the uncounted. The April 1995 interview calls the song a thank-you note.",
+            "created_at": "2026-10-03T15:10:00.000Z"
+          },
+          {
+            "is_machine": false,
+            "method": null,
+            "status": "active",
+            "layer": null,
+            "supersedes": null,
+            "anchor": {
+              "doc_id": 44,
+              "sha256": "7de1d5c82090cbc3a00984677222db11be5cecc025c752208d2db254991eeaf7",
+              "field": "body",
+              "start": 0,
+              "end": 104,
+              "quote": "the ones they never counted",
+              "prefix": "",
+              "suffix": " hold the place for the number\nc"
+            },
+            "dimensions": {},
+            "tags": ["forecast"],
+            "synthetic": true,
+            "id": 230,
+            "target": { "type": "passage", "ref": "901" },
+            "kind": "hypothesis",
+            "author": "Reader A (synthetic)",
+            "rev": 1,
+            "body_md": "By 2035 'carry the zero' may be mainly a data-engineering term outside hip-hop.",
+            "created_at": "2026-10-03T17:05:00.000Z",
+            "label": "Hypothesis — by Reader A (synthetic), 2026-10-03 — not evidence"
+          }
+        ],
+        "cursor": null
+      }
+    },
+    "empty": { "when": { "query": { "target": "passage:21" } }, "status": 200, "body": { "items": [], "cursor": null } },
+    "error": {
+      "status": 403,
+      "body": {
+        "error": {
+          "code": "E_FORBIDDEN_ORIGIN",
+          "message": "This request did not come from the Scrolls page on this computer.",
+          "hint": "Open Scrolls at http://127.0.0.1:3460/ and retry from there.",
+          "detail": null
+        }
+      }
+    }
+  }
+}

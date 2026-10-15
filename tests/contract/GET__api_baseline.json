@@ -1,0 +1,81 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/baseline for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/baseline",
+  "owner": "WP2",
+  "request": null,
+  "response": "Baseline",
+  "summary": "External Ngram baseline for one word, or `{available: false, reason}`.",
+  "default": "ok",
+  "example_request": null,
+  "variants": {
+    "ok": {
+      "status": 200,
+      "body": {
+        "available": true,
+        "word": "virus",
+        "top_form": "virus",
+        "forms": 6,
+        "label": "Google Books Ngram, English, 2020 edition: a different corpus",
+        "attribution": "Google Books Ngram Viewer (http://books.google.com/ngrams), dataset version 20200217; Michel et al. 2011; Lin et al. 2012",
+        "decades": [
+          {
+            "decade": 1820,
+            "per_million": 1.07,
+            "volumes": 31233
+          }
+        ],
+        "caveats": [
+          "case folding merges senses"
+        ],
+        "mock_note": "One decade only (the SPEC §7.2 example); a real answer lists every decade."
+      }
+    },
+    "multiword": {
+      "note": "The Ngram store holds 1-grams only.",
+      "when": {
+        "query": {
+          "word": "carry the zero"
+        }
+      },
+      "status": 200,
+      "body": {
+        "available": false,
+        "reason": "single words only"
+      }
+    },
+    "not_staged": {
+      "status": 200,
+      "body": {
+        "available": false,
+        "reason": "The Ngram store is not staged (sources/ngram-baseline/ngram-eng-1.sqlite)."
+      }
+    },
+    "other_language": {
+      "note": "Real: lang=fr (contract 1.2.0); the Ngram store is English-only.",
+      "when": {
+        "query": {
+          "lang": "fr"
+        }
+      },
+      "status": 200,
+      "body": {
+        "available": false,
+        "reason": "The Ngram store holds English words only."
+      }
+    },
+    "error": {
+      "status": 503,
+      "body": {
+        "error": {
+          "code": "QUERY_TIMEOUT",
+          "message": "The baseline lookup took longer than 5 s and was stopped.",
+          "hint": "Narrow the time range or add a filter, then retry.",
+          "detail": {
+            "timeout_ms": 5000
+          }
+        }
+      }
+    }
+  }
+}

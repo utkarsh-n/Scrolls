@@ -1,0 +1,25 @@
+{
+  "//": "OWNER: WP0 — canned POST /api/hypothesis-groups for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "POST",
+  "path": "/api/hypothesis-groups",
+  "owner": "WP5",
+  "request": "HypothesisGroupRequest",
+  "response": "Created",
+  "summary": "Open a hypothesis group on a target with a question.",
+  "default": "ok",
+  "example_request": { "target": "passage:2210", "question": "Where does Vyas's 2017 line come from?" },
+  "variants": {
+    "ok": { "status": 200, "body": { "id": 5 } },
+    "invalid": {
+      "status": 400,
+      "body": {
+        "error": {
+          "code": "E_VALIDATION",
+          "message": "A hypothesis group needs a question.",
+          "hint": null,
+          "detail": { "field": "question" }
+        }
+      }
+    }
+  }
+}

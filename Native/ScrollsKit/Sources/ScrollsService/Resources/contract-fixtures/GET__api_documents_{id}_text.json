@@ -1,0 +1,39 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/documents/:id/text for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/documents/:id/text",
+  "owner": "WP3",
+  "request": null,
+  "response": "DocumentText",
+  "summary": "A slice (≤ 20k chars) of the decoded original; offsets are UTF-16 code units (D4).",
+  "default": "ok",
+  "example_request": null,
+  "variants": {
+    "ok": {
+      "status": 200,
+      "body": {
+        "document_id": 44,
+        "from": 0,
+        "to": 153,
+        "text": "Zero Holds the Place\nMC Ledgerline (synthetic)\n\nthe ones they never counted hold the place for the number\ncarry the zero, carry the block, carry my name\n",
+        "length": 153,
+        "synthetic": true
+      }
+    },
+    "out_of_range": {
+      "status": 400,
+      "body": {
+        "error": {
+          "code": "E_RANGE",
+          "message": "from/to must lie inside the document (length 153).",
+          "hint": "Ask for a slice inside the document.",
+          "detail": { "length": 153 }
+        }
+      }
+    },
+    "not_found": {
+      "status": 404,
+      "body": { "error": { "code": "E_NOT_FOUND", "message": "No document 999999.", "hint": null, "detail": null } }
+    }
+  }
+}

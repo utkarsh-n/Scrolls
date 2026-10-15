@@ -1,0 +1,21 @@
+{
+  "//": "OWNER: WP0 — zero npm dependencies (SPEC D20); runtime data lives in $SCROLLS_DATA (~/Developer/scrolls-data), never here",
+  "name": "scrolls",
+  "version": "0.1.0",
+  "description": "Scrolls — A Living Atlas of Meaning: a local observatory of how expressions and their readings change over time",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=26"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:cipher": "SCROLLS_TEST_CIPHER=1 node --test tests/*.test.mjs",
+    "bench": "node scripts/bench.mjs",
+    "bootstrap": "node scripts/bootstrap-cipher.mjs",
+    "build:nl": "sh tools/nl-adapter/build.sh",
+    "build:demo": "node scripts/build-demo.mjs",
+    "verify": "node scripts/verify.mjs"
+  }
+}

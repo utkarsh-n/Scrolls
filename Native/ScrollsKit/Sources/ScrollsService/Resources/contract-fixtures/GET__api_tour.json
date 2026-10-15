@@ -1,0 +1,259 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/tour for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/tour",
+  "owner": "WP2",
+  "request": null,
+  "response": "Tour",
+  "summary": "The demo tour (data/demo/tour.json) with ids resolved; 10 steps ≈ 4 minutes, steps 1–3 are the first 60 seconds.",
+  "default": "ok",
+  "example_request": null,
+  "variants": {
+    "ok": {
+      "status": 200,
+      "body": {
+        "steps": [
+          {
+            "n": 1,
+            "action": "Opens the app",
+            "see": "'carry the zero' across communities, lanes = community, the SYNTHETIC ribbon. Hover 1940–49: hatched, 'no sources (archive gap — synthetic)'. The 1980s Hip-hop bin: a dotted baseline, '0 in 6.2k tokens — looked, found none'.",
+            "learn": "Bars are observations; absence has two kinds.",
+            "anchor": "#scroll",
+            "state": "#v=1&c=demo&s=e12",
+            "synthetic": true
+          },
+          {
+            "n": 2,
+            "action": "Clicks the 1994 Hip-hop mark",
+            "see": "The inspector opens with the highlighted span at its offsets, SYN, the date chip '17 May 1994 · stated · day' and a 'refers to 1911' chip.",
+            "learn": "Every mark opens its passage.",
+            "anchor": "#inspector",
+            "state": "#v=1&c=demo&s=e12&sel=occ:55012",
+            "synthetic": true
+          },
+          {
+            "n": 3,
+            "action": "Clicks the amber arc to 1911, then the dashed arc 1963→1911; presses E twice",
+            "see": "DOC (a synthetic liner record) next to CALC (13 shared tokens, run #9); with \"documented only\" the computed arc disappears.",
+            "learn": "Evidence status is visible and filterable.",
+            "anchor": "#scroll",
+            "state": "#v=1&c=demo&s=e12&ev=d&sel=rel:7781",
+            "synthetic": true
+          },
+          {
+            "n": 4,
+            "action": "Presses ▶ (Step ▸ with reduced motion)",
+            "see": "The vantage runs 1925 → 2026, pauses over the 1940s gap; at 2016 the 1911 primer gains a violet halo and a feedback arc appears below the lanes.",
+            "learn": "Later works change how earlier ones are read — only where a documented or annotated link says so.",
+            "anchor": "#scroll",
+            "state": "#v=1&c=demo&s=e12&t=20818c",
+            "synthetic": true
+          },
+          {
+            "n": 5,
+            "action": "Presses L → lanes = context group",
+            "see": "Four context groups with machine labels, dashed ⑂ splits, stability, 'representation: tfidf-hash-4096'; renames one group (a label annotation).",
+            "learn": "Groups are computed hypotheses with editable labels.",
+            "anchor": "#lanes",
+            "state": "#v=1&c=demo&s=e12&l=cluster:fo:r14&r=m12_31.c14.q9",
+            "synthetic": true
+          },
+          {
+            "n": 6,
+            "action": "Selects the 1994 song and reads Then / Now / Next",
+            "see": "Then = the 1911 primer and the 1958 memo (contemporaries, with denominators); Now = 1994; Next = 2003, 2016, 2017 and Reader A's hypothesis card.",
+            "learn": "Temporal layering, read from documents and their settings.",
+            "anchor": "#inspector",
+            "state": "#v=1&c=demo&s=e12&sel=psg:901",
+            "synthetic": true
+          },
+          {
+            "n": 7,
+            "action": "Presses A / B on 1955–1985 and 1994–2026, then C",
+            "see": "Coverage first (composition JSD 0.48 caveat), frequency with CIs, context shares with CIs; displacement refused ('slices are 21k and 30k tokens; spaces need 3M').",
+            "learn": "Scrolls computes what the evidence supports and refuses the rest.",
+            "anchor": "#panel",
+            "state": "#v=1&c=demo&s=e12&p=tnn,compare&cmp=1955-1985~1994-2026",
+            "synthetic": true
+          },
+          {
+            "n": 8,
+            "action": "Searches ◉ and compares 1890–1950 with 1980–2026",
+            "see": "A gate card: 'A has 7 occurrences in 2 documents, B 15 in 5; context-share shift needs ≥ 50 per slice. No widening inside this corpus reaches the gate (◉ has 26 matches in all).' Lineage shows one DOC arc and Reader A's rejected allusion (struck, 'show rejected').",
+            "learn": "Similarity is not ancestry; gates explain themselves.",
+            "anchor": "#panel",
+            "state": "#v=1&c=demo&s=e15&p=tnn,compare&cmp=1890-1950~1980-2026",
+            "synthetic": true
+          },
+          {
+            "n": 9,
+            "action": "Opens 'ghost in the margin' lineage (G), then the notebook (N) on the 1994 song, then S",
+            "see": "⚖ the disputed cue citation (1971), the Vyas hypothesis group, chain strength 'weakest link: PROPOSED'; Reader A and Reader B layers with a revision diff; a saved-view link.",
+            "learn": "Disagreement is preserved; views are reproducible.",
+            "anchor": "#panel",
+            "state": "#v=1&c=demo&s=e13&p=tnn,lineage&lg=passage:55~2~~",
+            "synthetic": true
+          },
+          {
+            "n": 10,
+            "action": "'Now try real data' → Cipher → zero",
+            "see": "The roots.tsv band 'Sanskrit śūnyá \"blank\" — period, not date'; hi/gu Wikisource lanes; 31 culture titles with 'zero' (per 1,000 works); the 1928 modality seam.",
+            "learn": "The same rules on your own corpus.",
+            "anchor": "#scroll",
+            "state": "#v=1&c=cipher",
+            "synthetic": false
+          }
+        ]
+      }
+    },
+    "track_pending": {
+      "note": "Real (M5 gate): on a database where 'zero' is not tracked yet, step 10 is pending and says what to POST to /api/expressions.",
+      "status": 200,
+      "body": {
+        "minutes": 4,
+        "steps": [
+          {
+            "n": 1,
+            "action": "Opens the app",
+            "see": "'carry the zero' across communities, lanes = community, the SYNTHETIC ribbon. Hover 1940–49: hatched, 'no sources (archive gap — synthetic)'. The 1980s Hip-hop bin: a dotted baseline, '0 in 7.1k tokens — looked, found none'.",
+            "learn": "Bars are observations; absence has two kinds.",
+            "anchor": "#scroll",
+            "state": "#v=1&c=demo&s=e1",
+            "synthetic": true,
+            "first_minute": true,
+            "refs": {}
+          },
+          {
+            "n": 2,
+            "action": "Clicks the 1994 Hip-hop mark",
+            "see": "The inspector opens with the highlighted span at its offsets, SYN, the date chip '17 May 1994 · stated · day' and a 'refers to 1911' chip.",
+            "learn": "Every mark opens its passage.",
+            "anchor": "#inspector",
+            "state": "#v=1&c=demo&s=e1&sel=occ:589",
+            "synthetic": true,
+            "first_minute": true,
+            "refs": {
+              "occurrence": 589
+            }
+          },
+          {
+            "n": 3,
+            "action": "Clicks the amber arc to 1911, then the dashed arc 1963→1911; presses E twice",
+            "see": "DOC (a synthetic liner-notes record) next to CALC (13 shared tokens, run #23); with \"documented only\" the computed arc disappears.",
+            "learn": "Evidence status is visible and filterable.",
+            "anchor": "#scroll",
+            "state": "#v=1&c=demo&s=e1&ev=d&sel=rel:1",
+            "synthetic": true,
+            "first_minute": true,
+            "refs": {
+              "relationship": 1
+            }
+          },
+          {
+            "n": 4,
+            "action": "Presses ▶ (Step ▸ with reduced motion)",
+            "see": "The vantage runs 1925 → 2026 and pauses over the 1940s gap; at 2016 the 1911 primer gains a violet halo and a feedback arc appears below the lanes.",
+            "learn": "Later works change how earlier ones are read — only where a documented or annotated link says so.",
+            "anchor": "#scroll",
+            "state": "#v=1&c=demo&s=e1&t=17166s",
+            "synthetic": true,
+            "first_minute": false,
+            "refs": {}
+          },
+          {
+            "n": 5,
+            "action": "Presses L → lanes = context group",
+            "see": "Context groups with machine labels, dashed ⑂ splits and stability, 'representation: tfidf-hash-4096'; one group renamed by Reader A (a label annotation; the machine label stays visible).",
+            "learn": "Groups are computed hypotheses with editable labels.",
+            "anchor": "#lanes",
+            "state": "#v=1&c=demo&s=e1&l=cluster:fo",
+            "synthetic": true,
+            "first_minute": false,
+            "refs": {}
+          },
+          {
+            "n": 6,
+            "action": "Selects the 1994 song and reads Then / Now / Next",
+            "see": "Then = the 1911 primer and the 1958 memo (contemporaries, with denominators); Now = 1994; Next = 2003, 2016, 2017 and Reader A's hypothesis card.",
+            "learn": "Temporal layering, read from documents and their settings.",
+            "anchor": "#inspector",
+            "state": "#v=1&c=demo&s=e1&sel=psg:53",
+            "synthetic": true,
+            "first_minute": false,
+            "refs": {
+              "passage": 53
+            }
+          },
+          {
+            "n": 7,
+            "action": "Presses A / B on 1955–1985 and 1994–2026, then C",
+            "see": "Coverage first (with a composition caveat), frequency with CIs, context shares with CIs; displacement refused (the slices hold about 30.2k and 34.8k tokens; aligned spaces need 3M).",
+            "learn": "Scrolls computes what the evidence supports and refuses the rest.",
+            "anchor": "#panel",
+            "state": "#v=1&c=demo&s=e1&p=tnn,compare&cmp=1955-1985~1994-2026",
+            "synthetic": true,
+            "first_minute": false,
+            "refs": {}
+          },
+          {
+            "n": 8,
+            "action": "Searches ◉ and compares 1890–1950 with 1980–2026",
+            "see": "A gate card names the occurrences in each slice and says context-share shift needs ≥ 50 per slice; no widening inside this corpus reaches the gate (◉ has 26 matches in all). Frequency and KWIC still show. Lineage shows one DOC arc and Reader A's rejected allusion (struck, 'show rejected').",
+            "learn": "Similarity is not ancestry; gates explain themselves.",
+            "anchor": "#panel",
+            "state": "#v=1&c=demo&s=e4&p=tnn,compare&cmp=1890-1950~1980-2026",
+            "synthetic": true,
+            "first_minute": false,
+            "refs": {}
+          },
+          {
+            "n": 9,
+            "action": "Opens 'ghost in the margin' lineage (G), then the notebook (N) on the 1994 song, then S",
+            "see": "⚖ the disputed cue citation (1971), the Vyas hypothesis group, chain strength 'weakest link: PROPOSED'; Reader A and Reader B layers with a revision diff; a saved-view link.",
+            "learn": "Disagreement is preserved; views are reproducible.",
+            "anchor": "#panel",
+            "state": "#v=1&c=demo&s=e3&p=tnn,lineage&lg=passage:13~2~~",
+            "synthetic": true,
+            "first_minute": false,
+            "refs": {
+              "lineage_root": "passage:13"
+            }
+          },
+          {
+            "n": 10,
+            "action": "'Now try real data' → Cipher → zero",
+            "see": "The roots.tsv band 'Sanskrit śūnyá \"blank\" — period, not date'; hi/gu Wikisource lanes; culture titles with 'zero' (per 1,000 works); the 1928 modality seam.",
+            "learn": "The same rules on your own corpus.",
+            "anchor": "#scroll",
+            "state": "#v=1&c=cipher",
+            "synthetic": false,
+            "first_minute": false,
+            "refs": {},
+            "pending": [
+              "expression 'zero' is not tracked yet"
+            ],
+            "track": [
+              {
+                "surface": "zero",
+                "lang": "en",
+                "kind": "word",
+                "corpus": "cipher"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "error": {
+      "status": 409,
+      "body": {
+        "error": {
+          "code": "E_DEMO_NOT_LOADED",
+          "message": "The tour needs the demo corpus, which is still loading.",
+          "hint": "Wait a few seconds and retry.",
+          "detail": null
+        }
+      }
+    }
+  }
+}

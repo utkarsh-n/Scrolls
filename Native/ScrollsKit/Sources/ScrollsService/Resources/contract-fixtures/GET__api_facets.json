@@ -1,0 +1,88 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/facets for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/facets",
+  "owner": "WP2",
+  "request": null,
+  "response": "Facets",
+  "summary": "Facet values with document counts for the current filter (`?f=`).",
+  "default": "ok",
+  "example_request": null,
+  "variants": {
+    "ok": {
+      "status": 200,
+      "body": {
+        "facets": {
+          "community": [
+            { "value": "classroom", "label": "Classroom", "count": 34 },
+            { "value": "office-lab", "label": "Office & Lab", "count": 28 },
+            { "value": "hiphop", "label": "Hip-hop", "count": 48 },
+            { "value": "criticism", "label": "Criticism", "count": 9 },
+            { "value": "software", "label": "Software", "count": 23 },
+            { "value": "gujarati", "label": "Gujarati verse & school", "count": 9 },
+            { "value": "hindi", "label": "Hindi verse", "count": 6 },
+            { "value": "hospital", "label": "Hospital", "count": 5 },
+            { "value": "literature", "label": "Literature", "count": 10 },
+            { "value": "workshop-radio", "label": "Workshop & Radio", "count": 25 }
+          ],
+          "kind": [
+            { "value": "song", "label": "Song", "count": 31 },
+            { "value": "memo", "label": "Memo", "count": 22 },
+            { "value": "book", "label": "Book", "count": 14 },
+            { "value": "blog", "label": "Blog", "count": 19 },
+            { "value": "zine", "label": "Zine", "count": 12 },
+            { "value": "essay", "label": "Essay", "count": 9 }
+          ],
+          "lang": [
+            { "value": "en", "label": "English", "count": 176 },
+            { "value": "gu", "label": "Gujarati", "count": 6 },
+            { "value": "hi", "label": "Hindi", "count": 4 },
+            { "value": "es", "label": "Spanish", "count": 2 }
+          ],
+          "basis": [
+            { "value": "stated", "label": "stated", "count": 183 },
+            { "value": "estimated", "label": "estimated", "count": 3 },
+            { "value": "derived", "label": "derived (calendar conversion)", "count": 1 },
+            { "value": "announced", "label": "announced", "count": 1 }
+          ]
+        },
+        "provenance": {
+          "data_version": 47,
+          "run_ids": {},
+          "tokenizer": "u61m-1",
+          "segmenter": "seg-1",
+          "synthetic": true,
+          "collections": ["demo-world"],
+          "licenses": ["CC0 (synthetic)"]
+        }
+      }
+    },
+    "empty": {
+      "when": { "query": { "f": "lang:la" } },
+      "status": 200,
+      "body": {
+        "facets": {},
+        "provenance": {
+          "data_version": 47,
+          "run_ids": {},
+          "tokenizer": "u61m-1",
+          "segmenter": "seg-1",
+          "synthetic": true,
+          "collections": ["demo-world"],
+          "licenses": ["CC0 (synthetic)"]
+        }
+      }
+    },
+    "error": {
+      "status": 503,
+      "body": {
+        "error": {
+          "code": "QUERY_TIMEOUT",
+          "message": "The facet count took longer than 5 s and was stopped.",
+          "hint": "Narrow the time range or add a filter, then retry.",
+          "detail": { "timeout_ms": 5000 }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,139 @@
+# OWNER: N0
+# XcodeGen spec of the Scrolls iPhone app (IOS-SPEC §8.4.1). Generated and built only inside a build mirror
+# (Tools/build.sh xcodegen|sim|app-test|device), never in the iCloud folder. The engine is the local ScrollsKit package;
+# LabKit is mirrored beside Scrolls/ (../../LabKit from here). The app and test source folders are `optional` so the
+# project generates before the app shell exists; once a folder exists it is an ordinary source folder.
+name: Scrolls
+options:
+  bundleIdPrefix: com.utkarsh
+  deploymentTarget: { iOS: "27.0" }
+  xcodeVersion: "27.0"
+  createIntermediateGroups: true
+packages:
+  ScrollsKit: { path: ScrollsKit }
+  LabKit: { path: ../../LabKit }                 # Tools/build.sh mirrors LabKit beside Scrolls/ (Rheo's pattern)
+  # IOS-SPEC-QWEN ΔQ-2: the MLX runtime (mlx-swift 0.32.3, mlx-swift-lm 3.32.3, swift-transformers 1.3.0, pinned exactVersion
+  # in its Package.swift; Package.resolved = AttentionMachine's pins). The only third-party code in the app.
+  ScrollsQwenKit: { path: ScrollsQwenKit }
+  OfflineIntelligenceKit: { path: ../../OfflineIntelligenceKit }
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    SWIFT_APPROACHABLE_CONCURRENCY: YES
+    SWIFT_STRICT_CONCURRENCY: complete
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "2"
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Automatic
+targets:
+  Scrolls:
+    type: application
+    platform: iOS
+    sources:
+      - path: Scrolls
+        optional: true
+        excludes: ["Resources/Bundled/**", "Resources/Probe/**", "Resources/Qwen/**", "Resources/Models/**"]
+      - path: Scrolls/Resources/Bundled          # starter.atlas, cipher-meta.scrollspack, cipher-text.scrollspack (build products)
+        type: folder
+        buildPhase: resources
+        optional: true
+      - path: Scrolls/Resources/Probe            # the probe's sample books, kept as one folder (Golden/probe-samples.mjs)
+        type: folder
+        buildPhase: resources
+        optional: true
+      - path: Scrolls/Resources/Qwen             # the Qwen demonstration's passages and the S6 parity sample (Tools/qwen-ref.py)
+        type: folder
+        buildPhase: resources
+        optional: true
+      - path: Scrolls/Resources/Models
+        type: folder
+        buildPhase: resources
+        optional: true
+    dependencies:
+      - package: ScrollsKit
+        products: [ScrollsService, ScrollsScrollModel, ScrollsRender, ScrollsQwen]
+      - package: ScrollsQwenKit
+        products: [ScrollsQwenRuntime]
+      - package: OfflineIntelligenceKit
+        products: [OfflineIntelligence]
+      - package: LabKit
+        products: [LabKitCore, LabKitFeedback, LabKitUI]
+    info:
+      path: Scrolls/Resources/Info.plist
+      properties:
+        CFBundleDisplayName: Scrolls
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        UILaunchScreen: { UIColorName: LaunchBackground }
+        UIApplicationSceneManifest: { UIApplicationSupportsMultipleScenes: false }
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait, UIInterfaceOrientationLandscapeLeft, UIInterfaceOrientationLandscapeRight]
+        UIUserInterfaceStyle: Dark
+        CADisableMinimumFrameDurationOnPhone: true
+        ITSAppUsesNonExemptEncryption: false
+        LSApplicationCategoryType: public.app-category.education
+        UIFileSharingEnabled: true
+        LSSupportsOpeningDocumentsInPlace: true
+        UIBackgroundModes: [processing]
+        BGTaskSchedulerPermittedIdentifiers: [com.utkarsh.scrolls.maintenance, "com.utkarsh.scrolls.job.*"]
+        CFBundleURLTypes: [{ CFBundleURLName: com.utkarsh.scrolls, CFBundleURLSchemes: [scrolls] }]
+        CFBundleDocumentTypes:
+          - { CFBundleTypeName: Scrolls source pack, LSHandlerRank: Owner, LSItemContentTypes: [com.utkarsh.scrolls.pack] }
+          - { CFBundleTypeName: Scrolls atlas, LSHandlerRank: Owner, LSItemContentTypes: [com.utkarsh.scrolls.atlas, com.utkarsh.scrolls.archive] }
+          - { CFBundleTypeName: Scrolls view, LSHandlerRank: Owner, LSItemContentTypes: [com.utkarsh.scrolls.view] }
+          - { CFBundleTypeName: Text or data to import, LSHandlerRank: Alternate,
+              LSItemContentTypes: [public.plain-text, public.comma-separated-values-text, public.tab-separated-values-text,
+                                   public.json, net.daringfireball.markdown, org.jsonlines.jsonl] }
+        UTExportedTypeDeclarations:
+          - { UTTypeIdentifier: com.utkarsh.scrolls.pack, UTTypeDescription: Scrolls source pack, UTTypeConformsTo: [public.data],
+              UTTypeTagSpecification: { public.filename-extension: [scrollspack] } }
+          - { UTTypeIdentifier: com.utkarsh.scrolls.atlas, UTTypeDescription: Scrolls atlas, UTTypeConformsTo: [com.apple.package],
+              UTTypeTagSpecification: { public.filename-extension: [scrollsatlas] } }
+          - { UTTypeIdentifier: com.utkarsh.scrolls.archive, UTTypeDescription: Scrolls atlas archive, UTTypeConformsTo: [public.data],
+              UTTypeTagSpecification: { public.filename-extension: [scrollsarchive] } }
+          - { UTTypeIdentifier: com.utkarsh.scrolls.view, UTTypeDescription: Scrolls view, UTTypeConformsTo: [public.json],
+              UTTypeTagSpecification: { public.filename-extension: [scrollsview] } }
+        UTImportedTypeDeclarations:
+          - { UTTypeIdentifier: org.jsonlines.jsonl, UTTypeDescription: JSON Lines, UTTypeConformsTo: [public.plain-text],
+              UTTypeTagSpecification: { public.filename-extension: [jsonl] } }
+    entitlements:
+      path: Scrolls/Resources/Scrolls.entitlements
+      properties:
+        com.apple.developer.kernel.increased-memory-limit: true         # requested; no budget depends on it
+        # extended-virtual-addressing is not requested: team YOUR_TEAM_ID is a personal team, and Xcode refuses a profile with
+        # it ("Personal development teams … do not support the Extended Virtual Addressing capability", B1 2026-10-13).
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.utkarsh.scrolls
+        TARGETED_DEVICE_FAMILY: "1"
+        SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        SUPPORTS_MACCATALYST: NO
+      configs:
+        Debug:
+          SWIFT_OPTIMIZATION_LEVEL: "-O"         # Loom's convention
+    postCompileScripts:
+      # codesign refuses bundles carrying the extended attributes iCloud Drive and Finder leave behind
+      - name: Strip extended attributes
+        script: '/usr/bin/xattr -cr "$TARGET_BUILD_DIR/$WRAPPER_NAME" || true'
+        basedOnDependencyAnalysis: false        # runs every build (it has no outputs to analyse)
+  ScrollsAppTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: ScrollsAppTests
+        optional: true
+    dependencies: [{ target: Scrolls }]
+    settings: { base: { SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor, GENERATE_INFOPLIST_FILE: YES } }
+  ScrollsUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: ScrollsUITests
+        optional: true
+    dependencies: [{ target: Scrolls }]
+    settings: { base: { GENERATE_INFOPLIST_FILE: YES } }
+schemes:
+  Scrolls:
+    build: { targets: { Scrolls: all } }
+    test: { config: Debug, targets: [ScrollsAppTests, ScrollsUITests] }

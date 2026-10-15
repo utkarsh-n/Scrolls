@@ -1,0 +1,204 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/etymology for mock mode and contract tests (SPEC §1.7, §6.7; contract 1.2.0, M5 gate; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/etymology",
+  "owner": "WP3",
+  "request": null,
+  "response": "Etymology",
+  "summary": "The roots.tsv families of an expression's single-word variants, with listed parents and parent_semantics: periods, not dates.",
+  "default": "zero",
+  "example_request": null,
+  "variants": {
+    "zero": {
+      "note": "Real Cipher roots data: 'zero' lists Latin zephirum and Sanskrit śūnyá, whose two listed roots are likely a chain (not stated).",
+      "status": 200,
+      "body": {
+        "available": true,
+        "expression": 6,
+        "word": "zero",
+        "lang": "en",
+        "source": "Wiktionary via kaikki.org (CC BY-SA), as listed in Cipher's roots data",
+        "families": [
+          {
+            "key": "la:zephirum",
+            "lang": "la",
+            "form": "zephirum",
+            "roman": null,
+            "gloss": "zero",
+            "kind": "etymon",
+            "parent_semantics": "none",
+            "parents": [],
+            "members": [{"lang": "en", "word": "zero", "rank": 1}]
+          },
+          {
+            "key": "sa:शून्य",
+            "lang": "sa",
+            "form": "शून्य",
+            "roman": "śūnyá",
+            "gloss": "blank; deserted",
+            "kind": "etymon",
+            "parent_semantics": "listed_chain",
+            "parents": [
+              { "key": "ine-pro:*kewh₁-", "lang": "ine-pro", "form": "*ḱewh₁-", "roman": null, "gloss": "to swell", "kind": "root" },
+              { "key": "sa:शू", "lang": "sa", "form": "शू", "roman": "śū", "gloss": "to swell", "kind": "root" }
+            ],
+            "members": [{"lang": "en", "word": "zero", "rank": 1}]
+          }
+        ],
+        "note": null,
+        "roots": [
+          {
+            "key": "ine-pro:*kewh₁-",
+            "lang": "ine-pro",
+            "form": "*ḱewh₁-",
+            "roman": null,
+            "gloss": "to swell",
+            "kind": "root",
+            "families": ["sa:शून्य"],
+            "is_family": false
+          },
+          { "key": "sa:शू", "lang": "sa", "form": "शू", "roman": "śū", "gloss": "to swell", "kind": "root", "families": ["sa:शून्य"], "is_family": false }
+        ]
+      }
+    },
+    "virus": {
+      "note": "Real (contract 1.3.0, the m5-stemm clone: demo + Cipher + STEMM): la:virus and PIE *wisós each list the same three roots (listed_unresolved); 1.3.0 roots lists each root once with both families (C5).",
+      "when": { "query": {"expr": "5"} },
+      "status": 200,
+      "body": {
+        "available": true,
+        "expression": 5,
+        "word": "virus",
+        "lang": "en",
+        "source": "Wiktionary via kaikki.org (CC BY-SA), as listed in Cipher's roots data",
+        "families": [
+          {
+            "key": "ine-pro:*wisos",
+            "lang": "ine-pro",
+            "form": "*wisós",
+            "roman": "non-ablauting",
+            "gloss": "poison",
+            "kind": "etymon",
+            "parent_semantics": "listed_unresolved",
+            "parents": [
+              {
+                "key": "ine-pro:*weys-",
+                "lang": "ine-pro",
+                "form": "*weys-",
+                "roman": null,
+                "gloss": "to raise, increase",
+                "kind": "root",
+                "shared": true
+              },
+              { "key": "ine-pro:*dʰewb-", "lang": "ine-pro", "form": "*dʰewb-", "roman": null, "gloss": "deep, hollow", "kind": "root", "shared": true },
+              { "key": "ine-pro:*dʰewbʰ-", "lang": "ine-pro", "form": "*dʰewbʰ-", "roman": null, "gloss": "to sink in", "kind": "root", "shared": true }
+            ],
+            "members": [{"lang": "en", "word": "virus", "rank": 1}]
+          },
+          {
+            "key": "la:virus",
+            "lang": "la",
+            "form": "virus",
+            "roman": null,
+            "gloss": "venom (a poisonous substance secreted by animals or plants)",
+            "kind": "etymon",
+            "parent_semantics": "listed_unresolved",
+            "parents": [
+              {
+                "key": "ine-pro:*weys-",
+                "lang": "ine-pro",
+                "form": "*weys-",
+                "roman": null,
+                "gloss": "to raise, increase",
+                "kind": "root",
+                "shared": true
+              },
+              { "key": "ine-pro:*dʰewb-", "lang": "ine-pro", "form": "*dʰewb-", "roman": null, "gloss": "deep, hollow", "kind": "root", "shared": true },
+              { "key": "ine-pro:*dʰewbʰ-", "lang": "ine-pro", "form": "*dʰewbʰ-", "roman": null, "gloss": "to sink in", "kind": "root", "shared": true }
+            ],
+            "members": [{"lang": "en", "word": "virus", "rank": 1}]
+          }
+        ],
+        "roots": [
+          {
+            "key": "ine-pro:*weys-",
+            "lang": "ine-pro",
+            "form": "*weys-",
+            "roman": null,
+            "gloss": "to raise, increase",
+            "kind": "root",
+            "families": ["ine-pro:*wisos", "la:virus"],
+            "is_family": false
+          },
+          {
+            "key": "ine-pro:*dʰewb-",
+            "lang": "ine-pro",
+            "form": "*dʰewb-",
+            "roman": null,
+            "gloss": "deep, hollow",
+            "kind": "root",
+            "families": ["ine-pro:*wisos", "la:virus"],
+            "is_family": false
+          },
+          {
+            "key": "ine-pro:*dʰewbʰ-",
+            "lang": "ine-pro",
+            "form": "*dʰewbʰ-",
+            "roman": null,
+            "gloss": "to sink in",
+            "kind": "root",
+            "families": ["ine-pro:*wisos", "la:virus"],
+            "is_family": false
+          }
+        ],
+        "note": null
+      }
+    },
+    "no_family": {
+      "note": "Real: 'bug' has no family in roots.tsv (Latin, Greek, Sanskrit, PIE only).",
+      "status": 200,
+      "body": {
+        "available": true,
+        "expression": 7,
+        "word": "bug",
+        "lang": "en",
+        "source": "Wiktionary via kaikki.org (CC BY-SA), as listed in Cipher's roots data",
+        "families": [
+          {
+            "key": "la:bulgarus",
+            "lang": "la",
+            "form": "Bulgarus",
+            "roman": null,
+            "gloss": "Bulgar",
+            "kind": "etymon",
+            "parent_semantics": "none",
+            "parents": [],
+            "members": [{"lang": "en", "word": "bugger", "rank": 1}]
+          }
+        ],
+        "note": null,
+        "roots": []
+      }
+    },
+    "phrase": {
+      "note": "Multi-word expressions have no families.",
+      "when": { "query": {"expr": "1"} },
+      "status": 200,
+      "body": {
+        "available": false,
+        "expression": 1,
+        "word": "carry the zero",
+        "lang": "en",
+        "source": "Wiktionary via kaikki.org (CC BY-SA), as listed in Cipher's roots data",
+        "reason": "Etymology families are listed for single words only."
+      }
+    },
+    "bad_id": { "status": 400, "body": {"error": {"code": "E_VALIDATION", "message": "expr must be an expression id.", "hint": "Use ?expr=12.", "detail": null}} },
+    "not_found": {
+      "status": 404,
+      "body": {
+        "error": { "code": "E_NOT_FOUND", "message": "No expression 987654.", "hint": "Track the word first (POST /api/expressions).", "detail": null }
+      }
+    }
+  }
+}

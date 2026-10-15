@@ -1,0 +1,1331 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/clusters for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/clusters",
+  "owner": "WP4",
+  "request": null,
+  "response": "Clusters",
+  "summary": "Sense hypotheses (context groups) of one expression: machine labels, shares, stability, transitions — or a gate.",
+  "default": "ok",
+  "example_request": null,
+  "variants": {
+    "ok": {
+      "status": 200,
+      "body": {
+        "gate": "ok",
+        "run": 14,
+        "representation": "tfidf-hash-4096",
+        "expr": 12,
+        "k": 4,
+        "stability_note": "bootstrap over 30 subsamples",
+        "clusters": [
+          {
+            "id": 40,
+            "label": "machine label: column · digit · place",
+            "human_label": null,
+            "n": 88,
+            "docs": 24,
+            "stability": 0.84,
+            "status": "hypothesis",
+            "first": {
+              "label": "1905"
+            },
+            "last": {
+              "label": "1960"
+            }
+          },
+          {
+            "id": 41,
+            "label": "machine label: auditors · forms · memo",
+            "human_label": null,
+            "n": 70,
+            "docs": 18,
+            "stability": 0.79,
+            "status": "hypothesis",
+            "first": {
+              "label": "1955"
+            },
+            "last": {
+              "label": "1985"
+            }
+          },
+          {
+            "id": 42,
+            "label": "machine label: counted · hold · ones",
+            "human_label": "honoring the uncounted",
+            "human_label_by": "Reader A (synthetic)",
+            "n": 110,
+            "docs": 30,
+            "stability": 0.81,
+            "status": "hypothesis",
+            "first": {
+              "label": "1994"
+            },
+            "last": {
+              "label": "2026"
+            }
+          },
+          {
+            "id": 43,
+            "label": "machine label: null · schema · column",
+            "human_label": null,
+            "n": 68,
+            "docs": 20,
+            "stability": 0.66,
+            "status": "hypothesis",
+            "first": {
+              "label": "2012"
+            },
+            "last": {
+              "label": "2026"
+            }
+          }
+        ],
+        "transitions": [
+          {
+            "kind": "split",
+            "from": 40,
+            "to": 41,
+            "year": 1955,
+            "cosine": 0.58,
+            "text": "Context group 41 'auditors · forms · memo' emerges 1955. Nearest earlier group: 40 (centroid cosine 0.58). Computed: a split in usage contexts, not a claim about speakers."
+          },
+          {
+            "kind": "emerge",
+            "from": null,
+            "to": 42,
+            "year": 1994,
+            "cosine": 0.31,
+            "text": "Context group 42 'counted · hold · ones' emerges 1994."
+          }
+        ],
+        "synthetic": true,
+        "provenance": {
+          "data_version": 47,
+          "run_ids": {
+            "cluster": 14
+          },
+          "tokenizer": "u61m-1",
+          "segmenter": "seg-1",
+          "synthetic": true,
+          "collections": [
+            "demo-world"
+          ],
+          "licenses": [
+            "CC0 (synthetic)"
+          ]
+        }
+      }
+    },
+    "gated": {
+      "when": {
+        "query": {
+          "expr": "13"
+        }
+      },
+      "status": 200,
+      "body": {
+        "gate": "insufficient_documents",
+        "needed": {
+          "occurrences": 60,
+          "documents": 5
+        },
+        "have": {
+          "occurrences": 41,
+          "documents": 3
+        },
+        "suggestion": null,
+        "note": "Clustering unavailable: 41 occurrences in 3 documents.",
+        "fallback_lanes": "language"
+      }
+    },
+    "not_run": {
+      "status": 200,
+      "body": {
+        "gate": "not_run",
+        "needed": {
+          "run": "cluster"
+        },
+        "have": {
+          "runs": 0
+        },
+        "suggestion": {
+          "label": "Start a clustering run",
+          "request": {
+            "method": "POST",
+            "path": "/api/analysis/runs",
+            "body": {
+              "stage": "cluster",
+              "expr": 12
+            }
+          }
+        }
+      }
+    },
+    "real_demo": {
+      "note": "Real demo run (M5 gate): carry the zero, k = 4, TF-IDF hash, ARI 0.992 against the planted senses.",
+      "status": 200,
+      "body": {
+        "run": 24,
+        "representation": "tfidf-hash-4096",
+        "expr": 1,
+        "expression": {
+          "id": 1,
+          "surface": "carry the zero",
+          "lang": "en",
+          "synthetic": true
+        },
+        "seed": 42,
+        "newer_run": null,
+        "newer_note": null,
+        "synthetic": true,
+        "provenance": {
+          "data_version": 107,
+          "run_ids": {
+            "cluster": 24,
+            "materialize": {
+              "1": 10
+            }
+          },
+          "tokenizer": "u61m-1",
+          "segmenter": "seg-1",
+          "synthetic": true,
+          "collections": [
+            "demo-world"
+          ],
+          "licenses": [
+            "CC0 (synthetic)"
+          ]
+        },
+        "gate": "ok",
+        "k": 4,
+        "stability_note": "bootstrap over 30 subsamples (80% of documents)",
+        "method": {
+          "representation": "tfidf-hash-4096",
+          "representation_note": null,
+          "window": "±10 tokens",
+          "min_context_words": 3,
+          "k_rule": "k ∈ {1…8}: largest mean cosine silhouette among stable k (mean ARI ≥ 0.6); below 0.1 → k = 1",
+          "k_reason": "chosen",
+          "silhouette": 0.1031,
+          "mean_ari": 0.9807,
+          "fit_sample": null,
+          "seed": 42,
+          "pipeline_version": "cluster@1.0.0",
+          "labels": "top 4 context words by weighted log-odds with an informative Dirichlet prior (z ≥ 1.96, in-group f ≥ 3)",
+          "params": {
+            "expr": 1,
+            "k": "auto",
+            "materialize": 10,
+            "representation": "tfidf-hash-4096",
+            "seed": 42,
+            "space": null,
+            "toggles": {
+              "ap": 0,
+              "bp": 0,
+              "ds": 0,
+              "dup": 0,
+              "est": 1,
+              "nm": 0,
+              "tr": 0
+            },
+            "version": "cluster@1.0.0",
+            "window": 10,
+            "with": null
+          }
+        },
+        "selection": [
+          {
+            "k": 2,
+            "silhouette": 0.0607,
+            "mean_ari": 0.7028,
+            "stable": true,
+            "stability": [
+              0.851,
+              0.826
+            ],
+            "subsamples": 30
+          },
+          {
+            "k": 3,
+            "silhouette": 0.0833,
+            "mean_ari": 0.8605,
+            "stable": true,
+            "stability": [
+              0.851,
+              0.951,
+              0.884
+            ],
+            "subsamples": 30
+          },
+          {
+            "k": 4,
+            "silhouette": 0.1031,
+            "mean_ari": 0.9807,
+            "stable": true,
+            "stability": [
+              0.97,
+              0.994,
+              0.979,
+              0.98
+            ],
+            "subsamples": 30
+          },
+          {
+            "k": 5,
+            "silhouette": 0.0901,
+            "mean_ari": 0.8764,
+            "stable": true,
+            "stability": [
+              0.617,
+              0.993,
+              0.928,
+              0.701,
+              0.992
+            ],
+            "subsamples": 30
+          },
+          {
+            "k": 6,
+            "silhouette": 0.0756,
+            "mean_ari": 0.7468,
+            "stable": true,
+            "stability": [
+              0.952,
+              0.628,
+              0.599,
+              0.549,
+              0.948,
+              0.395
+            ],
+            "subsamples": 30
+          },
+          {
+            "k": 7,
+            "silhouette": 0.0645,
+            "mean_ari": 0.6183,
+            "stable": true,
+            "stability": [
+              0.473,
+              0.629,
+              0.825,
+              0.539,
+              0.649,
+              0.417,
+              0.476
+            ],
+            "subsamples": 30
+          },
+          {
+            "k": 8,
+            "silhouette": 0.0636,
+            "mean_ari": 0.5565,
+            "stable": false,
+            "stability": [
+              0.373,
+              0.574,
+              0.534,
+              0.666,
+              0.563,
+              0.387,
+              0.464,
+              0.508
+            ],
+            "subsamples": 30
+          }
+        ],
+        "clusters": [
+          {
+            "id": 1,
+            "ord": 1,
+            "label": "machine label: lesson · write · tapped · digit",
+            "machine_label": "machine label: lesson · write · tapped · digit",
+            "human_label": null,
+            "human_label_by": null,
+            "human_label_at": null,
+            "label_annotation": null,
+            "n": 90,
+            "docs": 24,
+            "top_doc_share": 0.0444,
+            "stability": 0.9942,
+            "silhouette": 0.1025,
+            "status": "hypothesis",
+            "tentative": false,
+            "residual": false,
+            "first": {
+              "label": "1906",
+              "year": 1906
+            },
+            "last": {
+              "label": "1959",
+              "year": 1959
+            },
+            "distinctive": [
+              {
+                "term": "lesson",
+                "z": 5.51,
+                "f_in": 44,
+                "f_out": 0
+              },
+              {
+                "term": "write",
+                "z": 4.68,
+                "f_in": 32,
+                "f_out": 0
+              },
+              {
+                "term": "tapped",
+                "z": 4.45,
+                "f_in": 29,
+                "f_out": 0
+              },
+              {
+                "term": "digit",
+                "z": 4.21,
+                "f_in": 26,
+                "f_out": 0
+              },
+              {
+                "term": "units",
+                "z": 4.21,
+                "f_in": 26,
+                "f_out": 0
+              },
+              {
+                "term": "tens",
+                "z": 4.13,
+                "f_in": 25,
+                "f_out": 0
+              },
+              {
+                "term": "slate",
+                "z": 3.96,
+                "f_in": 23,
+                "f_out": 0
+              },
+              {
+                "term": "sum",
+                "z": 3.96,
+                "f_in": 23,
+                "f_out": 0
+              },
+              {
+                "term": "place",
+                "z": 3.95,
+                "f_in": 27,
+                "f_out": 3
+              },
+              {
+                "term": "teacher",
+                "z": 3.87,
+                "f_in": 22,
+                "f_out": 0
+              },
+              {
+                "term": "children",
+                "z": 3.78,
+                "f_in": 21,
+                "f_out": 0
+              },
+              {
+                "term": "add",
+                "z": 3.69,
+                "f_in": 20,
+                "f_out": 0
+              }
+            ],
+            "card": "Run #24 · k = 4 · stability 0.99 · representation: tfidf-hash-4096 · machine label (editable)",
+            "synthetic": true
+          },
+          {
+            "id": 2,
+            "ord": 2,
+            "label": "machine label: auditors · clerk · department · quota",
+            "machine_label": "machine label: auditors · clerk · department · quota",
+            "human_label": null,
+            "human_label_by": null,
+            "human_label_at": null,
+            "label_annotation": null,
+            "n": 71,
+            "docs": 19,
+            "top_doc_share": 0.0704,
+            "stability": 0.9696,
+            "silhouette": 0.1016,
+            "status": "hypothesis",
+            "tentative": false,
+            "residual": false,
+            "first": {
+              "label": "1955",
+              "year": 1955
+            },
+            "last": {
+              "label": "1995",
+              "year": 1995
+            },
+            "distinctive": [
+              {
+                "term": "auditors",
+                "z": 4.26,
+                "f_in": 24,
+                "f_out": 0
+              },
+              {
+                "term": "clerk",
+                "z": 4.08,
+                "f_in": 22,
+                "f_out": 0
+              },
+              {
+                "term": "department",
+                "z": 4.08,
+                "f_in": 22,
+                "f_out": 0
+              },
+              {
+                "term": "quota",
+                "z": 4.08,
+                "f_in": 22,
+                "f_out": 0
+              },
+              {
+                "term": "forms",
+                "z": 3.89,
+                "f_in": 20,
+                "f_out": 0
+              },
+              {
+                "term": "file",
+                "z": 3.79,
+                "f_in": 19,
+                "f_out": 0
+              },
+              {
+                "term": "ledger",
+                "z": 3.79,
+                "f_in": 19,
+                "f_out": 0
+              },
+              {
+                "term": "memo",
+                "z": 3.47,
+                "f_in": 16,
+                "f_out": 0
+              },
+              {
+                "term": "repeat",
+                "z": 3.47,
+                "f_in": 16,
+                "f_out": 0
+              },
+              {
+                "term": "sighed",
+                "z": 3.47,
+                "f_in": 16,
+                "f_out": 0
+              },
+              {
+                "term": "stamp",
+                "z": 3.47,
+                "f_in": 16,
+                "f_out": 0
+              },
+              {
+                "term": "budget",
+                "z": 3.32,
+                "f_in": 23,
+                "f_out": 8
+              }
+            ],
+            "card": "Run #24 · k = 4 · stability 0.97 · representation: tfidf-hash-4096 · machine label (editable)",
+            "synthetic": true
+          },
+          {
+            "id": 3,
+            "ord": 3,
+            "label": "machine label: hold · mic · verse · block",
+            "machine_label": "machine label: hold · mic · verse · block",
+            "human_label": null,
+            "human_label_by": null,
+            "human_label_at": null,
+            "label_annotation": null,
+            "n": 109,
+            "docs": 29,
+            "top_doc_share": 0.0459,
+            "stability": 0.9785,
+            "silhouette": 0.1022,
+            "status": "hypothesis",
+            "tentative": false,
+            "residual": false,
+            "first": {
+              "label": "1994",
+              "year": 1994
+            },
+            "last": {
+              "label": "2025",
+              "year": 2025
+            },
+            "distinctive": [
+              {
+                "term": "hold",
+                "z": 5.02,
+                "f_in": 39,
+                "f_out": 0
+              },
+              {
+                "term": "mic",
+                "z": 4.68,
+                "f_in": 34,
+                "f_out": 0
+              },
+              {
+                "term": "verse",
+                "z": 4.46,
+                "f_in": 31,
+                "f_out": 0
+              },
+              {
+                "term": "block",
+                "z": 4.39,
+                "f_in": 30,
+                "f_out": 0
+              },
+              {
+                "term": "labor",
+                "z": 4.24,
+                "f_in": 28,
+                "f_out": 0
+              },
+              {
+                "term": "beat",
+                "z": 4.16,
+                "f_in": 27,
+                "f_out": 0
+              },
+              {
+                "term": "credit",
+                "z": 4,
+                "f_in": 25,
+                "f_out": 0
+              },
+              {
+                "term": "nobody",
+                "z": 4,
+                "f_in": 25,
+                "f_out": 0
+              },
+              {
+                "term": "unpaid",
+                "z": 4,
+                "f_in": 25,
+                "f_out": 0
+              },
+              {
+                "term": "crew",
+                "z": 3.99,
+                "f_in": 33,
+                "f_out": 6
+              },
+              {
+                "term": "uncredited",
+                "z": 3.84,
+                "f_in": 23,
+                "f_out": 0
+              },
+              {
+                "term": "counted",
+                "z": 3.66,
+                "f_in": 21,
+                "f_out": 0
+              }
+            ],
+            "card": "Run #24 · k = 4 · stability 0.98 · representation: tfidf-hash-4096 · machine label (editable)",
+            "synthetic": true
+          },
+          {
+            "id": 4,
+            "ord": 4,
+            "label": "machine label: migrate · schema · null · pipeline",
+            "machine_label": "machine label: migrate · schema · null · pipeline",
+            "human_label": null,
+            "human_label_by": null,
+            "human_label_at": null,
+            "label_annotation": null,
+            "n": 70,
+            "docs": 20,
+            "top_doc_share": 0.0571,
+            "stability": 0.9798,
+            "silhouette": 0.1068,
+            "status": "hypothesis",
+            "tentative": false,
+            "residual": false,
+            "first": {
+              "label": "2012",
+              "year": 2012
+            },
+            "last": {
+              "label": "2026",
+              "year": 2026
+            },
+            "distinctive": [
+              {
+                "term": "migrate",
+                "z": 4.55,
+                "f_in": 26,
+                "f_out": 0
+              },
+              {
+                "term": "schema",
+                "z": 4.46,
+                "f_in": 25,
+                "f_out": 0
+              },
+              {
+                "term": "null",
+                "z": 4.09,
+                "f_in": 21,
+                "f_out": 0
+              },
+              {
+                "term": "pipeline",
+                "z": 4.09,
+                "f_in": 21,
+                "f_out": 0
+              },
+              {
+                "term": "field",
+                "z": 3.88,
+                "f_in": 19,
+                "f_out": 0
+              },
+              {
+                "term": "drop",
+                "z": 3.78,
+                "f_in": 18,
+                "f_out": 0
+              },
+              {
+                "term": "record",
+                "z": 3.54,
+                "f_in": 23,
+                "f_out": 7
+              },
+              {
+                "term": "asked",
+                "z": 3.45,
+                "f_in": 15,
+                "f_out": 0
+              },
+              {
+                "term": "table",
+                "z": 3.41,
+                "f_in": 20,
+                "f_out": 5
+              },
+              {
+                "term": "join",
+                "z": 3.33,
+                "f_in": 14,
+                "f_out": 0
+              },
+              {
+                "term": "doc",
+                "z": 3.08,
+                "f_in": 12,
+                "f_out": 0
+              },
+              {
+                "term": "suite",
+                "z": 2.81,
+                "f_in": 10,
+                "f_out": 0
+              }
+            ],
+            "card": "Run #24 · k = 4 · stability 0.98 · representation: tfidf-hash-4096 · machine label (editable)",
+            "synthetic": true
+          }
+        ],
+        "windows": [
+          {
+            "id": 1,
+            "label": "1900–1939",
+            "lo": 1900,
+            "hi": 1939,
+            "scheme": "merged_for_min_n",
+            "n": 69,
+            "tokens": 21989,
+            "state": "measured",
+            "note": "Windows merged to reach n ≥ 30: 1900–1939"
+          },
+          {
+            "id": 2,
+            "label": "1940–1949",
+            "lo": 1940,
+            "hi": 1949,
+            "scheme": "fixed",
+            "n": 0,
+            "tokens": 0,
+            "state": "uncovered",
+            "note": "No sources in 1940–1949."
+          },
+          {
+            "id": 3,
+            "label": "1950–1969",
+            "lo": 1950,
+            "hi": 1969,
+            "scheme": "merged_for_min_n",
+            "n": 54,
+            "tokens": 13640,
+            "state": "measured",
+            "note": "Windows merged to reach n ≥ 30: 1950–1969"
+          },
+          {
+            "id": 4,
+            "label": "1970–1989",
+            "lo": 1970,
+            "hi": 1989,
+            "scheme": "merged_for_min_n",
+            "n": 37,
+            "tokens": 18911,
+            "state": "measured",
+            "note": "Windows merged to reach n ≥ 30: 1970–1989"
+          },
+          {
+            "id": 5,
+            "label": "1990–2009",
+            "lo": 1990,
+            "hi": 2009,
+            "scheme": "merged_for_min_n",
+            "n": 53,
+            "tokens": 14110,
+            "state": "measured",
+            "note": "Windows merged to reach n ≥ 30: 1990–2009"
+          },
+          {
+            "id": 6,
+            "label": "2010–2019",
+            "lo": 2010,
+            "hi": 2019,
+            "scheme": "fixed",
+            "n": 74,
+            "tokens": 12957,
+            "state": "measured",
+            "note": null
+          },
+          {
+            "id": 7,
+            "label": "2020–2029",
+            "lo": 2020,
+            "hi": 2029,
+            "scheme": "fixed",
+            "n": 53,
+            "tokens": 8943,
+            "state": "measured",
+            "note": null
+          }
+        ],
+        "shares": [
+          {
+            "cluster": 1,
+            "window": 1,
+            "n": 69,
+            "share": 1,
+            "ci": [
+              1,
+              1
+            ]
+          },
+          {
+            "cluster": 2,
+            "window": 1,
+            "n": 0,
+            "share": 0,
+            "ci": [
+              0,
+              0
+            ]
+          },
+          {
+            "cluster": 3,
+            "window": 1,
+            "n": 0,
+            "share": 0,
+            "ci": [
+              0,
+              0
+            ]
+          },
+          {
+            "cluster": 4,
+            "window": 1,
+            "n": 0,
+            "share": 0,
+            "ci": [
+              0,
+              0
+            ]
+          },
+          {
+            "cluster": 1,
+            "window": 3,
+            "n": 21,
+            "share": 0.3889,
+            "ci": [
+              0.1404,
+              0.6491
+            ]
+          },
+          {
+            "cluster": 2,
+            "window": 3,
+            "n": 33,
+            "share": 0.6111,
+            "ci": [
+              0.3509,
+              0.8596
+            ]
+          },
+          {
+            "cluster": 3,
+            "window": 3,
+            "n": 0,
+            "share": 0,
+            "ci": [
+              0,
+              0
+            ]
+          },
+          {
+            "cluster": 4,
+            "window": 3,
+            "n": 0,
+            "share": 0,
+            "ci": [
+              0,
+              0
+            ]
+          },
+          {
+            "cluster": 1,
+            "window": 4,
+            "n": 0,
+            "share": 0,
+            "ci": [
+              0,
+              0
+            ]
+          },
+          {
+            "cluster": 2,
+            "window": 4,
+            "n": 37,
+            "share": 1,
+            "ci": [
+              1,
+              1
+            ]
+          },
+          {
+            "cluster": 3,
+            "window": 4,
+            "n": 0,
+            "share": 0,
+            "ci": [
+              0,
+              0
+            ]
+          },
+          {
+            "cluster": 4,
+            "window": 4,
+            "n": 0,
+            "share": 0,
+            "ci": [
+              0,
+              0
+            ]
+          },
+          {
+            "cluster": 1,
+            "window": 5,
+            "n": 0,
+            "share": 0,
+            "ci": [
+              0,
+              0
+            ]
+          },
+          {
+            "cluster": 2,
+            "window": 5,
+            "n": 1,
+            "share": 0.0189,
+            "ci": [
+              0,
+              0.0667
+            ]
+          },
+          {
+            "cluster": 3,
+            "window": 5,
+            "n": 52,
+            "share": 0.9811,
+            "ci": [
+              0.9333,
+              1
+            ]
+          },
+          {
+            "cluster": 4,
+            "window": 5,
+            "n": 0,
+            "share": 0,
+            "ci": [
+              0,
+              0
+            ]
+          },
+          {
+            "cluster": 1,
+            "window": 6,
+            "n": 0,
+            "share": 0,
+            "ci": [
+              0,
+              0
+            ]
+          },
+          {
+            "cluster": 2,
+            "window": 6,
+            "n": 0,
+            "share": 0,
+            "ci": [
+              0,
+              0
+            ]
+          },
+          {
+            "cluster": 3,
+            "window": 6,
+            "n": 37,
+            "share": 0.5,
+            "ci": [
+              0.2667,
+              0.7273
+            ]
+          },
+          {
+            "cluster": 4,
+            "window": 6,
+            "n": 37,
+            "share": 0.5,
+            "ci": [
+              0.2727,
+              0.7333
+            ]
+          },
+          {
+            "cluster": 1,
+            "window": 7,
+            "n": 0,
+            "share": 0,
+            "ci": [
+              0,
+              0
+            ]
+          },
+          {
+            "cluster": 2,
+            "window": 7,
+            "n": 0,
+            "share": 0,
+            "ci": [
+              0,
+              0
+            ]
+          },
+          {
+            "cluster": 3,
+            "window": 7,
+            "n": 20,
+            "share": 0.3774,
+            "ci": [
+              0.1455,
+              0.6157
+            ]
+          },
+          {
+            "cluster": 4,
+            "window": 7,
+            "n": 33,
+            "share": 0.6226,
+            "ci": [
+              0.3843,
+              0.8545
+            ]
+          }
+        ],
+        "transitions": [
+          {
+            "kind": "unknown_gap",
+            "from": 1,
+            "to": null,
+            "from_ord": 1,
+            "to_ord": null,
+            "window": 2,
+            "window_label": "1940–1949",
+            "year": 1940,
+            "cosine": null,
+            "score": null,
+            "nearest": null,
+            "evidence_status": "computed",
+            "text": "No sources in 1940–1949: whether context group 1 'lesson · write · tapped · digit' continued through it is unknown."
+          },
+          {
+            "kind": "emerge",
+            "from": null,
+            "to": 2,
+            "from_ord": null,
+            "to_ord": 2,
+            "window": 3,
+            "window_label": "1950–1969",
+            "year": 1955,
+            "cosine": 0.05,
+            "score": 0.611,
+            "nearest": {
+              "cluster": 1,
+              "cosine": 0.05
+            },
+            "evidence_status": "computed",
+            "text": "Context group 2 'auditors · clerk · department · quota' emerges in 1950–1969 (first observed 1955). Nearest earlier group: 1 (centroid cosine 0.05; a split needs ≥ 0.5). Run #24, k=4, stability 0.97, representation tfidf-hash-4096. Computed from usage contexts."
+          },
+          {
+            "kind": "vanish",
+            "from": 1,
+            "to": null,
+            "from_ord": 1,
+            "to_ord": null,
+            "window": 4,
+            "window_label": "1970–1989",
+            "year": 1970,
+            "cosine": null,
+            "score": 0,
+            "nearest": null,
+            "evidence_status": "computed",
+            "text": "Context group 1 'lesson · write · tapped · digit' falls below 2% of uses in 1970–1989 and the next measured window. Computed: absence from this corpus, not from the language."
+          },
+          {
+            "kind": "emerge",
+            "from": null,
+            "to": 3,
+            "from_ord": null,
+            "to_ord": 3,
+            "window": 5,
+            "window_label": "1990–2009",
+            "year": 1994,
+            "cosine": 0.06,
+            "score": 0.981,
+            "nearest": {
+              "cluster": 1,
+              "cosine": 0.06
+            },
+            "evidence_status": "computed",
+            "text": "Context group 3 'hold · mic · verse · block' emerges in 1990–2009 (first observed 1994). Nearest earlier group: 1 (centroid cosine 0.06; a split needs ≥ 0.5). Run #24, k=4, stability 0.98, representation tfidf-hash-4096. Computed from usage contexts."
+          },
+          {
+            "kind": "vanish",
+            "from": 2,
+            "to": null,
+            "from_ord": 2,
+            "to_ord": null,
+            "window": 5,
+            "window_label": "1990–2009",
+            "year": 1990,
+            "cosine": null,
+            "score": 0.019,
+            "nearest": null,
+            "evidence_status": "computed",
+            "text": "Context group 2 'auditors · clerk · department · quota' falls below 2% of uses in 1990–2009 and the next measured window. Computed: absence from this corpus, not from the language."
+          },
+          {
+            "kind": "emerge",
+            "from": null,
+            "to": 4,
+            "from_ord": null,
+            "to_ord": 4,
+            "window": 6,
+            "window_label": "2010–2019",
+            "year": 2012,
+            "cosine": 0.07,
+            "score": 0.5,
+            "nearest": {
+              "cluster": 2,
+              "cosine": 0.07
+            },
+            "evidence_status": "computed",
+            "text": "Context group 4 'migrate · schema · null · pipeline' emerges in 2010–2019 (first observed 2012). Nearest earlier group: 2 (centroid cosine 0.07; a split needs ≥ 0.5). Run #24, k=4, stability 0.98, representation tfidf-hash-4096. Computed from usage contexts."
+          }
+        ],
+        "convergence": [
+          {
+            "with": {
+              "id": 2,
+              "surface": "flux up"
+            },
+            "gate": "ok",
+            "value": 0.0263,
+            "ci": [
+              0,
+              0.0714
+            ],
+            "first": "1900–1939",
+            "last": "1980–2029",
+            "windows": [
+              {
+                "label": "1900–1939",
+                "lo": 1900,
+                "hi": 1939,
+                "n": [
+                  69,
+                  32
+                ],
+                "gated": false,
+                "J": 0,
+                "C": 0.039,
+                "shared": []
+              },
+              {
+                "label": "1950–1979",
+                "lo": 1950,
+                "hi": 1979,
+                "n": [
+                  79,
+                  31
+                ],
+                "gated": false,
+                "J": 0,
+                "C": 0.0553,
+                "shared": []
+              },
+              {
+                "label": "1980–2029",
+                "lo": 1980,
+                "hi": 2029,
+                "n": [
+                  192,
+                  62
+                ],
+                "gated": false,
+                "J": 0.0263,
+                "C": 0.3567,
+                "shared": [
+                  "hold"
+                ]
+              }
+            ],
+            "reported": false,
+            "rule": "J rises ≥ 0.15 between the first and last gated windows and the 95% document-block bootstrap CI excludes 0",
+            "evidence_status": "computed",
+            "text": "J (shared top-50 significant collocates) 0 in 1900–1939 → 0.0263 in 1980–2029; difference 0.0263 [0, 0.0714] (document-block bootstrap, 1000 resamples). Not reported: needs a rise ≥ 0.15 with a CI excluding 0. Computed: shared context words, not meanings; not evidence of influence."
+          },
+          {
+            "with": {
+              "id": 3,
+              "surface": "ghost in the margin"
+            },
+            "gate": "ok",
+            "value": 0.1667,
+            "ci": [
+              0,
+              0.2273
+            ],
+            "first": "1900–1939",
+            "last": "2010–2029",
+            "windows": [
+              {
+                "label": "1900–1939",
+                "lo": 1900,
+                "hi": 1939,
+                "n": [
+                  69,
+                  21
+                ],
+                "gated": false,
+                "J": 0,
+                "C": 0.009,
+                "shared": []
+              },
+              {
+                "label": "1950–1989",
+                "lo": 1950,
+                "hi": 1989,
+                "n": [
+                  91,
+                  27
+                ],
+                "gated": false,
+                "J": 0,
+                "C": 0.28,
+                "shared": []
+              },
+              {
+                "label": "1990–2009",
+                "lo": 1990,
+                "hi": 2009,
+                "n": [
+                  53,
+                  24
+                ],
+                "gated": false,
+                "J": 0,
+                "C": 0.1662,
+                "shared": []
+              },
+              {
+                "label": "2010–2029",
+                "lo": 2010,
+                "hi": 2029,
+                "n": [
+                  127,
+                  22
+                ],
+                "gated": false,
+                "J": 0.1667,
+                "C": 0.3607,
+                "shared": [
+                  "uncredited",
+                  "unpaid",
+                  "credit",
+                  "labor"
+                ]
+              }
+            ],
+            "reported": false,
+            "rule": "J rises ≥ 0.15 between the first and last gated windows and the 95% document-block bootstrap CI excludes 0",
+            "evidence_status": "computed",
+            "text": "J (shared top-50 significant collocates) 0 in 1900–1939 → 0.1667 in 2010–2029; difference 0.1667 [0, 0.2273] (document-block bootstrap, 1000 resamples). Not reported: needs a rise ≥ 0.15 with a CI excluding 0. Computed: shared context words, not meanings; not evidence of influence."
+          }
+        ],
+        "n": 340,
+        "docs": 92,
+        "excluded": {
+          "context_thin": 0,
+          "date_too_coarse": 0,
+          "undated": 0
+        },
+        "note": "Context groups are computed hypotheses over context words, not meanings; labels are machine labels (editable)."
+      }
+    },
+    "error": {
+      "status": 404,
+      "body": {
+        "error": {
+          "code": "E_NOT_FOUND",
+          "message": "No run 999.",
+          "hint": null,
+          "detail": null
+        }
+      }
+    }
+  }
+}

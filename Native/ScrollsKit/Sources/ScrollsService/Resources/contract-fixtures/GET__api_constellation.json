@@ -1,0 +1,2064 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/constellation for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/constellation",
+  "owner": "WP4",
+  "request": null,
+  "response": "Constellation",
+  "summary": "Nodes and edges with stable positions (layout key); periods A and B never move nodes.",
+  "default": "ok",
+  "example_request": null,
+  "variants": {
+    "ok": {
+      "status": 200,
+      "body": {
+        "nodes": [
+          {
+            "id": "x:12",
+            "type": "expression",
+            "label": "carry the zero",
+            "size": {
+              "a": 61,
+              "b": 122
+            },
+            "pos": [
+              0.41,
+              0.62
+            ],
+            "present": {
+              "a": true,
+              "b": true
+            }
+          },
+          {
+            "id": "x:13",
+            "type": "expression",
+            "label": "ghost in the margin",
+            "size": {
+              "a": 9,
+              "b": 21
+            },
+            "pos": [
+              0.58,
+              0.44
+            ],
+            "present": {
+              "a": true,
+              "b": true
+            }
+          },
+          {
+            "id": "k:41",
+            "type": "cluster",
+            "label": "machine label: auditors · forms · memo",
+            "size": {
+              "a": 50,
+              "b": 5
+            },
+            "pos": [
+              0.22,
+              0.71
+            ],
+            "present": {
+              "a": true,
+              "b": true
+            }
+          },
+          {
+            "id": "k:42",
+            "type": "cluster",
+            "label": "machine label: counted · hold · ones",
+            "size": {
+              "a": 0,
+              "b": 87
+            },
+            "pos": [
+              0.37,
+              0.31
+            ],
+            "present": {
+              "a": false,
+              "b": true
+            }
+          },
+          {
+            "id": "w:uncredited",
+            "type": "word",
+            "label": "uncredited",
+            "size": {
+              "a": 0,
+              "b": 12
+            },
+            "pos": [
+              0.5,
+              0.52
+            ],
+            "present": {
+              "a": false,
+              "b": true
+            }
+          },
+          {
+            "id": "w:auditors",
+            "type": "word",
+            "label": "auditors",
+            "size": {
+              "a": 14,
+              "b": 0
+            },
+            "pos": [
+              0.15,
+              0.83
+            ],
+            "present": {
+              "a": true,
+              "b": false
+            }
+          },
+          {
+            "id": "d:44",
+            "type": "document",
+            "label": "Zero Holds the Place (synthetic)",
+            "size": {
+              "a": 0,
+              "b": 3
+            },
+            "pos": [
+              0.29,
+              0.18
+            ],
+            "present": {
+              "a": false,
+              "b": true
+            }
+          }
+        ],
+        "edges": [
+          {
+            "s": "x:12",
+            "t": "w:uncredited",
+            "kind": "cooc",
+            "weight": {
+              "a": null,
+              "b": 9.8
+            },
+            "measure": "logDice"
+          },
+          {
+            "s": "x:13",
+            "t": "w:uncredited",
+            "kind": "cooc",
+            "weight": {
+              "a": null,
+              "b": 9.1
+            },
+            "measure": "logDice"
+          },
+          {
+            "s": "x:12",
+            "t": "w:auditors",
+            "kind": "cooc",
+            "weight": {
+              "a": 11.2,
+              "b": null
+            },
+            "measure": "logDice"
+          },
+          {
+            "s": "x:12",
+            "t": "k:41",
+            "kind": "member",
+            "weight": {
+              "a": 0.82,
+              "b": 0.04
+            },
+            "measure": "share"
+          },
+          {
+            "s": "x:12",
+            "t": "k:42",
+            "kind": "member",
+            "weight": {
+              "a": 0,
+              "b": 0.71
+            },
+            "measure": "share"
+          },
+          {
+            "s": "d:44",
+            "t": "x:12",
+            "kind": "rel",
+            "weight": {
+              "a": null,
+              "b": null
+            },
+            "measure": null,
+            "rel_id": 7781,
+            "evidence_status": "documented"
+          }
+        ],
+        "legend": {
+          "size": "occurrences in period (area, sqrt radius)",
+          "edge": "logDice, co-occurrence ±5 tokens",
+          "reference_circles": [
+            10,
+            50,
+            120
+          ],
+          "note": "Positions are fixed for this layout key; movement is not semantic."
+        },
+        "layout": {
+          "key": "fnv:3b91c2d0",
+          "algorithm": "fruchterman-reingold-300",
+          "pinned": true
+        },
+        "truncated": {
+          "nodes": 0
+        },
+        "periods": {
+          "a": [
+            1990,
+            2005
+          ],
+          "b": [
+            2010,
+            2026
+          ]
+        },
+        "synthetic": true
+      }
+    },
+    "truncated": {
+      "note": "Bounded: ≤ 150 nodes, ≤ 400 edges; \"+38 more\".",
+      "status": 200,
+      "body": {
+        "nodes": [
+          {
+            "id": "x:12",
+            "type": "expression",
+            "label": "carry the zero",
+            "size": {
+              "a": 61,
+              "b": 122
+            },
+            "pos": [
+              0.41,
+              0.62
+            ],
+            "present": {
+              "a": true,
+              "b": true
+            }
+          }
+        ],
+        "edges": [],
+        "legend": {
+          "size": "occurrences in period (area, sqrt radius)",
+          "edge": "logDice, co-occurrence ±5 tokens"
+        },
+        "layout": {
+          "key": "fnv:3b91c2d0",
+          "algorithm": "fruchterman-reingold-300",
+          "pinned": true
+        },
+        "truncated": {
+          "nodes": 38,
+          "reason": "top 150 by occurrences in period"
+        }
+      }
+    },
+    "two_periods": {
+      "note": "Real demo response (M5 gate): carry the zero, A 1955–1985 vs B 1994–2026; nodes keep their positions across periods.",
+      "status": 200,
+      "body": {
+        "nodes": [
+          {
+            "id": "x:1",
+            "type": "expression",
+            "label": "carry the zero",
+            "size": {
+              "a": 82,
+              "b": 180
+            },
+            "pos": [
+              0.4664,
+              0.4764
+            ],
+            "present": {
+              "a": true,
+              "b": true
+            },
+            "ref": "expression:1",
+            "modality": {
+              "a": "text",
+              "b": "text"
+            },
+            "synthetic": true
+          },
+          {
+            "id": "k:3",
+            "type": "cluster",
+            "label": "machine label: hold · mic · verse · block",
+            "size": {
+              "a": 0,
+              "b": 109
+            },
+            "pos": [
+              0.623,
+              0.4353
+            ],
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "ref": "cluster:3",
+            "machine_label": "machine label: hold · mic · verse · block",
+            "human_label": null,
+            "status": "hypothesis",
+            "tentative": false,
+            "run": 24,
+            "representation": "tfidf-hash-4096",
+            "synthetic": true
+          },
+          {
+            "id": "k:2",
+            "type": "cluster",
+            "label": "machine label: auditors · clerk · department · quota",
+            "size": {
+              "a": 70,
+              "b": 1
+            },
+            "pos": [
+              0.5312,
+              0.6286
+            ],
+            "present": {
+              "a": true,
+              "b": true
+            },
+            "ref": "cluster:2",
+            "machine_label": "machine label: auditors · clerk · department · quota",
+            "human_label": null,
+            "status": "hypothesis",
+            "tentative": false,
+            "run": 24,
+            "representation": "tfidf-hash-4096",
+            "synthetic": true
+          },
+          {
+            "id": "k:4",
+            "type": "cluster",
+            "label": "machine label: migrate · schema · null · pipeline",
+            "size": {
+              "a": 0,
+              "b": 70
+            },
+            "pos": [
+              0.3383,
+              0.5707
+            ],
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "ref": "cluster:4",
+            "machine_label": "machine label: migrate · schema · null · pipeline",
+            "human_label": null,
+            "status": "hypothesis",
+            "tentative": false,
+            "run": 24,
+            "representation": "tfidf-hash-4096",
+            "synthetic": true
+          },
+          {
+            "id": "k:1",
+            "type": "cluster",
+            "label": "machine label: lesson · write · tapped · digit",
+            "size": {
+              "a": 12,
+              "b": 0
+            },
+            "pos": [
+              0.4448,
+              0.3229
+            ],
+            "present": {
+              "a": true,
+              "b": false
+            },
+            "ref": "cluster:1",
+            "machine_label": "machine label: lesson · write · tapped · digit",
+            "human_label": null,
+            "status": "hypothesis",
+            "tentative": false,
+            "run": 24,
+            "representation": "tfidf-hash-4096",
+            "synthetic": true
+          },
+          {
+            "id": "w:hold",
+            "type": "word",
+            "label": "hold",
+            "size": {
+              "a": null,
+              "b": 26
+            },
+            "pos": [
+              0.4437,
+              0.6861
+            ],
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": false
+          },
+          {
+            "id": "w:us",
+            "type": "word",
+            "label": "us",
+            "size": {
+              "a": null,
+              "b": 24
+            },
+            "pos": [
+              0.6021,
+              0.5678
+            ],
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": false
+          },
+          {
+            "id": "w:verse",
+            "type": "word",
+            "label": "verse",
+            "size": {
+              "a": null,
+              "b": 20
+            },
+            "pos": [
+              0.6328,
+              0.3276
+            ],
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": false
+          },
+          {
+            "id": "w:mic",
+            "type": "word",
+            "label": "mic",
+            "size": {
+              "a": null,
+              "b": 18
+            },
+            "pos": [
+              0.5369,
+              0.3669
+            ],
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": false
+          },
+          {
+            "id": "w:uncredited",
+            "type": "word",
+            "label": "uncredited",
+            "size": {
+              "a": null,
+              "b": 18
+            },
+            "pos": [
+              0.5009,
+              0.2521
+            ],
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": false
+          },
+          {
+            "id": "w:department",
+            "type": "word",
+            "label": "department",
+            "size": {
+              "a": 16,
+              "b": null
+            },
+            "pos": [
+              0.1309,
+              0.5596
+            ],
+            "present": {
+              "a": true,
+              "b": false
+            },
+            "synthetic": false
+          },
+          {
+            "id": "w:sighed",
+            "type": "word",
+            "label": "sighed",
+            "size": {
+              "a": 16,
+              "b": null
+            },
+            "pos": [
+              0.7942,
+              0.5165
+            ],
+            "present": {
+              "a": true,
+              "b": false
+            },
+            "synthetic": false
+          },
+          {
+            "id": "w:stamp",
+            "type": "word",
+            "label": "stamp",
+            "size": {
+              "a": 16,
+              "b": null
+            },
+            "pos": [
+              0.3932,
+              0.7868
+            ],
+            "present": {
+              "a": true,
+              "b": false
+            },
+            "synthetic": false
+          },
+          {
+            "id": "w:asked",
+            "type": "word",
+            "label": "asked",
+            "size": {
+              "a": null,
+              "b": 15
+            },
+            "pos": [
+              0.2779,
+              0.4285
+            ],
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": false
+          },
+          {
+            "id": "w:auditors",
+            "type": "word",
+            "label": "auditors",
+            "size": {
+              "a": 14,
+              "b": null
+            },
+            "pos": [
+              0.5194,
+              0.1448
+            ],
+            "present": {
+              "a": true,
+              "b": false
+            },
+            "synthetic": false
+          },
+          {
+            "id": "w:beat",
+            "type": "word",
+            "label": "beat",
+            "size": {
+              "a": null,
+              "b": 14
+            },
+            "pos": [
+              0.3278,
+              0.6669
+            ],
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": false
+          },
+          {
+            "id": "w:nobody",
+            "type": "word",
+            "label": "nobody",
+            "size": {
+              "a": null,
+              "b": 14
+            },
+            "pos": [
+              0.3588,
+              0.3897
+            ],
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": false
+          },
+          {
+            "id": "w:null",
+            "type": "word",
+            "label": "null",
+            "size": {
+              "a": null,
+              "b": 14
+            },
+            "pos": [
+              0.2442,
+              0.538
+            ],
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": false
+          },
+          {
+            "id": "w:unpaid",
+            "type": "word",
+            "label": "unpaid",
+            "size": {
+              "a": null,
+              "b": 14
+            },
+            "pos": [
+              0.6785,
+              0.5025
+            ],
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": false
+          },
+          {
+            "id": "w:credit",
+            "type": "word",
+            "label": "credit",
+            "size": {
+              "a": null,
+              "b": 13
+            },
+            "pos": [
+              0.3185,
+              0.2941
+            ],
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": false
+          },
+          {
+            "id": "w:migrate",
+            "type": "word",
+            "label": "migrate",
+            "size": {
+              "a": null,
+              "b": 13
+            },
+            "pos": [
+              0.4338,
+              0.5729
+            ],
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": false
+          },
+          {
+            "id": "w:quota",
+            "type": "word",
+            "label": "quota",
+            "size": {
+              "a": 13,
+              "b": null
+            },
+            "pos": [
+              0.3545,
+              0.1865
+            ],
+            "present": {
+              "a": true,
+              "b": false
+            },
+            "synthetic": false
+          },
+          {
+            "id": "w:asking",
+            "type": "word",
+            "label": "asking",
+            "size": {
+              "a": 12,
+              "b": null
+            },
+            "pos": [
+              0.2134,
+              0.2958
+            ],
+            "present": {
+              "a": true,
+              "b": false
+            },
+            "synthetic": false
+          },
+          {
+            "id": "w:file",
+            "type": "word",
+            "label": "file",
+            "size": {
+              "a": 12,
+              "b": null
+            },
+            "pos": [
+              0.1954,
+              0.4323
+            ],
+            "present": {
+              "a": true,
+              "b": false
+            },
+            "synthetic": false
+          },
+          {
+            "id": "w:joked",
+            "type": "word",
+            "label": "joked",
+            "size": {
+              "a": 11,
+              "b": null
+            },
+            "pos": [
+              0.2344,
+              0.7005
+            ],
+            "present": {
+              "a": true,
+              "b": false
+            },
+            "synthetic": false
+          },
+          {
+            "id": "w:report",
+            "type": "word",
+            "label": "report",
+            "size": {
+              "a": 11,
+              "b": null
+            },
+            "pos": [
+              0.5558,
+              0.7995
+            ],
+            "present": {
+              "a": true,
+              "b": false
+            },
+            "synthetic": false
+          },
+          {
+            "id": "w:budget",
+            "type": "word",
+            "label": "budget",
+            "size": {
+              "a": 10,
+              "b": null
+            },
+            "pos": [
+              0.7028,
+              0.6636
+            ],
+            "present": {
+              "a": true,
+              "b": false
+            },
+            "synthetic": false
+          },
+          {
+            "id": "w:forms",
+            "type": "word",
+            "label": "forms",
+            "size": {
+              "a": 10,
+              "b": null
+            },
+            "pos": [
+              0.7646,
+              0.3478
+            ],
+            "present": {
+              "a": true,
+              "b": false
+            },
+            "synthetic": false
+          },
+          {
+            "id": "w:memo",
+            "type": "word",
+            "label": "memo",
+            "size": {
+              "a": 8,
+              "b": null
+            },
+            "pos": [
+              0.6543,
+              0.2186
+            ],
+            "present": {
+              "a": true,
+              "b": false
+            },
+            "synthetic": false
+          },
+          {
+            "id": "d:67",
+            "type": "document",
+            "label": "(generated background) Office memo 036 (synthetic)",
+            "size": {
+              "a": 5,
+              "b": 0
+            },
+            "pos": [
+              0.96,
+              0.1744
+            ],
+            "present": {
+              "a": true,
+              "b": false
+            },
+            "ref": "document:67",
+            "year": 1979,
+            "synthetic": true
+          },
+          {
+            "id": "d:78",
+            "type": "document",
+            "label": "(generated background) Block party flyer 047 (synthetic)",
+            "size": {
+              "a": 0,
+              "b": 5
+            },
+            "pos": [
+              0.6955,
+              0.0716
+            ],
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "ref": "document:78",
+            "year": 2003,
+            "synthetic": true
+          },
+          {
+            "id": "d:81",
+            "type": "document",
+            "label": "(generated background) Block party flyer 050 (synthetic)",
+            "size": {
+              "a": 0,
+              "b": 5
+            },
+            "pos": [
+              0.0494,
+              0.6727
+            ],
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "ref": "document:81",
+            "year": 2007,
+            "synthetic": true
+          },
+          {
+            "id": "d:51",
+            "type": "document",
+            "label": "(generated background) Lesson sheet 020 (synthetic)",
+            "size": {
+              "a": 4,
+              "b": 0
+            },
+            "pos": [
+              0.1336,
+              0.04
+            ],
+            "present": {
+              "a": true,
+              "b": false
+            },
+            "ref": "document:51",
+            "year": 1956,
+            "synthetic": true
+          },
+          {
+            "id": "d:52",
+            "type": "document",
+            "label": "(generated background) School log 021 (synthetic)",
+            "size": {
+              "a": 4,
+              "b": 0
+            },
+            "pos": [
+              0.1796,
+              0.96
+            ],
+            "present": {
+              "a": true,
+              "b": false
+            },
+            "ref": "document:52",
+            "year": 1957,
+            "synthetic": true
+          },
+          {
+            "id": "d:71",
+            "type": "document",
+            "label": "(generated background) Crew zine 040 (synthetic)",
+            "size": {
+              "a": 0,
+              "b": 4
+            },
+            "pos": [
+              0.3978,
+              0.04
+            ],
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "ref": "document:71",
+            "year": 1994,
+            "synthetic": true
+          },
+          {
+            "id": "d:11",
+            "type": "document",
+            "label": "Felmark Bulletin, June (synthetic)",
+            "size": {
+              "a": 1,
+              "b": 0
+            },
+            "pos": [
+              0.9599,
+              0.7938
+            ],
+            "present": {
+              "a": true,
+              "b": false
+            },
+            "ref": "document:11",
+            "year": 1963,
+            "synthetic": true
+          },
+          {
+            "id": "d:15",
+            "type": "document",
+            "label": "Zero Holds the Place (synthetic)",
+            "size": {
+              "a": 0,
+              "b": 1
+            },
+            "pos": [
+              0.6847,
+              0.8986
+            ],
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "ref": "document:15",
+            "year": 1994,
+            "synthetic": true
+          },
+          {
+            "id": "d:16",
+            "type": "document",
+            "label": "Nothing Holds the Place, reviewed (synthetic)",
+            "size": {
+              "a": 0,
+              "b": 1
+            },
+            "pos": [
+              0.9428,
+              0.4553
+            ],
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "ref": "document:16",
+            "year": 1995,
+            "synthetic": true
+          },
+          {
+            "id": "d:24",
+            "type": "document",
+            "label": "Ledgers of the Uncounted (synthetic)",
+            "size": {
+              "a": 0,
+              "b": 1
+            },
+            "pos": [
+              0.7859,
+              0.8339
+            ],
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "ref": "document:24",
+            "year": 2016,
+            "synthetic": true
+          },
+          {
+            "id": "d:17",
+            "type": "document",
+            "label": "Ledgerline answers the Quarterly (synthetic)",
+            "size": {
+              "a": 0,
+              "b": 0
+            },
+            "pos": [
+              0.918,
+              0.3642
+            ],
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "ref": "document:17",
+            "year": 1995,
+            "synthetic": true
+          },
+          {
+            "id": "d:25",
+            "type": "document",
+            "label": "શૂન્ય (synthetic)",
+            "size": {
+              "a": 0,
+              "b": 0
+            },
+            "pos": [
+              0.5308,
+              0.9134
+            ],
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "ref": "document:25",
+            "year": 2017,
+            "synthetic": true
+          },
+          {
+            "id": "d:3",
+            "type": "document",
+            "label": "The Ledger House (synthetic)",
+            "size": {
+              "a": 0,
+              "b": 0
+            },
+            "pos": [
+              0.8308,
+              0.7167
+            ],
+            "present": {
+              "a": false,
+              "b": false
+            },
+            "ref": "document:3",
+            "year": 1903,
+            "synthetic": true
+          },
+          {
+            "id": "d:4",
+            "type": "document",
+            "label": "Brennock's Ready Arithmetic (synthetic)",
+            "size": {
+              "a": 0,
+              "b": 0
+            },
+            "pos": [
+              0.8401,
+              0.9271
+            ],
+            "present": {
+              "a": false,
+              "b": false
+            },
+            "ref": "document:4",
+            "year": 1911,
+            "synthetic": true
+          },
+          {
+            "id": "d:9",
+            "type": "document",
+            "label": "Counting Lesson No. 4 (synthetic)",
+            "size": {
+              "a": 0,
+              "b": 0
+            },
+            "pos": [
+              0.6019,
+              0.96
+            ],
+            "present": {
+              "a": false,
+              "b": false
+            },
+            "ref": "document:9",
+            "year": 1952,
+            "synthetic": true
+          }
+        ],
+        "edges": [
+          {
+            "s": "x:1",
+            "t": "k:2",
+            "kind": "member",
+            "weight": {
+              "a": 0.8537,
+              "b": 0.0056
+            },
+            "measure": "share",
+            "run": 24,
+            "present": {
+              "a": true,
+              "b": true
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "k:3",
+            "kind": "member",
+            "weight": {
+              "a": 0,
+              "b": 0.6056
+            },
+            "measure": "share",
+            "run": 24,
+            "present": {
+              "a": true,
+              "b": true
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "k:4",
+            "kind": "member",
+            "weight": {
+              "a": 0,
+              "b": 0.3889
+            },
+            "measure": "share",
+            "run": 24,
+            "present": {
+              "a": true,
+              "b": true
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "k:1",
+            "kind": "member",
+            "weight": {
+              "a": 0.1463,
+              "b": 0
+            },
+            "measure": "share",
+            "run": 24,
+            "present": {
+              "a": true,
+              "b": true
+            }
+          },
+          {
+            "s": "d:11",
+            "t": "d:4",
+            "kind": "rel",
+            "weight": {
+              "a": null,
+              "b": null
+            },
+            "measure": null,
+            "rel_id": 593064,
+            "rel_type": "exact_quotation",
+            "family": "quotation",
+            "evidence_status": "computed",
+            "review_status": "disputed",
+            "provenance_quality": "complete",
+            "present": {
+              "a": true,
+              "b": true
+            },
+            "synthetic": true
+          },
+          {
+            "s": "d:15",
+            "t": "d:4",
+            "kind": "rel",
+            "weight": {
+              "a": null,
+              "b": null
+            },
+            "measure": null,
+            "rel_id": 1,
+            "rel_type": "explicit_citation",
+            "family": "citation",
+            "evidence_status": "documented",
+            "review_status": "unreviewed",
+            "provenance_quality": "complete",
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": true
+          },
+          {
+            "s": "d:15",
+            "t": "d:4",
+            "kind": "rel",
+            "weight": {
+              "a": null,
+              "b": null
+            },
+            "measure": null,
+            "rel_id": 593068,
+            "rel_type": "explicit_citation",
+            "family": "citation",
+            "evidence_status": "documented",
+            "review_status": "unreviewed",
+            "provenance_quality": "complete",
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": true
+          },
+          {
+            "s": "d:15",
+            "t": "d:9",
+            "kind": "rel",
+            "weight": {
+              "a": null,
+              "b": null
+            },
+            "measure": null,
+            "rel_id": 2,
+            "rel_type": "samples",
+            "family": "quotation",
+            "evidence_status": "documented",
+            "review_status": "unreviewed",
+            "provenance_quality": "complete",
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": true
+          },
+          {
+            "s": "d:15",
+            "t": "d:9",
+            "kind": "rel",
+            "weight": {
+              "a": null,
+              "b": null
+            },
+            "measure": null,
+            "rel_id": 593069,
+            "rel_type": "samples",
+            "family": "quotation",
+            "evidence_status": "documented",
+            "review_status": "unreviewed",
+            "provenance_quality": "complete",
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": true
+          },
+          {
+            "s": "d:17",
+            "t": "d:16",
+            "kind": "rel",
+            "weight": {
+              "a": null,
+              "b": null
+            },
+            "measure": null,
+            "rel_id": 8,
+            "rel_type": "answer_to",
+            "family": "reinterpretation",
+            "evidence_status": "documented",
+            "review_status": "unreviewed",
+            "provenance_quality": "complete",
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": true
+          },
+          {
+            "s": "d:17",
+            "t": "d:16",
+            "kind": "rel",
+            "weight": {
+              "a": null,
+              "b": null
+            },
+            "measure": null,
+            "rel_id": 593075,
+            "rel_type": "answer_to",
+            "family": "reinterpretation",
+            "evidence_status": "documented",
+            "review_status": "unreviewed",
+            "provenance_quality": "complete",
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": true
+          },
+          {
+            "s": "d:24",
+            "t": "d:15",
+            "kind": "rel",
+            "weight": {
+              "a": null,
+              "b": null
+            },
+            "measure": null,
+            "rel_id": 6,
+            "rel_type": "explicit_citation",
+            "family": "citation",
+            "evidence_status": "documented",
+            "review_status": "unreviewed",
+            "provenance_quality": "complete",
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": true
+          },
+          {
+            "s": "d:24",
+            "t": "d:15",
+            "kind": "rel",
+            "weight": {
+              "a": null,
+              "b": null
+            },
+            "measure": null,
+            "rel_id": 593073,
+            "rel_type": "explicit_citation",
+            "family": "citation",
+            "evidence_status": "documented",
+            "review_status": "unreviewed",
+            "provenance_quality": "complete",
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": true
+          },
+          {
+            "s": "d:24",
+            "t": "d:3",
+            "kind": "rel",
+            "weight": {
+              "a": null,
+              "b": null
+            },
+            "measure": null,
+            "rel_id": 4,
+            "rel_type": "explicit_citation",
+            "family": "citation",
+            "evidence_status": "documented",
+            "review_status": "unreviewed",
+            "provenance_quality": "complete",
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": true
+          },
+          {
+            "s": "d:24",
+            "t": "d:3",
+            "kind": "rel",
+            "weight": {
+              "a": null,
+              "b": null
+            },
+            "measure": null,
+            "rel_id": 593071,
+            "rel_type": "explicit_citation",
+            "family": "citation",
+            "evidence_status": "documented",
+            "review_status": "unreviewed",
+            "provenance_quality": "complete",
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": true
+          },
+          {
+            "s": "d:24",
+            "t": "d:4",
+            "kind": "rel",
+            "weight": {
+              "a": null,
+              "b": null
+            },
+            "measure": null,
+            "rel_id": 3,
+            "rel_type": "reframes",
+            "family": "reinterpretation",
+            "evidence_status": "documented",
+            "review_status": "unreviewed",
+            "provenance_quality": "complete",
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": true
+          },
+          {
+            "s": "d:24",
+            "t": "d:4",
+            "kind": "rel",
+            "weight": {
+              "a": null,
+              "b": null
+            },
+            "measure": null,
+            "rel_id": 5,
+            "rel_type": "explicit_citation",
+            "family": "citation",
+            "evidence_status": "documented",
+            "review_status": "unreviewed",
+            "provenance_quality": "complete",
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": true
+          },
+          {
+            "s": "d:24",
+            "t": "d:4",
+            "kind": "rel",
+            "weight": {
+              "a": null,
+              "b": null
+            },
+            "measure": null,
+            "rel_id": 593070,
+            "rel_type": "reframes",
+            "family": "reinterpretation",
+            "evidence_status": "documented",
+            "review_status": "unreviewed",
+            "provenance_quality": "complete",
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": true
+          },
+          {
+            "s": "d:24",
+            "t": "d:4",
+            "kind": "rel",
+            "weight": {
+              "a": null,
+              "b": null
+            },
+            "measure": null,
+            "rel_id": 593072,
+            "rel_type": "explicit_citation",
+            "family": "citation",
+            "evidence_status": "documented",
+            "review_status": "unreviewed",
+            "provenance_quality": "complete",
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": true
+          },
+          {
+            "s": "d:25",
+            "t": "d:15",
+            "kind": "rel",
+            "weight": {
+              "a": null,
+              "b": null
+            },
+            "measure": null,
+            "rel_id": 10,
+            "rel_type": "proposed_allusion",
+            "family": "allusion",
+            "evidence_status": "proposed",
+            "review_status": "unreviewed",
+            "provenance_quality": "complete",
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": true
+          },
+          {
+            "s": "d:25",
+            "t": "d:15",
+            "kind": "rel",
+            "weight": {
+              "a": null,
+              "b": null
+            },
+            "measure": null,
+            "rel_id": 593077,
+            "rel_type": "proposed_allusion",
+            "family": "allusion",
+            "evidence_status": "proposed",
+            "review_status": "unreviewed",
+            "provenance_quality": "complete",
+            "present": {
+              "a": false,
+              "b": true
+            },
+            "synthetic": true
+          },
+          {
+            "s": "x:1",
+            "t": "w:sighed",
+            "kind": "cooc",
+            "weight": {
+              "a": 12.39,
+              "b": null
+            },
+            "measure": "logDice",
+            "present": {
+              "a": true,
+              "b": false
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "w:stamp",
+            "kind": "cooc",
+            "weight": {
+              "a": 12.39,
+              "b": null
+            },
+            "measure": "logDice",
+            "present": {
+              "a": true,
+              "b": false
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "w:department",
+            "kind": "cooc",
+            "weight": {
+              "a": 12.29,
+              "b": null
+            },
+            "measure": "logDice",
+            "present": {
+              "a": true,
+              "b": false
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "w:auditors",
+            "kind": "cooc",
+            "weight": {
+              "a": 12.04,
+              "b": null
+            },
+            "measure": "logDice",
+            "present": {
+              "a": true,
+              "b": false
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "w:asking",
+            "kind": "cooc",
+            "weight": {
+              "a": 12.03,
+              "b": null
+            },
+            "measure": "logDice",
+            "present": {
+              "a": true,
+              "b": false
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "w:quota",
+            "kind": "cooc",
+            "weight": {
+              "a": 11.99,
+              "b": null
+            },
+            "measure": "logDice",
+            "present": {
+              "a": true,
+              "b": false
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "w:joked",
+            "kind": "cooc",
+            "weight": {
+              "a": 11.92,
+              "b": null
+            },
+            "measure": "logDice",
+            "present": {
+              "a": true,
+              "b": false
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "w:file",
+            "kind": "cooc",
+            "weight": {
+              "a": 11.9,
+              "b": null
+            },
+            "measure": "logDice",
+            "present": {
+              "a": true,
+              "b": false
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "w:us",
+            "kind": "cooc",
+            "weight": {
+              "a": null,
+              "b": 11.9
+            },
+            "measure": "logDice",
+            "present": {
+              "a": false,
+              "b": true
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "w:hold",
+            "kind": "cooc",
+            "weight": {
+              "a": null,
+              "b": 11.85
+            },
+            "measure": "logDice",
+            "present": {
+              "a": false,
+              "b": true
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "w:report",
+            "kind": "cooc",
+            "weight": {
+              "a": 11.76,
+              "b": null
+            },
+            "measure": "logDice",
+            "present": {
+              "a": true,
+              "b": false
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "w:forms",
+            "kind": "cooc",
+            "weight": {
+              "a": 11.64,
+              "b": null
+            },
+            "measure": "logDice",
+            "present": {
+              "a": true,
+              "b": false
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "w:budget",
+            "kind": "cooc",
+            "weight": {
+              "a": 11.59,
+              "b": null
+            },
+            "measure": "logDice",
+            "present": {
+              "a": true,
+              "b": false
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "w:mic",
+            "kind": "cooc",
+            "weight": {
+              "a": null,
+              "b": 11.42
+            },
+            "measure": "logDice",
+            "present": {
+              "a": false,
+              "b": true
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "w:uncredited",
+            "kind": "cooc",
+            "weight": {
+              "a": null,
+              "b": 11.38
+            },
+            "measure": "logDice",
+            "present": {
+              "a": false,
+              "b": true
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "w:memo",
+            "kind": "cooc",
+            "weight": {
+              "a": 11.37,
+              "b": null
+            },
+            "measure": "logDice",
+            "present": {
+              "a": true,
+              "b": false
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "w:asked",
+            "kind": "cooc",
+            "weight": {
+              "a": null,
+              "b": 11.28
+            },
+            "measure": "logDice",
+            "present": {
+              "a": false,
+              "b": true
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "w:null",
+            "kind": "cooc",
+            "weight": {
+              "a": null,
+              "b": 11.15
+            },
+            "measure": "logDice",
+            "present": {
+              "a": false,
+              "b": true
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "w:nobody",
+            "kind": "cooc",
+            "weight": {
+              "a": null,
+              "b": 11.11
+            },
+            "measure": "logDice",
+            "present": {
+              "a": false,
+              "b": true
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "w:beat",
+            "kind": "cooc",
+            "weight": {
+              "a": null,
+              "b": 11.1
+            },
+            "measure": "logDice",
+            "present": {
+              "a": false,
+              "b": true
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "w:verse",
+            "kind": "cooc",
+            "weight": {
+              "a": null,
+              "b": 11.09
+            },
+            "measure": "logDice",
+            "present": {
+              "a": false,
+              "b": true
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "w:unpaid",
+            "kind": "cooc",
+            "weight": {
+              "a": null,
+              "b": 11.03
+            },
+            "measure": "logDice",
+            "present": {
+              "a": false,
+              "b": true
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "w:migrate",
+            "kind": "cooc",
+            "weight": {
+              "a": null,
+              "b": 11.01
+            },
+            "measure": "logDice",
+            "present": {
+              "a": false,
+              "b": true
+            }
+          },
+          {
+            "s": "x:1",
+            "t": "w:credit",
+            "kind": "cooc",
+            "weight": {
+              "a": null,
+              "b": 10.91
+            },
+            "measure": "logDice",
+            "present": {
+              "a": false,
+              "b": true
+            }
+          }
+        ],
+        "legend": {
+          "size": "occurrences in period (area, sqrt radius)",
+          "size_mode": "occurrences",
+          "reference_circles": [
+            1,
+            13,
+            180
+          ],
+          "scale": "area ∝ value (sqrt radius)",
+          "size_by_type": {
+            "expression": "occurrences in period",
+            "cluster": "occurrences in period assigned to the group",
+            "word": "co-occurrences with the strand within ±5 tokens (significant collocates only)",
+            "document": "occurrences of the strands in the document",
+            "etymon": "not sized: a period of the language, not a date"
+          },
+          "edge": "logDice, co-occurrence ±5 tokens",
+          "edge_by_kind": {
+            "cooc": "logDice in the period (only collocates passing G² ≥ 10.83, q < .05, f ≥ 5)",
+            "member": "share of the period's clustered occurrences (≥ 30 needed)",
+            "occurs": "occurrences of the strand in the document",
+            "rel": "relationship (line pattern = evidence status)",
+            "etym": "shared ancestry, not shared meaning"
+          },
+          "shapes": {
+            "expression": "○",
+            "cluster": "⬡",
+            "word": "·",
+            "document": "□",
+            "theme": "◇",
+            "etymon": "▽"
+          },
+          "note": "Positions are fixed for this layout key; movement is not semantic.",
+          "words_note": "context words, not meanings"
+        },
+        "layout": {
+          "key": "fnv:18e58e0c",
+          "algorithm": "fruchterman-reingold-300",
+          "pinned": true,
+          "generation": 0,
+          "seed": 865283598,
+          "placed": 22,
+          "toast": null,
+          "cache": "stored"
+        },
+        "truncated": {
+          "nodes": 0,
+          "edges": 0,
+          "reason": null
+        },
+        "periods": {
+          "a": [
+            1955,
+            1985
+          ],
+          "b": [
+            1994,
+            2026
+          ],
+          "swapped": false,
+          "labels": [
+            "1955–1985",
+            "1994–2026"
+          ],
+          "notes": []
+        },
+        "gates": {
+          "cooc": {
+            "x:1": {
+              "a": {
+                "gate": "ok"
+              },
+              "b": {
+                "gate": "ok"
+              }
+            }
+          },
+          "member": {
+            "x:1": {
+              "a": {
+                "gate": "ok"
+              },
+              "b": {
+                "gate": "ok"
+              }
+            }
+          }
+        },
+        "diff": {
+          "only_a": [
+            "k:1",
+            "w:department",
+            "w:sighed",
+            "w:stamp",
+            "w:auditors",
+            "w:quota",
+            "w:asking",
+            "w:file",
+            "w:joked",
+            "w:report",
+            "w:budget",
+            "w:forms",
+            "w:memo",
+            "d:67",
+            "d:51",
+            "d:52",
+            "d:11"
+          ],
+          "only_b": [
+            "k:3",
+            "k:4",
+            "w:hold",
+            "w:us",
+            "w:verse",
+            "w:mic",
+            "w:uncredited",
+            "w:asked",
+            "w:beat",
+            "w:nobody",
+            "w:null",
+            "w:unpaid",
+            "w:credit",
+            "w:migrate",
+            "d:78",
+            "d:81",
+            "d:71",
+            "d:15",
+            "d:16",
+            "d:24",
+            "d:17",
+            "d:25"
+          ],
+          "grew": [
+            "x:1"
+          ],
+          "counts": {
+            "only_a": 17,
+            "only_b": 22,
+            "grew": 1
+          }
+        },
+        "synthetic": true,
+        "provenance": {
+          "data_version": 108,
+          "run_ids": {
+            "materialize": {
+              "1": 10
+            },
+            "cluster": {
+              "1": 24
+            }
+          },
+          "tokenizer": "u61m-1",
+          "segmenter": "seg-1",
+          "synthetic": true,
+          "collections": [
+            "demo-world"
+          ],
+          "licenses": [
+            "CC0 (synthetic)"
+          ]
+        }
+      }
+    },
+    "error": {
+      "status": 503,
+      "body": {
+        "error": {
+          "code": "QUERY_TIMEOUT",
+          "message": "The constellation query took longer than 15 s and was stopped.",
+          "hint": "Narrow the time range or add a filter, then retry.",
+          "detail": {
+            "timeout_ms": 15000
+          }
+        }
+      }
+    }
+  }
+}

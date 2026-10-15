@@ -1,0 +1,279 @@
+/* OWNER: WP6
+   timeline.css — the Scroll (four stacked canvases), the playhead handle, tooltip, state cards, footer
+   caption, minimap, legend, bin drawer and the table alternative (SPEC §1.4, §1.5, §8.3, §8.6).
+   At rest the Scroll shows bars, caps, arcs and the coverage track — nothing else; chips appear on hover. */
+
+/* ── The Scroll ────────────────────────────────────────────────────────────────────────────────── */
+#scroll { background: var(--bg-0); }
+.scroll-root { position: absolute; inset: 0; display: grid; grid-template-rows: minmax(0, 1fr) 26px; }
+.scroll-canvas { position: relative; min-height: 0; overflow: hidden; }
+.layer { position: absolute; left: 0; top: 0; display: block; max-width: none; }
+.layer-bg, .layer-data, .layer-arcs { pointer-events: none; }
+.layer-overlay { touch-action: none; cursor: grab; outline: none; }
+.layer-overlay.is-dragging, .scroll-root:active .layer-overlay.is-dragging { cursor: grabbing; }
+
+/* The playhead: a cyan line (drawn on the overlay canvas) with a 44 × 44 px handle on the ruler. */
+.playhead-handle {
+  position: absolute; left: -22px; top: 0; width: 44px; height: 44px; padding: 0; border: 0; background: transparent;
+  cursor: ew-resize; z-index: 3; touch-action: none;
+}
+.playhead-knob {
+  position: absolute; left: 50%; top: 5px; width: 12px; height: 12px; margin-left: -6px; background: var(--cyan);
+  clip-path: polygon(0 0, 100% 0, 100% 55%, 50% 100%, 0 55%); border-radius: 2px;
+}
+.playhead-label {
+  position: absolute; left: 30px; top: 3px; padding: 1px 7px; border-radius: 999px; background: var(--bg-1);
+  border: 1px solid color-mix(in srgb, var(--cyan) 55%, transparent); color: var(--cyan); white-space: nowrap;
+  font: 11.5px/1.35 var(--font-ui); font-variant-numeric: tabular-nums; pointer-events: none;
+}
+.playhead-handle.label-left .playhead-label { left: auto; right: 30px; }
+.playhead-handle:focus-visible { box-shadow: none; }
+.playhead-handle:focus-visible .playhead-label { box-shadow: var(--focus-ring); }
+
+/* Level change: "Now showing yearly bins" for 1.5 s (static in reduced motion). */
+.tier-pill {
+  position: absolute; left: 50%; top: 66px; transform: translateX(-50%); z-index: 3; padding: 4px 12px; border-radius: 999px;
+  background: var(--bg-2); border: 1px solid var(--rule); color: var(--ink); font-size: var(--fs-small); pointer-events: none;
+  animation: pill-in var(--dur-slow) var(--ease);
+}
+.tier-pill.is-static { animation: none; }
+@keyframes pill-in { from { opacity: 0; transform: translate(-50%, -4px); } to { opacity: 1; transform: translate(-50%, 0); } }
+
+/* Hover tooltip: generated from the same numbers as the drawing. */
+.scroll-tip {
+  position: absolute; left: 0; top: 0; z-index: 4; max-width: 360px; padding: 8px 10px; pointer-events: none;
+  background: var(--bg-2); border: 1px solid var(--rule); border-radius: var(--radius); box-shadow: var(--shadow);
+  font-size: var(--fs-small); line-height: 1.4;
+}
+.tip-head { color: var(--ink); font-weight: 500; margin-bottom: 2px; }
+.tip-line { color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.tip-line + .tip-line { margin-top: 1px; }
+.tip-summary { margin-top: 6px !important; padding-top: 6px; border-top: 1px solid var(--rule); }
+.tip-action { margin-top: 5px; color: var(--cyan); font-size: 11.5px; }
+
+/* Empty, loading and error states (§8.8): never a spinner without a number. */
+.scroll-state {
+  position: absolute; left: 50%; top: calc(56px + 32px); transform: translateX(-50%); z-index: 3; width: min(460px, calc(100% - 32px));
+  padding: 14px 16px; background: var(--bg-1); border: 1px solid var(--rule); border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.scroll-state[data-kind="error"] { border-left: 3px solid var(--danger); }
+.scroll-state[data-kind="loading"] { border-left: 3px solid var(--cyan); }
+.state-title { color: var(--ink); font-weight: 500; font-variant-numeric: tabular-nums; }
+.state-hint { color: var(--ink-2); font-size: var(--fs-small); margin: 4px 0 8px; }
+.scroll-state .btn { margin-top: 2px; }
+
+/* The marks region: focusable proxy over the lanes; the focused mark's ring is drawn on the canvas. */
+.marks-proxy { position: absolute; left: 0; right: 0; top: 56px; bottom: 26px; pointer-events: none; z-index: 1; }
+.marks-proxy:focus-visible { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--cyan) 40%, transparent); border-radius: 0; }
+
+/* Lanes scrollbar (the wheel zooms the Scroll, so overflow is shown explicitly). */
+.lanes-scrollbar { position: absolute; right: 2px; top: 58px; bottom: 28px; width: 6px; z-index: 2; }
+.lanes-thumb { width: 6px; border-radius: 3px; background: rgba(237, 230, 214, .22); cursor: ns-resize; touch-action: none; }
+.lanes-thumb:hover { background: rgba(237, 230, 214, .38); }
+
+/* Long-press action sheet. */
+.scroll-actions {
+  position: absolute; left: 0; top: 0; z-index: 5; width: 200px; padding: 4px; background: var(--bg-2); border: 1px solid var(--rule);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+}
+
+/* Footer caption: "Bins: decades · 1 cm ≈ 12.5 years" and the vantage mode. */
+.scroll-footer {
+  display: flex; align-items: center; gap: 14px; min-width: 0; padding: 0 10px; background: var(--bg-1); border-top: 1px solid var(--rule);
+  font-size: 12px; color: var(--ink-3); white-space: nowrap; overflow: hidden;
+}
+.footer-caption { color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.footer-vantage { overflow: hidden; text-overflow: ellipsis; }
+/* fix pass: the chips keep their words ('2 rejected hidden', '8 after the vantage'); the sentences around them shrink first,
+   with an ellipsis, and the caption last */
+.scroll-footer > .chip { flex: none; }
+/* the long arcs sentence gives way first, with an ellipsis (a block box: an inline-flex chip cuts its text instead) */
+.scroll-footer > .footer-arcs { flex: 0 1 auto; min-width: 12ch; display: inline-block; line-height: 18px; }
+.footer-vantage, .footer-members { flex: 0 1 auto; min-width: 4ch; }
+.footer-caption { flex: 0 1 auto; min-width: 8ch; overflow: hidden; text-overflow: ellipsis; }
+.footer-simplified { color: var(--amber); border-color: color-mix(in srgb, var(--amber) 50%, transparent); }
+.footer-seam, .footer-fold { cursor: pointer; }
+.footer-arcs { color: var(--ink-2); max-width: 46ch; overflow: hidden; text-overflow: ellipsis; }
+.footer-members { color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; }
+.footer-status { margin-left: auto; color: var(--ink-3); }
+.is-playing .footer-vantage { color: var(--cyan); }
+
+/* Start card (no strand pinned): a welcome, not an error. */
+.scroll-state[data-kind="start"] { top: calc(56px + 14px); width: min(620px, calc(100% - 32px)); background: color-mix(in srgb, var(--bg-1) 94%, transparent); border-left: 3px solid var(--ink-2); }
+.start-line { margin: 6px 0; color: var(--ink-2); line-height: 1.7; }
+.start-search {
+  border: 0; padding: 0; background: transparent; color: var(--ink); text-decoration: underline; text-decoration-color: var(--cyan);
+  text-underline-offset: 3px; font: inherit; cursor: pointer;
+}
+.start-chip {
+  display: inline-flex; align-items: center; min-height: 26px; padding: 0 10px; border-radius: 999px; border: 1px solid var(--edge);
+  background: var(--bg-0); color: var(--ink); font: 500 var(--fs-small)/1 var(--font-ui); cursor: pointer; vertical-align: middle;
+}
+.start-chip:hover { border-color: var(--cyan); }
+.start-sep { color: var(--ink-3); }
+.start-chip-trail { border-color: color-mix(in srgb, var(--amber) 60%, transparent); }
+.start-chip-trail::before { content: '⇢'; margin-right: 6px; color: var(--amber); }
+
+/* A context-group facet without lanes (C1): offer the clustering run, or show its gate (no value). */
+.scroll-state[data-kind="cluster"] { width: min(540px, calc(100% - 32px)); border-left: 3px solid var(--violet); }
+.scroll-state[data-kind="cluster"] .gate-card { margin: 0; }
+.state-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.cluster-progress { margin-top: 8px; font-variant-numeric: tabular-nums; }
+
+/* The evidence card of an arc (WP7's edge card, opened from the Scroll). */
+.arc-card {
+  position: absolute; left: 0; top: 0; z-index: 6; overflow: auto; padding: 10px 12px 12px; background: var(--bg-1);
+  border: 1px solid var(--edge); border-radius: 8px; box-shadow: var(--shadow); display: grid; gap: 8px;
+}
+.arc-card-head { display: flex; align-items: center; gap: 8px; }
+.arc-card-title { flex: 1; font: 600 var(--fs-ui)/1.3 var(--font-ui); color: var(--ink); }
+.arc-card-close { min-width: 28px; justify-content: center; }
+.arc-card-foot { display: flex; gap: 8px; }
+
+/* ── Minimap ───────────────────────────────────────────────────────────────────────────────────── */
+#minimap { position: relative; background: var(--bg-0); }
+.minimap { position: absolute; inset: 0; cursor: pointer; touch-action: none; }
+.minimap-canvas { position: absolute; left: 0; top: 0; max-width: none; }
+.minimap-bracket {
+  position: absolute; left: 0; top: 1px; bottom: 1px; min-width: 4px; border: 1px solid var(--cyan); border-left-width: 2px; border-right-width: 2px;
+  border-radius: 2px; background: color-mix(in srgb, var(--cyan) 9%, transparent); cursor: grab;
+}
+.minimap-bracket:focus-visible { box-shadow: var(--focus-ring); }
+
+/* ── Legend: one compact line, always present (priority+ in legend.mjs); Full legend lists every row ──── */
+#legend { background: var(--bg-0); border-top: 1px solid var(--rule); min-width: 0; }
+.legend-strip {
+  display: flex; flex-wrap: nowrap; align-items: center; gap: 14px; height: 30px; padding: 0 10px; overflow: hidden;
+  font-size: 12px; color: var(--ink-2); line-height: 1.2; white-space: nowrap;
+}
+.legend-item { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; flex: none; }
+.legend-item[hidden] { display: none; }
+.legend-swatch { display: inline-block; flex: none; border-radius: 2px; background: var(--bg-1); }
+.legend-strand { color: var(--ink); }
+.legend-scale { color: var(--ink); }
+.legend-gate { color: var(--ink-2); }
+/* the lane-order sentence (§1.3) keeps its full width: legend rows give way before it is cut (fix pass) */
+.legend-note { flex: 0 0 auto; min-width: 9ch; overflow: hidden; text-overflow: ellipsis; font-style: italic; color: var(--ink-3); }
+.legend-coverage { display: inline-flex; align-items: center; gap: 6px; }
+.cov-step { display: inline-flex; align-items: center; gap: 3px; color: var(--ink-3); }
+.cov-sw { width: 12px; height: 8px; border-radius: 1px; background: var(--hatch-none), var(--bg-0); border: 1px solid var(--rule); }
+.cov-step[data-cls="1"] .cov-sw { background: rgba(237, 230, 214, .12); }
+.cov-step[data-cls="2"] .cov-sw { background: rgba(237, 230, 214, .24); }
+.cov-step[data-cls="3"] .cov-sw { background: rgba(237, 230, 214, .38); }
+.cov-step[data-cls="4"] .cov-sw { background: rgba(237, 230, 214, .56); }
+.cov-span-sw { width: 26px; height: 8px; border-top: 1px solid rgba(237, 230, 214, .32); border-bottom: 1px solid rgba(237, 230, 214, .32); background: rgba(237, 230, 214, .08); }
+.legend-more { flex: none; min-height: 22px; padding: 0 8px; font-size: 12px; background: transparent; margin-left: auto; }
+.legend-full {
+  position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: calc(var(--z-sheet) + 1); width: min(760px, calc(100vw - 24px));
+  max-height: calc(100vh - 48px); overflow: auto; padding: 16px 18px; background: var(--bg-1); border: 1px solid var(--rule); border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+.legend-table { width: 100%; font-size: var(--fs-small); margin: 8px 0; }
+.legend-table th { text-align: left; font-weight: 400; color: var(--ink); padding: 4px 10px 4px 0; white-space: nowrap; }
+.legend-table td { padding: 4px 8px 4px 0; vertical-align: middle; }
+.legend-sw-cell { width: 46px; }
+.role-sw { display: inline-block; width: 26px; height: 3px; border-radius: 2px; background: var(--ink-2); vertical-align: middle; }
+.role-sw[data-hue="amber"] { background: var(--amber); }
+.role-sw[data-hue="violet"] { background: var(--violet); }
+.role-sw[data-hue="cyan"] { background: var(--cyan); }
+
+/* ── Bin drawer and shelf lists ────────────────────────────────────────────────────────────────── */
+.drawer {
+  position: fixed; right: 12px; bottom: 12px; z-index: var(--z-sheet); display: flex; flex-direction: column;
+  width: min(580px, calc(100vw - 24px)); height: min(62vh, 600px); background: var(--bg-1); border: 1px solid var(--rule);
+  border-radius: 10px; box-shadow: var(--shadow); overflow: hidden;
+}
+.drawer.syn-frame { outline-offset: -2px; }
+.drawer-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px 4px 14px; }
+.drawer-title { font: 600 14px/1.3 var(--font-ui); color: var(--ink); }
+.drawer-close { min-height: 26px; padding: 0 9px; background: transparent; }
+.drawer-denom { padding: 0 14px 8px; color: var(--ink-2); font: 12px/1.4 var(--font-num); border-bottom: 1px solid var(--rule); }
+.drawer-denom.is-syn { color: var(--syn); }
+.drawer-filter { margin: 8px 12px 0; height: 28px; padding: 0 10px; border-radius: var(--radius); border: 1px solid var(--rule); background: var(--bg-0); color: var(--ink); }
+.drawer-scroll { position: relative; flex: 1 1 auto; overflow: auto; overscroll-behavior: contain; }
+.drawer-list { position: absolute; left: 0; right: 0; top: 0; }
+.drawer-row {
+  position: absolute; left: 0; right: 0; height: 58px; display: grid; grid-template-columns: 86px 1fr auto; grid-template-rows: auto auto;
+  column-gap: 10px; align-content: center; padding: 0 14px; border: 0; border-bottom: 1px solid var(--rule); background: transparent;
+  color: var(--ink); text-align: left;
+}
+button.drawer-row:hover { background: var(--bg-2); }
+.row-date { grid-row: 1 / 3; color: var(--ink-2); font-size: 12px; align-self: center; }
+.row-title { font-size: var(--fs-small); color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.drawer-row .badge-syn { grid-column: 3; grid-row: 1; align-self: start; }
+.row-kwic { grid-column: 2 / 4; font: 14px/1.4 var(--font-text); color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.drawer-empty { padding: 14px; }
+.drawer-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 6px 12px; border-top: 1px solid var(--rule); }
+.drawer-status[data-kind="error"] { color: var(--danger); }
+
+/* ── Table alternative ─────────────────────────────────────────────────────────────────────────── */
+#a11y.is-open, #a11y:has(.a11y-tables:not([hidden])) { background: var(--bg-1); border-top: 1px solid var(--rule); }
+.a11y-tables { padding: 10px 14px 16px; }
+.a11y-summary { color: var(--ink-2); margin-bottom: 6px; max-width: 110ch; }
+.a11y-lane { margin: 12px 0; padding: 6px; }
+.a11y-table { width: 100%; font-size: 12px; font-variant-numeric: tabular-nums; }
+.a11y-table caption { text-align: left; color: var(--ink); font-weight: 500; padding: 4px 0; }
+.a11y-table th, .a11y-table td { padding: 3px 10px 3px 0; border-bottom: 1px solid var(--rule); text-align: left; }
+.a11y-table thead th { color: var(--ink-2); font-weight: 400; }
+.a11y-table td.num { text-align: right; }
+.a11y-segments { margin: 6px 0 0; padding-left: 18px; color: var(--ink-2); font-size: 12px; }
+
+/* ── Tour, coach marks, perf HUD ───────────────────────────────────────────────────────────────── */
+.tour-card {
+  position: fixed; left: 16px; bottom: 16px; z-index: var(--z-tour); width: min(440px, calc(100vw - 32px)); max-height: 70vh; overflow: auto;
+  display: grid; gap: 8px; padding: 12px 14px; background: var(--bg-1); border: 1px solid var(--edge); border-radius: 10px; box-shadow: var(--shadow);
+}
+.tour-head { display: flex; align-items: center; gap: 8px; }
+.tour-title { flex: 1; font: 600 var(--fs-ui)/1.3 var(--font-ui); color: var(--ink); }
+.tour-card p { color: var(--ink-2); line-height: 1.5; }
+.tour-card strong { color: var(--ink); font-weight: 600; }
+.tour-actions { display: flex; gap: 8px; }
+.tour-flash { outline: 2px solid var(--cyan); outline-offset: -2px; transition: outline-color var(--dur-slow); }
+.coach {
+  position: fixed; left: 0; top: 0; z-index: var(--z-tour); display: grid; gap: 6px; padding: 10px 12px 12px; background: var(--bg-2);
+  color: var(--ink); border: 1px solid color-mix(in srgb, var(--cyan) 55%, var(--rule)); border-radius: 10px; box-shadow: var(--shadow);
+  font-size: var(--fs-ui); line-height: 1.5;
+}
+.coach-head { display: flex; align-items: center; justify-content: space-between; }
+.coach-step { color: var(--cyan); font: 600 11px/1 var(--font-num); letter-spacing: .06em; text-transform: uppercase; }
+.coach-close { border: 0; background: transparent; color: var(--ink-2); font-size: 16px; width: 26px; height: 26px; border-radius: 50%; }
+.coach-close:hover { background: var(--bg-3); color: var(--ink); }
+.coach-title { font: 600 17px/1.3 var(--font-text); color: var(--ink); }
+.coach-line { color: var(--ink); }
+.coach-line strong { color: var(--ink); text-decoration: underline; text-decoration-color: var(--cyan); text-underline-offset: 3px; }
+.coach-actions, .coach-chips { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.coach .start-chip { background: var(--bg-1); }
+.coach-ring {
+  position: fixed; z-index: var(--z-tour); width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; pointer-events: none;
+  border: 2px solid var(--cyan); box-shadow: 0 0 0 4px var(--cyan-halo);
+}
+.coach-ring-label {
+  position: absolute; left: 16px; top: -18px; padding: 0 5px; border-radius: 3px; background: var(--bg-2); color: var(--ink);
+  font: 600 10.5px/16px var(--font-num); border: 1px solid var(--rule);
+}
+.perf-hud {
+  position: fixed; right: 8px; bottom: 8px; z-index: var(--z-toast); display: grid; gap: 4px; padding: 8px 10px; max-width: 420px;
+  background: var(--bg-2); border: 1px solid var(--rule); border-radius: var(--radius); font: 11.5px/1.4 var(--font-num); color: var(--ink-2);
+}
+.perf-hud strong { color: var(--cyan); }
+.perf-hud .btn { justify-self: start; min-height: 24px; font-size: 11.5px; }
+
+/* ── Narrow ────────────────────────────────────────────────────────────────────────────────────── */
+@media (max-width: 719.98px) {
+  .scroll-root { grid-template-rows: minmax(0, 1fr) 24px; }
+  .scroll-footer { font-size: 11px; gap: 8px; }
+  .footer-vantage, .footer-status { display: none; }
+  /* on a phone every chip may shrink, with an ellipsis (its title holds the words); nothing is cut mid-word (fix pass) */
+  .scroll-footer > .chip { flex: 0 1 auto; min-width: 6ch; display: inline-block; overflow: hidden; text-overflow: ellipsis; line-height: 18px; }
+  .legend-strip { display: none; }
+  .tour-card { left: 8px; right: 8px; bottom: calc(var(--toolbar-h) + 8px); width: auto; }
+  .scroll-state[data-kind="start"] { top: 62px; }
+  .drawer { left: 0; right: 0; bottom: 0; width: auto; height: 72vh; border-radius: 12px 12px 0 0; }
+  .playhead-label { font-size: 11px; }
+  .tier-pill { top: 60px; }
+}
+@media (forced-colors: active) {
+  .minimap-bracket { border-color: Highlight; }
+  .playhead-knob { background: Highlight; }
+  .legend-swatch { forced-color-adjust: none; }
+}

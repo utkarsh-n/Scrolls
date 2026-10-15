@@ -1,0 +1,128 @@
+/* OWNER: WP1
+   import.css — the import wizard (SPEC §5.2, §8.6, §8.7). Lives in #panel on desktop; a full-screen sheet with a
+   back button below 720 px. Text tokens only on the backgrounds tokens.css allows (--ink-3 on bg-0/bg-1). */
+
+/* position: relative makes the panel the containing block of its visually-hidden (absolute) captions and
+   inputs, so they scroll and clip with it instead of stretching the page. */
+.imp {
+  position: relative; display: flex; flex-direction: column; gap: 12px;
+  width: min(var(--panel-w), 60vw); min-width: 320px; height: 100%; min-height: 0; overflow: auto;
+  padding: 12px 16px 24px; background: var(--bg-1); border-left: 1px solid var(--rule); color: var(--ink);
+}
+.imp-head { display: flex; align-items: center; gap: var(--gap); }
+.imp-title { flex: 1; font: 600 16px/1.3 var(--font-ui); margin: 0; }
+.imp-back { display: none; }
+.imp-close { font-size: 18px; line-height: 1; padding: 0 10px; }
+.imp-h3 { font: 600 15px/1.3 var(--font-ui); margin: 4px 0 8px; outline-offset: 2px; }
+.imp-h4 { font: 600 13px/1.3 var(--font-ui); margin: 12px 0 6px; color: var(--ink); }
+.imp-h5 { font: 600 12px/1.3 var(--font-ui); margin: 10px 0 4px; color: var(--ink-2); text-transform: uppercase; letter-spacing: .04em; }
+.imp-body, .imp-step-body { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+
+/* Stepper: number + word, current marked by aria-current and a cyan underline (never colour alone). */
+.imp-steps { display: flex; gap: 4px; margin: 0; padding: 0; list-style: none; flex-wrap: wrap; }
+.imp-steps li { flex: 1 1 0; min-width: 72px; }
+.imp-step {
+  display: flex; align-items: center; justify-content: center; gap: 4px; width: 100%; min-height: 32px; padding: 4px 6px;
+  background: var(--bg-0); color: var(--ink-2); border: 1px solid var(--rule); border-radius: var(--radius); font: inherit;
+}
+button.imp-step:hover { background: var(--bg-3); color: var(--ink); }
+.imp-step[aria-current="step"] { color: var(--ink); border-color: var(--cyan); box-shadow: inset 0 -2px 0 var(--cyan); font-weight: 600; }
+.imp-step[aria-disabled="true"] { color: var(--ink-3); }
+.imp-step-n { font-family: var(--font-num); }
+
+.imp-fieldset { border: 1px solid var(--rule); border-radius: var(--radius); padding: 8px 10px 10px; margin: 0; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.imp-fieldset legend { padding: 0 4px; color: var(--ink-2); font-weight: 600; }
+.imp-inline { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+.imp-label { color: var(--ink-2); font-weight: 600; }
+.imp-input, .imp select, .imp-opt select {
+  min-height: 28px; padding: 2px 8px; max-width: 100%; background: var(--bg-0); color: var(--ink);
+  border: 1px solid var(--edge); border-radius: var(--radius-sm);
+}
+.imp-input { width: 100%; }
+.imp-mono { font-family: var(--font-num); font-size: 12px; }
+.imp-opt { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.imp-radio { display: block; padding: 2px 0; }
+
+.imp-drop {
+  display: flex; flex-direction: column; gap: 6px; padding: 16px; border: 1px dashed var(--edge); border-radius: var(--radius);
+  background: var(--bg-0); text-align: center;
+}
+.imp-drop[data-over="1"] { border-color: var(--cyan); border-style: solid; }
+.imp-progress-box { display: flex; flex-direction: column; gap: 6px; padding: 12px; background: var(--bg-0); border: 1px solid var(--rule); border-radius: var(--radius); }
+.imp-progress { width: 100%; height: 10px; accent-color: var(--cyan); }
+
+.imp-facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 6px 12px; margin: 0; }
+.imp-facts div { min-width: 0; }
+.imp-facts dt { color: var(--ink-3); font-size: var(--fs-small); }
+.imp-facts dd { margin: 0; overflow-wrap: anywhere; }
+
+/* Tables scroll inside their own box: the page never scrolls sideways (375 px). */
+.imp-scroll-x { max-width: 100%; overflow-x: auto; border: 1px solid var(--rule); border-radius: var(--radius); }
+.imp-scroll-x:focus-visible { box-shadow: var(--focus-ring); }
+.imp-table { width: max-content; min-width: 100%; font-size: 12px; }
+.imp-table th, .imp-table td { padding: 4px 8px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.imp-table thead th { position: sticky; top: 0; background: var(--bg-1); color: var(--ink-2); white-space: nowrap; }
+.imp-table td { max-width: 260px; overflow-wrap: break-word; }
+.imp-type { color: var(--ink-3); font-weight: 400; font-size: 11px; }
+.imp-map { width: 100%; }
+.imp-map td { max-width: none; }
+.imp-map th[scope="row"] { white-space: nowrap; width: 1%; }
+.imp-map-src { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6px; }
+.imp-map-src select, .imp-map-src input { width: 100%; min-width: 0; }
+.imp-map .imp-input[type="text"]:not(.imp-mono) { margin-top: 4px; }
+td.is-bad { outline: 1px solid var(--danger); outline-offset: -1px; color: var(--danger); }
+
+.imp-live { display: flex; flex-direction: column; gap: 2px; }
+.imp-parse-line { font-family: var(--font-num); font-size: 12px; }
+.imp-parse-line[data-bad="1"] { color: var(--danger); }
+.imp-error { color: var(--danger); }
+.imp-error-box, .imp-fatal {
+  padding: 10px 12px; border: 1px solid var(--danger); border-left-width: 4px; border-radius: var(--radius); background: var(--bg-0);
+  display: flex; flex-direction: column; gap: 4px;
+}
+.imp-mock { padding: 6px 10px; border: 1px dashed var(--amber); color: var(--amber); border-radius: var(--radius); background: var(--bg-0); }
+.imp-suggestion { color: var(--ink); }
+.imp-actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; margin: 4px 0 0; }
+
+.imp-issue-list { display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.imp-issue { padding: 6px 10px; border-left: 3px solid var(--rule); background: var(--bg-0); border-radius: var(--radius-sm); }
+.imp-issue[data-severity="fatal"], .imp-issue[data-severity="rejected"] { border-left-color: var(--danger); }
+.imp-issue[data-severity="warning"] { border-left-color: var(--amber); }
+.imp-issue p { margin: 2px 0; overflow-wrap: anywhere; }
+.imp-sev { font-weight: 600; font-size: 12px; }
+.imp-sev-fatal, .imp-sev-rejected { color: var(--danger); }
+.imp-sev-warning { color: var(--amber); }
+.imp-sev-info { color: var(--ink-2); }
+.imp-excerpt q { font-family: var(--font-num); }
+
+.imp-summary { display: flex; flex-direction: column; gap: 8px; padding: 10px 12px; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--bg-0); }
+.imp-summary[data-projected="1"] { border-style: dashed; }
+.imp-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px 12px; margin: 0; }
+.imp-stat dt { color: var(--ink-3); font-size: var(--fs-small); }
+.imp-stat dd { margin: 0; font-size: 15px; }
+.imp-stat-wide { grid-column: 1 / -1; }
+.imp-stat-wide dd { font-size: 13px; }
+.imp-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 8px 16px; }
+.imp-plain { margin: 0; padding: 0; list-style: none; }
+.imp-plain li { padding: 1px 0; overflow-wrap: anywhere; }
+.imp-codes { display: flex; flex-wrap: wrap; gap: 4px 12px; }
+.imp-notes { margin: 0; padding-left: 16px; }
+.imp-foot { border-top: 1px solid var(--rule); padding-top: 6px; overflow-wrap: anywhere; }
+
+/* Narrow (< 720 px, §8.6): a full-screen sheet with a back button; touch-sized controls. */
+@media (max-width: 719.98px) {
+  .imp { position: fixed; inset: 0; width: 100%; min-width: 0; max-width: none; border-left: 0; padding: 10px 16px calc(24px + env(safe-area-inset-bottom)); z-index: var(--z-sheet); }
+  .imp-back { display: inline-flex; }
+  .imp-close { display: none; }
+  .imp-step { min-height: var(--touch); }
+  .imp-input, .imp select { min-height: var(--touch); }
+  .imp-steps li { min-width: 64px; }
+  .imp-table td { max-width: 180px; }
+}
+@media (forced-colors: active) {
+  .imp-step[aria-current="step"] { border: 2px solid Highlight; }
+  td.is-bad { outline: 2px solid Mark; }
+}
+@media (max-width: 480px) {
+  .imp-map-src { grid-template-columns: minmax(0, 1fr); }
+}

@@ -1,0 +1,20 @@
+{
+  "//": "OWNER: WP0 — canned DELETE /api/views/:slug for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "DELETE",
+  "path": "/api/views/:slug",
+  "owner": "WP5",
+  "request": null,
+  "response": null,
+  "summary": "Soft-delete a saved view (its links stop resolving; the row stays).",
+  "default": "ok",
+  "example_request": null,
+  "variants": {
+    "ok": { "status": 204 },
+    "not_found": {
+      "status": 404,
+      "body": {
+        "error": { "code": "E_NOT_FOUND", "message": "No saved view no-such-view.", "hint": null, "detail": null }
+      }
+    }
+  }
+}

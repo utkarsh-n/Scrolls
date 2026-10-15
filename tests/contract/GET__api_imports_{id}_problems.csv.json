@@ -1,0 +1,24 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/imports/:id/problems.csv for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/imports/:id/problems.csv",
+  "owner": "WP1",
+  "request": null,
+  "response": null,
+  "summary": "Every issue of the batch as CSV (one row per issue).",
+  "default": "ok",
+  "example_request": null,
+  "variants": {
+    "ok": {
+      "status": 200,
+      "shape": null,
+      "unshaped": "CSV download: code,severity,line,col,field,value_excerpt,message,suggestion.",
+      "content_type": "text/csv; charset=utf-8",
+      "text": "code,severity,line,col,field,value_excerpt,message,suggestion\nE_DATE_UNPARSEABLE,warning,9,,issued,Spring-ish 1850,\"Row 9 date 'Spring-ish 1850' was not recognised; row imported as undated.\",\"Try 'spring 1850' (Mar–May 1850) or 'c. 1850'.\"\nE_ROW_RAGGED,rejected,57,,title,,\"Row 57 has 9 fields, the header has 8.\",\"Check for an unquoted comma in 'title'.\"\n"
+    },
+    "not_found": {
+      "status": 404,
+      "body": { "error": { "code": "E_NOT_FOUND", "message": "No import batch 99.", "hint": null, "detail": null } }
+    }
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/export for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/export",
+  "owner": "WP3",
+  "request": null,
+  "response": null,
+  "summary": "Export a view or state: manifest first (JSON key, JSONL first line, CSV # lines), then rows; licences travel with data.",
+  "default": "json",
+  "example_request": null,
+  "variants": {
+    "json": {
+      "status": 200,
+      "shape": null,
+      "unshaped": "Download (format=json): { manifest, rows } — no shape in contracts.SHAPES yet.",
+      "body": {
+        "manifest": {
+          "export_version": "1",
+          "generated_at": "2026-10-04T09:00:00.000Z",
+          "view": null,
+          "state": "#v=1&c=demo&s=e12",
+          "data_version": 47,
+          "run_ids": { "materialize": { "12": { "run": 31, "params": { "variants": "default" } } } },
+          "filters": "syn:1",
+          "toggles": { "tr": 0, "ds": 0, "ap": 0, "dup": 0, "nm": 0, "est": 1, "bp": 0 },
+          "synthetic_included": true,
+          "licenses": ["CC0 (synthetic)"],
+          "attributions": [],
+          "warning": "Contains SYNTHETIC demonstration data — invented people, texts, dates and links."
+        },
+        "rows": [
+          {
+            "occ": null,
+            "passage": 77,
+            "document": 12,
+            "title": "Brennock's Ready Arithmetic",
+            "lane": "community:classroom",
+            "start": 54,
+            "end": 68,
+            "match": "Carry the zero",
+            "date_label": "1911",
+            "date_precision": "year",
+            "date_basis": "stated",
+            "date_role": "publication",
+            "evidence_status": null,
+            "review_status": null,
+            "origin": null,
+            "source_locator": null,
+            "is_synthetic": 1
+          },
+          {
+            "occ": null,
+            "passage": 1630,
+            "document": 36,
+            "title": "Felmark Bulletin, June 1963",
+            "lane": "community:office-lab",
+            "start": 64,
+            "end": 78,
+            "match": "Carry the zero",
+            "date_label": "Jun 1963",
+            "date_precision": "month",
+            "date_basis": "stated",
+            "date_role": "publication",
+            "evidence_status": null,
+            "review_status": null,
+            "origin": null,
+            "source_locator": null,
+            "is_synthetic": 1
+          },
+          {
+            "occ": null,
+            "passage": 901,
+            "document": 44,
+            "title": "Zero Holds the Place",
+            "lane": "community:hiphop",
+            "start": 106,
+            "end": 120,
+            "match": "carry the zero",
+            "date_label": "17 May 1994",
+            "date_precision": "day",
+            "date_basis": "stated",
+            "date_role": "publication",
+            "evidence_status": null,
+            "review_status": null,
+            "origin": null,
+            "source_locator": null,
+            "is_synthetic": 1
+          }
+        ]
+      }
+    },
+    "jsonl": {
+      "when": { "query": { "format": "jsonl" } },
+      "status": 200,
+      "shape": null,
+      "unshaped": "Download (format=jsonl): manifest line, then one row per line.",
+      "content_type": "application/x-ndjson; charset=utf-8",
+      "text": "{\"manifest\":{\"export_version\":\"1\",\"generated_at\":\"2026-10-04T09:00:00.000Z\",\"view\":null,\"state\":\"#v=1&c=demo&s=e12\",\"data_version\":47,\"run_ids\":{\"materialize\":{\"12\":{\"run\":31,\"params\":{\"variants\":\"default\"}}}},\"filters\":\"syn:1\",\"toggles\":{\"tr\":0,\"ds\":0,\"ap\":0,\"dup\":0,\"nm\":0,\"est\":1,\"bp\":0},\"synthetic_included\":true,\"licenses\":[\"CC0 (synthetic)\"],\"attributions\":[],\"warning\":\"Contains SYNTHETIC demonstration data — invented people, texts, dates and links.\"}}\n{\"occ\":null,\"passage\":77,\"document\":12,\"title\":\"Brennock's Ready Arithmetic\",\"lane\":\"community:classroom\",\"start\":54,\"end\":68,\"match\":\"Carry the zero\",\"date_label\":\"1911\",\"date_precision\":\"year\",\"date_basis\":\"stated\",\"date_role\":\"publication\",\"evidence_status\":null,\"review_status\":null,\"origin\":null,\"source_locator\":null,\"is_synthetic\":1}\n{\"occ\":null,\"passage\":1630,\"document\":36,\"title\":\"Felmark Bulletin, June 1963\",\"lane\":\"community:office-lab\",\"start\":64,\"end\":78,\"match\":\"Carry the zero\",\"date_label\":\"Jun 1963\",\"date_precision\":\"month\",\"date_basis\":\"stated\",\"date_role\":\"publication\",\"evidence_status\":null,\"review_status\":null,\"origin\":null,\"source_locator\":null,\"is_synthetic\":1}\n{\"occ\":null,\"passage\":901,\"document\":44,\"title\":\"Zero Holds the Place\",\"lane\":\"community:hiphop\",\"start\":106,\"end\":120,\"match\":\"carry the zero\",\"date_label\":\"17 May 1994\",\"date_precision\":\"day\",\"date_basis\":\"stated\",\"date_role\":\"publication\",\"evidence_status\":null,\"review_status\":null,\"origin\":null,\"source_locator\":null,\"is_synthetic\":1}\n"
+    },
+    "csv": {
+      "when": { "query": { "format": "csv" } },
+      "status": 200,
+      "shape": null,
+      "unshaped": "Download (format=csv): # manifest lines, header, rows.",
+      "content_type": "text/csv; charset=utf-8",
+      "text": "# {\n#  \"export_version\": \"1\",\n#  \"generated_at\": \"2026-10-04T09:00:00.000Z\",\n#  \"view\": null,\n#  \"state\": \"#v=1&c=demo&s=e12\",\n#  \"data_version\": 47,\n#  \"run_ids\": {\n#   \"materialize\": {\n#    \"12\": {\n#     \"run\": 31,\n#     \"params\": {\n#      \"variants\": \"default\"\n#     }\n#    }\n#   }\n#  },\n#  \"filters\": \"syn:1\",\n#  \"toggles\": {\n#   \"tr\": 0,\n#   \"ds\": 0,\n#   \"ap\": 0,\n#   \"dup\": 0,\n#   \"nm\": 0,\n#   \"est\": 1,\n#   \"bp\": 0\n#  },\n#  \"synthetic_included\": true,\n#  \"licenses\": [\n#   \"CC0 (synthetic)\"\n#  ],\n#  \"attributions\": [],\n#  \"warning\": \"Contains SYNTHETIC demonstration data — invented people, texts, dates and links.\"\n# }\nocc,passage,document,title,lane,start,end,match,date_label,date_precision,date_basis,date_role,evidence_status,review_status,origin,source_locator,is_synthetic\n,77,12,Brennock's Ready Arithmetic,community:classroom,54,68,Carry the zero,1911,year,stated,publication,,,,,1\n,1630,36,\"Felmark Bulletin, June 1963\",community:office-lab,64,78,Carry the zero,Jun 1963,month,stated,publication,,,,,1\n,901,44,Zero Holds the Place,community:hiphop,106,120,carry the zero,17 May 1994,day,stated,publication,,,,,1\n"
+    },
+    "invalid": {
+      "status": 400,
+      "body": {
+        "error": {
+          "code": "E_EXPORT_FORMAT",
+          "message": "Format 'pdf' is not supported.",
+          "hint": "Use json, jsonl or csv; html with what=bundle.",
+          "detail": { "format": "pdf" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "//": "OWNER: WP0 — canned POST /api/imports/:id/revert for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "POST",
+  "path": "/api/imports/:id/revert",
+  "owner": "WP1",
+  "request": null,
+  "response": "JobRef",
+  "summary": "Soft-delete the batch's documents (a job); bumps data_version.",
+  "default": "ok",
+  "example_request": null,
+  "variants": {
+    "ok": { "status": 200, "body": { "job": { "id": 309 } } },
+    "not_found": {
+      "status": 404,
+      "body": { "error": { "code": "E_NOT_FOUND", "message": "No import batch 99.", "hint": null, "detail": null } }
+    }
+  }
+}

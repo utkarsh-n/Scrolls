@@ -1,0 +1,179 @@
+/* OWNER: WP0 — reset, typography, the region grid of index.html and the boot shell (SPEC §1.4, §8.6, §8.8) */
+
+/* ── Reset ─────────────────────────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { margin: 0; overflow: hidden; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4, p, figure, blockquote, dl, dd, ul, ol { margin: 0; }
+ul[role="list"], ol[role="list"] { list-style: none; padding: 0; }
+img, svg, canvas, video { display: block; max-width: 100%; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+table { border-collapse: collapse; }
+[hidden] { display: none !important; }
+
+/* ── Typography ────────────────────────────────────────────────────────────────────────────────── */
+.text, .passage { font: var(--fs-text)/var(--lh-text) var(--font-text); max-width: var(--measure); }
+.num, .tabular { font-family: var(--font-num); font-variant-numeric: tabular-nums; }
+.meta { color: var(--ink-3); font-size: var(--fs-small); }       /* only on bg-0 / bg-1 (tokens.css) */
+.secondary { color: var(--ink-2); }
+a { color: var(--cyan); text-underline-offset: 2px; }
+::selection { background: var(--cyan-halo); color: var(--ink); }
+
+/* ── Focus (§8.6): 2 px cyan ring + 2 px bg-0 offset; never removed without a replacement ─────────── */
+:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: var(--radius-sm); }
+@media (forced-colors: active) { :focus-visible { outline: 2px solid Highlight; outline-offset: 2px; } }
+
+/* ── Accessibility utilities ───────────────────────────────────────────────────────────────────── */
+.visually-hidden {
+  position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+.skip-link {
+  position: absolute; left: var(--gap); top: -100px; z-index: var(--z-toast);
+  padding: 8px 12px; background: var(--bg-2); color: var(--ink); border-radius: var(--radius);
+}
+.skip-link:focus { top: var(--gap); }
+
+/* ── Region grid (desktop) ─────────────────────────────────────────────────────────────────────────
+   ribbon / toolbar (+ jobs chip at its right) / minimap / stage (lanes · undated · scroll · scheduled)
+   / inspector / legend, with the right panel beside them. Empty regions take no space; WP6's layout.mjs
+   and shell.css refine this. */
+.app {
+  display: grid;
+  height: 100%;
+  min-height: 0;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto var(--toolbar-h) var(--minimap-h) minmax(0, 1fr) auto auto auto;
+  grid-template-areas:
+    "ribbon    ribbon"
+    "toolbar   toolbar"
+    "minimap   minimap"
+    "stage     panel"
+    "inspector panel"
+    "legend    panel"
+    "a11y      a11y";
+  background: var(--bg-0);
+}
+#ribbon { grid-area: ribbon; }
+#toolbar {
+  grid-area: toolbar; z-index: var(--z-toolbar); display: flex; align-items: center; gap: var(--gap);
+  padding: 0 var(--gap); background: var(--bg-1); border-bottom: 1px solid var(--rule); min-width: 0;
+}
+#jobs {
+  grid-area: toolbar; z-index: calc(var(--z-toolbar) + 1); justify-self: end; align-self: center;
+  display: flex; align-items: center; gap: var(--gap); padding-right: var(--gap);
+}
+#minimap { grid-area: minimap; min-width: 0; border-bottom: 1px solid var(--rule); }
+.stage {
+  grid-area: stage; display: grid; min-height: 0; min-width: 0;
+  grid-template-columns: var(--header-w) var(--shelf-w) minmax(0, 1fr) var(--shelf-sched-w);
+  grid-template-areas: "lanes undated scroll scheduled";
+}
+#lanes { grid-area: lanes; min-height: 0; overflow: hidden; background: var(--bg-1); border-right: 1px solid var(--rule); }
+#shelf-undated {
+  grid-area: undated; min-height: 0; overflow: hidden; z-index: var(--z-shelf);
+  border-right: 3px double var(--rule);   /* separated by a double rule (§1.4) */
+}
+#scroll { grid-area: scroll; position: relative; min-width: 0; min-height: 0; overflow: hidden; outline: none; }
+#shelf-scheduled { grid-area: scheduled; min-height: 0; overflow: hidden; z-index: var(--z-shelf); border-left: 1px solid var(--rule); }
+#inspector { grid-area: inspector; min-width: 0; max-height: var(--inspector-h); overflow: auto; }
+#panel { grid-area: panel; min-height: 0; overflow: auto; max-width: min(var(--panel-w), 60vw); z-index: var(--z-panel); }
+#legend { grid-area: legend; min-width: 0; }
+#a11y { grid-area: a11y; min-width: 0; max-height: 40vh; overflow: auto; }
+#sheet { position: fixed; inset: auto 0 0 0; z-index: var(--z-sheet); }
+#tour { position: fixed; inset: 0; z-index: var(--z-tour); pointer-events: none; }
+#tour > .slot > * { pointer-events: auto; }
+#toasts {
+  position: fixed; right: var(--gap); bottom: var(--gap); z-index: var(--z-toast);
+  display: flex; flex-direction: column; gap: var(--gap); max-width: min(420px, calc(100vw - 2 * var(--gap)));
+}
+/* A module slot is transparent to layout: its content takes part in the region's own grid or flex. */
+.slot { display: contents; }
+
+/* ── Narrow (< 720 px, §8.6): timeline in the top 55vh, inspector below as a sheet, toolbar → bottom bar ── */
+@media (max-width: 719.98px) {
+  .app {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto var(--minimap-h) minmax(0, 55vh) auto minmax(0, 1fr) auto var(--toolbar-h);
+    grid-template-areas: "ribbon" "minimap" "stage" "legend" "inspector" "a11y" "toolbar";
+  }
+  #toolbar { border-bottom: 0; border-top: 1px solid var(--rule); padding-bottom: env(safe-area-inset-bottom); }
+  #jobs { grid-area: ribbon; justify-self: end; }
+  #inspector { max-height: none; }
+  /* Right-hand views become full-screen sheets with a back button (rendered by their modules). */
+  #panel { position: fixed; inset: 0; max-width: none; pointer-events: none; }
+  #panel > .slot > * { pointer-events: auto; }
+  .stage { grid-template-columns: var(--header-w) minmax(0, 1fr); grid-template-areas: "lanes scroll"; }
+  #shelf-undated, #shelf-scheduled { display: none; }   /* become chips (⊘ 4) drawn by shelves.mjs in #lanes */
+}
+
+/* ── Shared atoms ──────────────────────────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 28px; padding: 0 10px;
+  background: var(--bg-2); color: var(--ink); border: 1px solid var(--edge); border-radius: var(--radius);
+}
+.btn:hover { background: var(--bg-3); }
+.btn[aria-pressed="true"], .btn.is-active { border-color: var(--cyan); color: var(--cyan); }
+.btn-primary { background: var(--cyan); color: var(--bg-0); border-color: var(--cyan); }
+@media (pointer: coarse) { .btn { min-height: var(--touch); min-width: var(--touch); } }
+.icon { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.chip {
+  display: inline-flex; align-items: center; gap: 4px; padding: 1px 8px; border-radius: 999px;
+  border: 1px solid var(--edge); background: var(--bg-1); color: var(--ink-2); font-size: var(--fs-small); white-space: nowrap;
+}
+/* Evidence badges: always a word, never colour alone (§8.7). */
+.badge {
+  display: inline-block; padding: 0 5px; border-radius: var(--radius-sm); border: 1px solid currentColor;
+  font: 600 11px/16px var(--font-num); letter-spacing: .04em; color: var(--ink);
+}
+.badge-syn { color: var(--syn); background-image: var(--syn-stripe); }
+/* A panel that shows synthetic material gets a dashed outer frame (§8.7). */
+.syn-frame { outline: 1px dashed var(--syn); outline-offset: -1px; }
+.role-amber { color: var(--amber); }
+.role-violet { color: var(--violet); }
+.role-ivory2 { color: var(--ivory-2); }
+.role-danger { color: var(--danger); }
+.card { background: var(--bg-1); border: 1px solid var(--rule); border-radius: var(--radius); padding: 12px; }
+
+/* ── The SYNTHETIC ribbon (§1.11, §9.1): striped, measured 7.73:1 on its stripes ───────────────────── */
+.ribbon {
+  display: flex; align-items: center; justify-content: center; min-height: var(--ribbon-h); padding: 2px var(--gap);
+  background: var(--bg-1) var(--syn-stripe); color: var(--syn); border-bottom: 1px dashed var(--syn);
+  font: 600 var(--fs-small)/1.3 var(--font-ui); letter-spacing: .06em; text-align: center;
+}
+
+/* ── Boot shell (main.mjs) ─────────────────────────────────────────────────────────────────────── */
+.boot-toolbar { display: flex; align-items: baseline; gap: 12px; min-width: 0; }
+.wordmark { font: 600 19px/1 var(--font-text); letter-spacing: .02em; color: var(--ink); }
+.boot-tagline { color: var(--ink-3); font-size: var(--fs-small); }
+.boot-status { color: var(--ink-2); font-size: var(--fs-small); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.boot-status[data-kind="error"] { color: var(--danger); }
+.boot-scroll { position: absolute; inset: 0; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.boot-note { color: var(--ink-2); }
+.boot-note[data-kind="error"] { color: var(--danger); max-width: var(--measure); }
+.skeleton-lanes { display: grid; gap: 1px; }
+.skeleton-lane {
+  height: var(--lane-h); background: var(--bg-1);
+  background-image: linear-gradient(90deg, transparent calc(var(--i) * 9%), var(--bg-3) calc(var(--i) * 9%),
+    var(--bg-3) calc(var(--i) * 9% + 22%), transparent calc(var(--i) * 9% + 22%));
+  background-size: 100% 6px; background-repeat: no-repeat; background-position: 0 50%;
+}
+.skeleton-lane:nth-child(even) { background-color: var(--bg-0); }
+.is-failed .skeleton-lanes { opacity: .4; }
+.mock-badge {
+  display: flex; justify-content: center; padding: 1px var(--gap); background: var(--bg-2); color: var(--amber);
+  border-bottom: 1px dashed var(--amber); font: 600 11px/18px var(--font-num); letter-spacing: .04em; text-align: center;
+}
+.noscript { padding: 24px; color: var(--ink-2); }
+
+/* ── Motion ────────────────────────────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion="full"]) *, :root:not([data-motion="full"]) *::before, :root:not([data-motion="full"]) *::after {
+    animation-duration: 0s !important; transition-duration: 0s !important; scroll-behavior: auto !important;
+  }
+}
+:root[data-motion="reduce"] *, :root[data-motion="reduce"] *::before, :root[data-motion="reduce"] *::after {
+  animation-duration: 0s !important; transition-duration: 0s !important; scroll-behavior: auto !important;
+}

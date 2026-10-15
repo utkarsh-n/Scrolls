@@ -1,0 +1,261 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/passages/:id for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/passages/:id",
+  "owner": "WP3",
+  "request": null,
+  "response": "Passage",
+  "summary": "A passage with offsets into the original, highlights (relative to `text`), its document and date card, anchor, machine annotations.",
+  "default": "p901",
+  "example_request": null,
+  "variants": {
+    "p901": {
+      "note": "The 1994 Hip-hop mark of the first 60 seconds (§1.11).",
+      "status": 200,
+      "body": {
+        "id": 901,
+        "field": "body",
+        "start": 48,
+        "end": 152,
+        "text": "the ones they never counted hold the place for the number\ncarry the zero, carry the block, carry my name",
+        "before": null,
+        "after": null,
+        "highlights": [{ "start": 58, "end": 72, "expr": 12, "occ": 55012, "variant": "carry the zero" }],
+        "lang": "en",
+        "quality": "ok",
+        "time_role": "document",
+        "document": {
+          "id": 44,
+          "title": "Zero Holds the Place",
+          "author": "MC Ledgerline (synthetic)",
+          "kind": "song",
+          "dates": [
+            {
+              "role": "publication",
+              "label": "17 May 1994",
+              "precision": "day",
+              "basis": "stated",
+              "asserted_by": "demo",
+              "is_chronology": true
+            },
+            {
+              "role": "referenced",
+              "label": "1911",
+              "precision": "year",
+              "basis": "stated",
+              "asserted_by": "demo",
+              "is_chronology": false
+            }
+          ],
+          "date_card": {
+            "label": "17 May 1994",
+            "precision": "day",
+            "basis": "stated",
+            "role": "publication",
+            "notes": []
+          },
+          "collection": "demo-world",
+          "license": "CC0 (synthetic)",
+          "is_translation": false,
+          "synthetic": true
+        },
+        "anchor": {
+          "doc_id": 44,
+          "sha256": "7de1d5c82090cbc3a00984677222db11be5cecc025c752208d2db254991eeaf7",
+          "field": "body",
+          "start": 48,
+          "end": 152
+        },
+        "machine": [
+          {
+            "kind": "cluster",
+            "cluster": 42,
+            "label": "machine label: counted · hold · ones",
+            "human_label": "honoring the uncounted",
+            "margin": 0.22,
+            "run": 14
+          }
+        ],
+        "relationships": { "out": 3, "in": 1 },
+        "annotations": 3,
+        "synthetic": true,
+        "refers_to": { "label": "1911", "precision": "year" }
+      }
+    },
+    "p77": {
+      "when": { "params": { "id": "77" } },
+      "status": 200,
+      "body": {
+        "id": 77,
+        "field": "body",
+        "start": 54,
+        "end": 150,
+        "text": "Carry the zero, children: it holds the place where nothing is, so that something can be counted.",
+        "before": null,
+        "after": null,
+        "highlights": [{ "start": 0, "end": 14, "expr": 12, "occ": 50077, "variant": "carry the zero" }],
+        "lang": "en",
+        "quality": "ok",
+        "time_role": "document",
+        "document": {
+          "id": 12,
+          "title": "Brennock's Ready Arithmetic",
+          "author": "Ada Brennock (synthetic)",
+          "kind": "book",
+          "dates": [
+            {
+              "role": "publication",
+              "label": "1911",
+              "precision": "year",
+              "basis": "stated",
+              "asserted_by": "demo",
+              "is_chronology": true
+            }
+          ],
+          "date_card": { "label": "1911", "precision": "year", "basis": "stated", "role": "publication", "notes": [] },
+          "collection": "demo-world",
+          "license": "CC0 (synthetic)",
+          "is_translation": false,
+          "synthetic": true
+        },
+        "anchor": {
+          "doc_id": 12,
+          "sha256": "011dec27da7321bb1a5d627dd50c92c29068d06b6b5988e65097daaa7160b350",
+          "field": "body",
+          "start": 54,
+          "end": 150
+        },
+        "machine": [
+          {
+            "kind": "cluster",
+            "cluster": 40,
+            "label": "machine label: column · digit · place",
+            "margin": 0.31,
+            "run": 14
+          }
+        ],
+        "relationships": { "out": 0, "in": 4 },
+        "annotations": 1,
+        "synthetic": true,
+        "reread": { "label": "re-read after 2016 (1 documented, 1 annotated)", "vantage_from": 2016 }
+      }
+    },
+    "p140_gu": {
+      "note": "Gujarati; date derived from Vikram Samvat.",
+      "when": { "params": { "id": "140" } },
+      "status": 200,
+      "body": {
+        "id": 140,
+        "field": "body",
+        "start": 57,
+        "end": 100,
+        "text": "શૂન્ય ઉપાડો, બાળકો — એ ખાલી જગ્યા સાચવે છે.",
+        "before": null,
+        "after": null,
+        "highlights": [{ "start": 0, "end": 11, "expr": 16, "occ": 51140, "variant": "શૂન્ય ઉપાડો" }],
+        "lang": "gu",
+        "quality": "ok",
+        "time_role": "document",
+        "document": {
+          "id": 18,
+          "title": "ગણિત પોથી (Ganit Pothi)",
+          "author": "Ratilal Mandaviwala (synthetic)",
+          "kind": "book",
+          "dates": [
+            {
+              "role": "publication",
+              "label": "1930–1931 (VS 1987)",
+              "precision": "range",
+              "basis": "derived",
+              "asserted_by": "demo",
+              "is_chronology": true
+            }
+          ],
+          "date_card": {
+            "label": "1930–1931 (VS 1987)",
+            "precision": "range",
+            "basis": "derived",
+            "role": "publication",
+            "notes": ["Vikram Samvat 1987 → 1930–1931 CE (calendar conversion)"]
+          },
+          "collection": "demo-world",
+          "license": "CC0 (synthetic)",
+          "is_translation": false,
+          "synthetic": true
+        },
+        "anchor": {
+          "doc_id": 18,
+          "sha256": "39a94336708bb39998962fc6eac2f21fad8cc03d22e9c0621bb81f6f776cb870",
+          "field": "body",
+          "start": 57,
+          "end": 100
+        },
+        "machine": [],
+        "relationships": { "out": 0, "in": 0 },
+        "annotations": 0,
+        "synthetic": true
+      }
+    },
+    "title_cipher": {
+      "note": "A real culture-works title passage (metadata only, no lyrics).",
+      "when": { "params": { "id": "61234" } },
+      "status": 200,
+      "body": {
+        "id": 61234,
+        "field": "title",
+        "start": 0,
+        "end": 7,
+        "text": "Hackers",
+        "before": null,
+        "after": null,
+        "highlights": [{ "start": 0, "end": 7, "expr": null, "occ": null, "variant": "hackers" }],
+        "lang": "und-Latn",
+        "quality": "ok",
+        "time_role": "document",
+        "document": {
+          "id": 61234,
+          "title": "Hackers",
+          "author": null,
+          "kind": "film",
+          "dates": [
+            {
+              "role": "publication",
+              "label": "1995",
+              "precision": "year",
+              "basis": "stated",
+              "asserted_by": "cipher.works",
+              "is_chronology": true
+            }
+          ],
+          "date_card": {
+            "label": "1995",
+            "precision": "year",
+            "basis": "stated",
+            "role": "publication",
+            "notes": ["Year from Cipher's culture-works list (Wikidata): unverified"]
+          },
+          "collection": "cipher-culture-works",
+          "license": "Wikidata CC0",
+          "is_translation": false,
+          "synthetic": false
+        },
+        "anchor": {
+          "doc_id": 61234,
+          "sha256": "56aa45d2f929cbfad5bb2212eda13b6990c209ec48fdf8eb218db059c49fee20",
+          "field": "title",
+          "start": 0,
+          "end": 7
+        },
+        "machine": [],
+        "relationships": { "out": 0, "in": 0 },
+        "annotations": 0,
+        "synthetic": false,
+        "mock_note": "Ids are illustrative; the title and year are real culture-works facts (SPEC §0.1)."
+      }
+    },
+    "not_found": {
+      "status": 404,
+      "body": { "error": { "code": "E_NOT_FOUND", "message": "No passage 999999.", "hint": null, "detail": null } }
+    }
+  }
+}

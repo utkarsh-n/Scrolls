@@ -1,0 +1,88 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/events for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/events",
+  "owner": "WP0",
+  "request": null,
+  "response": null,
+  "summary": "Shared SSE stream: `job` (progress/done), `data` (dataVersion bump), `bootstrap` (Cipher phases), `adapter`.",
+  "default": "ok",
+  "example_request": null,
+  "variants": {
+    "ok": {
+      "status": 200,
+      "keep_open": true,
+      "events": [
+        {
+          "event": "job",
+          "delay_ms": 500,
+          "data": {
+            "job": 301,
+            "type": "materialize",
+            "phase": "counting",
+            "fraction": 0.63,
+            "message": "counting… 63%",
+            "counts": {
+              "documents": 118,
+              "of": 188
+            }
+          },
+          "shape": "JobProgressEvent"
+        },
+        {
+          "event": "job",
+          "delay_ms": 800,
+          "data": {
+            "job": 301,
+            "status": "succeeded",
+            "run_id": 31
+          },
+          "shape": "JobDoneEvent"
+        },
+        {
+          "event": "data",
+          "delay_ms": 100,
+          "data": {
+            "dataVersion": 48
+          },
+          "shape": "DataEvent"
+        },
+        {
+          "event": "bootstrap",
+          "delay_ms": 1000,
+          "data": {
+            "status": "fulltext",
+            "phase": "B",
+            "progress": 0.22,
+            "message": "full text 330 / 1,516 books"
+          },
+          "shape": "BootstrapEvent"
+        },
+        {
+          "event": "adapter",
+          "delay_ms": 1000,
+          "data": {
+            "id": "stemm.openalex",
+            "loaded": false,
+            "staged": true,
+            "message": "OpenAlex (top-cited sample per field × period): 48,000 / 118,466",
+            "job": 412,
+            "progress": 0.41
+          },
+          "shape": "AdapterEvent"
+        }
+      ]
+    },
+    "error": {
+      "status": 403,
+      "body": {
+        "error": {
+          "code": "E_FORBIDDEN_ORIGIN",
+          "message": "This request did not come from the Scrolls page on this computer.",
+          "hint": "Open Scrolls at http://127.0.0.1:3460/ and retry from there.",
+          "detail": null
+        }
+      }
+    }
+  }
+}

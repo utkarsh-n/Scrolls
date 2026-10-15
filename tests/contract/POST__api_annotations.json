@@ -1,0 +1,43 @@
+{
+  "//": "OWNER: WP0 — canned POST /api/annotations for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "POST",
+  "path": "/api/annotations",
+  "owner": "WP5",
+  "request": "AnnotationRequest",
+  "response": "AnnotationRev",
+  "summary": "Create an annotation (passage and occurrence targets need an anchor).",
+  "default": "ok",
+  "example_request": {
+    "target": { "type": "passage", "ref": "901" },
+    "anchor": {
+      "doc_id": 44,
+      "sha256": "7de1d5c82090cbc3a00984677222db11be5cecc025c752208d2db254991eeaf7",
+      "field": "body",
+      "start": 0,
+      "end": 104,
+      "quote": "the ones they never counted",
+      "prefix": "",
+      "suffix": " hold the place for the number\nc"
+    },
+    "kind": "interpretation",
+    "body_md": "Reads as a tribute to the uncounted.",
+    "dimensions": { "pragmatic_function": "reclaimed" },
+    "tags": ["irony"],
+    "evidence_refs": [{ "type": "passage", "id": 77, "start": 0, "end": 60, "role": "supporting" }],
+    "layer": "Reading B"
+  },
+  "variants": {
+    "ok": { "status": 200, "body": { "id": 224, "rev": 1 } },
+    "invalid": {
+      "status": 400,
+      "body": {
+        "error": {
+          "code": "E_VALIDATION",
+          "message": "a passage target needs an anchor",
+          "hint": "Select the words the note is about.",
+          "detail": { "field": "anchor" }
+        }
+      }
+    }
+  }
+}

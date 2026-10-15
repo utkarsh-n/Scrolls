@@ -1,0 +1,47 @@
+<!-- OWNER: WP0 — the HTML shell: mount points, the six stylesheets, one module script (SPEC §12.2, §8) -->
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Scrolls — a local observatory of how expressions and their readings change over time.">
+  <!-- Local only (§13 rule 16): every request stays on this origin. -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <title>Scrolls — A Living Atlas of Meaning</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%230E1013'/%3E%3Cpath d='M3 5h10M3 8h7M3 11h9' stroke='%23EDE6D6' stroke-width='1.6' stroke-linecap='round'/%3E%3Ccircle cx='12.5' cy='8' r='1.4' fill='%234FD8E8'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/styles/tokens.css">
+  <link rel="stylesheet" href="/styles/base.css">
+  <link rel="stylesheet" href="/styles/shell.css">
+  <link rel="stylesheet" href="/styles/timeline.css">
+  <link rel="stylesheet" href="/styles/panels.css">
+  <link rel="stylesheet" href="/styles/import.css">
+  <script type="module" src="/ui/main.mjs"></script>
+</head>
+<body>
+  <a class="skip-link" href="#scroll">Skip to the Scroll</a>
+  <div id="app" class="app">
+    <div id="ribbon" class="region"></div>
+    <header id="toolbar" class="region" aria-label="Toolbar"></header>
+    <div id="jobs" class="region" aria-label="Jobs"></div>
+    <nav id="minimap" class="region" aria-label="Overview of all time (minimap)"></nav>
+    <main id="stage" class="stage">
+      <div id="lanes" class="region" aria-label="Lanes"></div>
+      <aside id="shelf-undated" class="region" aria-label="Undated — outside chronology"></aside>
+      <section id="scroll" class="region" aria-label="The Scroll" tabindex="-1"></section>
+      <aside id="shelf-scheduled" class="region" aria-label="Scheduled — dated after today"></aside>
+    </main>
+    <aside id="inspector" class="region" aria-label="Inspector — Then, Now, Next"></aside>
+    <aside id="panel" class="region" aria-label="Panel"></aside>
+    <div id="legend" class="region" aria-label="Legend"></div>
+    <section id="a11y" class="region" aria-label="Table alternative"></section>
+  </div>
+  <div id="sheet" class="region"></div>
+  <div id="tour" class="region"></div>
+  <div id="toasts" class="region" aria-label="Notifications"></div>
+  <div id="live-polite" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+  <div id="live-assertive" class="visually-hidden" aria-live="assertive" aria-atomic="true" role="alert"></div>
+  <noscript><p class="noscript">Scrolls needs JavaScript (ES modules). It runs entirely on this computer and talks only to its own local server.</p></noscript>
+</body>
+</html>

@@ -1,0 +1,84 @@
+{
+  "//": "OWNER: WP0 — canned POST /api/expressions for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "POST",
+  "path": "/api/expressions",
+  "owner": "WP3",
+  "request": "ExpressionRequest",
+  "response": "Expression",
+  "summary": "Track an expression: variants + materialization state (a job when counting is needed).",
+  "default": "materializing",
+  "example_request": { "surface": "carry the zero", "lang": "en", "kind": "phrase", "corpus": "demo" },
+  "variants": {
+    "materializing": {
+      "status": 200,
+      "body": {
+        "expression": { "id": 12, "surface": "carry the zero", "norm": "carry the zero", "kind": "phrase", "lang": "en", "synthetic": true },
+        "variants": [
+          { "id": 31, "form": "carry the zero", "type": "identity", "status": "documented", "enabled": true, "n": null },
+          { "id": 32, "form": "carries the zero", "type": "inflection", "rule": "en-inflect@1", "status": "computed", "enabled": true, "n": null },
+          { "id": 33, "form": "carried the zero", "type": "inflection", "rule": "en-inflect@1", "status": "computed", "enabled": true, "n": null },
+          { "id": 34, "form": "carrying the zero", "type": "inflection", "rule": "en-inflect@1", "status": "computed", "enabled": true, "n": null }
+        ],
+        "state": { "status": "materializing", "job": 301 }
+      }
+    },
+    "ready": {
+      "note": "Already tracked: counts are known.",
+      "status": 200,
+      "body": {
+        "expression": { "id": 12, "surface": "carry the zero", "norm": "carry the zero", "kind": "phrase", "lang": "en", "synthetic": true },
+        "variants": [
+          { "id": 31, "form": "carry the zero", "type": "identity", "status": "documented", "enabled": true, "n": 331 },
+          { "id": 32, "form": "carries the zero", "type": "inflection", "rule": "en-inflect@1", "status": "computed", "enabled": true, "n": 6 },
+          { "id": 33, "form": "carried the zero", "type": "inflection", "rule": "en-inflect@1", "status": "computed", "enabled": true, "n": 2 },
+          { "id": 34, "form": "carrying the zero", "type": "inflection", "rule": "en-inflect@1", "status": "computed", "enabled": true, "n": 1 }
+        ],
+        "state": { "status": "ready", "job": null }
+      }
+    },
+    "invalid": {
+      "status": 400,
+      "body": {
+        "error": {
+          "code": "E_VALIDATION",
+          "message": "The expression is empty.",
+          "hint": "Type a word, a phrase or a symbol.",
+          "detail": { "field": "surface" }
+        }
+      }
+    },
+    "real_members": {
+      "note": "Real (contract 1.3.0, the m5-stemm clone: demo + Cipher + STEMM): 'gene' tracked in the virtual corpus real — the first member's expression, counts added up over the members, each member's own state under members. The claim's relation word is left out (copy scanner).",
+      "when": { "body": {"corpus": "real"} },
+      "status": 200,
+      "body": {
+        "expression": { "id": 11, "surface": "gene", "norm": "gene", "kind": "word", "lang": "en", "corpus": "real", "synthetic": false },
+        "variants": [
+          { "id": 57, "form": "gene", "type": "identity", "status": "documented", "enabled": true, "n": 2587, "lang": "en" },
+          { "id": 58, "form": "genes", "type": "inflection", "status": "computed", "enabled": true, "n": 1634, "rule": "en-inflect@1", "lang": "en" },
+          { "id": 59, "form": "gened", "type": "inflection", "status": "computed", "enabled": true, "n": 0, "rule": "en-inflect@1", "lang": "en" },
+          { "id": 60, "form": "gening", "type": "inflection", "status": "computed", "enabled": true, "n": 0, "rule": "en-inflect@1", "lang": "en" },
+          { "id": 61, "form": "gener", "type": "inflection", "status": "computed", "enabled": true, "n": 30, "rule": "en-inflect@1", "lang": "en" },
+          { "id": 62, "form": "geners", "type": "inflection", "status": "computed", "enabled": true, "n": 0, "rule": "en-inflect@1", "lang": "en" },
+          { "id": 63, "form": "gene's", "type": "inflection", "status": "computed", "enabled": true, "n": 33, "rule": "en-inflect@1", "lang": "en" }
+        ],
+        "state": { "status": "materializing", "job": 98, "run": null, "n": 4284, "docs": 1842, "names_excluded": 214 },
+        "claims": [
+          {
+            "label": "Wiktionary: coined 1909 (external claim)",
+            "date": { "lo_year": 1909, "hi_year": 1909, "label": "1909" },
+            "display": "default",
+            "reasons": [],
+            "source": "wiktionary",
+            "license": "CC BY-SA 4.0 / GFDL",
+            "highlight": { "passage": 2763199, "start": 147, "end": 205 }
+          }
+        ],
+        "members": [
+          { "corpus": "cipher", "id": 11, "state": {"status": "ready", "job": null, "run": 17, "n": 129, "docs": 16, "names_excluded": 99} },
+          { "corpus": "stemm", "id": 8, "state": {"status": "materializing", "job": 98, "run": 40, "n": 4155, "docs": 1826, "names_excluded": 115} }
+        ]
+      }
+    }
+  }
+}

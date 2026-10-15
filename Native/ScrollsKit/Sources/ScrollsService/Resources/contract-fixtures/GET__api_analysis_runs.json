@@ -1,0 +1,61 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/analysis/runs for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/analysis/runs",
+  "owner": "WP4",
+  "request": null,
+  "response": "AnalysisRuns",
+  "summary": "Runs with versions and parameters (`?stage=&expr=`).",
+  "default": "ok",
+  "example_request": null,
+  "variants": {
+    "ok": {
+      "status": 200,
+      "body": {
+        "items": [
+          {
+            "id": 31,
+            "stage": "materialize",
+            "status": "succeeded",
+            "pipeline_version": "materialize@1",
+            "params": { "expr": 12, "variants": "default" },
+            "started_at": "2026-10-04T08:30:00.000Z",
+            "finished_at": "2026-10-04T08:30:00.000Z"
+          },
+          {
+            "id": 14,
+            "stage": "cluster",
+            "status": "succeeded",
+            "pipeline_version": "cluster@1",
+            "params": { "expr": 12, "k": 4, "seed": 1994 },
+            "started_at": "2026-10-04T08:40:00.000Z",
+            "finished_at": "2026-10-04T08:41:00.000Z",
+            "representation": "tfidf-hash-4096"
+          },
+          {
+            "id": 9,
+            "stage": "reuse-index",
+            "status": "succeeded",
+            "pipeline_version": "winnow@1",
+            "params": { "k": 8, "w": 6 },
+            "started_at": "2026-10-04T08:35:00.000Z",
+            "finished_at": "2026-10-04T08:36:00.000Z"
+          }
+        ],
+        "cursor": null
+      }
+    },
+    "empty": { "when": { "query": { "stage": "vectors" } }, "status": 200, "body": { "items": [], "cursor": null } },
+    "error": {
+      "status": 403,
+      "body": {
+        "error": {
+          "code": "E_FORBIDDEN_ORIGIN",
+          "message": "This request did not come from the Scrolls page on this computer.",
+          "hint": "Open Scrolls at http://127.0.0.1:3460/ and retry from there.",
+          "detail": null
+        }
+      }
+    }
+  }
+}

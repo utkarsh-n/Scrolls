@@ -1,0 +1,61 @@
+{
+  "//": "OWNER: WP0 — canned PATCH /api/expressions/:id/variants for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "PATCH",
+  "path": "/api/expressions/:id/variants",
+  "owner": "WP3",
+  "request": "VariantsPatch",
+  "response": "Expression",
+  "summary": "Enable or disable variants; counting reruns as a job.",
+  "default": "ok",
+  "example_request": { "variants": [{ "id": 34, "enabled": false }] },
+  "variants": {
+    "ok": {
+      "status": 200,
+      "body": {
+        "expression": {
+          "id": 12,
+          "surface": "carry the zero",
+          "norm": "carry the zero",
+          "kind": "phrase",
+          "lang": "en",
+          "synthetic": true
+        },
+        "variants": [
+          { "id": 31, "form": "carry the zero", "type": "identity", "status": "documented", "enabled": true, "n": 331 },
+          {
+            "id": 32,
+            "form": "carries the zero",
+            "type": "inflection",
+            "rule": "en-inflect@1",
+            "status": "computed",
+            "enabled": true,
+            "n": 6
+          },
+          {
+            "id": 33,
+            "form": "carried the zero",
+            "type": "inflection",
+            "rule": "en-inflect@1",
+            "status": "computed",
+            "enabled": true,
+            "n": 2
+          },
+          {
+            "id": 34,
+            "form": "carrying the zero",
+            "type": "inflection",
+            "rule": "en-inflect@1",
+            "status": "computed",
+            "enabled": false,
+            "n": null
+          }
+        ],
+        "state": { "status": "materializing", "job": 306 }
+      }
+    },
+    "not_found": {
+      "status": 404,
+      "body": { "error": { "code": "E_NOT_FOUND", "message": "No expression 999.", "hint": null, "detail": null } }
+    }
+  }
+}

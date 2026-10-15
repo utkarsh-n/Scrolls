@@ -1,0 +1,50 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/hypothesis-groups/:id for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/hypothesis-groups/:id",
+  "owner": "WP5",
+  "request": null,
+  "response": "HypothesisGroup",
+  "summary": "Competing hypotheses for one target, side by side; confirming one never rejects the others.",
+  "default": "ok",
+  "example_request": null,
+  "variants": {
+    "ok": {
+      "status": 200,
+      "body": {
+        "id": 4,
+        "question": "Where does Vyas's 2017 line come from?",
+        "target": "passage:2210",
+        "created_by": "human:Reader A (synthetic)",
+        "hypotheses": [
+          {
+            "rel_id": 7811,
+            "dst": "passage:901",
+            "label": "from Ledgerline, 1994",
+            "evidence_status": "proposed",
+            "review_status": "disputed",
+            "author": "Reader A (synthetic)",
+            "evidence": 1
+          },
+          {
+            "rel_id": 7812,
+            "dst": "passage:140",
+            "label": "from Mandaviwala's primer (VS 1987)",
+            "evidence_status": "proposed",
+            "review_status": "unreviewed",
+            "author": "Reader B (synthetic)",
+            "evidence": 1
+          }
+        ],
+        "text": "⚖ 2 competing",
+        "synthetic": true
+      }
+    },
+    "not_found": {
+      "status": 404,
+      "body": {
+        "error": { "code": "E_NOT_FOUND", "message": "No hypothesis group 999.", "hint": null, "detail": null }
+      }
+    }
+  }
+}

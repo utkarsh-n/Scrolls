@@ -1,0 +1,118 @@
+{
+  "//": "OWNER: WP0 — canned PUT /api/imports/:id/mapping for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "PUT",
+  "path": "/api/imports/:id/mapping",
+  "owner": "WP1",
+  "request": "ImportMappingRequest",
+  "response": "ImportValidation",
+  "summary": "Validate a mapping with a dry run over all rows → projected ImportSummary.",
+  "default": "ok",
+  "example_request": {
+    "mapping": {
+      "format": "csv",
+      "delimiter": ",",
+      "header": true,
+      "encoding": "utf-8",
+      "collection": { "slug": "my-zines", "name": "Zines 1977–1999", "unit": "tokens", "license": "own" },
+      "fields": {
+        "ext_id": { "from": "id" },
+        "title": { "from": "Title", "transform": ["trim"] },
+        "text": { "from": "body" },
+        "date": { "from": "issued", "transform": [{ "date": { "circa_radius": 5, "two_digit_century": null } }] },
+        "language": { "from": "lang", "transform": [{ "map": { "English": "en", "Spanish": "es" } }] },
+        "community": { "const": "east-side zine scene" },
+        "cites": { "from": "refs", "transform": [{ "split": ";" }] }
+      },
+      "options": { "dedupe": "flag", "detect_language": true, "on_bad_row": "skip_and_report", "line_mode": false }
+    }
+  },
+  "variants": {
+    "ok": {
+      "status": 200,
+      "body": {
+        "validation": {
+          "import_batch_id": 17,
+          "collection": "my-zines",
+          "file": {
+            "name": "zines.csv",
+            "sha256": "9c1e5b0d2f7a4c38e1b6a9d0f3c2e7b4a1d8c5f2e9b6a3d0c7f4e1b8a5d2c9f6",
+            "bytes": 4183022,
+            "encoding": "utf-8",
+            "format": "csv",
+            "delimiter": ","
+          },
+          "rows": { "seen": 2000, "accepted": 1961, "accepted_with_warnings": 214, "rejected": 39 },
+          "documents": { "created": 1958, "duplicates_flagged": 3, "metadata_only": 12, "translations": 4 },
+          "passages": 15422,
+          "tokens": 2310455,
+          "dates": {
+            "day": 120,
+            "month": 301,
+            "year": 1288,
+            "decade": 140,
+            "century": 9,
+            "range": 30,
+            "circa": 61,
+            "unknown": 27,
+            "scheduled": 0,
+            "span": { "from": "1871", "to": "1999-08-02" }
+          },
+          "languages": { "en": 1801, "es": 102, "und": 55 },
+          "relationships": { "documented": 88, "proposed": 4, "unresolved_targets": 2 },
+          "mapping_decisions": [
+            {
+              "target": "date",
+              "from": "issued",
+              "transform": "date(circa_radius=5)",
+              "parse_rate": 0.986,
+              "reason": "92% of values parse as dates"
+            }
+          ],
+          "problems": {
+            "by_code": { "E_DATE_UNPARSEABLE": 21, "W_LANG_MISMATCH": 55, "E_ROW_RAGGED": 39 },
+            "first": [
+              {
+                "code": "E_DATE_UNPARSEABLE",
+                "severity": "warning",
+                "line": 9,
+                "col": null,
+                "field": "issued",
+                "value_excerpt": "Spring-ish 1850",
+                "message": "Row 9 date 'Spring-ish 1850' was not recognised; row imported as undated.",
+                "suggestion": "Try 'spring 1850' (Mar–May 1850) or 'c. 1850'."
+              },
+              {
+                "code": "E_ROW_RAGGED",
+                "severity": "rejected",
+                "line": 57,
+                "col": null,
+                "field": "title",
+                "value_excerpt": null,
+                "message": "Row 57 has 9 fields, the header has 8.",
+                "suggestion": "Check for an unquoted comma in 'title'."
+              }
+            ],
+            "download": "/api/imports/17/problems.csv"
+          },
+          "data_version": null,
+          "run_id": null,
+          "started_at": "2026-10-04T09:10:00.000Z",
+          "finished_at": "2026-10-04T09:10:00.000Z",
+          "duration_ms": 5210,
+          "mock_note": "Mock fixture: illustrative values, not measured from your data."
+        }
+      }
+    },
+    "invalid_mapping": {
+      "status": 400,
+      "body": {
+        "error": {
+          "code": "E_MAPPING_INVALID",
+          "message": "Target 'date' maps to column 'issued_on', which the file does not have.",
+          "hint": "Pick a column from the preview.",
+          "detail": { "target": "date", "from": "issued_on" }
+        }
+      }
+    }
+  }
+}

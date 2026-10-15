@@ -1,0 +1,26 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/snapshots/:file for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/snapshots/:file",
+  "owner": "WP3",
+  "request": null,
+  "response": null,
+  "summary": "A stored snapshot file.",
+  "default": "ok",
+  "example_request": null,
+  "variants": {
+    "ok": {
+      "status": 200,
+      "shape": null,
+      "unshaped": "Binary image (1×1 placeholder in mock mode).",
+      "content_type": "image/png",
+      "base64": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGPgExAGAABhADJ5YPWCAAAAAElFTkSuQmCC"
+    },
+    "not_found": {
+      "status": 404,
+      "body": {
+        "error": { "code": "E_NOT_FOUND", "message": "No snapshot missing.png.", "hint": null, "detail": null }
+      }
+    }
+  }
+}

@@ -1,0 +1,139 @@
+/* OWNER: WP0 — design tokens (SPEC §8.7, §1.4, §8.6). Frozen contract: names change additively only. */
+
+/*
+ * Dark theme only (Appendix A: "a dark observatory"). Every contrast ratio below was MEASURED with the
+ * WCAG 2.x relative-luminance formula on 2026-10-04 (sRGB, no alpha):
+ *
+ *   text token  on bg-0   bg-1   bg-2   bg-3      use
+ *   --ink         15.32  14.04  12.54  10.67      body text, bars, marks
+ *   --ink-2        9.36   8.58   7.66   6.52      secondary text
+ *   --ink-3        5.41   4.95   4.42   3.77      meta text: ONLY on bg-0/bg-1 and ≥ 12 px (AA needs 4.5)
+ *   --cyan        11.18  10.24   9.15   7.79      selection & navigation
+ *   --amber        9.19   8.42   7.52   6.40      historical reference
+ *   --violet       8.08   7.40   6.61   5.63      reinterpretation
+ *   --danger       7.44   6.82   6.09   5.18      date conflicts, errors, rejected
+ *   --ok          10.45   9.58   8.55   7.28      job success only
+ *   --syn         12.31  11.28  10.07   8.57      SYNTHETIC ribbon and badges
+ *   --syn on --syn-stripe over bg-1: 7.73 (over bg-0: 8.72) — the ribbon stays AA on its stripes.
+ *   --bg-0 on --cyan / --amber / --ink: 11.18 / 9.19 / 15.32 (filled buttons and chips).
+ *
+ * Hue pairs differ little in luminance (cyan/amber 1.22, cyan/violet 1.38, amber/violet 1.14), so hue
+ * is ALWAYS backed by pattern, glyph and a word (§8.7, ui.evidence-style test). --rule is 1.67:1 on
+ * bg-0: decorative separators only; a control's boundary uses --edge (= --ink-3, 5.41:1, WCAG 1.4.11).
+ */
+:root {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --bg-0: #0E1013;   /* deep charcoal canvas */
+  --bg-1: #161A20;   /* panels; alternate lane band */
+  --bg-2: #1F242C;   /* raised, popovers */
+  --bg-3: #2A303A;   /* hover */
+  --rule: #343A45;   /* non-text rules, lane banding edges (decorative, 1.67:1) */
+
+  /* Text and roles */
+  --ink: #EDE6D6;    /* warm ivory text, bars — 15.32:1 on bg-0 */
+  --ink-2: #BDB5A5;  /* secondary text — 9.36:1 */
+  --ink-3: #8E887B;  /* meta text 5.41:1 on bg-0, 4.95 on bg-1 — never on bg-2/bg-3 */
+  --cyan: #4FD8E8;   /* selection & navigation: playhead, focus, selected marks, range, minimap bracket — 11.18:1 */
+  --amber: #E8A84A;  /* historical reference: arcs to earlier material, THEN, deep-time bands, CUE — 9.19:1 */
+  --violet: #B59AF5; /* reinterpretation: feedback arcs, NOW, re-read halo, hypotheses — 8.08:1 */
+  --danger: #F2826F; /* date conflicts, errors, rejected — 7.44:1 */
+  --ok: #7BD389;     /* job success only — 10.45:1 */
+  --syn: #D9CFB8;    /* SYNTHETIC ribbon/badges text — 12.31:1 (deliberately not a semantic hue) */
+  --ivory-2: var(--ink-2); /* role hue 'ivory2' of evidence-style.mjs: similarity, kindred, counterpart */
+
+  /* Patterns (CSS; canvas painters build the same patterns from these colours) */
+  --syn-stripe: repeating-linear-gradient(135deg, rgba(217, 207, 184, .16) 0 3px, transparent 3px 8px);
+  --hatch-none: repeating-linear-gradient(45deg, rgba(237, 230, 214, .10) 0 1px, transparent 1px 6px);  /* uncovered: "no sources" */
+  --hatch-low: repeating-linear-gradient(45deg, rgba(237, 230, 214, .06) 0 1px, transparent 1px 4px);   /* low coverage underlay (light) */
+  --stripes-est: repeating-linear-gradient(135deg, rgba(237, 230, 214, .22) 0 1px, transparent 1px 3px); /* mostly estimated dates (3 px) */
+  --dots-pending: radial-gradient(rgba(237, 230, 214, .22) 1px, transparent 1.2px) 0 0 / 6px 6px;       /* "indexing — not yet looked" */
+
+  /* Translucent role tints (halos, washes, selection) — decoration only, never the sole carrier of meaning */
+  --cyan-halo: rgba(79, 216, 232, .20);   /* selection glow: cyan 2 px + 6 px 20% halo (§1.4) */
+  --amber-tint: rgba(232, 168, 74, .14);
+  --violet-tint: rgba(181, 154, 245, .14);
+  --danger-tint: rgba(242, 130, 111, .14);
+  --wash-ink: rgba(237, 230, 214, .18);   /* precision wash band opacity .18 (§1.4) */
+  --bar-highlight: rgba(255, 255, 255, .12);
+  --edge: var(--ink-3);                   /* control boundaries (≥ 3:1) */
+  --focus: var(--cyan);
+  --scrim: rgba(14, 16, 19, .72);
+  --shadow: 0 8px 24px rgba(0, 0, 0, .45);
+
+  /* Geometry (§1.4, §1.5, §8.6) */
+  --radius: 6px;
+  --radius-sm: 3px;
+  --gap: 8px;
+  --lane-h: 40px;           /* a lane with one strand */
+  --slot-h: 24px;           /* strand slot (default) */
+  --slot-h-compact: 16px;
+  --slot-h-comfortable: 36px;
+  --header-w: 168px;        /* lane headers (DOM) */
+  --shelf-w: 88px;          /* UNDATED shelf */
+  --shelf-sched-w: 64px;    /* SCHEDULED shelf */
+  --minimap-h: 28px;        /* 20 px on narrow viewports */
+  --coverage-h: 24px;       /* coverage track under the ruler */
+  --ruler-h: 32px;
+  --baseline-h: 32px;       /* external baseline track */
+  --toolbar-h: 44px;
+  --ribbon-h: 24px;
+  --touch: 44px;            /* playhead handle and every touch target */
+  --inspector-h: 38vh;
+  --panel-w: 480px;
+  --focus-ring: 0 0 0 2px var(--bg-0), 0 0 0 4px var(--focus);   /* 2 px cyan + 2 px bg-0 offset (§8.6) */
+
+  /* Type (§1.4) */
+  --font-ui: system-ui, -apple-system, "SF Pro Text", "Segoe UI", sans-serif;
+  --font-text: ui-serif, "New York", "Iowan Old Style", Georgia, "Noto Serif Devanagari", "Noto Serif Gujarati", serif;
+  --font-num: ui-monospace, "SF Mono", Menlo, monospace;
+  --fs-ui: 13px;
+  --fs-small: 12px;         /* the smallest size --ink-3 may use */
+  --fs-text: 17px;          /* passages */
+  --lh-ui: 1.45;
+  --lh-text: 1.6;
+  --measure: 68ch;
+
+  /* Motion (§1.9): zeroed under reduced motion */
+  --dur-fast: 120ms;
+  --dur: 150ms;             /* mark fade-in */
+  --dur-slow: 240ms;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+
+  /* Stacking */
+  --z-canvas: 0;
+  --z-shelf: 2;
+  --z-toolbar: 10;
+  --z-panel: 20;
+  --z-sheet: 30;
+  --z-tour: 40;
+  --z-toast: 50;
+}
+
+body { background: var(--bg-0); color: var(--ink); font: var(--fs-ui)/var(--lh-ui) var(--font-ui); }
+
+/* Reduced motion: the OS setting, or the app's own switch (main.mjs sets html[data-motion]). */
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion="full"]) { --dur-fast: 0ms; --dur: 0ms; --dur-slow: 0ms; }
+}
+:root[data-motion="reduce"] { --dur-fast: 0ms; --dur: 0ms; --dur-slow: 0ms; }
+
+/* Narrow viewports (§8.6): minimap 20 px, narrower lane headers and shelves become chips. */
+@media (max-width: 719.98px) {
+  :root { --minimap-h: 20px; --header-w: 112px; --shelf-w: 0px; --shelf-sched-w: 0px; --inspector-h: 60vh; }
+}
+
+/* Forced colours: the evidence encoding never relies on colour, so system colours keep every pattern. */
+@media (forced-colors: active) {
+  :root {
+    --bg-0: Canvas; --bg-1: Canvas; --bg-2: Canvas; --bg-3: Canvas; --rule: GrayText;
+    --ink: CanvasText; --ink-2: CanvasText; --ink-3: GrayText; --syn: CanvasText;
+    --cyan: Highlight; --amber: CanvasText; --violet: CanvasText; --danger: CanvasText; --ok: CanvasText;
+    --edge: CanvasText; --focus: Highlight;
+    --syn-stripe: repeating-linear-gradient(135deg, CanvasText 0 1px, transparent 1px 8px);
+    --hatch-none: repeating-linear-gradient(45deg, GrayText 0 1px, transparent 1px 6px);
+    --stripes-est: repeating-linear-gradient(135deg, CanvasText 0 1px, transparent 1px 3px);
+    --dots-pending: radial-gradient(GrayText 1px, transparent 1.2px) 0 0 / 6px 6px;
+  }
+}

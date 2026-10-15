@@ -1,0 +1,97 @@
+{
+  "//": "OWNER: WP2 — the guided tour of the SYNTHETIC demo (SPEC §9.7; 10 steps ≈ 4 minutes; steps 1–3 are the first 60 seconds). Served by GET /api/tour with ids resolved and {placeholders} filled from the database: numbers in 'see' are computed at request time, never written here.",
+  "version": 1,
+  "minutes": 4,
+  "steps": [
+    {
+      "n": 1,
+      "action": "Opens the app",
+      "see": "'carry the zero' across communities, lanes = community, the SYNTHETIC ribbon. Hover 1940–49: hatched, 'no sources (archive gap — synthetic)'. The 1980s Hip-hop bin: a dotted baseline, '0 in {hiphop_1980s_tokens} tokens — looked, found none'.",
+      "learn": "Bars are observations; absence has two kinds.",
+      "anchor": "#scroll",
+      "state": { "corpus": "demo", "strands": ["carry the zero"], "lanes": "community" },
+      "first_minute": true
+    },
+    {
+      "n": 2,
+      "action": "Clicks the 1994 Hip-hop mark",
+      "see": "The inspector opens with the highlighted span at its offsets, SYN, the date chip '{a15_date} · stated · day' and a 'refers to {a15_referenced}' chip.",
+      "learn": "Every mark opens its passage.",
+      "anchor": "#inspector",
+      "state": { "corpus": "demo", "strands": ["carry the zero"], "lanes": "community",
+        "selection": { "type": "occurrence", "anchor": "A15", "expr": "carry the zero", "fallback": { "type": "passage", "anchor": "A15", "quote": "carry the zero, carry the block" } } },
+      "first_minute": true
+    },
+    {
+      "n": 3,
+      "action": "Clicks the amber arc to 1911, then the dashed arc 1963→1911; presses E twice",
+      "see": "DOC (a synthetic liner-notes record) next to CALC ({a11_a4_run} shared tokens, {reuse_run}); with \"documented only\" the computed arc disappears.",
+      "learn": "Evidence status is visible and filterable.",
+      "anchor": "#scroll",
+      "state": { "corpus": "demo", "strands": ["carry the zero"], "lanes": "community", "evidence": { "computed": 0, "proposed": 0 },
+        "selection": { "type": "relationship", "key": "liner-citation" } },
+      "first_minute": true
+    },
+    {
+      "n": 4,
+      "action": "Presses ▶ (Step ▸ with reduced motion)",
+      "see": "The vantage runs 1925 → 2026 and pauses over the 1940s gap; at 2016 the 1911 primer gains a violet halo and a feedback arc appears below the lanes.",
+      "learn": "Later works change how earlier ones are read — only where a documented or annotated link says so.",
+      "anchor": "#scroll",
+      "state": { "corpus": "demo", "strands": ["carry the zero"], "lanes": "community", "vantage": 2016 }
+    },
+    {
+      "n": 5,
+      "action": "Presses L → lanes = context group",
+      "see": "Context groups with machine labels, dashed ⑂ splits and stability, 'representation: tfidf-hash-4096'; one group renamed by Reader A (a label annotation; the machine label stays visible).",
+      "learn": "Groups are computed hypotheses with editable labels.",
+      "anchor": "#lanes",
+      "state": { "corpus": "demo", "strands": ["carry the zero"], "lanes": "cluster" }
+    },
+    {
+      "n": 6,
+      "action": "Selects the 1994 song and reads Then / Now / Next",
+      "see": "Then = the 1911 primer and the 1958 memo (contemporaries, with denominators); Now = 1994; Next = 2003, 2016, 2017 and Reader A's hypothesis card.",
+      "learn": "Temporal layering, read from documents and their settings.",
+      "anchor": "#inspector",
+      "state": { "corpus": "demo", "strands": ["carry the zero"], "lanes": "community", "panels": { "inspector": "tnn" },
+        "selection": { "type": "passage", "anchor": "A15", "quote": "carry the zero, carry the block" } }
+    },
+    {
+      "n": 7,
+      "action": "Presses A / B on 1955–1985 and 1994–2026, then C",
+      "see": "Coverage first (with a composition caveat), frequency with CIs, context shares with CIs; displacement refused (the slices hold about {slice_a_tokens} and {slice_b_tokens} tokens; aligned spaces need 3M).",
+      "learn": "Scrolls computes what the evidence supports and refuses the rest.",
+      "anchor": "#panel",
+      "state": { "corpus": "demo", "strands": ["carry the zero"], "lanes": "community", "panels": { "right": "compare" },
+        "compare": { "a": [1955, 1985], "b": [1994, 2026] } }
+    },
+    {
+      "n": 8,
+      "action": "Searches ◉ and compares 1890–1950 with 1980–2026",
+      "see": "A gate card names the occurrences in each slice and says context-share shift needs ≥ 50 per slice; no widening inside this corpus reaches the gate (◉ has {kiln_total} matches in all). Frequency and KWIC still show. Lineage shows one DOC arc and Reader A's rejected allusion (struck, 'show rejected').",
+      "learn": "Similarity is not ancestry; gates explain themselves.",
+      "anchor": "#panel",
+      "state": { "corpus": "demo", "strands": ["◉"], "lanes": "community", "panels": { "right": "compare" },
+        "compare": { "a": [1890, 1950], "b": [1980, 2026] } }
+    },
+    {
+      "n": 9,
+      "action": "Opens 'ghost in the margin' lineage (G), then the notebook (N) on the 1994 song, then S",
+      "see": "⚖ the disputed cue citation (1971), the Vyas hypothesis group, chain strength 'weakest link: PROPOSED'; Reader A and Reader B layers with a revision diff; a saved-view link.",
+      "learn": "Disagreement is preserved; views are reproducible.",
+      "anchor": "#panel",
+      "state": { "corpus": "demo", "strands": ["ghost in the margin"], "lanes": "community", "panels": { "right": "lineage" },
+        "lineage": { "anchor": "A3", "quote": "There is a ghost in the margin of every ledger" } }
+    },
+    {
+      "n": 10,
+      "action": "'Now try real data' → Cipher → zero",
+      "see": "The roots.tsv band 'Sanskrit śūnyá \"blank\" — period, not date'; hi/gu Wikisource lanes; culture titles with 'zero' (per 1,000 works); the 1928 modality seam.",
+      "learn": "The same rules on your own corpus.",
+      "anchor": "#scroll",
+      "state": { "corpus": "cipher", "strands": ["zero"], "lang": "en" },
+      "synthetic": false
+    }
+  ]
+}

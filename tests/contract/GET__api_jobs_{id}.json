@@ -1,0 +1,74 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/jobs/:id for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/jobs/:id",
+  "owner": "WP0",
+  "request": null,
+  "response": "Job",
+  "summary": "One job row.",
+  "default": "running",
+  "example_request": null,
+  "variants": {
+    "running": {
+      "status": 200,
+      "body": {
+        "id": 301,
+        "type": "materialize",
+        "status": "running",
+        "progress": 0.41,
+        "phase": "counting",
+        "message": "counting… 41%",
+        "counts": { "documents": 79, "of": 188 },
+        "run_id": null,
+        "created_at": "2026-10-04T09:01:00.000Z",
+        "started_at": "2026-10-04T09:01:00.000Z",
+        "finished_at": null
+      }
+    },
+    "succeeded": {
+      "when": { "params": { "id": "288" } },
+      "status": 200,
+      "body": {
+        "id": 288,
+        "type": "cluster",
+        "status": "succeeded",
+        "progress": 1,
+        "phase": "done",
+        "message": "k = 4 context groups (stability ≥ 0.6)",
+        "counts": { "k": 4, "occurrences": 340 },
+        "run_id": 14,
+        "result": { "run": 14, "k": 4 },
+        "created_at": "2026-10-04T08:40:00.000Z",
+        "started_at": "2026-10-04T08:40:00.000Z",
+        "finished_at": "2026-10-04T08:41:00.000Z"
+      }
+    },
+    "failed": {
+      "note": "A failed import job carries the error with message and hint.",
+      "when": { "params": { "id": "295" } },
+      "status": 200,
+      "body": {
+        "id": 295,
+        "type": "import",
+        "status": "failed",
+        "progress": 0.08,
+        "phase": "parse",
+        "message": "stopped at line 77",
+        "counts": null,
+        "run_id": null,
+        "error": {
+          "code": "E_CSV_QUOTE",
+          "message": "An unclosed quote starts on line 77, column 14 and runs to the end of the file.",
+          "hint": "Check for a stray \" in 'notes'."
+        },
+        "created_at": "2026-10-04T08:50:00.000Z",
+        "started_at": "2026-10-04T08:50:00.000Z",
+        "finished_at": "2026-10-04T08:51:00.000Z"
+      }
+    },
+    "not_found": {
+      "status": 404,
+      "body": { "error": { "code": "E_NOT_FOUND", "message": "No job 999.", "hint": null, "detail": null } }
+    }
+  }
+}

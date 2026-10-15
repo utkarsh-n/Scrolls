@@ -1,0 +1,870 @@
+{
+  "generated_with": {
+    "tokenizer": "u61m-1",
+    "now": "2026-10-04"
+  },
+  "documents": [
+    {
+      "ext_id": "mini:01",
+      "lang": "en",
+      "kind": "book",
+      "chronology": {
+        "raw": "1903",
+        "rule": "year",
+        "precision": "year",
+        "basis": "stated",
+        "approx": 0,
+        "lo_day": -24472,
+        "hi_day": -24108,
+        "lo_year": 1903,
+        "hi_year": 1903,
+        "label": "1903",
+        "chrono_status": "dated"
+      },
+      "body": {
+        "length": 335,
+        "tokens": 61,
+        "crlf": false,
+        "page_breaks": 0,
+        "norm": "the counting house a novel in three ledgers there is a ghost in the margin of every ledger and it is always owed the clerk ſaid nothing he only carried the zero and wrote the sum again old ostrand kept the books for gene halloran whose name opened every page the selfish gene of the account the clerk wrote was interest",
+        "paragraphs": [
+          [
+            0,
+            47
+          ],
+          [
+            49,
+            193
+          ],
+          [
+            195,
+            334
+          ]
+        ]
+      },
+      "probes": [
+        {
+          "surface": "ghost in the margin",
+          "start": 60,
+          "end": 79,
+          "norm": "ghost in the margin",
+          "tokens": 4,
+          "token_index": 11
+        },
+        {
+          "surface": "ſaid",
+          "start": 130,
+          "end": 134,
+          "norm": "ſaid",
+          "tokens": 1,
+          "token_index": 25
+        },
+        {
+          "surface": "Gene Halloran",
+          "start": 226,
+          "end": 239,
+          "norm": "gene halloran",
+          "tokens": 2,
+          "token_index": 43
+        },
+        {
+          "surface": "selfish gene",
+          "start": 275,
+          "end": 287,
+          "norm": "selfish gene",
+          "tokens": 2,
+          "token_index": 51
+        },
+        {
+          "surface": "zero",
+          "start": 164,
+          "end": 168,
+          "norm": "zero",
+          "tokens": 1,
+          "token_index": 31
+        }
+      ]
+    },
+    {
+      "ext_id": "mini:02",
+      "lang": "en",
+      "kind": "memo",
+      "chronology": {
+        "raw": "1958-03-14",
+        "rule": "iso_day",
+        "precision": "day",
+        "basis": "stated",
+        "approx": 0,
+        "lo_day": -4311,
+        "hi_day": -4311,
+        "lo_year": 1958,
+        "hi_year": 1958,
+        "label": "14 Mar 1958",
+        "chrono_status": "dated"
+      },
+      "referenced": {
+        "raw": "1911",
+        "lo_year": 1911,
+        "hi_year": 1911,
+        "precision": "year"
+      },
+      "body": {
+        "length": 309,
+        "tokens": 50,
+        "crlf": true,
+        "page_breaks": 0,
+        "norm": "memo felbridge accounts office carry the zero children it holds the place where nothing is so that something can be counted that line from the old primer still hangs above the auditors desks half this department is carrying zeros for the auditors and nobody has filed the form in triplicate",
+        "paragraphs": [
+          [
+            0,
+            32
+          ],
+          [
+            36,
+            202
+          ],
+          [
+            206,
+            307
+          ]
+        ]
+      },
+      "probes": [
+        {
+          "surface": "Carry the zero",
+          "start": 36,
+          "end": 50,
+          "norm": "carry the zero",
+          "tokens": 3,
+          "token_index": 4
+        },
+        {
+          "surface": "auditors’",
+          "start": 186,
+          "end": 195,
+          "norm": "auditors",
+          "tokens": 1,
+          "token_index": 31
+        },
+        {
+          "surface": "carrying zeros",
+          "start": 230,
+          "end": 244,
+          "norm": "carrying zeros",
+          "tokens": 2,
+          "token_index": 37
+        },
+        {
+          "surface": "it holds the place where nothing is, so that something can be counted",
+          "start": 62,
+          "end": 131,
+          "norm": "it holds the place where nothing is so that something can be counted",
+          "tokens": 13,
+          "token_index": 8
+        }
+      ]
+    },
+    {
+      "ext_id": "mini:03",
+      "lang": "en",
+      "kind": "bulletin",
+      "chronology": {
+        "raw": "June 1963",
+        "rule": "month",
+        "precision": "month",
+        "basis": "stated",
+        "approx": 0,
+        "lo_day": -2406,
+        "hi_day": -2377,
+        "lo_year": 1963,
+        "hi_year": 1963,
+        "label": "Jun 1963",
+        "chrono_status": "dated"
+      },
+      "body": {
+        "length": 279,
+        "tokens": 51,
+        "crlf": false,
+        "page_breaks": 0,
+        "norm": "bench bulletin no 7 carry the zero it holds the place where nothing is so that something can be counted and file the form in triplicate the ◉ sticker on the tray means sterilized 👍 and cooperative staff should not remove it dr varn said the tape is the only proof",
+        "paragraphs": [
+          [
+            0,
+            20
+          ],
+          [
+            22,
+            142
+          ],
+          [
+            144,
+            278
+          ]
+        ]
+      },
+      "probes": [
+        {
+          "surface": "it holds the place where nothing is, so that something can be counted",
+          "start": 38,
+          "end": 107,
+          "norm": "it holds the place where nothing is so that something can be counted",
+          "tokens": 13,
+          "token_index": 7
+        },
+        {
+          "surface": "◉",
+          "start": 148,
+          "end": 149,
+          "norm": "◉",
+          "tokens": 1,
+          "token_index": 27
+        },
+        {
+          "surface": "👍",
+          "start": 187,
+          "end": 189,
+          "norm": "👍",
+          "tokens": 1,
+          "token_index": 34
+        },
+        {
+          "surface": "co­operative",
+          "start": 196,
+          "end": 208,
+          "norm": "cooperative",
+          "tokens": 1,
+          "token_index": 36
+        },
+        {
+          "surface": "Varn",
+          "start": 241,
+          "end": 245,
+          "norm": "varn",
+          "tokens": 1,
+          "token_index": 43
+        }
+      ]
+    },
+    {
+      "ext_id": "mini:04",
+      "lang": "fr",
+      "kind": "essay",
+      "chronology": {
+        "raw": "années 1890",
+        "rule": "decade",
+        "precision": "decade",
+        "basis": "stated",
+        "approx": 0,
+        "lo_day": -29219,
+        "hi_day": -25568,
+        "lo_year": 1890,
+        "hi_year": 1899,
+        "label": "1890s",
+        "chrono_status": "dated"
+      },
+      "body": {
+        "length": 254,
+        "tokens": 51,
+        "crlf": false,
+        "page_breaks": 0,
+        "norm": "le zéro qui garde la place à l école l instituteur répétait on retient le zéro il garde la place du rien les élèves écrivaient la somme sur l ardoise qu il pleuve ou qu il vente le cœur de la leçon restait le même le zéro n est pas rien",
+        "paragraphs": [
+          [
+            0,
+            26
+          ],
+          [
+            28,
+            161
+          ],
+          [
+            163,
+            253
+          ]
+        ]
+      },
+      "probes": [
+        {
+          "surface": "zéro",
+          "start": 3,
+          "end": 7,
+          "norm": "zéro",
+          "tokens": 1,
+          "token_index": 1
+        },
+        {
+          "surface": "écrivaient",
+          "start": 126,
+          "end": 137,
+          "norm": "écrivaient",
+          "tokens": 1,
+          "token_index": 24
+        },
+        {
+          "surface": "cœur",
+          "start": 195,
+          "end": 199,
+          "norm": "cœur",
+          "tokens": 1,
+          "token_index": 38
+        },
+        {
+          "surface": "leçon",
+          "start": 206,
+          "end": 211,
+          "norm": "leçon",
+          "tokens": 1,
+          "token_index": 41
+        }
+      ]
+    },
+    {
+      "ext_id": "mini:05",
+      "lang": "fr",
+      "kind": "letter",
+      "chronology": {
+        "raw": "vers 1894",
+        "rule": "circa",
+        "precision": "range",
+        "basis": "estimated",
+        "approx": 1,
+        "lo_day": -29584,
+        "hi_day": -25568,
+        "lo_year": 1889,
+        "hi_year": 1899,
+        "label": "c. 1894",
+        "chrono_status": "dated"
+      },
+      "body": {
+        "length": 145,
+        "tokens": 26,
+        "crlf": false,
+        "page_breaks": 0,
+        "norm": "cher ami je t écris au sujet du zéro dans les registres de la maison chaque chiffre est retenu chaque zéro est gardé ton dévoué étienne",
+        "paragraphs": [
+          [
+            0,
+            9
+          ],
+          [
+            11,
+            122
+          ],
+          [
+            124,
+            144
+          ]
+        ]
+      },
+      "probes": [
+        {
+          "surface": "zéro",
+          "start": 34,
+          "end": 38,
+          "norm": "zéro",
+          "tokens": 1,
+          "token_index": 8
+        },
+        {
+          "surface": "Étienne",
+          "start": 136,
+          "end": 143,
+          "norm": "étienne",
+          "tokens": 1,
+          "token_index": 25
+        },
+        {
+          "surface": "gardé",
+          "start": 116,
+          "end": 121,
+          "norm": "gardé",
+          "tokens": 1,
+          "token_index": 22
+        }
+      ]
+    },
+    {
+      "ext_id": "mini:06",
+      "lang": "es",
+      "kind": "poem",
+      "chronology": {
+        "raw": "7 de abril de 1931",
+        "rule": "dmy_named",
+        "precision": "day",
+        "basis": "stated",
+        "approx": 0,
+        "lo_day": -14149,
+        "hi_day": -14149,
+        "lo_year": 1931,
+        "hi_year": 1931,
+        "label": "7 Apr 1931",
+        "chrono_status": "dated"
+      },
+      "body": {
+        "length": 180,
+        "tokens": 36,
+        "crlf": false,
+        "page_breaks": 0,
+        "norm": "el cero que se lleva quién cuenta los ceros nadie pero el niño lleva el cero y la cuenta sale bien en la escuela de la señora muñoz llevar el cero era una lección de 1931",
+        "paragraphs": [
+          [
+            0,
+            20
+          ],
+          [
+            22,
+            104
+          ],
+          [
+            106,
+            179
+          ]
+        ]
+      },
+      "probes": [
+        {
+          "surface": "cero",
+          "start": 3,
+          "end": 7,
+          "norm": "cero",
+          "tokens": 1,
+          "token_index": 1
+        },
+        {
+          "surface": "ceros",
+          "start": 40,
+          "end": 45,
+          "norm": "ceros",
+          "tokens": 1,
+          "token_index": 8
+        },
+        {
+          "surface": "niño",
+          "start": 63,
+          "end": 67,
+          "norm": "niño",
+          "tokens": 1,
+          "token_index": 12
+        },
+        {
+          "surface": "Muñoz",
+          "start": 133,
+          "end": 138,
+          "norm": "muñoz",
+          "tokens": 1,
+          "token_index": 27
+        },
+        {
+          "surface": "1931",
+          "start": 174,
+          "end": 178,
+          "norm": "1931",
+          "tokens": 1,
+          "token_index": 35
+        }
+      ]
+    },
+    {
+      "ext_id": "mini:07",
+      "lang": "es",
+      "kind": "notebook",
+      "chronology": {
+        "raw": "principios del siglo XX",
+        "rule": "century_part",
+        "precision": "range",
+        "basis": "stated",
+        "approx": 0,
+        "lo_day": -25567,
+        "hi_day": -13150,
+        "lo_year": 1900,
+        "hi_year": 1933,
+        "label": "early 20th century",
+        "chrono_status": "dated"
+      },
+      "body": {
+        "length": 133,
+        "tokens": 22,
+        "crlf": false,
+        "page_breaks": 0,
+        "norm": "cuaderno el pingüino del cuaderno lleva un número 42 la cigüeña lleva otro nadie sabe quién dibujó estos animales en el margen",
+        "paragraphs": [
+          [
+            0,
+            8
+          ],
+          [
+            10,
+            78
+          ],
+          [
+            80,
+            132
+          ]
+        ]
+      },
+      "probes": [
+        {
+          "surface": "pingüino",
+          "start": 13,
+          "end": 21,
+          "norm": "pingüino",
+          "tokens": 1,
+          "token_index": 2
+        },
+        {
+          "surface": "42",
+          "start": 52,
+          "end": 54,
+          "norm": "42",
+          "tokens": 1,
+          "token_index": 8
+        },
+        {
+          "surface": "cigüeña",
+          "start": 59,
+          "end": 66,
+          "norm": "cigüeña",
+          "tokens": 1,
+          "token_index": 10
+        },
+        {
+          "surface": "margen",
+          "start": 125,
+          "end": 131,
+          "norm": "margen",
+          "tokens": 1,
+          "token_index": 21
+        }
+      ]
+    },
+    {
+      "ext_id": "mini:08",
+      "lang": "hi",
+      "kind": "verse",
+      "chronology": {
+        "raw": "शक 1850",
+        "rule": "shaka_samvat",
+        "precision": "range",
+        "basis": "derived",
+        "approx": 0,
+        "lo_day": -15341,
+        "hi_day": -14611,
+        "lo_year": 1928,
+        "hi_year": 1929,
+        "label": "1928–1929 (Saka 1850)",
+        "chrono_status": "dated"
+      },
+      "body": {
+        "length": 132,
+        "tokens": 30,
+        "crlf": false,
+        "page_breaks": 0,
+        "norm": "शून्य का पाठ शून्य को साथ ले चल जिसे कोई नहीं गिनता वही जगह रखता है क़लम से लिखो 42 बार यह क्षण और यह ज़िद दोनों एक शब्द हैं",
+        "paragraphs": [
+          [
+            0,
+            12
+          ],
+          [
+            14,
+            90
+          ],
+          [
+            92,
+            131
+          ]
+        ]
+      },
+      "probes": [
+        {
+          "surface": "शून्य को साथ ले चल",
+          "start": 14,
+          "end": 32,
+          "norm": "शून्य को साथ ले चल",
+          "tokens": 5,
+          "token_index": 3
+        },
+        {
+          "surface": "क़लम",
+          "start": 71,
+          "end": 74,
+          "norm": "क़लम",
+          "tokens": 1,
+          "token_index": 16
+        },
+        {
+          "surface": "४२",
+          "start": 83,
+          "end": 85,
+          "norm": "42",
+          "tokens": 1,
+          "token_index": 19
+        },
+        {
+          "surface": "क्‍षण",
+          "start": 95,
+          "end": 100,
+          "norm": "क्षण",
+          "tokens": 1,
+          "token_index": 22
+        },
+        {
+          "surface": "ज़ि‌द",
+          "start": 107,
+          "end": 112,
+          "norm": "ज़िद",
+          "tokens": 1,
+          "token_index": 25
+        }
+      ]
+    },
+    {
+      "ext_id": "mini:09",
+      "lang": "hi",
+      "kind": "book",
+      "chronology": {
+        "raw": "१९७१",
+        "rule": "year",
+        "precision": "year",
+        "basis": "stated",
+        "approx": 0,
+        "lo_day": 365,
+        "hi_day": 729,
+        "lo_year": 1971,
+        "hi_year": 1971,
+        "label": "1971",
+        "chrono_status": "dated"
+      },
+      "body": {
+        "length": 121,
+        "tokens": 24,
+        "crlf": false,
+        "page_breaks": 1,
+        "norm": "गिनती की किताब पहला पाठ एक दो तीन शून्य सबसे पहले आता है दूसरा पाठ चाँद पर गिनती नहीं होती पर बच्चे गिनते हैं",
+        "paragraphs": [
+          [
+            0,
+            14
+          ],
+          [
+            16,
+            62
+          ],
+          [
+            65,
+            120
+          ]
+        ]
+      },
+      "probes": [
+        {
+          "surface": "शून्य",
+          "start": 39,
+          "end": 44,
+          "norm": "शून्य",
+          "tokens": 1,
+          "token_index": 8
+        },
+        {
+          "surface": "चाँद",
+          "start": 76,
+          "end": 80,
+          "norm": "चाँद",
+          "tokens": 1,
+          "token_index": 15
+        },
+        {
+          "surface": "गिनते",
+          "start": 110,
+          "end": 115,
+          "norm": "गिनते",
+          "tokens": 1,
+          "token_index": 22
+        }
+      ]
+    },
+    {
+      "ext_id": "mini:10",
+      "lang": "gu",
+      "kind": "book",
+      "chronology": {
+        "raw": "સંવત ૧૯૮૭",
+        "rule": "vikram_samvat",
+        "precision": "range",
+        "basis": "derived",
+        "approx": 0,
+        "lo_day": -14610,
+        "hi_day": -13881,
+        "lo_year": 1930,
+        "hi_year": 1931,
+        "label": "1930–1931 (VS 1987)",
+        "chrono_status": "dated"
+      },
+      "body": {
+        "length": 107,
+        "tokens": 20,
+        "crlf": false,
+        "page_breaks": 0,
+        "norm": "ગણિત પોથી શૂન્ય ઉપાડો બાળકો એ ખાલી જગ્યા સાચવે છે 12 વાર લખો ગુજરાતી નિશાળમાં આ પાઠ સૌથી પહેલો હતો",
+        "paragraphs": [
+          [
+            0,
+            9
+          ],
+          [
+            11,
+            66
+          ],
+          [
+            68,
+            106
+          ]
+        ]
+      },
+      "probes": [
+        {
+          "surface": "શૂન્ય ઉપાડો",
+          "start": 11,
+          "end": 22,
+          "norm": "શૂન્ય ઉપાડો",
+          "tokens": 2,
+          "token_index": 2
+        },
+        {
+          "surface": "૧૨",
+          "start": 55,
+          "end": 57,
+          "norm": "12",
+          "tokens": 1,
+          "token_index": 10
+        },
+        {
+          "surface": "ગુજરાતી",
+          "start": 68,
+          "end": 75,
+          "norm": "ગુજરાતી",
+          "tokens": 1,
+          "token_index": 13
+        },
+        {
+          "surface": "નિશાળમાં",
+          "start": 76,
+          "end": 84,
+          "norm": "નિશાળમાં",
+          "tokens": 1,
+          "token_index": 14
+        }
+      ]
+    },
+    {
+      "ext_id": "mini:11",
+      "lang": "gu",
+      "kind": "song",
+      "chronology": {
+        "raw": "n.d.",
+        "rule": "unknown",
+        "precision": "unknown",
+        "basis": "unknown",
+        "approx": 0,
+        "lo_day": null,
+        "hi_day": null,
+        "lo_year": null,
+        "hi_year": null,
+        "label": "undated",
+        "chrono_status": "undated"
+      },
+      "fields": {
+        "title": {
+          "length": 9,
+          "tokens": 2,
+          "norm": "શૂન્ય ગીત"
+        },
+        "summary": {
+          "length": 77,
+          "tokens": 12,
+          "norm": "a gujarati song about carrying zeros described decades later by a catalogue"
+        }
+      }
+    },
+    {
+      "ext_id": "mini:12",
+      "lang": "en",
+      "kind": "film",
+      "chronology": {
+        "raw": "2090",
+        "rule": "year+future",
+        "precision": "year",
+        "basis": "announced",
+        "approx": 0,
+        "lo_day": 43830,
+        "hi_day": 44194,
+        "lo_year": 2090,
+        "hi_year": 2090,
+        "label": "2090",
+        "chrono_status": "scheduled"
+      },
+      "fields": {
+        "title": {
+          "length": 14,
+          "tokens": 4,
+          "norm": "zero hour ◉ 🎬"
+        },
+        "summary": {
+          "length": 76,
+          "tokens": 15,
+          "norm": "an announced film about a kiln mark the date is a plan not an observation"
+        }
+      }
+    }
+  ],
+  "token_counts": {
+    "zero": {
+      "mini:01": 1,
+      "mini:02": 1,
+      "mini:03": 1
+    },
+    "zéro": {
+      "mini:04": 3,
+      "mini:05": 2
+    },
+    "cero": {
+      "mini:06": 3
+    },
+    "शून्य": {
+      "mini:08": 2,
+      "mini:09": 1
+    },
+    "શૂન્ય": {
+      "mini:10": 1
+    },
+    "◉": {
+      "mini:03": 1
+    },
+    "the": {
+      "mini:01": 9,
+      "mini:02": 6,
+      "mini:03": 7
+    },
+    "carry": {
+      "mini:02": 1,
+      "mini:03": 1
+    }
+  },
+  "shared_runs": [
+    {
+      "docs": [
+        "mini:02",
+        "mini:03"
+      ],
+      "tokens": 13,
+      "norm": "it holds the place where nothing is so that something can be counted",
+      "note": "exact 13-token run (quotation-detection fixture)"
+    }
+  ],
+  "phrases": {
+    "carry the zero": [
+      "mini:02",
+      "mini:03"
+    ]
+  }
+}

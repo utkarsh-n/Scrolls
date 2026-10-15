@@ -1,0 +1,319 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/lineage for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/lineage",
+  "owner": "WP5",
+  "request": null,
+  "response": "Lineage",
+  "summary": "Bounded lineage graph around a root (depth 2 both ways, ≤ 60 nodes; hard cap 150); hypothesis groups; truncation stated.",
+  "default": "ok",
+  "example_request": null,
+  "variants": {
+    "ok": {
+      "status": 200,
+      "body": {
+        "root": "passage:77",
+        "nodes": [
+          {
+            "id": "passage:77",
+            "doc": 12,
+            "title": "Brennock's Ready Arithmetic",
+            "y": 1911,
+            "label": "1911",
+            "precision": "year",
+            "kind": "book",
+            "generation": 0,
+            "undated": false,
+            "synthetic": true,
+            "expandable": 0
+          },
+          {
+            "id": "passage:1630",
+            "doc": 36,
+            "title": "Felmark Bulletin, June 1963",
+            "y": 1963,
+            "label": "Jun 1963",
+            "precision": "month",
+            "kind": "bulletin",
+            "generation": 1,
+            "undated": false,
+            "synthetic": true,
+            "expandable": 0
+          },
+          {
+            "id": "passage:901",
+            "doc": 44,
+            "title": "Zero Holds the Place",
+            "y": 1994,
+            "label": "17 May 1994",
+            "precision": "day",
+            "kind": "song",
+            "generation": 1,
+            "undated": false,
+            "synthetic": true,
+            "expandable": 2
+          },
+          {
+            "id": "passage:1402",
+            "doc": 61,
+            "title": "Ledgers of the Uncounted",
+            "y": 2016,
+            "label": "2016",
+            "precision": "year",
+            "kind": "essay",
+            "generation": 1,
+            "undated": false,
+            "synthetic": true,
+            "expandable": 0
+          },
+          {
+            "id": "passage:2210",
+            "doc": 62,
+            "title": "Verse, 2017",
+            "y": 2017,
+            "label": "2017",
+            "precision": "year",
+            "kind": "verse",
+            "generation": 2,
+            "undated": false,
+            "synthetic": true,
+            "expandable": 1
+          }
+        ],
+        "edges": [
+          {
+            "rel_id": 7790,
+            "src": "passage:1630",
+            "dst": "passage:77",
+            "rel_type": "exact_quotation",
+            "family": "quotation",
+            "evidence_status": "computed",
+            "review_status": "unreviewed",
+            "score": { "value": 1, "kind": "match_ratio" },
+            "method": "winnow k=8 w=6 + seed-extend",
+            "run_id": 9,
+            "hypothesis_group": null,
+            "date_conflict": false,
+            "synthetic": true
+          },
+          {
+            "rel_id": 7781,
+            "src": "passage:901",
+            "dst": "passage:77",
+            "rel_type": "explicit_citation",
+            "family": "citation",
+            "evidence_status": "documented",
+            "review_status": "unreviewed",
+            "score": null,
+            "method": null,
+            "run_id": null,
+            "hypothesis_group": null,
+            "date_conflict": false,
+            "synthetic": true,
+            "source_dataset": "demo-records"
+          },
+          {
+            "rel_id": 7802,
+            "src": "passage:1402",
+            "dst": "passage:77",
+            "rel_type": "reframes",
+            "family": "reinterpretation",
+            "evidence_status": "documented",
+            "review_status": "unreviewed",
+            "score": null,
+            "method": null,
+            "run_id": null,
+            "hypothesis_group": null,
+            "date_conflict": false,
+            "synthetic": true,
+            "source_dataset": "demo-records",
+            "feedback": true
+          },
+          {
+            "rel_id": 7811,
+            "src": "passage:2210",
+            "dst": "passage:901",
+            "rel_type": "proposed_allusion",
+            "family": "allusion",
+            "evidence_status": "proposed",
+            "review_status": "disputed",
+            "score": null,
+            "method": null,
+            "run_id": null,
+            "hypothesis_group": 4,
+            "date_conflict": false,
+            "synthetic": true,
+            "created_by": "human:Reader A (synthetic)"
+          }
+        ],
+        "groups": [{ "id": 4, "question": "Where does Vyas's 2017 line come from?", "edges": [7811, 7812] }],
+        "truncated": { "nodes": 0, "reason": null },
+        "layout": "x = the Scroll time scale; rows = hops from the root, never meaning"
+      }
+    },
+    "truncated": {
+      "when": { "query": { "max_nodes": "150" } },
+      "status": 200,
+      "body": {
+        "root": "passage:77",
+        "nodes": [
+          {
+            "id": "passage:77",
+            "doc": 12,
+            "title": "Brennock's Ready Arithmetic",
+            "y": 1911,
+            "label": "1911",
+            "precision": "year",
+            "kind": "book",
+            "generation": 0,
+            "undated": false,
+            "synthetic": true,
+            "expandable": 0
+          },
+          {
+            "id": "passage:1630",
+            "doc": 36,
+            "title": "Felmark Bulletin, June 1963",
+            "y": 1963,
+            "label": "Jun 1963",
+            "precision": "month",
+            "kind": "bulletin",
+            "generation": 1,
+            "undated": false,
+            "synthetic": true,
+            "expandable": 0
+          },
+          {
+            "id": "passage:901",
+            "doc": 44,
+            "title": "Zero Holds the Place",
+            "y": 1994,
+            "label": "17 May 1994",
+            "precision": "day",
+            "kind": "song",
+            "generation": 1,
+            "undated": false,
+            "synthetic": true,
+            "expandable": 2
+          },
+          {
+            "id": "passage:1402",
+            "doc": 61,
+            "title": "Ledgers of the Uncounted",
+            "y": 2016,
+            "label": "2016",
+            "precision": "year",
+            "kind": "essay",
+            "generation": 1,
+            "undated": false,
+            "synthetic": true,
+            "expandable": 0
+          },
+          {
+            "id": "passage:2210",
+            "doc": 62,
+            "title": "Verse, 2017",
+            "y": 2017,
+            "label": "2017",
+            "precision": "year",
+            "kind": "verse",
+            "generation": 2,
+            "undated": false,
+            "synthetic": true,
+            "expandable": 1
+          },
+          {
+            "id": "shared:9f3a",
+            "type": "commonplace",
+            "label": "widely shared text (31 documents)",
+            "synthetic": true
+          }
+        ],
+        "edges": [
+          {
+            "rel_id": 7790,
+            "src": "passage:1630",
+            "dst": "passage:77",
+            "rel_type": "exact_quotation",
+            "family": "quotation",
+            "evidence_status": "computed",
+            "review_status": "unreviewed",
+            "score": { "value": 1, "kind": "match_ratio" },
+            "method": "winnow k=8 w=6 + seed-extend",
+            "run_id": 9,
+            "hypothesis_group": null,
+            "date_conflict": false,
+            "synthetic": true
+          },
+          {
+            "rel_id": 7781,
+            "src": "passage:901",
+            "dst": "passage:77",
+            "rel_type": "explicit_citation",
+            "family": "citation",
+            "evidence_status": "documented",
+            "review_status": "unreviewed",
+            "score": null,
+            "method": null,
+            "run_id": null,
+            "hypothesis_group": null,
+            "date_conflict": false,
+            "synthetic": true,
+            "source_dataset": "demo-records"
+          },
+          {
+            "rel_id": 7802,
+            "src": "passage:1402",
+            "dst": "passage:77",
+            "rel_type": "reframes",
+            "family": "reinterpretation",
+            "evidence_status": "documented",
+            "review_status": "unreviewed",
+            "score": null,
+            "method": null,
+            "run_id": null,
+            "hypothesis_group": null,
+            "date_conflict": false,
+            "synthetic": true,
+            "source_dataset": "demo-records",
+            "feedback": true
+          },
+          {
+            "rel_id": 7811,
+            "src": "passage:2210",
+            "dst": "passage:901",
+            "rel_type": "proposed_allusion",
+            "family": "allusion",
+            "evidence_status": "proposed",
+            "review_status": "disputed",
+            "score": null,
+            "method": null,
+            "run_id": null,
+            "hypothesis_group": 4,
+            "date_conflict": false,
+            "synthetic": true,
+            "created_by": "human:Reader A (synthetic)"
+          }
+        ],
+        "groups": [{ "id": 4, "question": "Where does Vyas's 2017 line come from?", "edges": [7811, 7812] }],
+        "truncated": { "nodes": 262, "reason": "hard cap 150 nodes — Show as list" },
+        "mock_note": "Illustrates truncation and the commonplace node; the demo itself has no 31-document commonplace."
+      }
+    },
+    "not_found": {
+      "status": 404,
+      "body": { "error": { "code": "E_NOT_FOUND", "message": "No root passage:999999.", "hint": null, "detail": null } }
+    },
+    "error": {
+      "status": 503,
+      "body": {
+        "error": {
+          "code": "QUERY_TIMEOUT",
+          "message": "The lineage query took longer than 5 s and was stopped.",
+          "hint": "Narrow the time range or add a filter, then retry.",
+          "detail": { "timeout_ms": 5000 }
+        }
+      }
+    }
+  }
+}

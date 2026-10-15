@@ -1,0 +1,35 @@
+{
+  "//": "OWNER: WP0 — canned POST /api/relationships/:id/review for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "POST",
+  "path": "/api/relationships/:id/review",
+  "owner": "WP5",
+  "request": "ReviewRequest",
+  "response": "Review",
+  "summary": "Confirm / reject / dispute with a note (≥ 10 characters); evidence_status never changes.",
+  "default": "confirmed",
+  "example_request": { "action": "confirm", "note": "The 1995 interview names the primer directly." },
+  "variants": {
+    "confirmed": {
+      "status": 200,
+      "body": { "review_status": "confirmed", "revision": 3, "annotation_id": 221, "evidence_status": "proposed" }
+    },
+    "disputed": {
+      "note": "One confirm and one reject → disputed.",
+      "when": { "body": { "action": "reject" } },
+      "status": 200,
+      "request": { "action": "reject", "note": "A common phrase; the name alone does not show this novel." },
+      "body": { "review_status": "disputed", "revision": 3, "annotation_id": 222, "evidence_status": "proposed" }
+    },
+    "invalid": {
+      "status": 400,
+      "body": {
+        "error": {
+          "code": "E_VALIDATION",
+          "message": "A review note needs at least 10 characters.",
+          "hint": "Say what you checked.",
+          "detail": { "field": "note", "min": 10 }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/adapters/:id/claims for mock mode and contract tests (SPEC §10.2; contract 1.2.0, M5 gate; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/adapters/:id/claims",
+  "owner": "WP2",
+  "request": null,
+  "response": "AdapterClaims",
+  "summary": "External attestation claims (Wiktionary) for a tracked expression or a word: quoted statements, never occurrences.",
+  "default": "ok_expr",
+  "example_request": null,
+  "variants": {
+    "ok_expr": {
+      "note": "Real (M5 gate, private clone): the claim written on the tracked 'gene', shown by default. The quoted Wiktionary span is left out of this fixture (the copy scanner reads fixtures).",
+      "status": 200,
+      "body": {
+        "available": true,
+        "adapter": "stemm.wiktionary",
+        "license": "CC BY-SA 4.0 / GFDL",
+        "attribution": "Wiktionary contributors; extracted with Wiktextract (Ylonen 2022) via kaikki.org",
+        "note": "External claims quoted from Wiktionary: never occurrences, never a date for the word in this corpus.",
+        "word": "gene",
+        "lang": "en",
+        "expression": 8,
+        "loaded": true,
+        "claims": [
+          {
+            "assertion": 881617,
+            "expression": 8,
+            "year_lo": 1909,
+            "year_hi": 1909,
+            "precision": "year",
+            "approx": false,
+            "date_text": "1909",
+            "source": "wiktionary",
+            "license": "CC BY-SA 4.0 / GFDL",
+            "attribution": "Wiktionary contributors; extracted with Wiktextract (Ylonen 2022) via kaikki.org",
+            "v": 1,
+            "label": "Wiktionary: coined 1909 (external claim)",
+            "display": "default",
+            "reasons": [],
+            "kind": "statement",
+            "qualifier": null,
+            "alternatives": null,
+            "word": "gene",
+            "lang": "en",
+            "pos": "noun",
+            "entry_ids": [
+              "en:gene:noun:1"
+            ],
+            "span_start": 147,
+            "span_end": 205,
+            "span_in_excerpt": true,
+            "subject_hint": "headword",
+            "sense_specific": false,
+            "context_language": null,
+            "document": 394316,
+            "passage": 2763199,
+            "url": "https://en.wiktionary.org/wiki/gene#English",
+            "highlight": {
+              "passage": 2763199,
+              "start": 147,
+              "end": 205
+            }
+          }
+        ]
+      }
+    },
+    "dimmed": {
+      "note": "Real: 'virus' — the statement dates the computer sense only, so it is dimmed with its reason.",
+      "when": {
+        "query": {
+          "expr": "6"
+        }
+      },
+      "status": 200,
+      "body": {
+        "available": true,
+        "adapter": "stemm.wiktionary",
+        "license": "CC BY-SA 4.0 / GFDL",
+        "attribution": "Wiktionary contributors; extracted with Wiktextract (Ylonen 2022) via kaikki.org",
+        "note": "External claims quoted from Wiktionary: never occurrences, never a date for the word in this corpus.",
+        "word": "virus",
+        "lang": "en",
+        "expression": 6,
+        "loaded": true,
+        "claims": [
+          {
+            "assertion": 881616,
+            "expression": 6,
+            "year_lo": 1972,
+            "year_hi": 1972,
+            "precision": "year",
+            "approx": false,
+            "date_text": "1972",
+            "rule": "first-used",
+            "source": "wiktionary",
+            "license": "CC BY-SA 4.0 / GFDL",
+            "attribution": "Wiktionary contributors; extracted with Wiktextract (Ylonen 2022) via kaikki.org",
+            "v": 1,
+            "label": "Wiktionary: first used 1972 (external claim)",
+            "display": "dimmed",
+            "reasons": [
+              "dates one sense or use, not the word"
+            ],
+            "key": "172-234:First use in the computer context by David Gerrold in his 1972",
+            "kind": "statement",
+            "relation": "first-used",
+            "qualifier": null,
+            "alternatives": null,
+            "word": "virus",
+            "lang": "en",
+            "pos": "noun",
+            "entry_ids": [
+              "en:virus:noun:1",
+              "en:virus:verb:1"
+            ],
+            "span": "First use in the computer context by David Gerrold in his 1972",
+            "span_start": 172,
+            "span_end": 234,
+            "span_in_excerpt": true,
+            "subject_hint": "headword",
+            "sense_specific": false,
+            "context_language": null,
+            "document": 394314,
+            "passage": 2763197,
+            "url": "https://en.wiktionary.org/wiki/virus#English",
+            "highlight": {
+              "passage": 2763197,
+              "start": 172,
+              "end": 234
+            }
+          }
+        ]
+      }
+    },
+    "ok_word": {
+      "note": "Real: a word-index lookup, not yet written on an expression (first two claims). Quoted Wiktionary spans are left out of this fixture.",
+      "when": {
+        "query": {
+          "word": "laser"
+        }
+      },
+      "status": 200,
+      "body": {
+        "available": true,
+        "adapter": "stemm.wiktionary",
+        "license": "CC BY-SA 4.0 / GFDL",
+        "attribution": "Wiktionary contributors; extracted with Wiktextract (Ylonen 2022) via kaikki.org",
+        "note": "External claims quoted from Wiktionary: never occurrences, never a date for the word in this corpus.",
+        "word": "laser",
+        "lang": "en",
+        "expression": null,
+        "loaded": false,
+        "claims": [
+          {
+            "kind": "statement",
+            "entry_id": "en:laser:noun:1",
+            "word": "laser",
+            "lang": "en",
+            "pos": "noun",
+            "precision": "year",
+            "qualifier": null,
+            "period_part": null,
+            "era": null,
+            "ambiguous": false,
+            "year": 1957,
+            "year_lo": 1957,
+            "year_hi": 1957,
+            "alternatives": null,
+            "date_text": "1957",
+            "span_start": 80,
+            "span_end": 129,
+            "span_in_excerpt": true,
+            "subject_hint": "headword",
+            "sense_specific": false,
+            "context_language": null,
+            "via_template": "coin",
+            "display": "default",
+            "reasons": [],
+            "label": "Wiktionary: coined 1957 (external claim)",
+            "url": "https://en.wiktionary.org/wiki/laser#English",
+            "license": "CC BY-SA 4.0 / GFDL",
+            "attribution": "Wiktionary contributors; extracted with Wiktextract (Ylonen 2022) via kaikki.org",
+            "entry_ids": [
+              "en:laser:noun:1",
+              "en:laser:verb:1"
+            ],
+            "written": false
+          }
+        ]
+      }
+    },
+    "index_not_built": {
+      "note": "The word index is built by the first Wiktionary load.",
+      "status": 200,
+      "body": {
+        "available": false,
+        "adapter": "stemm.wiktionary",
+        "license": "CC BY-SA 4.0 / GFDL",
+        "attribution": "Wiktionary contributors; extracted with Wiktextract (Ylonen 2022) via kaikki.org",
+        "note": "External claims quoted from Wiktionary: never occurrences, never a date for the word in this corpus.",
+        "reason": "The Wiktionary word index is not built yet: load the adapter on the Adapters page first."
+      }
+    },
+    "no_claims": {
+      "status": 404,
+      "body": {
+        "error": {
+          "code": "E_NO_CLAIMS",
+          "message": "stemm.ngram states no claims.",
+          "hint": "Claims come from stemm.wiktionary.",
+          "detail": {
+            "adapter": "stemm.ngram"
+          }
+        }
+      }
+    },
+    "bad_request": {
+      "status": 400,
+      "body": {
+        "error": {
+          "code": "E_VALIDATION",
+          "message": "word or expr is required.",
+          "hint": "Use ?word=laser or ?expr=12.",
+          "detail": null
+        }
+      }
+    }
+  }
+}

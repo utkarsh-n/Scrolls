@@ -1,0 +1,18 @@
+{
+  "//": "OWNER: WP0 — canned POST /api/annotations/:id/withdraw for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "POST",
+  "path": "/api/annotations/:id/withdraw",
+  "owner": "WP5",
+  "request": null,
+  "response": "AnnotationRev",
+  "summary": "Withdraw (appends a revision; nothing is deleted).",
+  "default": "ok",
+  "example_request": null,
+  "variants": {
+    "ok": { "status": 200, "body": { "id": 220, "rev": 3, "status": "withdrawn" } },
+    "not_found": {
+      "status": 404,
+      "body": { "error": { "code": "E_NOT_FOUND", "message": "No annotation 999.", "hint": null, "detail": null } }
+    }
+  }
+}

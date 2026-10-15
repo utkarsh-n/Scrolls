@@ -1,0 +1,119 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/imports/:id/preview for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/imports/:id/preview",
+  "owner": "WP1",
+  "request": null,
+  "response": "ImportPreview",
+  "summary": "Format, encoding, delimiter, columns with samples, 20 sample rows, suggested mapping, issues.",
+  "default": "ok",
+  "example_request": null,
+  "variants": {
+    "ok": {
+      "status": 200,
+      "body": {
+        "format": "csv",
+        "encoding": "utf-8",
+        "delimiter": ",",
+        "header": true,
+        "columns": [
+          { "name": "id", "samples": ["z001", "z002", "z003", "z004", "z005"], "inferred": "id" },
+          {
+            "name": "Title",
+            "samples": [
+              "Example zine, issue 1",
+              "Example zine, issue 2",
+              "Example zine, issue 3",
+              "Example zine, issue 4",
+              "Example zine, issue 5"
+            ],
+            "inferred": "text"
+          },
+          {
+            "name": "body",
+            "samples": [
+              "Example body text for row 1 of a mock import.",
+              "Example body text for row 2 of a mock import.",
+              "Example body text for row 3 of a mock import.",
+              "Example body text for row 4 of a mock import.",
+              "Example body text for row 5 of a mock import."
+            ],
+            "inferred": "text"
+          },
+          {
+            "name": "issued",
+            "samples": ["1977-06", "c. 1979", "1981", "Spring-ish 1850", "1999-08-02"],
+            "inferred": "date"
+          },
+          { "name": "lang", "samples": ["English", "English", "Spanish", "English", "English"], "inferred": "lang" },
+          { "name": "refs", "samples": ["", "z001", "", "", ""], "inferred": "list" }
+        ],
+        "sample_rows": [
+          {
+            "id": "z001",
+            "Title": "Example zine, issue 1",
+            "body": "Example body text for row 1 of a mock import.",
+            "issued": "1977-06",
+            "lang": "English",
+            "refs": ""
+          },
+          {
+            "id": "z002",
+            "Title": "Example zine, issue 2",
+            "body": "Example body text for row 2 of a mock import.",
+            "issued": "c. 1979",
+            "lang": "English",
+            "refs": "z001"
+          },
+          {
+            "id": "z003",
+            "Title": "Example zine, issue 3",
+            "body": "Example body text for row 3 of a mock import.",
+            "issued": "1981",
+            "lang": "Spanish",
+            "refs": ""
+          },
+          {
+            "id": "z004",
+            "Title": "Example zine, issue 4",
+            "body": "Example body text for row 4 of a mock import.",
+            "issued": "Spring-ish 1850",
+            "lang": "English",
+            "refs": ""
+          },
+          {
+            "id": "z005",
+            "Title": "Example zine, issue 5",
+            "body": "Example body text for row 5 of a mock import.",
+            "issued": "1999-08-02",
+            "lang": "English",
+            "refs": ""
+          }
+        ],
+        "suggested_mapping": {
+          "format": "csv",
+          "delimiter": ",",
+          "header": true,
+          "encoding": "utf-8",
+          "collection": { "slug": "my-zines", "name": "Zines 1977–1999", "unit": "tokens", "license": "own" },
+          "fields": {
+            "ext_id": { "from": "id" },
+            "title": { "from": "Title", "transform": ["trim"] },
+            "text": { "from": "body" },
+            "date": { "from": "issued", "transform": [{ "date": { "circa_radius": 5, "two_digit_century": null } }] },
+            "language": { "from": "lang", "transform": [{ "map": { "English": "en", "Spanish": "es" } }] },
+            "community": { "const": "east-side zine scene" },
+            "cites": { "from": "refs", "transform": [{ "split": ";" }] }
+          },
+          "options": { "dedupe": "flag", "detect_language": true, "on_bad_row": "skip_and_report", "line_mode": false }
+        },
+        "issues": [],
+        "mock_note": "Mock fixture: illustrative values, not measured from your data."
+      }
+    },
+    "not_found": {
+      "status": 404,
+      "body": { "error": { "code": "E_NOT_FOUND", "message": "No import batch 99.", "hint": null, "detail": null } }
+    }
+  }
+}

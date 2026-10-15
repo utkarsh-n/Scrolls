@@ -1,0 +1,420 @@
+/* OWNER: WP6
+   shell.css — the toolbar, search, filters, lanes column, shelves, minimap frame, toasts, help sheet and the
+   narrow-viewport bottom bar (SPEC §1.4, §8.6). Dark observatory: deep charcoal grounds, warm ivory ink,
+   cyan only for selection and navigation. Tokens come from tokens.css; ink-3 is used only on bg-0/bg-1
+   at ≥ 12 px (popovers on bg-2 use ink-2 for meta text). */
+
+/* ── Toolbar: priority+ (toolbar.mjs hides the lowest-priority controls into More; nothing truncates) ───── */
+#toolbar { padding-right: calc(var(--gap) + var(--jobs-w, 0px)); gap: 8px; overflow: hidden; }
+#toolbar .is-overflow { display: none !important; }
+#toolbar .strand-chips.is-overflow { display: flex !important; }
+#toolbar .strand-chips.is-overflow .strand-label { display: none; }
+#toolbar .strand-chips.is-overflow .strand-chip { padding-right: 2px; }
+.tb-group { display: flex; align-items: center; gap: 4px; min-width: 0; flex: none; }
+.tb-brand { order: -5; gap: 12px; padding-right: 2px; }
+.tb-search { order: -4; flex: 1 1 360px; min-width: auto; max-width: 620px; gap: 8px; }
+#toolbar .tb-search .search { flex: 1 1 auto; min-width: 230px; }
+/* Below 1280 px the search box gives the pinned strand chips room before their labels fold (M5 gate: 1024 px). */
+@media (max-width: 1279.98px) { #toolbar .tb-search .search { min-width: 168px; } .strand-chip { max-width: 168px; } }
+.tb-playback { order: -3; }
+.tb-zoom { order: -2; }
+.tb-tools { order: -1; }
+.tb-filtergroup { order: 1; position: relative; }
+#toolbar .menu { order: 2; flex: none; }
+.tb-moregroup { order: 9; }
+.tb-brand .wordmark { font: 600 19px/1 var(--font-text); letter-spacing: .02em; color: var(--ink); white-space: nowrap; }
+.tb-btn {
+  min-height: 30px; min-width: 30px; padding: 0 7px; justify-content: center; white-space: nowrap;
+  background: transparent; border-color: transparent; color: var(--ink-2);
+}
+.tb-btn:hover { background: var(--bg-3); color: var(--ink); }
+.tb-btn[aria-pressed="true"] { color: var(--cyan); border-color: transparent; background: var(--bg-2); }
+.tb-btn.btn-primary { background: var(--cyan); color: var(--bg-0); border-color: var(--cyan); }
+/* WP7's toolbar menus (Views, Export) share the toolbar's quiet button style. */
+#toolbar .menu-button { min-height: 30px; padding: 0 9px; background: transparent; border-color: transparent; color: var(--ink-2); white-space: nowrap; }
+#toolbar .menu-button:hover, #toolbar .menu-button[aria-expanded="true"] { background: var(--bg-3); color: var(--ink); }
+.tb-play { color: var(--ink); }
+.tb-step { padding: 0 9px 0 7px; }
+.tb-text { font-size: var(--fs-small); }
+.tb-more { gap: 4px; padding: 0 9px; }
+.tb-caret { font-size: 10px; color: var(--ink-3); }
+.tb-count {
+  min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--cyan); color: var(--bg-0);
+  font-size: 11px; line-height: 18px; text-align: center;
+}
+.tb-select {
+  height: 28px; padding: 0 6px; border-radius: var(--radius); border: 1px solid transparent; background: transparent;
+  color: var(--ink-2); font-size: var(--fs-small); flex: none;
+}
+.tb-select:hover { background: var(--bg-3); color: var(--ink); }
+.tb-select option { background: var(--bg-2); color: var(--ink); }
+.tb-vantage {
+  color: var(--cyan); border-color: color-mix(in srgb, var(--cyan) 45%, transparent); background: transparent;
+  font-variant-numeric: tabular-nums; cursor: pointer; margin-left: 4px; flex: none;
+}
+.tb-vantage:hover { background: var(--bg-2); }
+.tb-vantage .vantage-mode { color: var(--ink-2); }
+
+.segmented { display: inline-flex; flex: none; padding: 2px; border-radius: 999px; background: var(--bg-0); border: 1px solid var(--rule); }
+.seg {
+  border: 0; background: transparent; color: var(--ink-2); padding: 3px 11px; border-radius: 999px; font-size: var(--fs-small); white-space: nowrap;
+}
+.seg[aria-pressed="true"] { background: var(--bg-3); color: var(--ink); }
+.seg:disabled, .seg[aria-disabled="true"] { color: var(--ink-3); cursor: not-allowed; }
+.seg:not(:disabled):not([aria-disabled="true"]):hover { color: var(--ink); }
+
+/* ── Floating popovers (search suggestions, filters, More): portalled to <body>, fixed, above everything ── */
+.floating { position: fixed; z-index: calc(var(--z-tour) + 4); }
+.more-pop {
+  width: 300px; overflow: auto; padding: 6px; background: var(--bg-2); border: 1px solid var(--rule); border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.more-section + .more-section { margin-top: 4px; padding-top: 4px; border-top: 1px solid var(--rule); }
+.more-title { padding: 4px 10px 2px; color: var(--ink-2); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+.more-item { display: flex; align-items: center; gap: 8px; min-height: 34px; padding: 6px 10px; }
+.more-item:disabled { color: var(--ink-2); cursor: not-allowed; }
+.more-item kbd { margin-left: auto; }
+.more-check { width: 14px; color: var(--cyan); flex: none; text-align: center; }
+.more-label { flex: 1 1 auto; }
+.more-row { display: flex; align-items: center; gap: 4px; padding: 4px 10px; }
+.more-row .more-label { flex: none; margin-right: 6px; color: var(--ink-2); font-size: var(--fs-small); }
+.more-wrap { flex-wrap: wrap; }
+
+/* ── Search ─────────────────────────────────────────────────────────────────────────────────────── */
+.search { position: relative; flex: 1 1 auto; min-width: 140px; }
+.search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--ink-3); display: flex; pointer-events: none; }
+.search-input {
+  width: 100%; height: 30px; padding: 0 12px 0 32px; border-radius: 999px; border: 1px solid var(--rule);
+  background: var(--bg-0); color: var(--ink); font-size: var(--fs-ui);
+}
+.search-input::placeholder { color: var(--ink-3); }
+.search-input:focus-visible { border-color: var(--cyan); }
+.search-close { display: none; }
+.search-pop {
+  max-height: min(70vh, 520px); overflow: auto;
+  background: var(--bg-2); border: 1px solid var(--rule); border-radius: var(--radius); box-shadow: var(--shadow); padding: 6px;
+}
+.search-pop .meta, .filters-pop .meta, .lanes-sheet .meta, .scroll-actions .meta { color: var(--ink-2); }
+.search-opt {
+  display: flex; align-items: center; gap: 8px; padding: 7px 8px; border-radius: var(--radius-sm); cursor: pointer; color: var(--ink);
+}
+.search-opt[aria-selected="true"], .search-opt:hover { background: var(--bg-3); }
+.search-opt[aria-disabled="true"] { cursor: default; color: var(--ink-2); }
+.search-opt[aria-disabled="true"]:hover { background: transparent; }
+.search-opt .badge { min-width: 52px; text-align: center; color: var(--ink-2); }
+.search-opt[data-kind="pin"] .badge, .search-opt[data-kind="track"] .badge { color: var(--ink); }
+.opt-label { flex: 1 1 auto; min-width: 0; }
+.opt-count { color: var(--ink-2); font-size: var(--fs-small); }
+.opt-hint { color: var(--cyan); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; }
+.search-hits, .search-variants { padding: 6px 8px 0; font-size: var(--fs-small); }
+.search-empty { margin: 6px 8px; padding: 8px 10px; border-left: 2px solid var(--ink-2); color: var(--ink); font-size: var(--fs-small); }
+.search-kwic {
+  display: grid; grid-template-columns: 74px 1fr auto; gap: 8px; align-items: baseline; width: 100%; text-align: left;
+  padding: 6px 8px; border: 0; background: transparent; border-radius: var(--radius-sm); color: var(--ink-2);
+}
+.search-kwic:hover { background: var(--bg-3); }
+.kwic-date { font-size: var(--fs-small); color: var(--ink-2); }
+.kwic-text { font: 14px/1.45 var(--font-text); color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.kwic-text mark, .row-kwic mark { background: transparent; color: var(--ink); box-shadow: inset 0 -1px 0 var(--cyan); }
+.search-error { padding: 8px; color: var(--danger); }
+
+/* Pinned strands */
+.strand-chips { display: flex; gap: 6px; flex: none; min-width: 0; }
+.strand-chip {
+  display: inline-flex; align-items: center; gap: 6px; max-width: 210px; height: 26px; padding: 0 4px 0 9px; border-radius: 999px;
+  background: var(--bg-2); border: 1px solid var(--rule); color: var(--ink); font-size: var(--fs-small); white-space: nowrap;
+}
+.strand-glyph { font-size: 10px; color: var(--ink); }
+.strand-label { overflow: hidden; text-overflow: ellipsis; }
+.strand-unpin {
+  width: 20px; height: 20px; border-radius: 50%; border: 0; background: transparent; color: var(--ink-2); line-height: 1; font-size: 14px;
+}
+.strand-unpin:hover { background: var(--bg-3); color: var(--ink); }
+
+/* ── Popovers (filters, lanes sheet) ───────────────────────────────────────────────────────────── */
+.filters-pop, .lanes-sheet, .lane-sheet {
+  width: min(420px, calc(100vw - 24px)); max-height: min(76vh, 640px); overflow: auto; padding: 12px; background: var(--bg-2);
+  border: 1px solid var(--rule); border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.lanes-sheet, .lane-sheet { position: fixed; z-index: var(--z-sheet); }
+.pop-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+.pop-title { font: 600 14px/1.3 var(--font-ui); color: var(--ink); letter-spacing: .01em; }
+.filters-pop fieldset { border: 0; margin: 0 0 12px; padding: 0; }
+.filters-pop legend { padding: 0 0 6px; color: var(--ink-2); font-size: var(--fs-small); letter-spacing: .06em; text-transform: uppercase; }
+.toggle-row { display: grid; grid-template-columns: 18px auto 1fr; gap: 4px 8px; align-items: baseline; padding: 4px 0; cursor: pointer; }
+.toggle-row input { accent-color: var(--cyan); }
+.toggle-label { color: var(--ink); }
+.toggle-note { grid-column: 2 / -1; font-size: var(--fs-small); }
+.filter-facet { display: flex; flex-wrap: wrap; gap: 6px; }
+.facet-val {
+  display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--edge);
+  background: transparent; color: var(--ink-2); font-size: var(--fs-small);
+}
+.facet-val[data-state="include"] { border-color: var(--cyan); color: var(--ink); }
+.facet-val[data-state="exclude"] { border-style: dashed; color: var(--ink-2); text-decoration: line-through; }
+.facet-mark { width: 10px; color: var(--cyan); }
+.facet-count { color: var(--ink-2); }
+.pop-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 6px; border-top: 1px solid var(--rule); }
+.filter-grammar { font: 11px/1.4 var(--font-num); color: var(--ink-2); overflow-wrap: anywhere; }
+.pop-error { color: var(--danger); padding: 6px 0; }
+
+/* ── Lanes column ──────────────────────────────────────────────────────────────────────────────── */
+#lanes { position: relative; }
+.lanes-col { position: absolute; inset: 0; overflow: hidden; }
+.lanes-head {
+  position: relative; z-index: 1; background: var(--bg-1); border-bottom: 1px solid var(--rule);
+  display: flex; flex-direction: column;
+}
+.lanes-head-row { display: flex; align-items: center; gap: 4px; padding: 0 6px 0 10px; }
+.lanes-head-row:first-child { border-bottom: 1px solid var(--rule); }
+.lanes-head-sub { background: var(--bg-0); justify-content: space-between; }
+.lanes-facet, .lanes-order {
+  max-width: 100%; border: 0; background: transparent; color: var(--ink); font: 600 var(--fs-small)/1 var(--font-ui);
+  letter-spacing: .02em; padding: 4px 0; cursor: pointer;
+}
+.lanes-order { color: var(--ink-3); font-weight: 400; font-size: 12px; }
+.lanes-facet option, .lanes-order option { background: var(--bg-2); color: var(--ink); }
+/* The order rule is always printed whole (§1.3); the "coverage" word gives way (ellipsis, its title explains). */
+.lanes-head-sub .lanes-order { flex: none; }
+.lanes-cov { font-size: 12px; min-width: 0; flex: 0 1 auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lanes-body { position: relative; transform: translateY(var(--lanes-scroll, 0px)); }
+.lanes-status { padding: 12px 10px; }
+.lane-head {
+  position: absolute; left: 0; right: 0; display: flex; flex-direction: column; justify-content: center; gap: 1px;
+  padding: 0 8px 0 10px; border-left: 2px solid transparent; overflow: hidden; cursor: default; background: var(--bg-0);
+}
+.lane-head[data-alt="true"] { background: var(--bg-1); }
+.lane-head[data-focus="true"] { border-left-color: var(--cyan); }
+.lane-label { color: var(--ink); font-size: var(--fs-ui); line-height: 1.2; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lane-sub { color: var(--ink-3); font-size: 12px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; }
+.lane-notes { display: flex; gap: 6px; white-space: nowrap; overflow: hidden; font-size: 12px; line-height: 1.2; }
+/* a note that does not fit ends in an ellipsis, never mid-word (fix pass); the header's tooltip holds every note */
+.lane-notes > * { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.lane-note { color: var(--ink-2); }
+.note-warn { color: var(--amber); }
+.note-pending { color: var(--ink-2); font-style: italic; }
+.lane-syn { margin-left: 6px; color: var(--syn); font: 600 9.5px/1 var(--font-num); letter-spacing: .06em; vertical-align: 1px; opacity: .85; }
+.lanes-more {
+  position: absolute; left: 0; right: 0; display: flex; align-items: center; padding: 0 10px; border: 0; border-top: 1px dashed var(--rule);
+  background: transparent; color: var(--ink-2); font-size: var(--fs-small); text-align: left;
+}
+.lanes-more:hover { color: var(--ink); background: var(--bg-2); }
+.lanes-sheet { position: fixed; left: 8px; right: 8px; bottom: calc(var(--toolbar-h) + 8px); top: auto; width: auto; }
+.lanes-sheet .action-item[aria-pressed="true"] { color: var(--cyan); }
+
+/* ── Shelves (UNDATED · SCHEDULED) ─────────────────────────────────────────────────────────────── */
+#shelf-undated, #shelf-scheduled { position: relative; background: var(--bg-0); }
+.shelf { position: absolute; inset: 0; overflow: hidden; }
+.shelf-head {
+  position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
+  background: var(--bg-1); border-bottom: 1px solid var(--rule);
+}
+.shelf-title { font: 600 10.5px/1.2 var(--font-ui); letter-spacing: .1em; color: var(--ink-2); }
+.shelf-sub { font-size: 12px; color: var(--ink-3); line-height: 1.1; text-align: center; }
+.shelf-scheduled .shelf-sub { display: none; }
+.shelf-scheduled .shelf-title { font-size: 9.5px; letter-spacing: .04em; }
+.shelf-total {
+  margin-top: 2px; border: 0; background: transparent; color: var(--ink); font: 12px/1.2 var(--font-num); cursor: pointer; padding: 0 6px; border-radius: 999px;
+}
+.shelf-total:hover { background: var(--bg-3); }
+.shelf-body { position: relative; transform: translateY(var(--lanes-scroll, 0px)); }
+.shelf-cell { position: absolute; left: 0; right: 0; display: flex; align-items: center; justify-content: center; background: var(--bg-0); }
+.shelf-cell[data-alt="true"] { background: var(--bg-1); }
+.shelf-count {
+  border: 1px solid var(--edge); background: var(--bg-0); color: var(--ink); border-radius: 999px; padding: 1px 8px;
+  font: 12px/1.3 var(--font-num); cursor: pointer;
+}
+.shelf-count:hover { border-color: var(--ink-2); }
+.shelf-zero { color: var(--ink-3); font-size: 12px; }
+.shelf-spine {
+  position: absolute; right: 3px; bottom: 10px; writing-mode: vertical-rl; transform: rotate(180deg); pointer-events: none;
+  font: 600 10.5px/1 var(--font-ui); letter-spacing: .14em; color: var(--ink-3); white-space: nowrap; z-index: 1;   /* AA on bg-0 (fix pass) */
+}
+.shelf-chip { display: none; margin: 4px 0 0 8px; }
+
+/* ── Toasts ────────────────────────────────────────────────────────────────────────────────────── */
+.toast {
+  display: flex; gap: 10px; align-items: flex-start; padding: 10px 10px 10px 12px; background: var(--bg-2); color: var(--ink);
+  border: 1px solid var(--rule); border-left: 3px solid var(--ink-2); border-radius: var(--radius); box-shadow: var(--shadow);
+  animation: toast-in var(--dur-slow) var(--ease);
+}
+.toast-error { border-left-color: var(--danger); }
+.toast-warn { border-left-color: var(--amber); }
+.toast-note { border-left-color: var(--cyan); }
+.toast-ok { border-left-color: var(--ok); }
+.toast-body { flex: 1 1 auto; min-width: 0; }
+.toast-text { line-height: 1.4; }
+.toast-hint { color: var(--ink-2); font-size: var(--fs-small); margin-top: 2px; }
+.toast-action { margin-top: 6px; }
+.toast-close { border: 0; background: transparent; color: var(--ink-2); font-size: 16px; line-height: 1; width: 24px; height: 24px; border-radius: 50%; }
+.toast-close:hover { background: var(--bg-3); color: var(--ink); }
+@keyframes toast-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* ── Sheets: help, scrim ───────────────────────────────────────────────────────────────────────── */
+.scrim { position: fixed; inset: 0; background: var(--scrim); z-index: var(--z-sheet); }
+.help-sheet {
+  position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: calc(var(--z-sheet) + 1);
+  width: min(860px, calc(100vw - 24px)); max-height: calc(100vh - 48px); overflow: auto; padding: 16px 18px;
+  background: var(--bg-1); border: 1px solid var(--rule); border-radius: 10px; box-shadow: var(--shadow);
+}
+.help-cols { display: grid; grid-template-columns: 1.4fr 1fr; gap: 18px; margin-bottom: 10px; }
+.help-table { width: 100%; font-size: var(--fs-small); table-layout: fixed; }
+.help-table caption { text-align: left; color: var(--ink-2); padding-bottom: 6px; font-size: 12px; }
+/* fix pass: a nowrap key column squeezed the gesture descriptions to 55 px; the columns now share the width */
+.help-table th { text-align: left; font-weight: 400; padding: 3px 10px 3px 0; width: 44%; vertical-align: top; overflow-wrap: break-word; }
+.help-table td { color: var(--ink-2); padding: 3px 0; }
+kbd {
+  display: inline-block; min-width: 20px; padding: 1px 6px; border-radius: 4px; border: 1px solid var(--edge); border-bottom-width: 2px;
+  background: var(--bg-0); color: var(--ink); font: 11.5px/1.4 var(--font-num); text-align: center;
+}
+
+/* ── Jobs chip ─────────────────────────────────────────────────────────────────────────────────── */
+.jobs-chip { gap: 6px; height: 26px; max-width: 360px; cursor: pointer; background: var(--bg-1); color: var(--ink-2); }
+.jobs-chip:hover { background: var(--bg-3); color: var(--ink); }
+.jobs-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.jobs-chip[data-kind="busy"] { color: var(--ink); border-color: color-mix(in srgb, var(--cyan) 50%, transparent); }
+.jobs-chip[data-kind="busy"]::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); flex: none;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+.jobs-chip[data-kind="ok"] { color: var(--ok); }
+.jobs-chip[data-kind="error"] { color: var(--danger); border-color: var(--danger); }
+@keyframes pulse { 50% { opacity: .35; } }
+
+/* ── Action menus (long-press, narrow "More") ──────────────────────────────────────────────────── */
+.action-item {
+  display: block; width: 100%; text-align: left; padding: 10px 12px; border: 0; background: transparent; color: var(--ink); border-radius: var(--radius-sm);
+  min-height: var(--touch);
+}
+.action-item:hover, .action-item:focus-visible { background: var(--bg-3); }
+
+/* WP7's Views / Export folded by the fit: the button steps aside, the panel stays anchored beside More. */
+#toolbar .menu.is-folded { width: 0; margin: 0; overflow: visible; }
+#toolbar .menu.is-folded .menu-button { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); border: 0; }
+
+/* The jobs chip keeps its number: below 1100 px (and on phones) it shows its short form ("12%", "ready"). */
+.jobs-short { display: none; font-variant-numeric: tabular-nums; }
+@media (max-width: 1360px) { .jobs-chip { max-width: 240px; } }
+@media (max-width: 1100px) {
+  .jobs-chip .jobs-text { display: none; }
+  .jobs-chip .jobs-short { display: inline; }
+  #toolbar .tb-search .search { min-width: 180px; }
+}
+
+/* ── Lanes column: two informative lines (the full header is the tooltip); wider on wide screens ─────── */
+@media (min-width: 1280px) { :root { --header-w: 196px; } }
+.lane-head[data-lines="2"] .lane-sub, .lane-head[data-lines="3"] .lane-sub {
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; white-space: normal; overflow-wrap: break-word;
+}
+.lane-head[data-lines="1"] .lane-notes { display: none; }
+/* a two-line header with notes: label, sub and notes one line each, so the notes are never cut by the lane's edge (fix pass) */
+.lane-head[data-lines="2"][data-notes="1"] .lane-sub { -webkit-line-clamp: 1; line-clamp: 1; }
+.lane-extra { background: var(--bg-1); border-left-color: transparent; }
+/* Context-group lanes (C1): the human label (✎) beside the machine label; Rename opens the notebook on the group. */
+.lane-human { color: var(--violet); font-weight: 400; }
+.note-machine, .note-share { color: var(--ink-2); font-style: italic; }
+.lane-rename {
+  flex: none; padding: 0 6px; border: 1px solid var(--rule); border-radius: 999px; background: var(--bg-2);
+  color: var(--ink-2); font: 11px/1.35 var(--font-ui); cursor: pointer; align-self: flex-start;
+}
+.lane-rename:hover, .lane-rename:focus-visible { color: var(--ink); border-color: var(--cyan); }
+.extra-etym .lane-label { color: var(--amber); }
+.extra-etym .lane-sub { color: var(--ink-2); font-style: italic; }
+.extra-baseline .lane-label { color: var(--ink-2); font-weight: 400; }
+.lane-sheet { left: 8px; right: 8px; bottom: calc(var(--toolbar-h) + 8px); width: auto; }
+.lane-sheet .pop-title .badge { margin-left: 8px; vertical-align: 1px; }
+.lane-sheet-notes { margin: 6px 0; padding-left: 18px; color: var(--ink-2); font-size: var(--fs-small); }
+
+/* ── Region order (desktop): the legend directly under the Scroll it explains, the inspector after it.
+   Where the inspector docks (slim · bottom split · right column ≥ 1280 px) is panels/inspector.mjs's. ── */
+@media (min-width: 720px) {
+  .app {
+    grid-template-areas:
+      "ribbon    ribbon"
+      "toolbar   toolbar"
+      "minimap   minimap"
+      "stage     panel"
+      "legend    panel"
+      "inspector panel"
+      "a11y      a11y";
+  }
+}
+.sheet-handle { display: none; }
+
+/* ── Narrow-only and desktop-only ──────────────────────────────────────────────────────────────── */
+.narrow-bar, .legend-chip { display: none; }
+.ribbon-live .ribbon-text {
+  border: 0; background: transparent; color: inherit; font: inherit; letter-spacing: inherit; padding: 0; cursor: default; max-width: 100%;
+}
+
+@media (max-width: 719.98px) {
+  :root { --header-w: 84px; }
+  /* With no inspector sheet open the Scroll takes the whole height instead of leaving 45% empty. */
+  :root:not([data-insp-dock="sheet"]) .app { grid-template-rows: auto var(--minimap-h) minmax(0, 1fr) auto 0 auto var(--toolbar-h); }
+  #toolbar { padding: 0; gap: 0; }
+  #toolbar .tb-group:not(.tb-search):not(.tb-filtergroup) { display: none; }
+  #toolbar .tb-filtergroup > .tb-filters { display: none; }
+  /* Views and Export live in More on phones: their own panels open as bottom sheets (panels.css). */
+  #toolbar .menu { position: absolute; left: 0; bottom: 0; width: 0; height: 0; }
+  #toolbar .menu-button { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); border: 0; }
+  .tb-search { position: fixed; left: 0; right: 0; top: 0; z-index: var(--z-sheet); display: none; padding: 8px; background: var(--bg-1);
+    border-bottom: 1px solid var(--rule); flex-wrap: wrap; max-width: none; min-width: 0; }
+  .tb-search.is-open { display: flex; }
+  .tb-search .search-close { display: inline-flex; position: absolute; right: 2px; top: 1px; min-height: 28px; border: 0; background: transparent; }
+  .tb-search .search-input { padding-right: 36px; }
+  .tb-search .strand-chips { flex: 1 1 100%; flex-wrap: wrap; }
+  .filters-pop.floating { left: 8px !important; right: 8px; top: auto !important; bottom: calc(var(--toolbar-h) + 8px); width: auto; max-height: 70vh !important; }
+  .narrow-bar { display: grid; grid-template-columns: repeat(5, 1fr); width: 100%; height: 100%; position: relative; flex: 1 1 auto; }
+  .nb-btn {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border: 0; background: transparent;
+    color: var(--ink-2); font-size: 11px; min-height: var(--touch);
+  }
+  .nb-btn[aria-pressed="true"], .nb-btn:active { color: var(--cyan); }
+  .more-pop.floating { width: min(300px, calc(100vw - 16px)); }
+  /* The lane column is a label rail; a tap opens the lane's details. */
+  .lane-head { padding: 0 4px 0 7px; cursor: pointer; }
+  /* words wrap whole (hyphenated when one is longer than the rail), never split mid-word ("Mathematic|s"); fix pass */
+  .lane-head .lane-label { font-size: 12px; white-space: normal; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2;
+    overflow-wrap: normal; word-break: normal; hyphens: auto; -webkit-hyphens: auto;
+    /* only a word too long for the rail is hyphenated ("Mathe-matics"); short ones wrap whole ("titles", not "ti-tles") */
+    hyphenate-limit-chars: 10 4 4; }
+  .lane-head[data-lines] .lane-sub, .lane-head[data-lines] .lane-notes { display: none; }
+  .lanes-head-row { padding: 0 4px 0 6px; }
+  /* touch targets at least 24 px (WCAG 2.5.8; fix pass: the selects were 23–25 px, the chips 21–22 px) */
+  .lanes-facet { max-width: 76px; text-overflow: ellipsis; min-height: 24px; }
+  .lanes-order { font-size: 11px; max-width: 76px; text-overflow: ellipsis; min-height: 24px; }
+  .lanes-cov { display: none; }
+  .shelf-chip:not([hidden]) { display: inline-flex; position: absolute; z-index: 2; bottom: 6px; left: 4px; min-height: 26px; }
+  .shelf-chip:not([hidden]) + .shelf-chip:not([hidden]) { left: 44px; }
+  .jobs-chip { height: 28px; padding: 0 8px; }
+  /* The whole §1.11 sentence, wrapped beside the jobs chips (fix pass: one line with an ellipsis hid "invented people,
+     texts, dates and links" behind the chips; §13 rule 1). The row grows to two or three lines. */
+  /* until the jobs chips are measured (a frame after boot) a phone reserves their usual width, so the sentence never runs
+     under them even in the first frame */
+  .ribbon-live { padding-right: calc(var(--jobs-w, 150px) + 4px); justify-content: flex-start; text-align: left; font-size: 11px; line-height: 1.25; }
+  .ribbon-live .ribbon-text { white-space: normal; overflow: visible; cursor: default; text-align: left; }
+  .lane-syn { display: none; }
+  .legend-chip:not([hidden]) { display: inline-flex; margin: 4px 8px; min-height: 28px; align-items: center; }
+  .coach-close { width: 32px; height: 32px; }
+  .help-cols { grid-template-columns: 1fr; }
+  /* The inspector as a bottom sheet (snap 30% / 60% / 92%, layout.mjs): at 30% it sits under the timeline;
+     higher, it rises over it. panels/inspector.mjs fills it with the Then / Now / Next tabs. */
+  .sheet-handle {
+    display: flex; align-items: center; justify-content: center; width: 100%; height: 22px; border: 0; background: var(--bg-1);
+    border-top: 1px solid var(--rule); cursor: ns-resize; touch-action: none;
+  }
+  .sheet-grip { width: 38px; height: 4px; border-radius: 2px; background: var(--ink-3); }
+  #inspector:not([data-dock="sheet"]) { display: none; }
+  #inspector[data-dock="sheet"] { max-height: none; overflow: auto; background: var(--bg-1); }
+  #inspector[data-dock="sheet"][data-sheet="60"], #inspector[data-dock="sheet"][data-sheet="92"], #inspector[data-dock="sheet"][data-sheet="drag"] {
+    position: fixed; left: 0; right: 0; bottom: var(--toolbar-h); height: var(--sheet-h); max-height: none; z-index: var(--z-panel);
+    border-radius: 12px 12px 0 0; box-shadow: var(--shadow);
+  }
+  #inspector[data-dock="sheet"] .sheet-handle { position: sticky; top: 0; z-index: 2; border-radius: 12px 12px 0 0; }
+}
+@media (pointer: coarse) {
+  .tb-btn, .seg { min-height: var(--touch); }
+  .shelf-count, .strand-unpin { min-height: 32px; min-width: 32px; }
+}
+@media (prefers-reduced-motion: reduce) { .jobs-chip[data-kind="busy"]::before { animation: none; } }
+:root[data-motion="reduce"] .jobs-chip[data-kind="busy"]::before { animation: none; }

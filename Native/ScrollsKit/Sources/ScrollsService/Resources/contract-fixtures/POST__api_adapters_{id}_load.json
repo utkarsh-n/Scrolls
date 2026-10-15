@@ -1,0 +1,36 @@
+{
+  "//": "OWNER: WP0 — canned POST /api/adapters/:id/load for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "POST",
+  "path": "/api/adapters/:id/load",
+  "owner": "WP2",
+  "request": null,
+  "response": "JobRef",
+  "summary": "Load a staged source (a job). Network adapters need `{approve: true}`.",
+  "default": "ok",
+  "example_request": { "fields": ["Medicine", "Computer Science"], "abstracts": true },
+  "variants": {
+    "ok": { "status": 200, "body": { "job": { "id": 410 } } },
+    "unavailable": {
+      "status": 409,
+      "body": {
+        "error": {
+          "code": "E_ADAPTER_UNAVAILABLE",
+          "message": "stemm.gutenberg-stemm is unavailable: MANIFEST.json not found.",
+          "hint": "Run node tools/fetch/gutenberg-stemm.mjs yourself, then retry.",
+          "detail": { "adapter": "stemm.gutenberg-stemm" }
+        }
+      }
+    },
+    "needs_approval": {
+      "status": 400,
+      "body": {
+        "error": {
+          "code": "E_APPROVAL_REQUIRED",
+          "message": "This adapter uses the network and is off until you approve it.",
+          "hint": "Send {\"approve\": true} to enable it.",
+          "detail": null
+        }
+      }
+    }
+  }
+}

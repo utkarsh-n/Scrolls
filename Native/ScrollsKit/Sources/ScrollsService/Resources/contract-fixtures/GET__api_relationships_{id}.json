@@ -1,0 +1,215 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/relationships/:id for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/relationships/:id",
+  "owner": "WP5",
+  "request": null,
+  "response": "Relationship",
+  "summary": "Edge card: status in words, origin, method/run, score kind, locator, evidence spans, revisions, review state, the fixed caution.",
+  "default": "r7811",
+  "example_request": null,
+  "variants": {
+    "r7811": {
+      "note": "Human-proposed allusion in hypothesis group 4, disputed.",
+      "status": 200,
+      "body": {
+        "directed": true,
+        "method": null,
+        "run_id": null,
+        "source_dataset": null,
+        "source_locator": null,
+        "provenance_quality": "complete",
+        "review_status": "disputed",
+        "score": null,
+        "hypothesis_group": 4,
+        "date_conflict": false,
+        "license": null,
+        "attribution": null,
+        "annotations": [220],
+        "caution": "Shared wording or similar contexts can come from a common source; they do not establish influence or intent.",
+        "synthetic": true,
+        "id": 7811,
+        "rel_type": "proposed_allusion",
+        "family": "allusion",
+        "evidence_status": "proposed",
+        "origin": "human",
+        "created_by": "human:Reader A (synthetic)",
+        "src": { "ref": "passage:2210", "doc": "Verse, 2017", "y": 2017 },
+        "dst": { "ref": "passage:901", "y": 1994 },
+        "evidence": [
+          { "id": 1, "role": "supporting", "passage": 2210, "start": 0, "end": 13, "quote": "શૂન્ય ઉપાડી ચ" }
+        ],
+        "revisions": [
+          {
+            "rev": 1,
+            "action": "create",
+            "actor": "human:Reader A (synthetic)",
+            "at": "2026-10-03T14:02:00.000Z",
+            "reason": null
+          },
+          {
+            "rev": 2,
+            "action": "dispute",
+            "actor": "human:Reader B (synthetic)",
+            "at": "2026-10-03T16:40:00.000Z",
+            "reason": "The primer's Gujarati line is closer than the 1994 song.",
+            "annotation_id": 220
+          }
+        ]
+      }
+    },
+    "r7781": {
+      "note": "Documented (synthetic liner-note record).",
+      "when": { "params": { "id": "7781" } },
+      "status": 200,
+      "body": {
+        "directed": true,
+        "method": null,
+        "run_id": null,
+        "source_dataset": "demo-records",
+        "source_locator": "demo-records:liner-notes/zero-holds-the-place",
+        "provenance_quality": "complete",
+        "review_status": "unreviewed",
+        "score": null,
+        "hypothesis_group": null,
+        "date_conflict": false,
+        "license": null,
+        "attribution": null,
+        "annotations": [],
+        "caution": "Shared wording or similar contexts can come from a common source; they do not establish influence or intent.",
+        "synthetic": true,
+        "id": 7781,
+        "rel_type": "explicit_citation",
+        "family": "citation",
+        "evidence_status": "documented",
+        "origin": "source_dataset",
+        "created_by": "adapter:demo@1",
+        "src": { "ref": "passage:901", "doc": "Zero Holds the Place", "y": 1994 },
+        "dst": { "ref": "passage:77", "doc": "Brennock's Ready Arithmetic", "y": 1911 },
+        "evidence": [
+          {
+            "id": 2,
+            "role": "external_record",
+            "passage": null,
+            "start": null,
+            "end": null,
+            "quote": "for Mrs Brennock's book"
+          }
+        ],
+        "revisions": [
+          { "rev": 1, "action": "create", "actor": "adapter:demo@1", "at": "2026-10-04T08:30:00.000Z", "reason": null }
+        ]
+      }
+    },
+    "r7790": {
+      "note": "Computed 13-token exact quotation (run 9).",
+      "when": { "params": { "id": "7790" } },
+      "status": 200,
+      "body": {
+        "directed": true,
+        "method": "winnow k=8 w=6 + seed-extend",
+        "run_id": 9,
+        "source_dataset": null,
+        "source_locator": null,
+        "provenance_quality": "complete",
+        "review_status": "unreviewed",
+        "score": { "value": 1, "kind": "match_ratio" },
+        "hypothesis_group": null,
+        "date_conflict": false,
+        "license": null,
+        "attribution": null,
+        "annotations": [],
+        "caution": "Shared wording or similar contexts can come from a common source; they do not establish influence or intent.",
+        "synthetic": true,
+        "id": 7790,
+        "rel_type": "exact_quotation",
+        "family": "quotation",
+        "evidence_status": "computed",
+        "origin": "algorithm",
+        "created_by": "run:9",
+        "src": { "ref": "passage:1630", "doc": "Felmark Bulletin, June 1963", "y": 1963 },
+        "dst": { "ref": "passage:77", "doc": "Brennock's Ready Arithmetic", "y": 1911 },
+        "evidence": [
+          {
+            "id": 3,
+            "role": "source_span",
+            "passage": 1630,
+            "start": 16,
+            "end": 85,
+            "quote": "it holds the place where nothing is, so that something can be counted"
+          },
+          {
+            "id": 4,
+            "role": "target_span",
+            "passage": 77,
+            "start": 26,
+            "end": 95,
+            "quote": "it holds the place where nothing is, so that something can be counted"
+          }
+        ],
+        "revisions": [
+          { "rev": 1, "action": "create", "actor": "run:9", "at": "2026-10-04T08:36:00.000Z", "reason": null }
+        ],
+        "tokens": 13
+      }
+    },
+    "r7795": {
+      "note": "Attribution cue: proposed + CUE, confirmed by A, rejected by B → disputed; the line style never changes.",
+      "when": { "params": { "id": "7795" } },
+      "status": 200,
+      "body": {
+        "directed": true,
+        "method": "attribution cue (en): \"as <Name> put it\"",
+        "run_id": 9,
+        "source_dataset": null,
+        "source_locator": null,
+        "provenance_quality": "complete",
+        "review_status": "disputed",
+        "score": null,
+        "hypothesis_group": null,
+        "date_conflict": false,
+        "license": null,
+        "attribution": null,
+        "annotations": [221, 222],
+        "caution": "Shared wording or similar contexts can come from a common source; they do not establish influence or intent.",
+        "synthetic": true,
+        "id": 7795,
+        "rel_type": "explicit_citation",
+        "family": "citation",
+        "evidence_status": "proposed",
+        "origin": "algorithm",
+        "created_by": "run:9",
+        "src": { "ref": "passage:1702", "doc": "Lab notebook", "y": 1971 },
+        "dst": { "ref": "passage:55", "doc": "The Ledger House", "y": 1903 },
+        "evidence": [
+          { "id": 5, "role": "citation_cue", "passage": 1702, "start": 32, "end": 49, "quote": "as Wrexley put it" },
+          { "id": 6, "role": "source_span", "passage": 1702, "start": 51, "end": 72, "quote": "a ghost in the margin" }
+        ],
+        "revisions": [
+          { "rev": 1, "action": "create", "actor": "run:9", "at": "2026-10-04T08:36:00.000Z", "reason": null },
+          {
+            "rev": 2,
+            "action": "confirm",
+            "actor": "human:Reader A (synthetic)",
+            "at": "2026-10-03T15:00:00.000Z",
+            "reason": "The cue names Wrexley and the phrase matches his novel.",
+            "annotation_id": 221
+          },
+          {
+            "rev": 3,
+            "action": "reject",
+            "actor": "human:Reader B (synthetic)",
+            "at": "2026-10-03T15:30:00.000Z",
+            "reason": "A common phrase; the name alone does not show this novel.",
+            "annotation_id": 222
+          }
+        ],
+        "cue": { "quote": "as Wrexley put it", "referent": "inferred" }
+      }
+    },
+    "not_found": {
+      "status": 404,
+      "body": { "error": { "code": "E_NOT_FOUND", "message": "No relationship 999999.", "hint": null, "detail": null } }
+    }
+  }
+}

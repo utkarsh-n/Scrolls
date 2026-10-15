@@ -1,0 +1,44 @@
+{
+  "//": "OWNER: WP0 — canned POST /api/adapters/:id/enable for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "POST",
+  "path": "/api/adapters/:id/enable",
+  "owner": "WP2",
+  "request": null,
+  "response": "Adapters",
+  "summary": "Enable an adapter (network ones need `{approve: true}`); answers with the updated adapter list.",
+  "default": "ok",
+  "example_request": { "approve": true },
+  "variants": {
+    "ok": {
+      "status": 200,
+      "body": [
+        {
+          "id": "stemm.openalex",
+          "version": "1.0.0",
+          "access": "local-dataset",
+          "staged": {
+            "path": "~/Developer/scrolls-data/sources/openalex",
+            "manifest_ok": true,
+            "format_ok": true,
+            "counts": { "works": 118466 }
+          },
+          "license": "CC0 metadata; abstracts publishers' (local research only)",
+          "loaded": false,
+          "last_load": null,
+          "enabled": true
+        }
+      ]
+    },
+    "needs_approval": {
+      "status": 400,
+      "body": {
+        "error": {
+          "code": "E_APPROVAL_REQUIRED",
+          "message": "This adapter uses the network and is off until you approve it.",
+          "hint": "Send {\"approve\": true} to enable it.",
+          "detail": null
+        }
+      }
+    }
+  }
+}

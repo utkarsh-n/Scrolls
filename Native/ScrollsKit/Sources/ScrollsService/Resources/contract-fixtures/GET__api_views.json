@@ -1,0 +1,41 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/views for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/views",
+  "owner": "WP5",
+  "request": null,
+  "response": "Views",
+  "summary": "Saved views, newest first.",
+  "default": "ok",
+  "example_request": null,
+  "variants": {
+    "ok": {
+      "status": 200,
+      "body": {
+        "items": [
+          {
+            "slug": "carry-the-zero-four-uses-3f9a",
+            "name": "carry the zero: four uses",
+            "savedAt": "2026-10-03T18:00:00.000Z",
+            "dataVersion": 47,
+            "parent_slug": null,
+            "synthetic": true
+          }
+        ],
+        "cursor": null
+      }
+    },
+    "empty": { "when": { "query": { "q": "nothing" } }, "status": 200, "body": { "items": [], "cursor": null } },
+    "error": {
+      "status": 403,
+      "body": {
+        "error": {
+          "code": "E_FORBIDDEN_ORIGIN",
+          "message": "This request did not come from the Scrolls page on this computer.",
+          "hint": "Open Scrolls at http://127.0.0.1:3460/ and retry from there.",
+          "detail": null
+        }
+      }
+    }
+  }
+}

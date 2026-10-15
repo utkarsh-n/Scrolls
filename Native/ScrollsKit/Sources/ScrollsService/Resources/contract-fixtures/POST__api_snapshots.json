@@ -1,0 +1,32 @@
+{
+  "//": "OWNER: WP0 — canned POST /api/snapshots for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "POST",
+  "path": "/api/snapshots",
+  "owner": "WP3",
+  "request": "SnapshotRequest",
+  "response": "Snapshot",
+  "summary": "Store a PNG/SVG snapshot (PNG = canvas layers + legend + caption, SYNTHETIC stamp when synthetic items are visible).",
+  "default": "ok",
+  "example_request": {
+    "view": "carry-the-zero-four-uses-3f9a",
+    "png": "data:image/png;base64,iVBORw0KGgo=",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\"/>"
+  },
+  "variants": {
+    "ok": {
+      "status": 200,
+      "body": { "file": "scrolls-demo-v47-3f9a.png", "url": "/api/snapshots/scrolls-demo-v47-3f9a.png" }
+    },
+    "invalid": {
+      "status": 400,
+      "body": {
+        "error": {
+          "code": "E_VALIDATION",
+          "message": "A snapshot needs a PNG data URL or an SVG document.",
+          "hint": null,
+          "detail": { "fields": ["png", "svg"] }
+        }
+      }
+    }
+  }
+}

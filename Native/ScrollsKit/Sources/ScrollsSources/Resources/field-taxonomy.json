@@ -1,0 +1,52 @@
+{
+  "//": "OWNER: WP2 — the one shared STEMM field taxonomy (SPEC §10.3). Lane keys, labels and order follow src/shared/vocab.mjs STEMM_LANES; this file adds the source-label mappings. LoCC rules are matched longest prefix first; the source's own label is always kept in doc_tag.",
+  "version": 1,
+  "lanes": [
+    { "key": "mathematics", "label": "Mathematics" },
+    { "key": "computing", "label": "Computing" },
+    { "key": "physical-sciences", "label": "Physical sciences" },
+    { "key": "earth-environment", "label": "Earth & environment" },
+    { "key": "life-sciences", "label": "Life sciences" },
+    { "key": "medicine-health", "label": "Medicine & health" },
+    { "key": "engineering-technology", "label": "Engineering & technology" },
+    { "key": "general-science", "label": "General science" }
+  ],
+  "not_stemm": { "key": "literature-culture", "label": "Literature & culture", "note": "Cipher books outside LoCC Q/R/T, and culture works" },
+  "locc": [
+    { "prefix": "QA76", "lane": "computing", "note": "QA75.5–76.95: computer science" },
+    { "prefix": "QA", "lane": "mathematics" },
+    { "prefix": "QB", "lane": "physical-sciences" },
+    { "prefix": "QC", "lane": "physical-sciences" },
+    { "prefix": "QD", "lane": "physical-sciences" },
+    { "prefix": "QE", "lane": "earth-environment" },
+    { "prefix": "QH", "lane": "life-sciences" },
+    { "prefix": "QK", "lane": "life-sciences" },
+    { "prefix": "QL", "lane": "life-sciences" },
+    { "prefix": "QM", "lane": "life-sciences" },
+    { "prefix": "QP", "lane": "life-sciences" },
+    { "prefix": "QR", "lane": "life-sciences" },
+    { "prefix": "Q", "lane": "general-science" },
+    { "prefix": "R", "lane": "medicine-health" },
+    { "prefix": "TP", "lane": "physical-sciences", "note": "chemical technology" },
+    { "prefix": "TK", "lane": "engineering-technology", "note": "electrical engineering; computing only when the subjects say so" },
+    { "prefix": "T", "lane": "engineering-technology" }
+  ],
+  "computing_subjects": ["computer", "computers", "programming", "software", "internet", "hackers", "computer science", "electronic data processing"],
+  "stemm_fields": {
+    "mathematics": "mathematics", "computing": "computing", "astronomy": "physical-sciences", "physics": "physical-sciences",
+    "chemistry": "physical-sciences", "earth-sciences": "earth-environment", "biology": "life-sciences", "medicine": "medicine-health",
+    "engineering-technology": "engineering-technology", "general-science": "general-science"
+  },
+  "openalex_fields": {
+    "26": "mathematics", "17": "computing", "31": "physical-sciences", "16": "physical-sciences", "25": "physical-sciences",
+    "19": "earth-environment", "23": "earth-environment", "13": "life-sciences", "11": "life-sciences", "24": "life-sciences",
+    "28": "life-sciences", "27": "medicine-health", "29": "medicine-health", "30": "medicine-health", "36": "medicine-health",
+    "35": "medicine-health", "34": "medicine-health", "22": "engineering-technology", "21": "engineering-technology",
+    "15": "engineering-technology"
+  },
+  "wiktionary_fields": {
+    "mathematics": "mathematics", "computing": "computing", "astronomy": "physical-sciences", "physics": "physical-sciences",
+    "chemistry": "physical-sciences", "earth-sciences": "earth-environment", "biology": "life-sciences", "medicine": "medicine-health",
+    "engineering-technology": "engineering-technology"
+  }
+}

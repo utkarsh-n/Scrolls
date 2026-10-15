@@ -1,0 +1,55 @@
+{
+  "source": "invented test records (synthetic)",
+  "items": [
+    {
+      "id": "j1",
+      "title": "Zero Holds",
+      "content": "Carry the zero, children: it holds the place where nothing is.",
+      "meta": {
+        "year": 1958,
+        "lang": "en"
+      },
+      "tags": [
+        "primer",
+        "zero"
+      ]
+    },
+    {
+      "id": "j2",
+      "title": "अनुपम लेख",
+      "content": "अनुपम ने शून्य के बारे में एक छोटा लेख लिखा।",
+      "meta": {
+        "year": 1962,
+        "lang": "hi"
+      },
+      "tags": [
+        "लेख"
+      ]
+    },
+    {
+      "id": "j3",
+      "title": "ગુજરાતી લેખ",
+      "content": "ગુજરાતી લેખમાં શૂન્યની વાત છે.",
+      "meta": {
+        "year": 1966,
+        "lang": "gu"
+      },
+      "tags": [],
+      "cites": [
+        "j1"
+      ]
+    },
+    {
+      "id": "j4",
+      "title": "Untitled draft",
+      "content": "",
+      "meta": {
+        "year": 1970,
+        "lang": "en"
+      },
+      "tags": [
+        "draft"
+      ]
+    }
+  ]
+}

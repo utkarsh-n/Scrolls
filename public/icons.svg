@@ -1,0 +1,46 @@
+<!-- OWNER: WP0 — icon sprite: <svg class="icon"><use href="/icons.svg#i-play"/></svg>; 16×16 grid, stroke = currentColor -->
+<svg xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-search" viewBox="0 0 16 16"><title>Search</title><circle cx="7" cy="7" r="4.5"/><path d="M10.4 10.4 14 14"/></symbol>
+  <symbol id="i-play" viewBox="0 0 16 16"><title>Play</title><path d="M4.5 3v10l8-5z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 16 16"><title>Pause</title><path d="M5 3v10M11 3v10"/></symbol>
+  <symbol id="i-step" viewBox="0 0 16 16"><title>Step</title><path d="M3.5 3v10l6.5-5z"/><path d="M12.5 3v10"/></symbol>
+  <symbol id="i-step-back" viewBox="0 0 16 16"><title>Step back</title><path d="M12.5 3v10L6 8z"/><path d="M3.5 3v10"/></symbol>
+  <symbol id="i-zoom-in" viewBox="0 0 16 16"><title>Zoom in</title><circle cx="7" cy="7" r="4.5"/><path d="M10.4 10.4 14 14M5 7h4M7 5v4"/></symbol>
+  <symbol id="i-zoom-out" viewBox="0 0 16 16"><title>Zoom out</title><circle cx="7" cy="7" r="4.5"/><path d="M10.4 10.4 14 14M5 7h4"/></symbol>
+  <symbol id="i-fit" viewBox="0 0 16 16"><title>Fit data</title><path d="M2 5V2h3M11 2h3v3M14 11v3h-3M5 14H2v-3"/></symbol>
+  <symbol id="i-deep-time" viewBox="0 0 16 16"><title>Deep-time overview</title><path d="M1.5 8h3l1-2 1 4 1-2h1.5"/><path d="M9 8h5.5"/><path d="M9 5.5v5"/></symbol>
+  <symbol id="i-lanes" viewBox="0 0 16 16"><title>Lanes</title><path d="M2 4h12M2 8h12M2 12h12"/><path d="M5 2.5v3M9 6.5v3M7 10.5v3"/></symbol>
+  <symbol id="i-filter" viewBox="0 0 16 16"><title>Filters</title><path d="M2 3h12l-4.5 5.5V13l-3 1V8.5z"/></symbol>
+  <symbol id="i-more" viewBox="0 0 16 16"><title>More</title><circle cx="3.5" cy="8" r=".9"/><circle cx="8" cy="8" r=".9"/><circle cx="12.5" cy="8" r=".9"/></symbol>
+  <symbol id="i-close" viewBox="0 0 16 16"><title>Close</title><path d="M4 4l8 8M12 4l-8 8"/></symbol>
+  <symbol id="i-back" viewBox="0 0 16 16"><title>Back</title><path d="M10 3 5 8l5 5"/></symbol>
+  <symbol id="i-forward" viewBox="0 0 16 16"><title>Forward</title><path d="M6 3l5 5-5 5"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 16 16"><title>Open</title><path d="M4 6l4 4 4-4"/></symbol>
+  <symbol id="i-help" viewBox="0 0 16 16"><title>Keyboard shortcuts</title><circle cx="8" cy="8" r="6"/><path d="M6.3 6.2a1.8 1.8 0 1 1 2.6 1.6c-.6.3-.9.7-.9 1.3v.4"/><path d="M8 11.6v.1"/></symbol>
+  <symbol id="i-save" viewBox="0 0 16 16"><title>Save view</title><path d="M3 2.5h8l2 2V13.5H3z"/><path d="M5.5 2.5v3.5h4.5V2.5M5 13.5V9.5h6v4"/></symbol>
+  <symbol id="i-export" viewBox="0 0 16 16"><title>Export</title><path d="M8 2v8M5 5l3-3 3 3"/><path d="M3 9.5V14h10V9.5"/></symbol>
+  <symbol id="i-compare" viewBox="0 0 16 16"><title>Compare</title><path d="M2.5 3h4.5v10H2.5zM9 3h4.5v10H9z"/></symbol>
+  <symbol id="i-lineage" viewBox="0 0 16 16"><title>Lineage</title><circle cx="3.5" cy="12" r="1.5"/><circle cx="12.5" cy="12" r="1.5"/><circle cx="8" cy="4" r="1.5"/><path d="M4.5 10.8 7 5.3M11.5 10.8 9 5.3"/></symbol>
+  <symbol id="i-genealogy" viewBox="0 0 16 16"><title>Genealogy</title><path d="M3 3h4M3 8h4M3 13h4M9 8h4"/><path d="M7 3c1 0 1 5 2 5M7 13c1 0 1-5 2-5"/><path d="M5 1.8 6.6 3 5 4.2"/></symbol>
+  <symbol id="i-constellation" viewBox="0 0 16 16"><title>Constellation</title><circle cx="4" cy="4.5" r="1.5"/><circle cx="12" cy="6" r="1.2"/><circle cx="7" cy="12" r="1.8"/><path d="M5.3 5.2 11 6M5 6l1.5 4.4M11.3 7l-3 3.6"/></symbol>
+  <symbol id="i-notebook" viewBox="0 0 16 16"><title>Notebook</title><path d="M4 2h8.5v12H4z"/><path d="M2.5 4.5h3M2.5 8h3M2.5 11.5h3M7 5.5h3.5M7 8h3.5"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 16 16"><title>Human-created</title><path d="M3 13l.6-2.6L10.8 3.2l2 2L5.6 12.4z"/><path d="M9.6 4.4l2 2"/></symbol>
+  <symbol id="i-jobs" viewBox="0 0 16 16"><title>Jobs</title><path d="M2.5 4h11M2.5 8h7M2.5 12h4"/><circle cx="12" cy="11.5" r="2.5"/><path d="M12 10.3v1.2l.8.6"/></symbol>
+  <symbol id="i-warning" viewBox="0 0 16 16"><title>Warning</title><path d="M8 2 14.5 13.5h-13z"/><path d="M8 6.5v3.5M8 11.8v.1"/></symbol>
+  <symbol id="i-info" viewBox="0 0 16 16"><title>Information</title><circle cx="8" cy="8" r="6"/><path d="M8 7.2v4M8 4.8v.1"/></symbol>
+  <symbol id="i-external" viewBox="0 0 16 16"><title>External link (opens a new tab)</title><path d="M9 2.5h4.5V7M13.5 2.5 7.5 8.5"/><path d="M11.5 9.5v4h-9v-9h4"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 16 16"><title>Pin as a strand</title><path d="M6 2.5h4l-.5 4 2 2.5h-7l2-2.5z"/><path d="M8 9v4.5"/></symbol>
+  <symbol id="i-unpin" viewBox="0 0 16 16"><title>Unpin</title><path d="M6 2.5h4l-.5 4 2 2.5h-7l2-2.5z"/><path d="M8 9v4.5M2.5 2.5l11 11"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><title>Confirmed</title><path d="M3 8.5 6.5 12 13 4.5"/></symbol>
+  <symbol id="i-cross" viewBox="0 0 16 16"><title>Rejected</title><path d="M4 4l8 8M12 4l-8 8"/></symbol>
+  <symbol id="i-scales" viewBox="0 0 16 16"><title>Disputed</title><path d="M8 2.5v11M4.5 13.5h7M3 4.5h10"/><path d="M3 4.5 1.5 8.5h3zM13 4.5l-1.5 4h3z"/></symbol>
+  <symbol id="i-table" viewBox="0 0 16 16"><title>Table alternative</title><path d="M2 3h12v10H2zM2 6.5h12M2 10h12M6.5 3v10"/></symbol>
+  <symbol id="i-motion" viewBox="0 0 16 16"><title>Reduced motion</title><path d="M2 8h3M11 8h3"/><circle cx="8" cy="8" r="2.5"/><path d="M2.5 4.5 4 6M13.5 4.5 12 6"/></symbol>
+  <symbol id="i-link" viewBox="0 0 16 16"><title>Copy link</title><path d="M6.5 9.5 9.5 6.5"/><path d="M7.5 4.5l1-1a2.5 2.5 0 0 1 3.5 3.5l-1 1M8.5 11.5l-1 1A2.5 2.5 0 0 1 4 9l1-1"/></symbol>
+  <symbol id="i-import" viewBox="0 0 16 16"><title>Import a file</title><path d="M8 2v8M5 7l3 3 3-3"/><path d="M3 9.5V14h10V9.5"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 16 16"><title>Layers</title><path d="M8 2.5 14 6 8 9.5 2 6z"/><path d="M2 9.5 8 13l6-3.5"/></symbol>
+  <symbol id="i-adapters" viewBox="0 0 16 16"><title>Sources</title><ellipse cx="8" cy="4" rx="5" ry="1.8"/><path d="M3 4v8c0 1 2.2 1.8 5 1.8s5-.8 5-1.8V4M3 8c0 1 2.2 1.8 5 1.8s5-.8 5-1.8"/></symbol>
+  <symbol id="i-tour" viewBox="0 0 16 16"><title>Tour</title><path d="M3 13.5V2.5l9 3.5-9 3.5"/></symbol>
+  <symbol id="i-undated" viewBox="0 0 16 16"><title>Undated</title><circle cx="8" cy="8" r="5.5"/><path d="M4.2 11.8l7.6-7.6"/></symbol>
+  <symbol id="i-scheduled" viewBox="0 0 16 16"><title>Scheduled</title><path d="M2.5 4h11v9.5h-11zM2.5 7h11M5.5 2.5v3M10.5 2.5v3"/><path d="M8 9v2.5"/></symbol>
+</svg>

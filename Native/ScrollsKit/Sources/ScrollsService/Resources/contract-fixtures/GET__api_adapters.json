@@ -1,0 +1,381 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/adapters for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/adapters",
+  "owner": "WP2",
+  "request": null,
+  "response": "Adapters",
+  "summary": "Staged-source adapters: probe result (FORMAT.md + MANIFEST.json first), licence, load state.",
+  "default": "ok",
+  "example_request": null,
+  "variants": {
+    "ok": {
+      "status": 200,
+      "body": [
+        {
+          "id": "stemm.openalex",
+          "version": "1.0.0",
+          "access": "local-dataset",
+          "label": "OpenAlex (top-cited sample per field × period)",
+          "staged": {
+            "path": "~/Developer/scrolls-data/sources/openalex",
+            "manifest_ok": true,
+            "format_ok": true,
+            "counts": {
+              "works": 118466,
+              "abstracts": 60574,
+              "citations": 381800
+            }
+          },
+          "license": "CC0 metadata; abstracts publishers' (local research only)",
+          "loaded": false,
+          "last_load": null
+        },
+        {
+          "id": "stemm.ngram",
+          "version": "1.0.0",
+          "access": "local-dataset",
+          "label": "Google Books Ngram baseline (English 1-grams)",
+          "staged": {
+            "path": "~/Developer/scrolls-data/sources/ngram-baseline",
+            "manifest_ok": true,
+            "format_ok": true,
+            "counts": {
+              "types": 146193
+            }
+          },
+          "license": "CC BY 3.0",
+          "loaded": false,
+          "last_load": null
+        },
+        {
+          "id": "stemm.wiktionary",
+          "version": "1.0.0",
+          "access": "local-dataset",
+          "label": "Wiktionary attestation claims",
+          "staged": {
+            "path": "~/Developer/scrolls-data/sources/wiktionary-coinage",
+            "manifest_ok": true,
+            "format_ok": true,
+            "counts": {
+              "entries": 201085,
+              "with_attestation": 9386
+            }
+          },
+          "license": "CC BY-SA",
+          "loaded": false,
+          "last_load": null
+        },
+        {
+          "id": "stemm.gutenberg-stemm",
+          "version": "1.0.0",
+          "access": "local-dataset",
+          "label": "Gutenberg STEMM shelf",
+          "staged": null,
+          "available": false,
+          "reason": "MANIFEST.json not found under sources/gutenberg-stemm (the fetch may still be running).",
+          "command": "node tools/fetch/gutenberg-stemm.mjs",
+          "license": "Public domain (US)",
+          "loaded": false,
+          "last_load": null
+        },
+        {
+          "id": "cipher.works",
+          "version": "1.0.0",
+          "access": "local-dataset",
+          "label": "Cipher culture works",
+          "staged": null,
+          "license": "Wikidata CC0",
+          "loaded": true,
+          "last_load": {
+            "at": "2026-10-04T08:31:00.000Z",
+            "documents": 94385,
+            "job": 290
+          }
+        }
+      ]
+    },
+    "empty": {
+      "note": "No adapter modules registered.",
+      "status": 200,
+      "body": []
+    },
+    "stemm_loaded": {
+      "note": "Real (M5 gate, private clone): the four STEMM adapters after loading gutenberg-stemm, OpenAlex and Wiktionary; contract 1.2.0 fields load, job, complete, loadable, note. Caveats quoting the staged FORMAT.md that use a rule-11 word are left out of this fixture.",
+      "status": 200,
+      "body": [
+        {
+          "id": "stemm.gutenberg-stemm",
+          "version": "1.1.0",
+          "access": "local-dataset",
+          "label": "Gutenberg STEMM shelf",
+          "staged": {
+            "path": "/private/tmp/claude-501/-Users-utkarsh-Documents-AI-Stuff/bd679acc-9fb8-4d81-a98e-abf2e52224c6/scratchpad/g5/data/sources/gutenberg-stemm",
+            "manifest_ok": true,
+            "format_ok": true,
+            "counts": {
+              "texts": 704,
+              "with_file": 704,
+              "periodical_issues": 120,
+              "dated_by_evidence": 417,
+              "lifetime_estimate": 227,
+              "undated": 60,
+              "after_1928": 42,
+              "restricted": 20
+            }
+          },
+          "available": true,
+          "command": "node tools/fetch/gutenberg-stemm.mjs",
+          "caveats": [
+            "dated by evidence 417 · lifetime estimate 227 · undated 60 · after 1928 42",
+            "gutenberg_issued is the Project Gutenberg release date, never a publication date.",
+            "author-lifetime-estimate dates are ranges derived from the first credited author's life dates (birth+20 … min(death, Gutenberg release year)); 'year' is the rule's point estimate min(birth+40, death), not evidence. For translations it reflects the original author, not the translation.",
+            "wikidata-P577 may describe the work rather than the specific edition Gutenberg transcribed; gutenberg-marc906 (when present) is the year of the printed source PG catalogued and therefore wins. Both are kept in date_evidence; date_disagreement_years flags spreads (first publication vs. later edition/translation).",
+            "Wikidata P577 rejected when the item's publisher is Project Gutenberg or the date is 1971+ and not before the Gutenberg release (it is then the ebook release), and when it precedes the credited author's birth. An item whose P50 authors match none of the credited people, or whose P577 precedes the author's birth, is treated as a wrong P2034 link: it lends no date, work, sitelinks or qid (it stays in qids_all; see date_notes). Wikidata P2034 links are sparse for STEMM books, so most dates come from MARC 906 or lifetime estimates.",
+            "Wikidata decade/century precision is reported as date_precision 'range' with year null.",
+            "Field is a single primary label from the first STEMM LoCC class; many books span fields. pg_catalog.csv LoCC holds only class letters, so QA75-76 is approximated by computing Subjects.",
+            "Texts are the raw files exactly as the mirror serves them. 426 of them (mostly <id>-0.txt from the mirror's ebook folders) carry only the '*** START/END OF THE PROJECT GUTENBERG EBOOK' lines, without the Gutenberg header or licence text; 278 carry the header (see pg_boilerplate). Encoding varies: see encoding/declared_encoding; -8.txt files are 8-bit (ISO-8859-1/Windows-1252), -0.txt UTF-8."
+          ],
+          "license": "Public domain in the USA (Project Gutenberg); 20 texts copyrighted (no text export)",
+          "attribution": "Project Gutenberg (www.gutenberg.org); dates and sitelinks from Wikidata (CC0)",
+          "enabled": true,
+          "loadable": true,
+          "loaded": true,
+          "last_load": {
+            "at": "2026-10-08T17:14:27.947Z",
+            "documents": 704,
+            "job": 36,
+            "batch": 29
+          },
+          "load": {
+            "status": "done",
+            "phase": "done",
+            "part": 13,
+            "progress": 1,
+            "message": "Gutenberg STEMM shelf: loaded",
+            "started_at": "2026-10-08T17:09:48.756Z",
+            "updated_at": "2026-10-08T17:14:27.956Z",
+            "finished_at": "2026-10-08T17:14:27.956Z",
+            "counts": {
+              "stemm-gutenberg": {
+                "documents": 684,
+                "rejected": 0,
+                "metadata_only": 0,
+                "translations": 0,
+                "passages": 1008337,
+                "tokens": 63914036,
+                "batches": 13,
+                "issues": {
+                  "W_MIXED_LANGUAGE": 2
+                }
+              },
+              "stemm-gutenberg-restricted": {
+                "documents": 20,
+                "rejected": 0,
+                "metadata_only": 0,
+                "translations": 0,
+                "passages": 13613,
+                "tokens": 792825,
+                "batches": 1
+              },
+              "aliases": 5
+            },
+            "coverage": {
+              "stemm-gutenberg": {
+                "dated_by_evidence": 416,
+                "lifetime_estimate": 221,
+                "undated": 47,
+                "after_1928": 35,
+                "restricted": 0
+              },
+              "stemm-gutenberg-restricted": {
+                "dated_by_evidence": 1,
+                "lifetime_estimate": 6,
+                "undated": 13,
+                "after_1928": 7,
+                "restricted": 20
+              }
+            },
+            "params": {},
+            "error": null
+          },
+          "complete": true,
+          "job": null
+        },
+        {
+          "id": "stemm.openalex",
+          "version": "1.1.0",
+          "access": "local-dataset",
+          "label": "OpenAlex (top-cited sample per field × period)",
+          "staged": {
+            "path": "/private/tmp/claude-501/-Users-utkarsh-Documents-AI-Stuff/bd679acc-9fb8-4d81-a98e-abf2e52224c6/scratchpad/g5/data/sources/openalex",
+            "manifest_ok": true,
+            "format_ok": true,
+            "counts": {
+              "works": 118466,
+              "abstracts": 60574,
+              "citations": 381800,
+              "citations_cited_later": 6666,
+              "cells": 600
+            }
+          },
+          "available": true,
+          "command": "node tools/fetch/openalex.mjs",
+          "caveats": [
+            "The 200 most-cited works per field and period: compare shares within a cell, never counts between cells.",
+            "Field labels are a modern classifier's; before 1900 they are its guess.",
+            "OpenAlex year may be a reprint or digitisation year.",
+            "Abstract text belongs to its publishers: it is never exported.",
+            "Sample = the 200 most-cited works per (field x bin) cell, so it heavily over-represents canonical, highly cited works; it is NOT a random or representative sample of the literature. Compare cells via population.tsv / coverage.tsv, never by raw counts in works.jsonl.",
+            "cited_by_count is a snapshot at fetch time and favours older works within a bin (more time to accumulate citations) and fields/venues OpenAlex indexes well; the 2025-2026 bin is especially noisy.",
+            "field / subfield / topic / topic_score / domain come from OpenAlex's machine topic classifier (primary_topic) and can be wrong (e.g. Newton's Principia gets subfield 'Theoretical Computer Science'). keywords are also machine-derived by OpenAlex, with OpenAlex's own scores.",
+            "language is OpenAlex's (machine-detected) language code; it can be null or wrong for short or mixed-language records.",
+            "Abstracts: rebuilt from OpenAlex's inverted index, so original spacing/line breaks are lost and tokens are joined with single spaces; many works (esp. pre-1950 and some publishers) have no abstract; some 'abstracts' are junk (page ranges, boilerplate, front matter). Copyright of abstract text sits with publishers — local research use only.",
+            "Dates: publication_year/publication_date are as recorded by OpenAlex (date_basis 'stated'). OpenAlex fills unknown month/day with 01, so date_precision is 'year' for YYYY-01-01 and 'month' for YYYY-MM-01 (a genuine 1 Jan / 1st-of-month date is conservatively downgraded). For digitised old works OpenAlex's year is sometimes the reprint/digitisation year rather than first publication; we cannot detect that and did not correct it."
+          ],
+          "license": "CC0 metadata; abstracts publishers' (local research only)",
+          "attribution": "OpenAlex (CC0)",
+          "enabled": true,
+          "loadable": true,
+          "loaded": true,
+          "last_load": {
+            "at": "2026-10-08T17:26:36.492Z",
+            "documents": 118466,
+            "job": 64,
+            "batch": 66
+          },
+          "load": {
+            "status": "done",
+            "phase": "done",
+            "part": 28,
+            "progress": 1,
+            "message": "OpenAlex (top-cited sample per field × period): loaded",
+            "started_at": "2026-10-08T17:14:28.223Z",
+            "updated_at": "2026-10-08T17:26:49.534Z",
+            "finished_at": "2026-10-08T17:26:49.528Z",
+            "counts": {
+              "stemm-openalex": {
+                "documents": 118466,
+                "rejected": 0,
+                "metadata_only": 57892,
+                "translations": 0,
+                "passages": 211389,
+                "tokens": 11551765,
+                "issues": {
+                  "W_MIXED_LANGUAGE": 320
+                },
+                "batches": 14
+              },
+              "relationships": {
+                "documents": 0,
+                "rejected": 0,
+                "metadata_only": 0,
+                "translations": 0,
+                "passages": 0,
+                "tokens": 0,
+                "rel_documented": 381800,
+                "batches": 23
+              }
+            },
+            "coverage": {
+              "cells": 600
+            },
+            "params": {},
+            "error": null
+          },
+          "complete": true,
+          "job": null
+        },
+        {
+          "id": "stemm.wiktionary",
+          "version": "1.1.0",
+          "access": "local-dataset",
+          "label": "Wiktionary attestation claims",
+          "staged": {
+            "path": "/private/tmp/claude-501/-Users-utkarsh-Documents-AI-Stuff/bd679acc-9fb8-4d81-a98e-abf2e52224c6/scratchpad/g5/data/sources/wiktionary-coinage",
+            "manifest_ok": true,
+            "format_ok": true,
+            "counts": {
+              "entries": 200591,
+              "with_attestation": 9408,
+              "index_built": 1
+            }
+          },
+          "available": true,
+          "command": "node tools/fetch/wiktionary-coinage.mjs",
+          "caveats": [
+            "Claims are statements in Wiktionary etymologies (external claims), never occurrences.",
+            "Wiktionary is crowd-edited; dates in etymology prose are Wiktionary's statements (often from the OED, Etymonline, TLFi or Merriam-Webster), not verified here. 'first attested' means first attestation known to the editor.",
+            "Window matching takes the first acceptable date in the trigger's clause (≤220 characters); a clause that mentions another dated event before the relevant one can be mis-assigned — check 'span'.",
+            "'the 1500s' is read as the century 1500–1599 (ambiguous=true; the decade reading lies inside the range). Centuries are given as e.g. 1600–1699 for the 17th century; BCE years are negative (historical numbering, no year 0; 1 BCE = -1).",
+            "Alternatives joined by 'or' or '/' ('1943 or 1944', '1841/1842', 'the 1620s/1630s', 'the 13th or 14th century') have precision 'alternatives' with each listed in 'alternatives'; year_lo/year_hi span them. Ranges whose ends carry period words are read whole ('the late 15th to the early 17th centuries' → 1400–1699); 'ante YEAR' is qualifier 'before'."
+          ],
+          "license": "CC BY-SA 4.0 / GFDL",
+          "attribution": "Wiktionary contributors; extracted with Wiktextract (Ylonen 2022) via kaikki.org",
+          "enabled": true,
+          "loadable": true,
+          "loaded": true,
+          "last_load": {
+            "at": "2026-10-08T17:28:54.185Z",
+            "documents": 4,
+            "job": 72,
+            "batch": 67
+          },
+          "job": null
+        },
+        {
+          "id": "stemm.ngram",
+          "version": "1.0.0",
+          "access": "local-dataset",
+          "label": "Google Books Ngram baseline (English 1-grams)",
+          "staged": {
+            "path": "/private/tmp/claude-501/-Users-utkarsh-Documents-AI-Stuff/bd679acc-9fb8-4d81-a98e-abf2e52224c6/scratchpad/g5/data/sources/ngram-baseline",
+            "manifest_ok": true,
+            "format_ok": true,
+            "counts": {
+              "types": 146193,
+              "years": 520
+            }
+          },
+          "available": true,
+          "command": "node tools/fetch/ngram-baseline.mjs",
+          "caveats": [
+            "Different corpus: Google Books is a library-scan corpus, not a balanced sample of English and not the Scrolls local corpus; its composition changes over time (the share of scientific and technical literature grows through the 20th century — Pechenick, Danforth & Dodds 2015, PLOS ONE 10(10): e0137041). Its frequencies are a print baseline, not a measure of speech, rap or any community's usage.",
+            "Version: v3 (2020, '20200217') differs from v2 (2012) and v1 (2009) in scans, metadata and tokenisation; do not compare values across versions.",
+            "OCR errors, especially before 1800 and in low-volume years; early decades rest on few volumes (see totals.volume_count) and are noisy — e.g. in this store 'computer' 2.0074 per million in the 1710s, 'dna' 3.8095 per million in the 1710s, 'internet' 3.1795 per million in the 1780s, which are artefacts (OCR or misdated volumes), not usage.",
+            "Long s: in pre-1800 printing 'ſ' is frequently OCR'd as 'f', so words containing 's' are undercounted before ~1800 and spurious f-forms exist as their own types (observed totals: {\"such\":2584876596,\"fuch\":1640264,\"best\":481284669,\"beft\":174442,\"first\":1817604070,\"firft\":436663}). Tokens literally containing 'ſ' would be kept as their own types (NFC does not fold ſ to s); kept types containing 'ſ': 0.",
+            "Tokenisation is Google's and evidently splits hyphenated words: only 2 kept types contain '-' ([[\"x-ray\",806],[\"hip-hop\",361]]), and 590 contain an apostrophe. 'x-ray' and 'hip-hop' therefore have tiny totals (kept only as seed words); their occurrences presumably appear as separate 1-grams ('x', 'ray'; 'hip', 'hop'), which this store cannot reassemble. Low totals for hyphenated or apostrophised forms are a tokenisation artefact, not evidence of rarity.",
+            "Dates are publication years from Google Books metadata (basis: stated by the source; precision: year). Misdated volumes exist, producing anachronisms such as modern words in early years. first_year/last_year are the first/last years with a nonzero count in this dataset, NOT coinage or attestation dates.",
+            "first_year is left-censored at 1500: 14839 kept types have first_year = 1500, meaning 'present from the start of the window', not 'first printed in 1500'.",
+            "Case folding merges proper nouns, sentence-initial capitals and common words (e.g. 'Hacker' the surname with 'hacker'; 'Bill' with 'bill'); top_form and forms show the dominant original spelling and how many source tokens were merged.",
+            "Homographs and cross-language tokens share one curve: e.g. 'rap' (a knock, since Middle English) and the music genre; 'meme' has counts throughout the 1800s, long before Dawkins' 1976 coinage (OCR'd French 'même', names or noise — the source cannot say which). A curve is the sum of every sense, language and error sharing the spelling.",
+            "Abbreviations containing periods ('Mr.', 'Mrs.', 'No.', 'e.g.') fail the token filter by design; the period-less forms ('mr', 'mrs') are separate tokens and are kept where frequent.",
+            "Volumes per word-year are the MAX over the merged case variants (lower bound on distinct volumes); a per-word volume series is therefore not directly comparable to totals.volume_count.",
+            "Per-million values must be computed against totals.match_count, which counts all 1-gram tokens (including punctuation and numbers) — the Ngram Viewer convention.",
+            "Types with a 1500–2019 total below 100,000 are absent (except seed words); absence from the table is not evidence that a word was never printed.",
+            "Uint32 storage: no yearly value exceeded 4,294,967,295 (none clamped; largest {\"word\":\"the\",\"year\":2013,\"value\":1715212653,\"uint32_headroom\":2.5})."
+          ],
+          "license": "CC BY 3.0",
+          "attribution": "Google Books Ngram, English, 2020 edition",
+          "enabled": true,
+          "loadable": false,
+          "note": "Read in place: GET /api/baseline?word=… (no documents, nothing to load).",
+          "loaded": false,
+          "last_load": null,
+          "job": null
+        }
+      ]
+    },
+    "error": {
+      "status": 403,
+      "body": {
+        "error": {
+          "code": "E_FORBIDDEN_ORIGIN",
+          "message": "This request did not come from the Scrolls page on this computer.",
+          "hint": "Open Scrolls at http://127.0.0.1:3460/ and retry from there.",
+          "detail": null
+        }
+      }
+    }
+  }
+}

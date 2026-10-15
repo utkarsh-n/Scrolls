@@ -1,0 +1,15 @@
+# OWNER: N0 — what stays out of git under Native/ (IOS-SPEC §1.1, §2.6)
+# Build products and tool state: builds happen in $SCROLLS_BUILD_DIR mirrors, never here, but editors (SourceKit-LSP)
+# and xcodegen can leave these behind.
+.build/
+.swiftpm/
+Scrolls.xcodeproj/
+ScrollsKit/.scrolls-targets
+# Bundled packs and the starter are build products (Tools/packs.sh, N2).
+Scrolls/Resources/Bundled/
+# Reports are local machine-readable outputs; only the milestone records are committed (IOS-SPEC §1.1).
+Reports/*
+!Reports/milestones/
+# The Store's mini fixture database is a committed test input (the root .gitignore drops *.sqlite); its MANIFEST.json
+# says how it was made, and the test refuses a stale copy.
+!ScrollsKit/Tests/ScrollsStoreTests/Fixtures/mini-dump/mini.sqlite

@@ -1,0 +1,62 @@
+{
+  "//": "OWNER: WP0 — canned GET /api/lineage/path for mock mode and contract tests (SPEC §7; Docs/API.md)",
+  "method": "GET",
+  "path": "/api/lineage/path",
+  "owner": "WP5",
+  "request": null,
+  "response": "LineagePath",
+  "summary": "Least-evidence-cost path (documented 1, computed 3, proposed 5; rejected excluded); chain strength = weakest link.",
+  "default": "ok",
+  "example_request": null,
+  "variants": {
+    "ok": {
+      "status": 200,
+      "body": {
+        "path": [
+          {
+            "rel_id": 7811,
+            "src": "passage:2210",
+            "dst": "passage:901",
+            "rel_type": "proposed_allusion",
+            "evidence_status": "proposed",
+            "review_status": "disputed",
+            "cost": 5
+          },
+          {
+            "rel_id": 7781,
+            "src": "passage:901",
+            "dst": "passage:77",
+            "rel_type": "explicit_citation",
+            "evidence_status": "documented",
+            "review_status": "unreviewed",
+            "cost": 1
+          }
+        ],
+        "cost": 6,
+        "weakest": "proposed",
+        "text": "Chain strength: weakest link PROPOSED."
+      }
+    },
+    "empty": {
+      "when": { "query": { "to": "passage:21" } },
+      "status": 200,
+      "body": {
+        "path": [],
+        "cost": 0,
+        "weakest": null,
+        "note": "No chain of recorded links joins these two items (rejected links are excluded)."
+      }
+    },
+    "error": {
+      "status": 503,
+      "body": {
+        "error": {
+          "code": "QUERY_TIMEOUT",
+          "message": "The path query took longer than 5 s and was stopped.",
+          "hint": "Narrow the time range or add a filter, then retry.",
+          "detail": { "timeout_ms": 5000 }
+        }
+      }
+    }
+  }
+}
